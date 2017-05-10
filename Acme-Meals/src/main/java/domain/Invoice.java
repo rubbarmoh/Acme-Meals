@@ -6,8 +6,10 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -66,5 +68,16 @@ public class Invoice extends DomainEntity {
 	}
 
 	// Relationships -----------------------------------
+	private MealOrder mealOrder;
 
+	@Valid
+	@OneToOne(optional = false)
+	public MealOrder getMealOrder() {
+		return mealOrder;
+	}
+	public void setMealOrder(MealOrder mealOrder) {
+		this.mealOrder = mealOrder;
+	}
+	
+	
 }

@@ -1,11 +1,14 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -17,7 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Order extends DomainEntity {
+public class MealOrder extends DomainEntity {
 
 	// Attributes --------------------------------------
 
@@ -77,4 +80,36 @@ public class Order extends DomainEntity {
 
 	// Relationships -----------------------------------
 
+	private User user;
+	private Restaurant restaurant;
+	private Collection<Quantity> quantities;
+
+	@Valid
+	@ManyToOne(optional = false)
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	@Valid
+	@ManyToOne(optional = false)
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
+	}
+	
+	@Valid
+	@OneToMany(mappedBy = "mealOrder")
+	public Collection<Quantity> getQuantities() {
+		return quantities;
+	}
+	public void setQuantities(Collection<Quantity> quantities) {
+		this.quantities = quantities;
+	}
+	
+	
 }

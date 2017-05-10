@@ -1,9 +1,14 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -117,5 +122,75 @@ public class Restaurant extends DomainEntity {
 	}
 
 	// Relationships -----------------------------------
+	private Manager manager;
+	private Collection<MealOrder> mealOrders;
+	private Collection<Meal> meals;
+	private Collection<Comment> comments;
+	private Collection<SocialIdentity> socialIdentities;
+	private Collection<Review> reviews;
+	private Collection<Promote> promotes;
 
+	@Valid
+	@ManyToOne(optional = false)
+	public Manager getManager() {
+		return manager;
+	}
+	public void setManager(Manager manager) {
+		this.manager = manager;
+	}
+	
+	@Valid
+	@OneToMany(mappedBy = "restaurant")
+	public Collection<MealOrder> getMealOrders() {
+		return mealOrders;
+	}
+	public void setMealOrders(Collection<MealOrder> mealOrders) {
+		this.mealOrders = mealOrders;
+	}
+	
+	@Valid
+	@OneToMany(mappedBy = "restaurant")
+	public Collection<Meal> getMeals() {
+		return meals;
+	}
+	public void setMeals(Collection<Meal> meals) {
+		this.meals = meals;
+	}
+	
+	@Valid
+	@OneToMany(mappedBy = "restaurant")
+	public Collection<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(Collection<Comment> comments) {
+		this.comments = comments;
+	}
+	
+	@Valid
+	@OneToMany(mappedBy = "restaurant")
+	public Collection<SocialIdentity> getSocialIdentities() {
+		return socialIdentities;
+	}
+	public void setSocialIdentities(Collection<SocialIdentity> socialIdentities) {
+		this.socialIdentities = socialIdentities;
+	}
+	
+	@Valid
+	@OneToMany(mappedBy = "restaurant")
+	public Collection<Review> getReviews() {
+		return reviews;
+	}
+	public void setReviews(Collection<Review> reviews) {
+		this.reviews = reviews;
+	}
+	
+	@Valid
+	@OneToMany(mappedBy = "restaurant")
+	public Collection<Promote> getPromotes() {
+		return promotes;
+	}
+	public void setPromotes(Collection<Promote> promotes) {
+		this.promotes = promotes;
+	}
+	
 }

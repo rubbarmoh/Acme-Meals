@@ -1,9 +1,14 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -50,4 +55,44 @@ public class Review extends DomainEntity {
 
 	// Relationships -----------------------------------
 
+	private Critic critic;
+	private Restaurant restaurant;
+	private Collection<RelationLike> relationLikes;
+	private Collection<RelationDislike> relationDislikes;
+	
+	@Valid
+	@ManyToOne(optional = false)
+	public Critic getCritic() {
+		return critic;
+	}
+	public void setCritic(Critic critic) {
+		this.critic = critic;
+	}
+	
+	@Valid
+	@ManyToOne(optional = false)
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
+	}
+	
+	@Valid
+	@OneToMany(mappedBy = "review")
+	public Collection<RelationLike> getRelationLikes() {
+		return relationLikes;
+	}
+	public void setRelationLikes(Collection<RelationLike> relationLikes) {
+		this.relationLikes = relationLikes;
+	}
+	
+	@Valid
+	@OneToMany(mappedBy = "review")
+	public Collection<RelationDislike> getRelationDislikes() {
+		return relationDislikes;
+	}
+	public void setRelationDislikes(Collection<RelationDislike> relationDislikes) {
+		this.relationDislikes = relationDislikes;
+	}
 }

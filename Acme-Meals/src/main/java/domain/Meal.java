@@ -1,9 +1,14 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -61,5 +66,36 @@ public class Meal extends DomainEntity {
 	}
 
 	// Relationships -----------------------------------
+	private Collection<Quantity> quantities;
+	private Restaurant restaurant;
+	private Category category;
 
+	@Valid
+	@OneToMany(mappedBy = "meal")
+	public Collection<Quantity> getQuantities() {
+		return quantities;
+	}
+	public void setQuantities(Collection<Quantity> quantities) {
+		this.quantities = quantities;
+	}
+	
+	@Valid
+	@ManyToOne(optional = false)
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
+	}
+	
+	@Valid
+	@ManyToOne(optional = false)
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
+	
 }

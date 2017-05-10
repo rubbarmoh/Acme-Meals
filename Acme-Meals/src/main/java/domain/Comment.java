@@ -1,13 +1,17 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -67,5 +71,36 @@ public class Comment extends DomainEntity {
 	}
 
 	// Relationships -----------------------------------
+	private Collection<Report> reports;
+	private User user;
+	private Restaurant restaurant;
 
+	@Valid
+	@ManyToOne(optional = false)
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
+	}
+	
+	@Valid
+	@OneToMany(mappedBy = "comment")
+	public Collection<Report> getReports() {
+		return reports;
+	}
+	public void setReports(Collection<Report> reports) {
+		this.reports = reports;
+	}
+	
+	@Valid
+	@ManyToOne(optional = false)
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	
 }
