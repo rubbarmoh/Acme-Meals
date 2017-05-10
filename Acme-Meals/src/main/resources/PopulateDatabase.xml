@@ -31,25 +31,10 @@
 	</bean>
 
 	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="username" value="user1" />
+		<property name="password" value="24c9e15e52afc47c225b757e7bee1f9d" />
 		<property name="authorities">
 			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="USER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="super" />
-		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
 				<bean class="security.Authority">
 					<property name="authority" value="USER" />
 				</bean>
@@ -57,6 +42,273 @@
 		</property>
 	</bean>
 	
-	<!-- Other domain beans come here -->	
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="user2" />
+		<property name="password" value="7e58d63b60197ceb55a1c487989a3720" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="user3" />
+		<property name="password" value="92877af70a45fd6a2ed7fe81e1236b78" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="user4" />
+		<property name="password" value="3f02ebe3d7929b091e3d8ccfde2f3bc6" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="manager1" />
+		<property name="password" value="c240642ddef994358c96da82c0361a58" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount7" class="security.UserAccount">
+		<property name="username" value="manager2" />
+		<property name="password" value="8df5127cd164b5bc2d2b78410a7eea0c" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount8" class="security.UserAccount">
+		<property name="username" value="manager3" />
+		<property name="password" value="2d3a5db4a2a9717b43698520a8de57d0" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount9" class="security.UserAccount">
+		<property name="username" value="critic1" />
+		<property name="password" value="165d185050bab438668aef6faeee3be5" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CRITIC" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount10" class="security.UserAccount">
+		<property name="username" value="critic2" />
+		<property name="password" value="88fc227c1f12e1f11b8b1584991c88fe" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CRITIC" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Other domain beans come here -->
+	
+	<!-- Fee -->
+	<bean id="fee" class="domain.Fee">
+		<property name="value" value="1.00"/>
+	</bean>
+	
+	<!-- VATNumber -->
+	<bean id="vatNumber" class="domain.VATNumber">
+		<property name="value" value="ES-78245688"/>
+	</bean>
+	
+	<!-- Credit Card -->
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="Lucia Aire" />
+		<property name="brandName" value="Visa" />
+		<property name="number" value="4079978752719950" />
+		<property name="expirationMonth" value="10" />
+		<property name="expirationYear" value="2019" />
+		<property name="cvv" value="580" />
+	</bean>
+	
+	<bean id="creditCard2" class="domain.CreditCard">
+	  <property name="holderName" value="Nomis Aege" />
+	  <property name="brandName" value="MasterCard" />
+	  <property name="number" value="348336595595090" />
+	  <property name="expirationMonth" value="12" />
+	  <property name="expirationYear" value="2017" />
+	  <property name="cvv" value="998" />
+	 </bean>
+
+	<bean id="creditCard3" class="domain.CreditCard">
+	  <property name="holderName" value="Nebur Sotneirrab" />
+	  <property name="brandName" value="Discover" />
+	  <property name="number" value="6011330960939283" />
+	  <property name="expirationMonth" value="1" />
+	  <property name="expirationYear" value="2019" />
+	  <property name="cvv" value="582" />
+	 </bean>
+	
+	<bean id="creditCard4" class="domain.CreditCard">
+	  <property name="holderName" value="Irene Garcia Vazquez" />
+	  <property name="brandName" value="MasterCard" />
+	  <property name="number" value="5237494243102802" />
+	  <property name="expirationMonth" value="8" />
+	  <property name="expirationYear" value="2020" />
+	  <property name="cvv" value="220" />
+	 </bean>
+	 
+	 <bean id="creditCard5" class="domain.CreditCard">
+	  <property name="holderName" value="Pedro Almodovar" />
+	  <property name="brandName" value="Visa" />
+	  <property name="number" value="4735179919208401" />
+	  <property name="expirationMonth" value="4" />
+	  <property name="expirationYear" value="2019" />
+	  <property name="cvv" value="666" />
+	 </bean>
+	 
+	 <bean id="creditCard6" class="domain.CreditCard">
+	  <property name="holderName" value="Montse Caballet" />
+	  <property name="brandName" value="MasterCard" />
+	  <property name="number" value="5901769379901779" />
+	  <property name="expirationMonth" value="9" />
+	  <property name="expirationYear" value="2020" />
+	  <property name="cvv" value="232" />
+	 </bean>
+	 
+	 <bean id="creditCard7" class="domain.CreditCard">
+	  <property name="holderName" value="Chunk Corris" />
+	  <property name="brandName" value="Amex" />
+	  <property name="number" value="371773256613913" />
+	  <property name="expirationMonth" value="11" />
+	  <property name="expirationYear" value="2021" />
+	  <property name="cvv" value="456" />
+	 </bean>
+	 
+	 <!-- Admin -->
+	 <bean id="admin" class="domain.Administrator">
+		<property name="name" value="Manuel" />
+		<property name="surname" value="Torres" />
+		<property name="email" value="manuto@gmail.com" />
+		<property name="phone" value="+34 965845789" />
+		<property name="address" value="C/Sagasta nº23" />
+		<property name="userAccount" ref="userAccount1"/>
+	 </bean>
+	 
+	 <!-- User -->
+	 <bean id="user1" class="domain.User">
+		<property name="name" value="Pedro" />
+		<property name="surname" value="Casto" />
+		<property name="email" value="PCasto@gmail.com" />
+		<property name="phone" value="+34 672141455" />
+		<property name="banned" value="false" />
+		<property name="userAccount" ref="userAccount2"/>
+	 </bean>
+	 
+	 <bean id="user2" class="domain.User">
+		<property name="name" value="Maria" />
+		<property name="surname" value="Bienaventurada" />
+		<property name="email" value="MariaBAV@gmail.com" />
+		<property name="address" value="C/Barco Perdido nº42" />
+		<property name="banned" value="false" />
+		<property name="userAccount" ref="userAccount3"/>
+	 </bean>
+	 
+	 <bean id="user3" class="domain.User">
+		<property name="name" value="Ignacio" />
+		<property name="surname" value="Palomo" />
+		<property name="email" value="IgnPal@gmail.com" />
+		<property name="banned" value="false" />
+		<property name="userAccount" ref="userAccount4"/>
+	 </bean>
+	 
+	 <bean id="user4" class="domain.User">
+		<property name="name" value="Vanesa" />
+		<property name="surname" value="Celeste" />
+		<property name="email" value="Valeste@gmail.com" />
+		<property name="phone" value="+34 965922789" />
+		<property name="address" value="C/Andalucía nº80" />
+		<property name="banned" value="false" />
+		<property name="userAccount" ref="userAccount5"/>
+	 </bean>
+	 
+	 <!-- Manager -->
+	 <bean id="manager1" class="domain.Manager">
+		<property name="name" value="Lucia" />
+		<property name="surname" value="Aire" />
+		<property name="email" value="Luci@gmail.com" />
+		<property name="phone" value="+34 922125654" />
+		<property name="address" value="C/Pedro Jimenez nº2" />
+		<property name="creditCard" ref="creditCard1" />
+		<property name="userAccount" ref="userAccount6"/>
+	 </bean>
+	 
+	 <bean id="manager2" class="domain.Manager">
+		<property name="name" value="Nomis" />
+		<property name="surname" value="Aege" />
+		<property name="email" value="noAE@gmail.com" />
+		<property name="phone" value="+34 623545987" />
+		<property name="creditCard" ref="creditCard2" />
+		<property name="userAccount" ref="userAccount7"/>
+	 </bean>
+	 
+	 <bean id="manager3" class="domain.Manager">
+		<property name="name" value="Nebur" />
+		<property name="surname" value="Sotneirrab" />
+		<property name="email" value="neSO@gmail.com" />
+		<property name="creditCard" ref="creditCard3" />
+		<property name="userAccount" ref="userAccount8"/>
+	 </bean>
+	 
+	 <!-- Critic -->
+	 <bean id="critic1" class="domain.Critic">
+		<property name="name" value="Salocin" />
+		<property name="surname" value="Znerol" />
+		<property name="email" value="Sazn@gmail.com" />
+		<property name="phone" value="+34 654699885" />
+		<property name="address" value="C/Alcala nº6" />
+		<property name="companyName" value="GastroCriticas SL" />
+		<property name="userAccount" ref="userAccount9"/>
+	 </bean>
+	 
+	 <bean id="critic2" class="domain.Critic">
+		<property name="name" value="Marta" />
+		<property name="surname" value="Atunes" />
+		<property name="email" value="maatunes@gmail.com" />
+		<property name="companyName" value="Desafio Comida SL" />
+		<property name="userAccount" ref="userAccount10"/>
+	 </bean>
+	 
+	 
+	 
 	
 </beans>
