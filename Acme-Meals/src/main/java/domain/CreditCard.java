@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -51,6 +52,7 @@ public class CreditCard {
 
 	@Valid
 	@NotBlank
+	@CreditCardNumber
 	public String getNumber() {
 		return this.number;
 	}
