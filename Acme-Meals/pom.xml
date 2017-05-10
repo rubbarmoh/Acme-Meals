@@ -18,7 +18,7 @@
 	<!-- Artifact identification and properties -->
 
 	<groupId>Design-and-Testing</groupId>
-	<artifactId>Sample-Project</artifactId>
+	<artifactId>Acme-Meals</artifactId>
 	<version>1.8</version>
 	<packaging>war</packaging>
 	
@@ -28,9 +28,8 @@
 
 	<!-- Indexing information -->
 
-	<name>Sample Project</name>
-	<url>http://www.sample-project.com</url>
-	<description>This is D&amp;T's sample project.</description>
+	<name>Acme-Meals</name>
+	<url>http://www.acme.com</url>
 	
 	<!-- Build commands -->
 
@@ -317,4 +316,5 @@
 		
 	</dependencies>
 
+	<description>This is Acme-Meals project.</description>
 </project> 
