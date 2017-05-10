@@ -48,7 +48,7 @@ public class Authority implements GrantedAuthority {
 
 
 	@NotBlank
-	@Pattern(regexp = "^" + Authority.ADMIN + "|" + Authority.USER + Authority.MANAGER + "|" + Authority.CRITIC + "$")
+	@Pattern(regexp = "^" + Authority.ADMIN + "|" + Authority.USER + "|" + Authority.MANAGER + "|" + Authority.CRITIC + "$")
 	@Override
 	public String getAuthority() {
 		return this.authority;
