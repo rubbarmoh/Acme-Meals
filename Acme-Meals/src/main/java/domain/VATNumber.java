@@ -21,10 +21,10 @@ public class VATNumber extends DomainEntity {
 
 	@NotNull
 	@NotBlank
-	public String getvalue() {
+	public String getValue() {
 		return value;
 	}
-	public void setChorbiValue(String value) {
+	public void setValue(String value) {
 		this.value = value;
 	}
 
