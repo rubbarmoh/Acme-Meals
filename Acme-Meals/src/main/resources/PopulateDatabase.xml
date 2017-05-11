@@ -141,16 +141,19 @@
 	<!-- Other domain beans come here -->
 	
 	<!-- Fee -->
+	
 	<bean id="fee" class="domain.Fee">
 		<property name="value" value="1.00"/>
 	</bean>
 	
 	<!-- VATNumber -->
+	
 	<bean id="vatNumber" class="domain.VATNumber">
 		<property name="value" value="ES-78245688"/>
 	</bean>
 	
 	<!-- Credit Card -->
+	
 	<bean id="creditCard1" class="domain.CreditCard">
 		<property name="holderName" value="Lucia Aire" />
 		<property name="brandName" value="Visa" />
@@ -215,6 +218,7 @@
 	 </bean>
 	 
 	 <!-- Admin -->
+	 
 	 <bean id="admin" class="domain.Administrator">
 		<property name="name" value="Manuel" />
 		<property name="surname" value="Torres" />
@@ -225,11 +229,13 @@
 	 </bean>
 	 
 	 <!-- User -->
+	 
 	 <bean id="user1" class="domain.User">
 		<property name="name" value="Pedro" />
 		<property name="surname" value="Casto" />
 		<property name="email" value="PCasto@gmail.com" />
 		<property name="phone" value="+34 672141455" />
+		<property name="address"><null/></property>
 		<property name="banned" value="false" />
 		<property name="userAccount" ref="userAccount2"/>
 		<property name="relationLikes">
@@ -246,7 +252,7 @@
 		</property>
 		<property name="mealOrders">
 			<list>
-				<ref bean=""/>
+				<ref bean="mealOrder1"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -283,7 +289,7 @@
 		</property>
 		<property name="mealOrders">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 		<property name="comments">
@@ -317,7 +323,7 @@
 		</property>
 		<property name="mealOrders">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 		<property name="comments">
@@ -352,7 +358,7 @@
 		</property>
 		<property name="mealOrders">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 		<property name="comments">
@@ -368,6 +374,7 @@
 	 </bean>
 	 
 	 <!-- Manager -->
+	 
 	 <bean id="manager1" class="domain.Manager">
 		<property name="name" value="Lucia" />
 		<property name="surname" value="Aire" />
@@ -444,6 +451,7 @@
 	 </bean>
 	 
 	 <!-- Critic -->
+	 
 	 <bean id="critic1" class="domain.Critic">
 		<property name="name" value="Salocin" />
 		<property name="surname" value="Znerol" />
@@ -474,7 +482,8 @@
 		</property>
 	 </bean>
 	 
-	 <!-- Resturant -->
+	 <!-- Restaurant -->
+	 
 	 <bean id="restaurant1" class="domain.Restaurant">
 	 	<property name="name" value="El pescaito" />
 		<property name="phone" value="+34 956123456" />
@@ -487,12 +496,13 @@
 		<property name="manager" ref="manager1"/>
 		<property name="mealOrders">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 		<property name="meals">
 			<list>
-				<ref bean=""/>
+				<ref bean="meal1"/>
+				<ref bean="meal2"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -515,7 +525,8 @@
 		</property>
 		<property name="promotes">
 			<list>
-				<ref bean=""/>
+				<ref bean="promote1"/>
+				<ref bean="promote2"/>
 			</list>
 		</property>
 	 </bean>
@@ -534,12 +545,12 @@
 		<property name="manager" ref="manager1"/>
 		<property name="mealOrders">
 			<list>
-				<ref bean=""/>
+				<ref bean="mealOrder1"/>
 			</list>
 		</property>
 		<property name="meals">
 			<list>
-				<ref bean=""/>
+				<ref bean="meal3"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -560,7 +571,7 @@
 		</property>
 		<property name="promotes">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 	 </bean>
@@ -579,12 +590,12 @@
 		<property name="manager" ref="manager1"/>
 		<property name="mealOrders">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 		<property name="meals">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 		<property name="comments">
@@ -605,7 +616,7 @@
 		</property>
 		<property name="promotes">
 			<list>
-				<ref bean=""/>
+				<ref bean="promote3"/>
 			</list>
 		</property>
 	 </bean>
@@ -622,17 +633,17 @@
 		<property name="manager" ref="manager2"/>
 		<property name="mealOrders">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 		<property name="meals">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 		<property name="comments">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 		<property name="socialIdentities">
@@ -647,7 +658,7 @@
 		</property>
 		<property name="promotes">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 	 </bean>
@@ -666,17 +677,17 @@
 		<property name="manager" ref="manager2"/>
 		<property name="mealOrders">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 		<property name="meals">
 			<list>
-				<ref bean=""/>
+				<ref bean="meal5"/>
 			</list>
 		</property>
 		<property name="comments">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 		<property name="socialIdentities">
@@ -691,7 +702,7 @@
 		</property>
 		<property name="promotes">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 	 </bean>
@@ -708,17 +719,17 @@
 		<property name="manager" ref="manager3"/>
 		<property name="mealOrders">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 		<property name="meals">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 		<property name="comments">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 		<property name="socialIdentities">
@@ -733,12 +744,13 @@
 		</property>
 		<property name="promotes">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 	 </bean>
 
 	 <!-- Category -->
+	 
 	 <bean id="category1" class="domain.Category">
 		<property name="name" value="Pescado"/>
 	 </bean>
@@ -764,6 +776,7 @@
 	 </bean>
 	 
 	 <!-- Social Identity -->
+	 
 	 <bean id="socialIdentity1" class="domain.SocialIdentity">
 		<property name="nick" value="PescaitoGaditano"/>
 		<property name="socialNetwork" value="Twitter"/>
@@ -789,9 +802,10 @@
 	 </bean>
 	 
 	 <!-- Review -->
+	 
 	 <bean id="review1" class="domain.Review">
 		<property name="title" value="Critica al Pescadito"/>
-		<property name="text" value="Muy lejos, más allá de las montañas de palabras, alejados de los países de las vocales y las consonantes, viven los textos simulados. Viven aislados en casas de letras, en la costa de la semántica, un gran océano de lenguas. Un riachuelo llamado Pons fluye por su pueblo y los abastece con las normas necesarias. Hablamos de un país paraisomático en el que a uno le caen pedazos de frases asadas en la boca. Ni siquiera los todopoderosos signos de puntuación dominan a los textos simulados; una vida, se puede decir, poco ortográfica. Pero un buen día, una pequeña línea de texto simulado, llamada Lorem Ipsum, decidió aventurarse y salir al vasto mundo de la gramática. El gran Oxmox le desanconsejó hacerlo, ya que esas tierras estaban llenas de comas malvadas, signos de interrogación salvajes y puntos y coma traicioneros, pero el texto simulado no se dejó atemorizar. Empacó sus siete versales, enfundó su inicial en el cinturón y se puso en camino."/>
+		<property name="text" value="Muy lejos, más allá de las montañas de palabras."/>
 		<property name="rate" value="4"/>
 		<property name="critic" ref="critic1"/>
 		<property name="restaurant" ref="restaurant1"/>
@@ -812,7 +826,7 @@
 	 
 	 <bean id="review2" class="domain.Review">
 		<property name="title" value="Critica al Pescadito Gaditano"/>
-		<property name="text" value="Muy lejos, más allá de las montañas de palabras, alejados de los países de las vocales y las consonantes, viven los textos simulados. Viven aislados en casas de letras, en la costa de la semántica, un gran océano de lenguas. Un riachuelo llamado Pons fluye por su pueblo y los abastece con las normas necesarias. Hablamos de un país paraisomático en el que a uno le caen pedazos de frases asadas en la boca. Ni siquiera los todopoderosos signos de puntuación dominan a los textos simulados; una vida, se puede decir, poco ortográfica. Pero un buen día, una pequeña línea de texto simulado, llamada Lorem Ipsum, decidió aventurarse y salir al vasto mundo de la gramática. El gran Oxmox le desanconsejó hacerlo, ya que esas tierras estaban llenas de comas malvadas, signos de interrogación salvajes y puntos y coma traicioneros, pero el texto simulado no se dejó atemorizar. Empacó sus siete versales, enfundó su inicial en el cinturón y se puso en camino."/>
+		<property name="text" value="Muy lejos, más allá de las montañas de palabras, alejados de los países de las vocales y las consonantes."/>
 		<property name="rate" value="5"/>
 		<property name="critic" ref="critic2"/>
 		<property name="restaurant" ref="restaurant1"/>
@@ -830,7 +844,7 @@
 	 
 	 <bean id="review3" class="domain.Review">
 		<property name="title" value="Critica al restaurante de brasas"/>
-		<property name="text" value="Muy lejos, más allá de las montañas de palabras, alejados de los países de las vocales y las consonantes, viven los textos simulados. Viven aislados en casas de letras, en la costa de la semántica, un gran océano de lenguas. Un riachuelo llamado Pons fluye por su pueblo y los abastece con las normas necesarias. Hablamos de un país paraisomático en el que a uno le caen pedazos de frases asadas en la boca. Ni siquiera los todopoderosos signos de puntuación dominan a los textos simulados; una vida, se puede decir, poco ortográfica. Pero un buen día, una pequeña línea de texto simulado, llamada Lorem Ipsum, decidió aventurarse y salir al vasto mundo de la gramática. El gran Oxmox le desanconsejó hacerlo, ya que esas tierras estaban llenas de comas malvadas, signos de interrogación salvajes y puntos y coma traicioneros, pero el texto simulado no se dejó atemorizar. Empacó sus siete versales, enfundó su inicial en el cinturón y se puso en camino."/>
+		<property name="text" value="Muy lejos, más allá de las montañas."/>
 		<property name="rate" value="3"/>
 		<property name="critic" ref="critic1"/>
 		<property name="restaurant" ref="restaurant2"/>
@@ -848,7 +862,7 @@
 	 
 	 <bean id="review4" class="domain.Review">
 		<property name="title" value="Critica al restaurante chino"/>
-		<property name="text" value="Muy lejos, más allá de las montañas de palabras, alejados de los países de las vocales y las consonantes, viven los textos simulados. Viven aislados en casas de letras, en la costa de la semántica, un gran océano de lenguas. Un riachuelo llamado Pons fluye por su pueblo y los abastece con las normas necesarias. Hablamos de un país paraisomático en el que a uno le caen pedazos de frases asadas en la boca. Ni siquiera los todopoderosos signos de puntuación dominan a los textos simulados; una vida, se puede decir, poco ortográfica. Pero un buen día, una pequeña línea de texto simulado, llamada Lorem Ipsum, decidió aventurarse y salir al vasto mundo de la gramática. El gran Oxmox le desanconsejó hacerlo, ya que esas tierras estaban llenas de comas malvadas, signos de interrogación salvajes y puntos y coma traicioneros, pero el texto simulado no se dejó atemorizar. Empacó sus siete versales, enfundó su inicial en el cinturón y se puso en camino."/>
+		<property name="text" value="Muy lejos, más allá."/>
 		<property name="rate" value="2"/>
 		<property name="critic" ref="critic2"/>
 		<property name="restaurant" ref="restaurant3"/>
@@ -868,6 +882,7 @@
 	 </bean>
 	 
 	 <!-- Relation Like -->
+	 
 	 <bean id="relationLike1" class="domain.RelationLike">
 		<property name="user" ref="user1"/>
 		<property name="review" ref="review1"/>
@@ -899,6 +914,7 @@
 	 </bean>
 	 
 	 <!-- Relation Dislike -->
+	 
 	 <bean id="relationDislike1" class="domain.RelationDislike">
 		<property name="user" ref="user1"/>
 		<property name="review" ref="review3"/>
@@ -930,6 +946,7 @@
 	 </bean>
 	 
 	 <!-- Monthly Bills -->
+	 
 	 <bean id="monthlyBill1" class="domain.MonthlyBill">
 		<property name="moment" value="05/05/2017 15:00"/>
 		<property name="paidMoment" value="05/08/2017 15:00"/>
@@ -952,6 +969,7 @@
 	 </bean>
 	 
 	 <!-- Comment -->
+	 
 	 <bean id="comment1" class="domain.Comment">
 	 	<property name="title" value="Comentario del pescadito"/>
 		<property name="text" value="Muy buen restaurante, tal y como me esperaba. El pescaito en su punto"/>
@@ -961,12 +979,12 @@
 		<property name="restaurant" ref="restaurant1"/>
 		<property name="reports">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 	  </bean>
 	  
-	  <bean id="comment2" class="domain.Comment">
+	 <bean id="comment2" class="domain.Comment">
 	 	<property name="title" value="Comentario del pescadito"/>
 		<property name="text" value="Me encanta el aroma de la playa cuando fui a recoger mi pescadito frito"/>
 		<property name="moment" value="05/06/2017 15:00"/>
@@ -975,12 +993,12 @@
 		<property name="restaurant" ref="restaurant1"/>
 		<property name="reports">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 	  </bean>
 	  
-	  <bean id="comment3" class="domain.Comment">
+	 <bean id="comment3" class="domain.Comment">
 	 	<property name="title" value="Comentario del brasas"/>
 		<property name="text" value="La comida estaba un poco cruda, pero aun asi estaba buena."/>
 		<property name="moment" value="03/05/2017 15:00"/>
@@ -989,40 +1007,40 @@
 		<property name="restaurant" ref="restaurant2"/>
 		<property name="reports">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 	  </bean>
 	  
-	  <bean id="comment4" class="domain.Comment">
+	 <bean id="comment4" class="domain.Comment">
 	 	<property name="title" value="Comentario del pescadito"/>
 		<property name="text" value="Creo que ha sido una de mis mejoras experiencias en restaurantes de este tipo"/>
-		<property name="moment" value="06/05/2017 15:00"/>
+		<property name="moment" value="03/25/2017 15:00"/>
 		<property name="stars" value="5"/>
 		<property name="user" ref="user2"/>
 		<property name="restaurant" ref="restaurant2"/>
 		<property name="reports">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 	  </bean>
 	  
-	  <bean id="comment5" class="domain.Comment">
+	 <bean id="comment5" class="domain.Comment">
 	 	<property name="title" value="Comentario del chino"/>
 		<property name="text" value="Comida decente, quizas vuelva a pedir comia otro dia"/>
-		<property name="moment" value="07/05/2017 15:00"/>
+		<property name="moment" value="02/15/2017 15:00"/>
 		<property name="stars" value="4"/>
 		<property name="user" ref="user3"/>
 		<property name="restaurant" ref="restaurant3"/>
 		<property name="reports">
 			<list>
-				<ref bean=""/>
+				
 			</list>
 		</property>
 	  </bean>
 	  
-	  <bean id="comment6" class="domain.Comment">
+	 <bean id="comment6" class="domain.Comment">
 	 	<property name="title" value="Comentario basura"/>
 		<property name="text" value="Menuda basura de comida"/>
 		<property name="moment" value="04/06/2017 15:00"/>
@@ -1038,6 +1056,7 @@
 	  </bean>
 	  
 	  <!-- Report -->
+	  
 	 <bean id="report1" class="domain.Report">
 		<property name="text" value="Este comentario me parece inadecuado"/>
 		<property name="moment" value="04/07/2017 15:00"/>
@@ -1045,12 +1064,136 @@
 		<property name="comment" ref="comment6"/>
 	  </bean>
 	  
-	  <bean id="report2" class="domain.Report">
+	 <bean id="report2" class="domain.Report">
 		<property name="text" value="Este comentario me parece incorrecto"/>
 		<property name="moment" value="04/08/2017 15:00"/>
 		<property name="reporter" ref="user2"/>
 		<property name="comment" ref="comment6"/>
 	  </bean>
-	 
+	  
+	  <!-- Promote -->
+	  
+	  <bean id="promote1" class="domain.Promote">
+	  	<property name="beginning" value="02/25/2016" />
+	  	<property name="ending" value="02/25/2017" />
+	  	<property name="timesDisplayed" value="7" />
+	  	<property name="restaurant" ref="restaurant1" />
+	  </bean>
+	  
+	  <bean id="promote2" class="domain.Promote">
+	  	<property name="beginning" value="04/30/2017" />
+	  	<property name="ending" value="12/25/2017" />
+	  	<property name="timesDisplayed" value="7" />
+	  	<property name="restaurant" ref="restaurant1" />
+	  </bean>
+	  
+	  <bean id="promote3" class="domain.Promote">
+	  	<property name="beginning" value="04/25/2017" />
+	  	<property name="ending" value="09/25/2017" />
+	  	<property name="timesDisplayed" value="3" />
+	  	<property name="restaurant" ref="restaurant3" />
+	  </bean>
+	  
+	  <!-- Meals -->
+	  
+	  <bean id="meal1" class="domain.Meal">
+	  	<property name="title" value="Surtido variado"/>
+	  	<property name="description" value="Surtido de gran variedad de los mejores y mas frescos pescaitos fritos."/>
+	  	<property name="price" value="25.50"/>
+	  	<property name="erased" value="false"/>
+	  	<property name="category" ref="category1"/>
+	  	<property name="restaurant" ref="restaurant1"/>
+	  	<property name="quantities">
+	  		<list>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
+	  <bean id="meal2" class="domain.Meal">
+	  	<property name="title" value="Dorada a la plancha"/>
+	  	<property name="description" value="Estupenda dorada a la plancha acompañada con ensalada de col."/>
+	  	<property name="price" value="17.50"/>
+	  	<property name="erased" value="false"/>
+	  	<property name="category" ref="category1"/>
+	  	<property name="restaurant" ref="restaurant1"/>
+	  	<property name="quantities">
+	  		<list>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
+	  <bean id="meal3" class="domain.Meal">
+	  	<property name="title" value="Secreto ibérico"/>
+	  	<property name="description" value="Filete de secreto ibérico en su punto con patatas."/>
+	  	<property name="price" value="9.50"/>
+	  	<property name="erased" value="false"/>
+	  	<property name="category" ref="category2"/>
+	  	<property name="restaurant" ref="restaurant2"/>
+	  	<property name="quantities">
+	  		<list>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
+	  <bean id="meal4" class="domain.Meal">
+	  	<property name="title" value="Sushi variado"/>
+	  	<property name="description" value="En este variado encontraras un total de30 piezas de sushi entre maki, uramaki, nigiri y oshi."/>
+	  	<property name="price" value="30.00"/>
+	  	<property name="erased" value="false"/>
+	  	<property name="category" ref="category4"/>
+	  	<property name="restaurant" ref="restaurant4"/>
+	  	<property name="quantities">
+	  		<list>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
+	  <bean id="meal5" class="domain.Meal">
+	  	<property name="title" value="Bocadillo de albondigas"/>
+	  	<property name="description" value="Estupendo bocadillo de albondigas en salsa, ¿cúal salsa? ¡La que tú quieras!."/>
+	  	<property name="price" value="7.50"/>
+	  	<property name="erased" value="false"/>
+	  	<property name="category" ref="category5"/>
+	  	<property name="restaurant" ref="restaurant5"/>
+	  	<property name="quantities">
+	  		<list>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
+	  <!-- Meal Order -->
+	  
+	  <bean id="mealOrder1" class="domain.MealOrder">
+	  	<property name="moment" value="04/25/2017"/>
+	  	<property name="creditCard" ref="creditCard4"/>
+	  	<property name="amount" value="20.55"/>
+	  	<property name="status" value="FINISHED"/>
+	  	<property name="pickUp" value="false"/>
+	  	<property name="user" ref="user1"/>
+	  	<property name="restaurant" ref="restaurant2"/>
+	  	<property name="quantities">
+	  		<list>
+	  			<ref bean="quantity1"/>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
+	  <!-- Quantity -->
+	  
+	  <bean id="quantity1" class="domain.Quantity">
+	  	<property name="quantity" value="1"/>
+	  	<property name="mealOrder" ref="mealOrder1"/>
+	  	<property name="meal" ref="meal3"/>
+	  </bean>
+	  
+	  <!-- Invoice -->
+	  
+	  <bean id="invoice1" class="domain.Invoice">
+	  	<property name="moment" value="04/25/2017"/>
+	  	<property name="vatNumber" value="ES-78245688"/>
+	  	<property name="name" value="Irene"/>
+	  	<property name="surname" value="Montoya"/>
+	  	<property name="mealOrder" ref="mealOrder1"/>
+	  </bean>
 	
 </beans>

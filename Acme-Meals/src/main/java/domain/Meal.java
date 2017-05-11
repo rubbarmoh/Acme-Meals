@@ -29,7 +29,6 @@ public class Meal extends DomainEntity {
 
 	// Getters and Setters -----------------------------
 
-	@NotNull
 	@NotBlank
 	public String getTitle() {
 		return title;
@@ -38,7 +37,6 @@ public class Meal extends DomainEntity {
 		this.title = title;
 	}
 
-	@NotNull
 	@NotBlank
 	public String getDescription() {
 		return description;

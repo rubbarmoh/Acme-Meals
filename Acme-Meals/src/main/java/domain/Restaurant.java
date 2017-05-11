@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
@@ -36,7 +37,6 @@ public class Restaurant extends DomainEntity {
 	// Getters and Setters -----------------------------
 
 	@NotBlank
-	@NotNull
 	public String getName() {
 		return name;
 	}
@@ -54,7 +54,6 @@ public class Restaurant extends DomainEntity {
 	}
 
 	@NotBlank
-	@NotNull
 	public String getCity() {
 		return city;
 	}
@@ -63,7 +62,6 @@ public class Restaurant extends DomainEntity {
 	}
 
 	@NotBlank
-	@NotNull
 	public String getAddress() {
 		return address;
 	}
@@ -72,8 +70,7 @@ public class Restaurant extends DomainEntity {
 	}
 
 	@NotBlank
-	@NotNull
-	@URL
+	@Email
 	public String getEmail() {
 		return email;
 	}
@@ -82,7 +79,6 @@ public class Restaurant extends DomainEntity {
 	}
 
 	@NotBlank
-	@NotNull
 	@URL
 	public String getPicture() {
 		return picture;

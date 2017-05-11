@@ -6,7 +6,6 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -26,7 +25,6 @@ public class SocialIdentity extends DomainEntity {
 	// Getters and Setters -----------------------------
 
 	@NotBlank
-	@NotNull
 	public String getNick() {
 		return nick;
 	}
@@ -35,7 +33,6 @@ public class SocialIdentity extends DomainEntity {
 	}
 
 	@NotBlank
-	@NotNull
 	public String getSocialNetwork() {
 		return socialNetwork;
 	}
@@ -44,7 +41,6 @@ public class SocialIdentity extends DomainEntity {
 	}
 
 	@NotBlank
-	@NotNull
 	@URL
 	public String getLink() {
 		return link;

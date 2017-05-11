@@ -56,10 +56,10 @@ public class User extends Reporter {
 
 	@Valid
 	@OneToMany(mappedBy = "user")
-	public Collection<MealOrder> getOrders() {
+	public Collection<MealOrder> getMealOrders() {
 		return mealOrders;
 	}
-	public void setOrders(Collection<MealOrder> mealOrders) {
+	public void setMealOrders(Collection<MealOrder> mealOrders) {
 		this.mealOrders = mealOrders;
 	}
 

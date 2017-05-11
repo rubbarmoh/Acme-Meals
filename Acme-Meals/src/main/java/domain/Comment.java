@@ -34,7 +34,6 @@ public class Comment extends DomainEntity {
 	// Getters and Setters -----------------------------
 
 	@NotBlank
-	@NotNull
 	public String getTitle() {
 		return title;
 	}
@@ -43,7 +42,6 @@ public class Comment extends DomainEntity {
 	}
 
 	@NotBlank
-	@NotNull
 	public String getText() {
 		return text;
 	}

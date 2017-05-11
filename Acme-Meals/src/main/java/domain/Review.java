@@ -11,7 +11,6 @@ import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 
 @Entity
@@ -28,7 +27,6 @@ public class Review extends DomainEntity {
 	// Getters and Setters -----------------------------
 
 	@NotNull
-	@NotBlank
 	public String getTitle() {
 		return title;
 	}
@@ -37,7 +35,6 @@ public class Review extends DomainEntity {
 	}
 
 	@NotNull
-	@NotBlank
 	public String getText() {
 		return text;
 	}

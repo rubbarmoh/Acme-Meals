@@ -28,7 +28,6 @@ public class Report extends DomainEntity {
 	// Getters and Setters -----------------------------
 
 	@NotBlank
-	@NotNull
 	public String getText() {
 		return text;
 	}
