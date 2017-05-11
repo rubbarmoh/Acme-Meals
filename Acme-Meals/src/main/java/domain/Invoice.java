@@ -50,7 +50,6 @@ public class Invoice extends DomainEntity {
 	}
 
 	@NotBlank
-	@NotNull
 	public String getName() {
 		return name;
 	}
@@ -59,7 +58,6 @@ public class Invoice extends DomainEntity {
 	}
 
 	@NotBlank
-	@NotNull
 	public String getSurname() {
 		return surname;
 	}
