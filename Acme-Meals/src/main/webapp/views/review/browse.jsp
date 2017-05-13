@@ -30,7 +30,7 @@
 	</display:column>
 	
 	<display:column>
-		<a href="critic/display.do?criticId=${row.id}"><spring:message code="review.critic.display" /></a>
+		<a href="critic/display.do?criticId=${row.critic.id}"><spring:message code="review.critic.display" /></a>
 	</display:column>
 	
 	

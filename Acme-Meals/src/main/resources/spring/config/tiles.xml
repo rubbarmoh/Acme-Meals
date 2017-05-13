@@ -27,6 +27,7 @@
 		<value>/views/customer/tiles.xml</value>
 		<value>/views/profile/tiles.xml</value>
 		
+		<value>/views/critic/tiles.xml</value>
 		<value>/views/fee/tiles.xml</value>
 		<value>/views/manager/tiles.xml</value>
 		<value>/views/restaurant/tiles.xml</value>

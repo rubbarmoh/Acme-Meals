@@ -16,32 +16,18 @@
 	<tbody>
 		<tr>
 			<th>
-				<spring:message code = "review.title"/>
+				<spring:message code = "critic.name"/>
 			</th>
 			<td>
-				<jstl:out value="${review.title }" />
+				<jstl:out value="${critic.name }" />
 			</td>
 		</tr>
 		<tr>
 			<th>
-				<spring:message code = "review.text"/>
+				<spring:message code = "critic.phone"/>
 			</th>
 			<td>
-				<jstl:out value="${review.text }" />
-			</td>
-		</tr>
-		<tr>
-			<th>
-				<spring:message code = "review.rate"/>
-			</th>
-			<td>
-				<jstl:out value="${review.rate }" />
-			</td>
-		</tr>
-		
-		<tr>
-			<td>
-				<a href="critic/display.do?criticId=${review.critic.id}"><spring:message code="review.critic.display" /></a>
+				<jstl:out value="${critic.phone }" />
 			</td>
 		</tr>
 </table>
