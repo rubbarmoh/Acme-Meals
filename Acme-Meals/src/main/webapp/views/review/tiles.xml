@@ -20,5 +20,10 @@
 		<put-attribute name="title" value="Browse Reviews" />
 		<put-attribute name="body" value="/views/review/browse.jsp" />
 	</definition>
+	
+	<definition name="review/display" extends="master.page">	
+		<put-attribute name="title" value="Display Review" />
+		<put-attribute name="body" value="/views/review/display.jsp" />
+	</definition>
 		
 </tiles-definitions>
