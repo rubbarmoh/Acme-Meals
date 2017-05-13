@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -88,6 +89,7 @@ public class Restaurant extends DomainEntity {
 	}
 
 	@NotNull
+	@Min(0)
 	public Double getAvgStars() {
 		return avgStars;
 	}
@@ -117,14 +119,16 @@ public class Restaurant extends DomainEntity {
 		this.minimunAmount = minimunAmount;
 	}
 
+
 	// Relationships -----------------------------------
-	private Manager manager;
-	private Collection<MealOrder> mealOrders;
-	private Collection<Meal> meals;
-	private Collection<Comment> comments;
-	private Collection<SocialIdentity> socialIdentities;
-	private Collection<Review> reviews;
-	private Collection<Promote> promotes;
+	private Manager						manager;
+	private Collection<MealOrder>		mealOrders;
+	private Collection<Meal>			meals;
+	private Collection<Comment>			comments;
+	private Collection<SocialIdentity>	socialIdentities;
+	private Collection<Review>			reviews;
+	private Collection<Promote>			promotes;
+
 
 	@Valid
 	@ManyToOne(optional = false)
@@ -134,7 +138,7 @@ public class Restaurant extends DomainEntity {
 	public void setManager(Manager manager) {
 		this.manager = manager;
 	}
-	
+
 	@Valid
 	@OneToMany(mappedBy = "restaurant")
 	public Collection<MealOrder> getMealOrders() {
@@ -143,7 +147,7 @@ public class Restaurant extends DomainEntity {
 	public void setMealOrders(Collection<MealOrder> mealOrders) {
 		this.mealOrders = mealOrders;
 	}
-	
+
 	@Valid
 	@OneToMany(mappedBy = "restaurant")
 	public Collection<Meal> getMeals() {
@@ -152,7 +156,7 @@ public class Restaurant extends DomainEntity {
 	public void setMeals(Collection<Meal> meals) {
 		this.meals = meals;
 	}
-	
+
 	@Valid
 	@OneToMany(mappedBy = "restaurant")
 	public Collection<Comment> getComments() {
@@ -161,7 +165,7 @@ public class Restaurant extends DomainEntity {
 	public void setComments(Collection<Comment> comments) {
 		this.comments = comments;
 	}
-	
+
 	@Valid
 	@OneToMany(mappedBy = "restaurant")
 	public Collection<SocialIdentity> getSocialIdentities() {
@@ -170,7 +174,7 @@ public class Restaurant extends DomainEntity {
 	public void setSocialIdentities(Collection<SocialIdentity> socialIdentities) {
 		this.socialIdentities = socialIdentities;
 	}
-	
+
 	@Valid
 	@OneToMany(mappedBy = "restaurant")
 	public Collection<Review> getReviews() {
@@ -179,7 +183,7 @@ public class Restaurant extends DomainEntity {
 	public void setReviews(Collection<Review> reviews) {
 		this.reviews = reviews;
 	}
-	
+
 	@Valid
 	@OneToMany(mappedBy = "restaurant")
 	public Collection<Promote> getPromotes() {
@@ -188,5 +192,5 @@ public class Restaurant extends DomainEntity {
 	public void setPromotes(Collection<Promote> promotes) {
 		this.promotes = promotes;
 	}
-	
+
 }

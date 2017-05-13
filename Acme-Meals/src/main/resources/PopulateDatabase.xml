@@ -495,7 +495,7 @@
 		<property name="address" value="C/alcala nº6" />
 		<property name="email" value="ElPesca1@gmail.com" />
 		<property name="picture" value="http://www.elpescaito.es/wp-content/uploads/2014/07/restaurante-andaluz-duque-de-sexto.jpg" />
-		<property name="avgStars" value="1" />
+		<property name="avgStars" value="4.5" />
 		<property name="deliveryService" value="false" />
 		<property name="manager" ref="manager1"/>
 		<property name="mealOrders">
@@ -542,7 +542,7 @@
 		<property name="address" value="C/Sagasta nº25" />
 		<property name="email" value="Brasitas25@gmail.com" />
 		<property name="picture" value="https://pbs.twimg.com/profile_images/672480932138479616/0KfinFSQ.jpg" />
-		<property name="avgStars" value="1" />
+		<property name="avgStars" value="3.6" />
 		<property name="deliveryService" value="true" />
 		<property name="costDelivery" value="2.00" />
 		<property name="minimunAmount" value="15.00" />
@@ -587,7 +587,7 @@
 		<property name="address" value="C/Alhambra nº2" />
 		<property name="email" value="elchinofeliz@gmail.com" />
 		<property name="picture" value="http://www.emtstatic.com/2010/04/panteonfeliz.jpg" />
-		<property name="avgStars" value="1" />
+		<property name="avgStars" value="2.3" />
 		<property name="deliveryService" value="true" />
 		<property name="costDelivery" value="1.00" />
 		<property name="minimunAmount" value="10.00" />
@@ -632,7 +632,7 @@
 		<property name="address" value="C/Aventura nº12" />
 		<property name="email" value="makimaki@gmail.com" />
 		<property name="picture" value="https://madridevoltion.files.wordpress.com/2012/06/maki-restaurante-japones-malasac3b1a.jpg" />
-		<property name="avgStars" value="1" />
+		<property name="avgStars" value="0.0" />
 		<property name="deliveryService" value="false" />
 		<property name="manager" ref="manager2"/>
 		<property name="mealOrders">
@@ -674,7 +674,7 @@
 		<property name="address" value="C/Sol nº42" />
 		<property name="email" value="waysub@gmail.com" />
 		<property name="picture" value="http://ciplo.net/noticias/wp-content/uploads/2013/06/subway-restaurante.jpg" />
-		<property name="avgStars" value="1" />
+		<property name="avgStars" value="0.0" />
 		<property name="deliveryService" value="true" />
 		<property name="costDelivery" value="3.00" />
 		<property name="minimunAmount" value="10.00" />
@@ -718,7 +718,7 @@
 		<property name="address" value="C/Arbol nº20" />
 		<property name="email" value="vergelveggie@gmail.com" />
 		<property name="picture" value="http://s3.eestatic.com/2017/03/30/social/Acoso-Dieta_vegana-Restaurantes-La_Jungla_204740027_31771887_1024x576.jpg" />
-		<property name="avgStars" value="1" />
+		<property name="avgStars" value="0.0" />
 		<property name="deliveryService" value="false" />
 		<property name="manager" ref="manager3"/>
 		<property name="mealOrders">
