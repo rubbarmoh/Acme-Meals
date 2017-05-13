@@ -22,6 +22,73 @@
 			Add your own converters using entries of the following form: 
 			<bean class="converters.Class1ToClass2" /> 
 		-->
+		
+		<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.StringToActorConverter" />
+		
+		<bean class="converters.AdministratorToStringConverter" />
+		<bean class="converters.StringToAdministratorConverter" />
+		
+		<bean class="converters.CategoryToStringConverter" />
+		<bean class="converters.StringToCategoryConverter" />
+		
+		<bean class="converters.CommentToStringConverter" />
+		<bean class="converters.StringToCommentConverter" />
+		
+		<bean class="converters.CriticToStringConverter" />
+		<bean class="converters.StringToCriticConverter" />
+		
+		<bean class="converters.FeeToStringConverter" />
+		<bean class="converters.StringToFeeConverter" />
+		
+		<bean class="converters.InvoiceToStringConverter" />
+		<bean class="converters.StringToInvoiceConverter" />
+		
+		<bean class="converters.ManagerToStringConverter" />
+		<bean class="converters.StringToManagerConverter" />
+		
+		<bean class="converters.MealOrderToStringConverter" />
+		<bean class="converters.StringToMealOrderConverter" />
+		
+		<bean class="converters.MealToStringConverter" />
+		<bean class="converters.StringToMealConverter" />
+		
+		<bean class="converters.MonthlyBillToStringConverter" />
+		<bean class="converters.StringToMonthlyBillConverter" />
+		
+		<bean class="converters.PromoteToStringConverter" />
+		<bean class="converters.StringToPromoteConverter" />
+		
+		<bean class="converters.QuantityToStringConverter" />
+		<bean class="converters.StringToQuantityConverter" />
+		
+		<bean class="converters.RelationDislikeToStringConverter" />
+		<bean class="converters.StringToRelationDislikeConverter" />
+		
+		<bean class="converters.RelationLikeToStringConverter" />
+		<bean class="converters.StringToRelationLikeConverter" />
+		
+		<bean class="converters.ReporterToStringConverter" />
+		<bean class="converters.StringToReporterConverter" />
+		
+		<bean class="converters.ReportToStringConverter" />
+		<bean class="converters.StringToReportConverter" />
+		
+		<bean class="converters.RestaurantToStringConverter" />
+		<bean class="converters.StringToRestaurantConverter" />
+		
+		<bean class="converters.ReviewToStringConverter" />
+		<bean class="converters.StringToReviewConverter" />
+		
+		<bean class="converters.SocialIdentityToStringConverter" />
+		<bean class="converters.StringToSocialIdentityConverter" />
+		
+		<bean class="converters.UserToStringConverter" />
+		<bean class="converters.StringToUserConverter" />
+		
+		<bean class="converters.VATNumberToStringConverter" />
+		<bean class="converters.StringToVATNumberConverter" />
+		
 	</util:list>
 	
 </beans>
