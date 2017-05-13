@@ -55,6 +55,7 @@
 					<li><a href="user/register.do"><spring:message code="master.page.register.user" /></a></li>				
 				</ul>
 			</li>
+			<li><a class="fNiv" href="review/browse.do"><spring:message code="master.page.review.browse" /></a></li>
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>
 		
