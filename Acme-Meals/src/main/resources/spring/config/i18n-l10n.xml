@@ -28,6 +28,7 @@
 		<value>/views/profile/messages</value>
 		
 		<value>/views/fee/messages</value>
+		<value>/views/vatNumber/messages</value>
 	</util:list>
 
 </beans>

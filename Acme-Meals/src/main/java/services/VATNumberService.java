@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.Collection;
@@ -6,99 +7,129 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-
-import domain.VATNumber;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.VATNumberRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.VATNumber;
+import forms.VATNumberForm;
 
 @Service
 @Transactional
 public class VATNumberService {
+
 	// Managed repository -----------------------------------------------------
 
-		@Autowired
-		private VATNumberRepository	vatNumberRepository;
+	@Autowired
+	private VATNumberRepository	vatNumberRepository;
 
-		// Supporting services ----------------------------------------------------
+	// Supporting services ----------------------------------------------------
 
-		
+	@Autowired
+	private Validator			validator;
 
 
-		// Constructors -----------------------------------------------------------
+	// Constructors -----------------------------------------------------------
 
-		public VATNumberService() {
-			super();
-		}
+	public VATNumberService() {
+		super();
+	}
 
-		// Simple CRUD methods ----------------------------------------------------
+	// Simple CRUD methods ----------------------------------------------------
 
-		public VATNumber create() {
+	public VATNumber create() {
 
-			UserAccount userAccount;
-			userAccount = LoginService.getPrincipal();
-			Authority au = new Authority();
-			au.setAuthority("ADMIN");
-			Assert.isTrue(userAccount.getAuthorities().contains(au));
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
 
-			VATNumber result;
+		VATNumber result;
 
-			result = new VATNumber();
+		result = new VATNumber();
 
-			return result;
-		}
+		return result;
+	}
 
-		public Collection<VATNumber> findAll() {
-			Collection<VATNumber> result;
+	public Collection<VATNumber> findAll() {
+		Collection<VATNumber> result;
 
-			result = vatNumberRepository.findAll();
-			Assert.notNull(result);
+		result = vatNumberRepository.findAll();
+		Assert.notNull(result);
 
-			return result;
-		}
+		return result;
+	}
 
-		public VATNumber findOne(int vatId) {
-			Assert.isTrue(vatId != 0);
+	public VATNumber findOne(int vatId) {
+		Assert.isTrue(vatId != 0);
 
-			VATNumber result;
+		VATNumber result;
 
-			result = vatNumberRepository.findOne(vatId);
-			Assert.notNull(result);
+		result = vatNumberRepository.findOne(vatId);
+		Assert.notNull(result);
 
-			return result;
-		}
+		return result;
+	}
 
-		public VATNumber save(VATNumber vat) {
+	public VATNumber save(VATNumber vat) {
 
-			UserAccount userAccount;
-			userAccount = LoginService.getPrincipal();
-			Authority au = new Authority();
-			au.setAuthority("ADMIN");
-			Assert.isTrue(userAccount.getAuthorities().contains(au));
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
 
-			Assert.notNull(vat);
+		Assert.notNull(vat);
 
-			return vatNumberRepository.save(vat);
-		}
+		return vatNumberRepository.save(vat);
+	}
 
-		public void delete(VATNumber vat) {
+	public void delete(VATNumber vat) {
 
-			UserAccount userAccount;
-			userAccount = LoginService.getPrincipal();
-			Authority au = new Authority();
-			au.setAuthority("ADMIN");
-			Assert.isTrue(userAccount.getAuthorities().contains(au));
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
 
-			Assert.notNull(vat);
-			Assert.isTrue(vat.getId() != 0);
-			Assert.isTrue(vatNumberRepository.exists(vat.getId()));
+		Assert.notNull(vat);
+		Assert.isTrue(vat.getId() != 0);
+		Assert.isTrue(vatNumberRepository.exists(vat.getId()));
 
-			vatNumberRepository.delete(vat);
-		}
+		vatNumberRepository.delete(vat);
+	}
 
-		// Other bussines methods ---------------------------
+	// Other bussines methods ---------------------------
 
-		
+	public VATNumber find() {
+		Collection<VATNumber> result;
+		result = vatNumberRepository.findAll();
+		return result.iterator().next();
+	}
+
+	// Forms ---------------------------
+
+	public VATNumberForm generateForm(VATNumber vatNumber) {
+		VATNumberForm vatNumberForm = new VATNumberForm();
+
+		vatNumberForm.setId(vatNumber.getId());
+		vatNumberForm.setValue(vatNumber.getValue());
+
+		return vatNumberForm;
+	}
+
+	public VATNumber reconstruct(VATNumberForm vatNumberForm, BindingResult binding) {
+		VATNumber result = findOne(vatNumberForm.getId());
+
+		result.setValue(vatNumberForm.getValue());
+
+		validator.validate(result, binding);
+
+		return result;
+	}
+
 }
