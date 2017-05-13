@@ -19,27 +19,24 @@
 
 <security:authorize access="hasRole('MANAGER')">
 
-<display:table name="events"
+<display:table name="restaurants"
 	id="row"
 	class="displaytag"
 	pagesize="5"
 	requestURI="${requestURI}" >
 	
 	<display:column>
-		<a href="managerActor/event/edit.do?eventId=${row.id}"><spring:message code="event.edit" /></a>
+		<a href="managerActor/restaurant/edit.do?restaurantId=${row.id}"><spring:message code="restaurant.edit" /></a>
 	</display:column>
 	
-	<spring:message code="event.title" var="titleHeader" />
-	<display:column property="title" title="${titleHeader}"/>
+	<spring:message code="restaurant.name" var="nameHeader" />
+	<display:column property="name" title="${nameHeader}"/>
 			
-	<spring:message code="event.seats" var="seatsHeader" />
-	<display:column title="${seatsHeader}" sortable="true" ><jstl:out value="${seats.get(row)}"/></display:column>
-	
-	<spring:message code="event.moment" var="momentHeader" />
-	<display:column title="${momentHeader}" sortable="false"><fmt:formatDate value="${row.moment }" pattern="dd/MM/yyyy HH:mm" /></display:column>
+	<spring:message code="restaurant.phone" var="phoneHeader" />
+	<display:column property="phone" title="${phoneHeader}"/>
 	
 	<display:column>
-		<a href="event/display.do?eventId=${row.id}"><spring:message code="event.display" /></a>
+		<a href="restaurant/display.do?restaurantId=${row.id}"><spring:message code="restaurant.display" /></a>
 	</display:column>
 	
 </display:table>
