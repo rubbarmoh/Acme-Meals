@@ -108,7 +108,7 @@ public class ManagerForm {
 	}
 
 	@SafeHtml(whitelistType = WhiteListType.NONE)
-	@Pattern(regexp = "^([+]?\\d{1,3})?[ ]?(\\d{9})")
+	@Pattern(regexp = "^$|^([+]?\\d{1,3})?[ ]?(\\d{9})")
 	public String getPhone() {
 		return phone;
 	}

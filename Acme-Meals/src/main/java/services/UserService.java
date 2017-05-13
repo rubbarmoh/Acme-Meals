@@ -11,6 +11,8 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.UserRepository;
 import security.Authority;
@@ -23,6 +25,7 @@ import domain.RelationDislike;
 import domain.RelationLike;
 import domain.Report;
 import domain.User;
+import forms.UserForm;
 
 @Service
 @Transactional
@@ -33,8 +36,11 @@ public class UserService {
 	@Autowired
 	private UserRepository	userRepository;
 
-
 	// Supporting services ----------------------------------------------------
+
+	@Autowired
+	private Validator		validator;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -52,7 +58,9 @@ public class UserService {
 		authorities.add(a);
 		userAccount.addAuthority(a);
 		User result;
+
 		result = new User();
+		result.setBanned(false);
 		result.setUserAccount(userAccount);
 		result.setComments(new ArrayList<Comment>());
 		result.setMealOrders(new ArrayList<MealOrder>());
@@ -177,6 +185,87 @@ public class UserService {
 		return validador;
 	}
 
-	//Forms----------------------
+	//Forms----------
+
+	public UserForm generateForm(User user) {
+		UserForm result = new UserForm();
+
+		result.setId(user.getId());
+		result.setUsername(user.getUserAccount().getUsername());
+		result.setPassword(user.getUserAccount().getPassword());
+		result.setPassword2(user.getUserAccount().getPassword());
+		result.setAgreed(true);
+
+		result.setCreditCard(user.getCreditCard());
+
+		result.setEmail(user.getEmail());
+		result.setName(user.getName());
+		result.setPhone(user.getPhone());
+		result.setAddress(user.getAddress());
+		result.setSurname(user.getSurname());
+
+		return result;
+	}
+
+	public User reconstructEditPersonalData(UserForm userForm, BindingResult binding) {
+		User result;
+
+		Assert.isTrue(userForm.getPassword2().equals(userForm.getPassword()), "notEqualPassword");
+		Assert.isTrue(userForm.getAgreed(), "agreedNotAccepted");
+		Assert.isTrue(check(userForm.getCreditCard()), "badCreditCard");
+		Assert.isTrue(userForm.getCreditCard().getHolderName() != "", "badCreditCard");
+
+		result = userRepository.findOne(userForm.getId());
+
+		result.setName(userForm.getName());
+		result.setSurname(userForm.getSurname());
+		result.setEmail(userForm.getEmail());
+		result.setPhone(userForm.getPhone());
+		result.setAddress(userForm.getAddress());
+		result.setCreditCard(userForm.getCreditCard());
+
+		validator.validate(result, binding);
+
+		return result;
+	}
+
+	public UserForm generate() {
+		UserForm result;
+		result = new UserForm();
+
+		return result;
+	}
+
+	public User reconstruct(UserForm userForm, BindingResult binding) {
+		User result = create();
+
+		String password = userForm.getPassword();
+
+		Assert.isTrue(userForm.getPassword2().equals(password), "notEqualPassword");
+		Assert.isTrue(userForm.getAgreed(), "agreedNotAccepted");
+		Assert.isTrue(check(userForm.getCreditCard()), "badCreditCard");
+		Assert.isTrue(userForm.getCreditCard().getHolderName() != "", "badCreditCard");
+
+		UserAccount userAccount = new UserAccount();
+		List<Authority> authorities = new ArrayList<Authority>();
+		Authority a = new Authority();
+		a.setAuthority(Authority.USER);
+		authorities.add(a);
+		userAccount.addAuthority(a);
+		userAccount.setPassword(password);
+		userAccount.setUsername(userForm.getUsername());
+
+		result.setUserAccount(userAccount);
+		result.setName(userForm.getName());
+		result.setSurname(userForm.getSurname());
+		result.setEmail(userForm.getEmail());
+		result.setPhone(userForm.getPhone());
+		result.setAddress(userForm.getAddress());
+		result.setCreditCard(userForm.getCreditCard());
+
+		validator.validate(result, binding);
+
+		return result;
+	}
 
 }

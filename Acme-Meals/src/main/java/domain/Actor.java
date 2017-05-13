@@ -54,7 +54,7 @@ public class Actor extends DomainEntity {
 		this.email = email;
 	}
 
-	@Pattern(regexp = "^([+]?\\d{1,3})?[ ]?(\\d{9})")
+	@Pattern(regexp = "^$|^([+]?\\d{1,3})?[ ]?(\\d{9})")
 	public String getPhone() {
 		return this.phone;
 	}
