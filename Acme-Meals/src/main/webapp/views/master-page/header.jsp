@@ -28,6 +28,7 @@
 					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>					
 				</ul>
 			</li>
+			<li><a class="fNiv" href="administrator/fee/edit.do"><spring:message code="master.page.administrator.fee" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('CUSTOMER')">
