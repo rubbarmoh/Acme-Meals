@@ -1,0 +1,1 @@
+Añadirla al reporter la credit card y quitarla del pedido
