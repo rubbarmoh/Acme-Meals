@@ -8,7 +8,6 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -16,24 +15,12 @@ public class Manager extends Reporter {
 
 	// Attributes --------------------------------------
 
-	private CreditCard	creditCard;
-
-
 	// Getters and Setters -----------------------------
 
-	@Valid
-	@NotNull
-	public CreditCard getCreditCard() {
-		return creditCard;
-	}
-
-	public void setCreditCard(CreditCard creditCard) {
-		this.creditCard = creditCard;
-	}
-
 	// Relationships -----------------------------------
-	private Collection<MonthlyBill> monthlyBills;
-	private Collection<Restaurant> restaurants;
+	private Collection<MonthlyBill>	monthlyBills;
+	private Collection<Restaurant>	restaurants;
+
 
 	@Valid
 	@OneToMany(mappedBy = "manager")
@@ -52,6 +39,5 @@ public class Manager extends Reporter {
 	public void setRestaurants(Collection<Restaurant> restaurants) {
 		this.restaurants = restaurants;
 	}
-	
-	
+
 }

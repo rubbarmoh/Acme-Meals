@@ -24,11 +24,10 @@ public class MealOrder extends DomainEntity {
 
 	// Attributes --------------------------------------
 
-	private Date		moment;
-	private CreditCard	creditCard;
-	private Double		amount;
-	private String		status;
-	private Boolean		pickUp;
+	private Date	moment;
+	private Double	amount;
+	private String	status;
+	private Boolean	pickUp;
 
 
 	// Getters and Setters -----------------------------
@@ -42,15 +41,6 @@ public class MealOrder extends DomainEntity {
 	}
 	public void setMoment(Date moment) {
 		this.moment = moment;
-	}
-
-	@NotNull
-	@Valid
-	public CreditCard getCreditCard() {
-		return creditCard;
-	}
-	public void setCreditCard(CreditCard creditCard) {
-		this.creditCard = creditCard;
 	}
 
 	@NotNull
@@ -78,11 +68,13 @@ public class MealOrder extends DomainEntity {
 		this.pickUp = pickUp;
 	}
 
+
 	// Relationships -----------------------------------
 
-	private User user;
-	private Restaurant restaurant;
-	private Collection<Quantity> quantities;
+	private User					user;
+	private Restaurant				restaurant;
+	private Collection<Quantity>	quantities;
+
 
 	@Valid
 	@ManyToOne(optional = false)
@@ -92,7 +84,7 @@ public class MealOrder extends DomainEntity {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	@Valid
 	@ManyToOne(optional = false)
 	public Restaurant getRestaurant() {
@@ -101,7 +93,7 @@ public class MealOrder extends DomainEntity {
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
 	}
-	
+
 	@Valid
 	@OneToMany(mappedBy = "mealOrder")
 	public Collection<Quantity> getQuantities() {
@@ -110,6 +102,5 @@ public class MealOrder extends DomainEntity {
 	public void setQuantities(Collection<Quantity> quantities) {
 		this.quantities = quantities;
 	}
-	
-	
+
 }
