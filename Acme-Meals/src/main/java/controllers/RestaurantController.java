@@ -1,6 +1,8 @@
 
 package controllers;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +44,22 @@ public class RestaurantController extends AbstractController {
 
 		return result;
 	}
+	
+	//Browse-------------------------------------------------------
+	
+		@RequestMapping(value = "/browse", method = RequestMethod.GET)
+		public ModelAndView browse() {
+			ModelAndView result;
+			Collection<Restaurant>restaurants;
+
+			restaurants = restaurantService.findAll();
+
+			result = new ModelAndView("restaurant/browse");
+			result.addObject("restaurants", restaurants);
+			result.addObject("requestURI", "restaurant/browse.do");
+
+			return result;
+		}
 
 	//Ancillary Methods---------------------------
 

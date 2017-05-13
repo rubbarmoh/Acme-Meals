@@ -15,7 +15,10 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
        
 <tiles-definitions>
-	
+	<definition name="restaurant/browse" extends="master.page">	
+		<put-attribute name="title" value="Browse restaurants" />
+		<put-attribute name="body" value="/views/restaurant/browse.jsp" />
+	</definition>
 	<definition name="restaurant/display" extends="master.page">	
 		<put-attribute name="title" value="Display restaurant" />
 		<put-attribute name="body" value="/views/restaurant/display.jsp" />
