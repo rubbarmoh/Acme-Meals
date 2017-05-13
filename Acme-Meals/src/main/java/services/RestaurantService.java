@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.ArrayList;
@@ -7,29 +8,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.RestaurantRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Comment;
+import domain.Manager;
 import domain.Meal;
 import domain.MealOrder;
 import domain.Promote;
 import domain.Restaurant;
 import domain.Review;
 import domain.SocialIdentity;
+import forms.RestaurantForm;
 
 @Service
 @Transactional
 public class RestaurantService {
+
 	//Managed repository--------------------------------
 	@Autowired
-	private RestaurantRepository restaurantRepository;
+	private RestaurantRepository	restaurantRepository;
+
 	//Supporting Services-------------------------------
-	
+
+	@Autowired
+	private Validator				validator;
+
+	@Autowired
+	private ManagerService			managerService;
+
+
 	//Constructor---------------------------------------
-	public RestaurantService(){
+	public RestaurantService() {
 		super();
 	}
 	// Simple CRUD methods ----------------------------------------------------
@@ -43,6 +57,7 @@ public class RestaurantService {
 		Assert.isTrue(userAccount.getAuthorities().contains(au2));
 		Restaurant result;
 		result = new Restaurant();
+		result.setAvgStars(0.0);
 		result.setComments(new ArrayList<Comment>());
 		result.setMealOrders(new ArrayList<MealOrder>());
 		result.setMeals(new ArrayList<Meal>());
@@ -101,7 +116,90 @@ public class RestaurantService {
 		restaurantRepository.delete(restaurant);
 	}
 	// Other bussiness methods ----------------------------------------------------
+
+	public Collection<Restaurant> findByPrincipal() {
+
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
+		Collection<Restaurant> result = new ArrayList<Restaurant>();
+		Manager manager = managerService.findByPrincipal();
+		result = restaurantRepository.restaurantByManagerId(manager.getId());
+		return result;
+	}
+
+	// Forms -----------
+
+	public RestaurantForm generateForm() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+		RestaurantForm result;
+
+		result = new RestaurantForm();
+		return result;
+	}
+
+	public Restaurant reconstruct(RestaurantForm restaurantForm, BindingResult binding) {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
+		Manager manager = managerService.findByPrincipal();
+
+		Restaurant result;
+
+		if (restaurantForm.getId() == 0)
+			result = create();
+		else
+			result = findOne(restaurantForm.getId());
+
+		result.setId(restaurantForm.getId());
+		result.setManager(manager);
+		result.setName(restaurantForm.getName());
+		result.setPhone(restaurantForm.getPhone());
+		result.setCity(restaurantForm.getCity());
+		result.setAddress(restaurantForm.getAddress());
+		result.setEmail(restaurantForm.getEmail());
+		result.setPicture(restaurantForm.getPicture());
+		result.setDeliveryService(restaurantForm.getDeliveryService());
+		result.setCostDelivery(restaurantForm.getCostDelivery());
+		result.setMinimunAmount(restaurantForm.getMinimunAmount());
+
+		validator.validate(result, binding);
+
+		return result;
+	}
+
+	public RestaurantForm transform(Restaurant restaurant) {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+		RestaurantForm result = generateForm();
+		result.setId(restaurant.getId());
+		result.setName(restaurant.getName());
+		result.setPhone(restaurant.getPhone());
+		result.setCity(restaurant.getCity());
+		result.setAddress(restaurant.getAddress());
+		result.setEmail(restaurant.getEmail());
+		result.setPicture(restaurant.getPicture());
+		result.setDeliveryService(restaurant.getDeliveryService());
+		result.setCostDelivery(restaurant.getCostDelivery());
+		result.setMinimunAmount(restaurant.getMinimunAmount());
+		return result;
+	}
+
 }
-
-
-
