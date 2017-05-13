@@ -28,6 +28,8 @@
 		<value>/views/profile/messages</value>
 		
 		<value>/views/fee/messages</value>
+		<value>/views/manager/messages</value>
+		<value>/views/user/messages</value>
 		<value>/views/vatNumber/messages</value>
 	</util:list>
 

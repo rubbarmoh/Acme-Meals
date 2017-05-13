@@ -28,6 +28,8 @@
 		<value>/views/profile/tiles.xml</value>
 		
 		<value>/views/fee/tiles.xml</value>
+		<value>/views/manager/tiles.xml</value>
+		<value>/views/user/tiles.xml</value>
 		<value>/views/vatNumber/tiles.xml</value>
 	</util:list>
 

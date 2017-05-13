@@ -48,6 +48,13 @@
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">
+			<li><a class="fNiv"><spring:message	code="master.page.register" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="managerActor/register.do"><spring:message code="master.page.register.manager" /></a></li>
+					<li><a href="user/register.do"><spring:message code="master.page.register.user" /></a></li>				
+				</ul>
+			</li>
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>
 		
@@ -57,13 +64,32 @@
 					<spring:message code="master.page.profile" /> 
 			        (<security:authentication property="principal.username" />)
 				</a>
+				<security:authorize access="hasRole('MANAGER')">
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="profile/action-1.do"><spring:message code="master.page.profile.action.1" /></a></li>
-					<li><a href="profile/action-2.do"><spring:message code="master.page.profile.action.2" /></a></li>
-					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>					
+					<li><a href="managerActor/edit.do"><spring:message code="master.page.edit.manager" /></a></li>					
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
+				</security:authorize>
+				<security:authorize access="hasRole('USER')">
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="user/edit.do"><spring:message code="master.page.edit.user" /></a></li>					
+					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
+				</ul>
+				</security:authorize>
+				<security:authorize access="hasRole('CRITIC')">
+				<ul>
+					<li class="arrow"></li>		
+					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
+				</ul>
+				</security:authorize>
+				<security:authorize access="hasRole('ADMIN')">
+				<ul>
+					<li class="arrow"></li>					
+					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
+				</ul>
+				</security:authorize>
 			</li>
 		</security:authorize>
 	</ul>
