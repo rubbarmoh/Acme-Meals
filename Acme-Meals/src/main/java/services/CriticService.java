@@ -2,6 +2,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -117,4 +118,11 @@ public class CriticService {
 
 				return result;
 			}
+			
+			public List<Double> minMaxAvgReviewsPerCritic(){
+				List<Double> result = criticRepository.minMaxAvgReviewsPerCritic();
+				return result;
+			}
+			
+			
 }

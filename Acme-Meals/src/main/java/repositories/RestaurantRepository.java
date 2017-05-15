@@ -17,7 +17,7 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
 	// Search query -------------------------------------------------------
 	
 	@Query("select r from Restaurant r where r.name like %?1% or r.address like %?1%")
-	Collection<Restaurant> searchByKey(String key);
+	Collection<Restaurant> findByKey(String key);
 	
 	// Dashboard ----------------------------------------------------------
 
@@ -33,8 +33,8 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
 	@Query("select r from Restaurant r where r.manager=?1 and r.avgStars<= all(select r2.avgStars from Restaurant r2 where r2.manager=?1)")
 	List<Restaurant> restaurantLessStars(Manager manager);
 
-	@Query("select 1.0*(select sum(o.amount) from MealOrder o where o.status='FINISHED' and o.restaurant.manager=?1 and o.restaurant=?2)/sum(o2.amount) from MealOrder o2 where o2.status='FINISHED' and o2.restaurant.manager=?1")
-	Double avgProfitMyRestaurants(Manager manager, Restaurant restaurant);
+	@Query("select 1.0*(select sum(o.amount) from MealOrder o where o.status='FINISHED' and o.restaurant.manager=?1)/sum(o2.amount) from MealOrder o2 where o2.status='FINISHED' and o2.restaurant.manager=?1")
+	Double avgProfitMyRestaurants(Manager manager);
 
 	@Query("select sum(o.amount) from MealOrder o where o.status='FINISHED' and o.restaurant.manager=?1")
 	Double minMaxProfitByRestaurant(Manager m);

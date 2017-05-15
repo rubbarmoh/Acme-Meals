@@ -182,6 +182,11 @@ public class ManagerService {
 
 		return validador;
 	}
+	
+	public List<Double> minMaxAvgMonthlyBillsPerManager(){
+		List<Double> result = managerRepository.minMaxAvgMonthlyBillsPerManager();
+		return result;
+	}
 
 	//Forms----------
 

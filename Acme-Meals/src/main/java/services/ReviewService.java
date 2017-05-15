@@ -2,6 +2,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -94,5 +95,10 @@ public class ReviewService {
 			reviewRepository.delete(review);
 		}
 		// Other bussiness methods ----------------------------------------------------
+	
+		public List<Review> reviewMoreLikes(){
+			List<Review> result = reviewRepository.reviewMoreLikes();
+			return result;
+		}
 	}
 

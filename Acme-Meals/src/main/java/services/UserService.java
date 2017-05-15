@@ -185,6 +185,31 @@ public class UserService {
 		return validador;
 	}
 
+	public List<Double> minMaxAVGOrdersPerUser(){
+		List<Double> result = userRepository.minMaxAVGOrdersPerUser();
+		return result;
+	}
+	
+	public List<User> usersMorethan10PercentOrders(){
+		List<User> result = userRepository.usersMorethan10PercentOrders();
+		return result;
+	}
+	
+	public List<User> usersLessthan10PercentOrders(){
+		List<User> result = userRepository.usersLessthan10PercentOrders();
+		return result;
+	}
+	
+	public List<User> usersMoreThan10PercentComments(){
+		List<User> result = userRepository.usersMoreThan10PercentComments();
+		return result;
+	}
+	
+	public List<User> usersLessThan10PercentComments(){
+		List<User> result = userRepository.usersLessThan10PercentComments();
+		return result;
+	}
+	
 	//Forms----------
 
 	public UserForm generateForm(User user) {

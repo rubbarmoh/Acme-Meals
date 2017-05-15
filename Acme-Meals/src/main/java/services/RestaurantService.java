@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -134,10 +135,89 @@ public class RestaurantService {
 	}
 
 	public Collection<Restaurant> findByKey(String key){
-		Collection<Restaurant> result = restaurantRepository.searchByKey(key);
+		Collection<Restaurant> result = restaurantRepository.findByKey(key);
 		return result;
 	}
 	
+	public Collection<Restaurant> restaurantByManagerId(int id){
+		Collection<Restaurant> result = restaurantRepository.restaurantByManagerId(id);
+		return result;
+	}
+	
+	public List<Integer> ordersPerRestaurant(Manager manager){
+		List<Integer> result = restaurantRepository.ordersPerRestaurant(manager);
+		return result;
+	}
+	
+	public List<Restaurant> restaurantMoreStars(Manager manager){
+		List<Restaurant> result = restaurantRepository.restaurantMoreStars(manager);
+		return result;
+	}
+	
+	public List<Restaurant> restaurantLessStars(Manager manager){
+		List<Restaurant> result = restaurantRepository.restaurantLessStars(manager);
+		return result;
+	}
+	
+	public Double avgProfitMyRestaurants(Manager manager){
+		Double result = restaurantRepository.avgProfitMyRestaurants(manager);
+		return result;
+	}
+	
+	public Double minMaxProfitByRestaurant(Manager manager){
+		Double result = restaurantRepository.minMaxProfitByRestaurant(manager);
+		return result;
+	}
+	
+	public List<Object[]> restaurantMoreProfit(Manager manager){
+		 List<Object[]> result = restaurantRepository.restaurantMoreProfit(manager);
+		return result;
+	}
+	
+	public List<Restaurant> restaurantsWithMore10PercentOrders(Manager manager){
+		List<Restaurant> result = restaurantRepository.restaurantsWithMore10PercentOrders(manager);
+		return result;
+	}
+	
+	public List<Restaurant> restaurantsWithLess10PercentOrders(Manager manager){
+		List<Restaurant> result = restaurantRepository.restaurantsWithLess10PercentOrders(manager);
+		return result;
+	}
+	
+	public List<Restaurant> restaurantMoreOrders(){
+		List<Restaurant> result = restaurantRepository.restaurantMoreOrders();
+		return result;
+	}
+	
+	public List<Restaurant> restaurantLessOrders(){
+		List<Restaurant> result = restaurantRepository.restaurantLessOrders();
+		return result;
+	}
+	
+	public Double ratioRestaurantWithSocialIdentity(){
+		Double result = restaurantRepository.ratioRestaurantWithSocialIdentity();
+		return result;
+	}
+	
+	public List<Restaurant> restaurantWithMoreReviews(){
+		List<Restaurant> result = restaurantRepository.restaurantWithMoreReviews();
+		return result;
+	}
+	
+	public List<Restaurant> restaurantWithLessReviews(){
+		List<Restaurant> result = restaurantRepository.restaurantWithLessReviews();
+		return result;
+	}	
+
+	public Double ratioRestaurantsPromoted(){
+		Double result = restaurantRepository.ratioRestaurantsPromoted();
+		return result;
+	}
+	
+	public List<Restaurant> restaurantMoreStars(){
+		List<Restaurant> result = restaurantRepository.restaurantMoreStars();
+		return result;
+	}
 	// Forms ----------------------------------------------------------
 
 	public RestaurantForm generateForm() {
