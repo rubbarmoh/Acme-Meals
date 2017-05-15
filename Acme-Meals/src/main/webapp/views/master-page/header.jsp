@@ -65,7 +65,8 @@
 			<li><a class="fNiv" href="restaurant/browse.do"><spring:message code="master.page.restaurant.browse" /></a></li>
 			
 			<security:authorize access="hasRole('USER')">
-				<li><a href="mealOrder/browse.do"><spring:message code="master.page.user.mealOrder" /></a></li>
+				<li><a class="fNiv" href="mealOrder/browse.do"><spring:message code="master.page.user.mealOrder" /></a></li>
+				<li><a class="fNiv" href="invoice/list.do"><spring:message code="master.page.user.invoice" /></a></li>
 			</security:authorize>
 			<li>
 				<a class="fNiv"> 

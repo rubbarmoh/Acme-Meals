@@ -65,6 +65,9 @@
 		<security:intercept-url pattern="/mealOrder/browse.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/mealOrder/display.do" access="hasRole('USER')" />
 		
+		<security:intercept-url pattern="/invoice/list.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/invoice/display.do" access="hasRole('USER')" />
+		
 		<security:intercept-url pattern="/review/browse.do" access="permitAll" /> 
 		<security:intercept-url pattern="/review/display.do" access="permitAll" /> 
 		<security:intercept-url pattern="/critic/display.do" access="permitAll" /> 
