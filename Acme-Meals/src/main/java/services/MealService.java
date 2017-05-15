@@ -56,7 +56,9 @@ public class MealService {
 		ArrayList<Quantity> quantities = new ArrayList<Quantity>();
 
 		Meal result;
+
 		result = new Meal();
+		result.setErased(false);
 		result.setQuantities(quantities);
 		return result;
 	}
@@ -151,6 +153,7 @@ public class MealService {
 		result.setTitle(mealForm.getTitle());
 		result.setDescription(mealForm.getDescription());
 		result.setPrice(mealForm.getPrice());
+		result.setCategory(mealForm.getCategory());
 
 		validator.validate(result, binding);
 
@@ -169,6 +172,7 @@ public class MealService {
 		result.setTitle(meal.getTitle());
 		result.setDescription(meal.getDescription());
 		result.setPrice(meal.getPrice());
+		result.setCategory(meal.getCategory());
 		return result;
 	}
 

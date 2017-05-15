@@ -20,12 +20,12 @@
 		<put-attribute name="body" value="/views/meal/browse.jsp" />
 	</definition>
 
-	<definition name="managerActor/meal/edit" extends="master.page">	
+	<definition name="meal/edit" extends="master.page">	
 		<put-attribute name="title" value="Editar plato" />
 		<put-attribute name="body" value="/views/meal/edit.jsp" />
 	</definition>
 	
-	<definition name="managerActor/meal/create" extends="master.page">	
+	<definition name="meal/create" extends="master.page">	
 		<put-attribute name="title" value="Crear plato" />
 		<put-attribute name="body" value="/views/meal/edit.jsp" />
 	</definition>

@@ -1,6 +1,10 @@
 
 package controllers.manager;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.CategoryService;
 import services.MealService;
 import controllers.AbstractController;
+import domain.Category;
 import domain.Meal;
 import forms.MealForm;
 
@@ -24,7 +30,10 @@ public class ManagerMealController extends AbstractController {
 	//Services-------------------------
 
 	@Autowired
-	private MealService	mealService;
+	private MealService		mealService;
+
+	@Autowired
+	private CategoryService	categoryService;
 
 
 	//Constructor----------------------
@@ -47,6 +56,7 @@ public class ManagerMealController extends AbstractController {
 
 		result = new ModelAndView("meal/create");
 		result.addObject("mealForm", mealForm);
+		result.addObject("categories", getCategories());
 
 		return result;
 
@@ -87,14 +97,10 @@ public class ManagerMealController extends AbstractController {
 				meal = mealService.reconstruct(mealForm, binding);
 
 				mealService.save(meal);
-				result = new ModelAndView("meal/browse");
+				result = new ModelAndView("restaurant/list");
 
 			} catch (Throwable oops) {
 				String msgCode = "meal.save.error";
-				if (oops.getMessage().equals("nullCreditCard"))
-					msgCode = "meal.nullCreditCard";
-				else if (oops.getMessage().equals("badCreditCard"))
-					msgCode = "meal.badCreditCard";
 
 				if (mealForm.getId() != 0) {
 					result = createEditModelAndView(mealForm, msgCode);
@@ -116,14 +122,9 @@ public class ManagerMealController extends AbstractController {
 			try {
 				Meal meal = mealService.reconstruct(mealForm, binding);
 				mealService.delete(meal);
-				result = new ModelAndView("meal/browse");
+				result = new ModelAndView("restaurant/list");
 			} catch (Throwable oops) {
 				String msgCode = "meal.save.error";
-
-				if (oops.getMessage().equals("nullCreditCard"))
-					msgCode = "meal.nullCreditCard";
-				else if (oops.getMessage().equals("badCreditCard"))
-					msgCode = "meal.badCreditCard";
 
 				result = createEditModelAndView(mealForm, msgCode);
 			}
@@ -138,6 +139,7 @@ public class ManagerMealController extends AbstractController {
 		result = new ModelAndView("meal/edit");
 		result.addObject("meal", meal);
 		result.addObject("message", message);
+		result.addObject("categories", getCategories());
 		return result;
 
 	}
@@ -147,7 +149,7 @@ public class ManagerMealController extends AbstractController {
 
 		result = new ModelAndView("meal/edit");
 		result.addObject("meal", meal);
-
+		result.addObject("categories", getCategories());
 		result.addObject("message", message);
 
 		return result;
@@ -159,6 +161,7 @@ public class ManagerMealController extends AbstractController {
 
 		result = new ModelAndView("meal/create");
 		result.addObject("meal", meal);
+		result.addObject("categories", getCategories());
 		result.addObject("message", message);
 
 		return result;
@@ -172,6 +175,17 @@ public class ManagerMealController extends AbstractController {
 
 		return result;
 
+	}
+
+	private Map<Integer, String> getCategories() {
+		Collection<Category> cs;
+		cs = categoryService.findAll();
+
+		Map<Integer, String> categories = new HashMap<Integer, String>();
+		for (Category c : cs) {
+			categories.put(c.getId(), c.getName());
+		}
+		return categories;
 	}
 
 }

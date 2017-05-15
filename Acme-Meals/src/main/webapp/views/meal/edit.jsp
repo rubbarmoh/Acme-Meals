@@ -22,6 +22,7 @@
 	<form:form action="managerActor/meal/edit.do"	modelAttribute="mealForm">
 	
 		<form:hidden path="id"/>
+		<form:hidden path="rId"/>
 	
 		<acme:textbox code="meal.title" path="title" />
 		<br/>
@@ -29,6 +30,14 @@
 		<br/>
 		<acme:textbox code="meal.price" path="price" />
 		<br/>
+		<form:label path="category" class="control-label">
+				<spring:message code="meal.category.name" />:
+		</form:label>
+		
+		<form:select path="category" class="form-control">
+			<form:options items="${categories}" />
+		</form:select>
+		<form:errors cssClass="error" path="category" />
 		
 		<acme:submit name="save" code="meal.save"/>
 		<jstl:if test="${mealForm.id != 0}">
