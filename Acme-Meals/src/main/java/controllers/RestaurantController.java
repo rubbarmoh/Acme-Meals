@@ -60,6 +60,23 @@ public class RestaurantController extends AbstractController {
 
 			return result;
 		}
+		
+	// Search ------------------------------------------------------
+		
+		@RequestMapping(value = "/search", method = RequestMethod.GET)
+		public ModelAndView search(@RequestParam String key){
+			ModelAndView result;
+			String requestUri = "restaurant/search.do?key="+key;
+			try{
+				Collection<Restaurant> restaurants = restaurantService.findByKey(key);
+				result = new ModelAndView("restaurant/browse");
+				result.addObject("restaurants", restaurants);
+				result.addObject("requestURI", requestUri);
+			}catch(Throwable oops){
+				result = browse();
+			}
+			return result;
+		}
 
 	//Ancillary Methods---------------------------
 

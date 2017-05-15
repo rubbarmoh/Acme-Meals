@@ -13,6 +13,13 @@ import domain.Restaurant;
 
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer> {
+	
+	// Search query -------------------------------------------------------
+	
+	@Query("select r from Restaurant r where r.name like %?1% or r.address like %?1%")
+	Collection<Restaurant> searchByKey(String key);
+	
+	// Dashboard ----------------------------------------------------------
 
 	@Query("select r from Restaurant r where r.manager.id=?1")
 	Collection<Restaurant> restaurantByManagerId(int id);

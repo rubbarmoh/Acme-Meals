@@ -16,6 +16,24 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<!-- Search for a restaurant -->
+
+<input type="text" value="" id="textSearch" />
+<input type="button" id="buttonSearch"
+	value="<spring:message code="restaurant.search"/>" />
+	
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#buttonSearch").click(function(){
+			window.location.replace('restaurant/search.do?key=' + $("#textSearch").val());
+		});
+		
+		$("#buttonSearch").onsubmit(function(){
+			window.location.replace('restaurant/search.do?key=' + $("#textSearch").val());
+		});
+	});
+</script>
+
 <display:table name="restaurants"
 	id="row"
 	class="displaytag"

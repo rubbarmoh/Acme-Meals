@@ -115,6 +115,7 @@ public class RestaurantService {
 		Assert.isTrue(restaurant.getId() != 0);
 		restaurantRepository.delete(restaurant);
 	}
+	
 	// Other bussiness methods ----------------------------------------------------
 
 	public Collection<Restaurant> findByPrincipal() {
@@ -132,7 +133,12 @@ public class RestaurantService {
 		return result;
 	}
 
-	// Forms -----------
+	public Collection<Restaurant> findByKey(String key){
+		Collection<Restaurant> result = restaurantRepository.searchByKey(key);
+		return result;
+	}
+	
+	// Forms ----------------------------------------------------------
 
 	public RestaurantForm generateForm() {
 		UserAccount userAccount;
