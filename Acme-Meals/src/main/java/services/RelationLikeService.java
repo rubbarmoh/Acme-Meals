@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-
 import repositories.RelationLikeRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-
 import domain.RelationLike;
+import domain.Review;
+import domain.User;
 
 @Service
 @Transactional
@@ -21,7 +21,11 @@ public class RelationLikeService {
 	//Managed repository--------------------------------
 	@Autowired
 	private RelationLikeRepository relationLikeRepository;
+	
 	//Supporting Services-------------------------------
+	
+	@Autowired
+	private UserService userService;
 	
 	//Constructor---------------------------------------
 	public RelationLikeService(){
@@ -92,6 +96,20 @@ public class RelationLikeService {
 		relationLikeRepository.delete(relationLike);
 	}
 	// Other bussiness methods ----------------------------------------------------
+	
+	public RelationLike findRelationLike(Review review){
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("USER");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
+		
+		User user = userService.findByPrincipal();
+		RelationLike result = relationLikeRepository.findRelationLike(user, review);
+		return result;
+	}
 }
 
 
