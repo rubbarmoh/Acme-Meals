@@ -35,7 +35,7 @@
 	</display:column>
 	
 	<security:authorize access="hasRole('MANAGER')">
-		<jstl:if test="${row.manager.userAccount.username == pageContext.request.remoteUser &&
+		<jstl:if test="${row.restaurant.manager.userAccount.username == pageContext.request.remoteUser &&
 			(row.status=='PENDING' || row.status=='INPROGRESS')}">
 			<display:column>
 				<input type="button" name="step" value="<spring:message code="mealOrder.step" />"
