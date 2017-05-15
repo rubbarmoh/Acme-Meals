@@ -24,6 +24,12 @@
 	class="displaytag"
 	pagesize="5"
 	requestURI="${requestURI}" >
+	
+	<security:authorize access="hasRole('MANAGER')">
+		<display:column>
+			<a href="managerActor/meal/edit.do?mealId=${row.id}"><spring:message code="meal.edit" /></a>
+		</display:column>
+	</security:authorize>
 
 	<spring:message code="meal.title" var="titleHeader" />
 	<display:column property="title" title="${titleHeader}"/>
@@ -34,13 +40,19 @@
 	<spring:message code="meal.price" var="priceHeader" />
 	<display:column property="price" title="${priceHeader}"/>
 
-<security:authorize access="hasRole('USER')">
+	<security:authorize access="hasRole('USER')">
 	<display:column>
 			<input type="button" name="add"
 						value="<spring:message code="meal.add" />"
 						onclick="javascript: window.location.replace('user/mealOrder/add.do?mealId=${meal.id }')"/><br/>
 	</display:column>
-</security:authorize>
+	</security:authorize>
+
+	<security:authorize access="hasRole('MANAGER')">
+		<input type="button" name="create"
+						value="<spring:message code="meal.create" />"
+						onclick="javascript: window.location.replace('managerActor/meal/create.do')"/><br/>
+	</security:authorize>
 	
 </display:table>
 
