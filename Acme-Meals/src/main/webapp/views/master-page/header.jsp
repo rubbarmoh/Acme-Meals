@@ -61,6 +61,8 @@
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
+			<li><a class="fNiv" href="review/browse.do"><spring:message code="master.page.review.browse" /></a></li>
+			<li><a class="fNiv" href="restaurant/browse.do"><spring:message code="master.page.restaurant.browse" /></a></li>
 			<li>
 				<a class="fNiv"> 
 					<spring:message code="master.page.profile" /> 

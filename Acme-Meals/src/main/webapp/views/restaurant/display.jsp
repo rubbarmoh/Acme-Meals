@@ -29,6 +29,22 @@
 		</tr>
 		<tr>
 			<th>
+				<spring:message code = "restaurant.city"/>
+			</th>
+			<td>
+				<jstl:out value="${restaurant.city }" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<spring:message code = "restaurant.address"/>
+			</th>
+			<td>
+				<jstl:out value="${restaurant.address }" />
+			</td>
+		</tr>
+		<tr>
+			<th>
 				<spring:message code = "restaurant.phone"/>
 			</th>
 			<td>
