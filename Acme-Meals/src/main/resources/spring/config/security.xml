@@ -63,6 +63,7 @@
 		<security:intercept-url pattern="/meal/browse.do" access="permitAll" />
 		<security:intercept-url pattern="/restaurant/search.do" access="permitAll" /> 
 		
+		<security:intercept-url pattern="/mealOrder/step.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/mealOrder/browseByUser.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/mealOrder/browseCurrentlyByUser.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/mealOrder/display.do" access="hasAnyRole('USER','MANAGER')" />

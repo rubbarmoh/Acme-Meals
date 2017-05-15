@@ -97,7 +97,6 @@ public class MealOrderController extends AbstractController{
 	// Steps -----------------------------------------------------
 	@RequestMapping(value = "/step", method = RequestMethod.GET)
 	public ModelAndView step(@RequestParam int mealOrderId){
-		ModelAndView result;
 		MealOrder	mealOrder;
 		
 		mealOrder = mealOrderService.findOne(mealOrderId);
@@ -110,13 +109,7 @@ public class MealOrderController extends AbstractController{
 		
 		mealOrderService.save(mealOrder);
 		
-		Collection<MealOrder> mealOrders = mealOrderService.findByUser();
-		
-		result = new ModelAndView("mealOrder/browse");
-		result.addObject("mealOrders", mealOrders);
-		result.addObject("requestURI", "mealOrder/browse.do");
-		
-		return result;
+		return browseCurrentlyByManager();
 	}
 
 }
