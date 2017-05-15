@@ -1,17 +1,24 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
+import org.hibernate.jpa.criteria.expression.function.CurrentTimeFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.CommentRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Comment;
+import domain.Restaurant;
+import domain.User;
+import forms.CommentForm;
 
 @Service
 @Transactional
@@ -24,7 +31,12 @@ public class CommentService {
 
 
 		// Supporting services ----------------------------------------------------
-
+		@Autowired
+		private UserService	userService;
+		@Autowired
+		private RestaurantService	restaurantService;
+		@Autowired
+		private Validator	validator;
 		// Constructors -----------------------------------------------------------
 
 		public CommentService() {
@@ -89,4 +101,28 @@ public class CommentService {
 
 			commentRepository.delete(comment);
 		}
+		// Form methods ----------------------------------------------------------
+
+		public CommentForm generateForm() {
+			CommentForm result = new CommentForm();
+
+			return result;
+		}
+
+		public Comment reconstruct(CommentForm commentForm, BindingResult binding) {
+			Comment result;
+			result = create();
+			User u=userService.findByPrincipal();
+			Restaurant r=restaurantService.findOne(commentForm.getRestaurantId());
+			result.setUser(u);
+			result.setRestaurant(r);
+			result.setTitle(commentForm.getTitle());
+			result.setText(commentForm.getText());
+			result.setStars(commentForm.getStars());
+			Date d=new Date(System.currentTimeMillis()-1000);
+			result.setMoment(d);
+			validator.validate(result, binding);
+			return result;
+		}
+
 }

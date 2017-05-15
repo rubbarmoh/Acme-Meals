@@ -85,7 +85,7 @@
 <security:authorize access="hasRole('USER')">
 	<input type="button" name="addComment"
 			value="<spring:message code="restaurant.addComment" />"
-			onclick="javascript: window.location.replace('comment/create.do?restaurantId=${restaurant.id}')" />
+			onclick="javascript: window.location.replace('user/comment/create.do?restaurantId=${restaurant.id}')" />
 <br/>
 </security:authorize>
 					

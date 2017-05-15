@@ -78,6 +78,8 @@
 		<security:intercept-url pattern="/user/review/like/delete.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/user/review/dislike/create.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/user/review/dislike/delete.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/user/comment/create.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/user/comment/edit.do" access="hasRole('USER')" />
 		
 		
 		<security:intercept-url pattern="/review/browse.do" access="permitAll" /> 

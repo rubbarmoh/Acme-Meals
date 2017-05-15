@@ -93,8 +93,10 @@ public class RestaurantService {
 		userAccount = LoginService.getPrincipal();
 		Authority au2 = new Authority();
 		au2.setAuthority("MANAGER");
+		Authority au = new Authority();
+		au.setAuthority("USER");
 
-		Assert.isTrue(userAccount.getAuthorities().contains(au2));
+		Assert.isTrue(userAccount.getAuthorities().contains(au2) || userAccount.getAuthorities().contains(au));
 
 		Restaurant result;
 		result = restaurantRepository.save(restaurant);
@@ -286,6 +288,11 @@ public class RestaurantService {
 		result.setCostDelivery(restaurant.getCostDelivery());
 		result.setMinimunAmount(restaurant.getMinimunAmount());
 		return result;
+	}
+	public void updateAvgStars(int restaurantId) {
+		Restaurant r=restaurantRepository.findOne(restaurantId);
+		r.setAvgStars(restaurantRepository.findAvgStars(restaurantId));
+		save(r);
 	}
 
 }
