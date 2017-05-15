@@ -52,3 +52,8 @@
 			</td>
 		</tr>
 </table>
+<input type="button" name="meals"
+					value="<spring:message code="restaurant.meals" />"
+					onclick="javascript: window.location.replace('meal/browse.do?restaurantId=${restaurant.id}')" 
+					style="float: right;padding: 5px 15px; margin: 0 3px 0 3px;" />
+					

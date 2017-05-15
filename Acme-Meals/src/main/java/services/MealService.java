@@ -14,6 +14,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Meal;
 import domain.Quantity;
+import domain.Restaurant;
 
 @Service
 @Transactional
@@ -96,5 +97,10 @@ public class MealService {
 				Assert.isTrue(mealRepository.exists(meal.getId()));
 
 				mealRepository.delete(meal);
+			}
+			public Collection<Meal> mealPerRestaurant(Restaurant r){
+				Collection<Meal> result;
+				result=mealRepository.mealsPerRestaurant(r);
+				return result;
 			}
 }

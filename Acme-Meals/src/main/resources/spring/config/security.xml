@@ -58,6 +58,7 @@
 		<security:intercept-url pattern="/managerActor/restaurant/**" access="hasRole('MANAGER')" /> 
 		<security:intercept-url pattern="/restaurant/display.do" access="permitAll" /> 
 		<security:intercept-url pattern="/restaurant/browse.do" access="permitAll" />
+		<security:intercept-url pattern="/meal/browse.do" access="permitAll" />
 		<security:intercept-url pattern="/restaurant/search.do" access="permitAll" /> 
 		
 		<security:intercept-url pattern="/review/browse.do" access="permitAll" /> 
