@@ -68,7 +68,7 @@
 				<spring:message code="user.creditCard.brandName" />
 			</th>
 			<td>
-				<fmt:formatDate value="${user.creditCard.brandName }"/>
+				<jstl:out value="${user.creditCard.brandName }"/>
 			</td>
 		</tr>
 		<tr>
@@ -76,7 +76,7 @@
 				<spring:message code="user.creditCard.number" />
 			</th>
 			<td>
-				<fmt:formatDate value="${user.creditCard.number }"/>
+				<jstl:out value="${user.creditCard.number }"/>
 			</td>
 		</tr>
 		<tr>
@@ -84,7 +84,7 @@
 				<spring:message code="user.creditCard.expirationMonth" />
 			</th>
 			<td>
-				<fmt:formatDate value="${user.creditCard.expirationMonth }"/>
+				<jstl:out value="${user.creditCard.expirationMonth }"/>
 			</td>
 		</tr>
 		<tr>
@@ -92,7 +92,7 @@
 				<spring:message code="user.creditCard.expirationYear" />
 			</th>
 			<td>
-				<fmt:formatDate value="${user.creditCard.expirationYear }"/>
+				<jstl:out value="${user.creditCard.expirationYear }"/>
 			</td>
 		</tr>
 		
@@ -101,7 +101,7 @@
 				<spring:message code="user.creditCard.cvv" />
 			</th>
 			<td>
-				<fmt:formatDate value="${user.creditCard.cvv }"/>
+				<jstl:out value="${user.creditCard.cvv }"/>
 			</td>
 		</tr>
 		</jstl:if>
