@@ -43,7 +43,7 @@
 				<spring:message code = "invoice.moment"/>
 			</th>
 			<td>
-				<jstl:out value="${invoice.moment }" />
+				<fmt:formatDate value="${invoice.moment }" pattern="dd/MM/yyyy HH:mm" />
 			</td>
 		</tr>
 </table>

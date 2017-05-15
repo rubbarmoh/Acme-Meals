@@ -26,7 +26,7 @@
 	requestURI="${requestURI}" >
 	
 	<spring:message code="invoice.moment" var="momentHeader" />
-	<display:column property="moment" title="${momentHeader}"/>
+	<display:column title="${momentHeader}" sortable="false"><fmt:formatDate value="${row.moment }" pattern="dd/MM/yyyy HH:mm" /></display:column>
 			
 	<spring:message code="invoice.mealOrder.amount" var="mealOrderAmountHeader" />
 	<display:column property="mealOrder.amount" title="${mealOrderAmountHeader}"/>

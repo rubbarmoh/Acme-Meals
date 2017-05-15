@@ -1192,7 +1192,7 @@
 	  <!-- Invoice -->
 	  
 	  <bean id="invoice1" class="domain.Invoice">
-	  	<property name="moment" value="04/25/2017"/>
+	  	<property name="moment" value="04/25/2017 18:30"/>
 	  	<property name="vatNumber" value="ES-78245688"/>
 	  	<property name="name" value="Irene"/>
 	  	<property name="surname" value="Montoya"/>
