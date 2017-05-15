@@ -14,6 +14,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.MealOrder;
 import domain.Quantity;
+import domain.User;
 
 @Service
 @Transactional
@@ -24,6 +25,9 @@ public class MealOrderService {
 			private MealOrderRepository	mealOrderRepository;
 
 			// Supporting services ----------------------------------------------------
+			
+			@Autowired
+			private UserService userService;
 
 
 			// Constructors -----------------------------------------------------------
@@ -94,4 +98,21 @@ public class MealOrderService {
 
 				mealOrderRepository.delete(mealOrder);
 			}
+			
+		// Other bussiness methods ----------------------------------------------
+			
+		public Collection<MealOrder> findByUser(){
+			UserAccount userAccount;
+			userAccount = LoginService.getPrincipal();
+			Authority au = new Authority();
+			au.setAuthority("USER");
+			Assert.isTrue(userAccount.getAuthorities().contains(au));
+			
+			User user = userService.findByPrincipal();
+			
+			Collection<MealOrder> mealOrders = mealOrderRepository.findByUser(user.getId());
+			
+			return mealOrders;
+			
+		}
 }
