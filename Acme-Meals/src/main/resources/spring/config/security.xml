@@ -68,6 +68,12 @@
 		<security:intercept-url pattern="/invoice/list.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/invoice/display.do" access="hasRole('USER')" />
 		
+		<security:intercept-url pattern="/user/review/like/create.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/user/review/like/delete.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/user/review/dislike/create.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/user/review/dislike/delete.do" access="hasRole('USER')" />
+		
+		
 		<security:intercept-url pattern="/review/browse.do" access="permitAll" /> 
 		<security:intercept-url pattern="/review/display.do" access="permitAll" /> 
 		<security:intercept-url pattern="/critic/display.do" access="permitAll" /> 
