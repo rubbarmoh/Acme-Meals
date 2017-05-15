@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.RelationLikeService;
 import services.ReviewService;
+import services.UserService;
+import domain.RelationLike;
 import domain.Review;
+import domain.User;
 
 @Controller
 @RequestMapping("/review")
@@ -22,7 +26,13 @@ public class ReviewController extends AbstractController {
 	@Autowired
 	private ReviewService	reviewService;
 
+	@Autowired
+	private UserService		userService;
 
+	@Autowired
+	private RelationLikeService		relationLikeService;
+
+	
 	// Constructors -----------------------------------------------------------
 
 	public ReviewController() {
@@ -56,7 +66,7 @@ public class ReviewController extends AbstractController {
 		result = new ModelAndView("review/display");
 		result.addObject("review", review);
 		result.addObject("requestURI", "review/display.do");
-
+		
 		return result;
 	}
 

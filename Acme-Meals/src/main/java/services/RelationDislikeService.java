@@ -9,6 +9,8 @@ import org.springframework.util.Assert;
 
 
 import domain.RelationDislike;
+import domain.Review;
+import domain.User;
 
 import repositories.RelationDislikeRepository;
 import security.Authority;
@@ -21,7 +23,11 @@ public class RelationDislikeService {
 	//Managed repository--------------------------------
 	@Autowired
 	private RelationDislikeRepository relationDislikeRepository;
+	
 	//Supporting Services-------------------------------
+	
+		@Autowired
+		private UserService userService;
 	
 	//Constructor---------------------------------------
 	public RelationDislikeService(){
@@ -92,4 +98,20 @@ public class RelationDislikeService {
 		relationDislikeRepository.delete(relationDislike);
 	}
 	// Other bussiness methods ----------------------------------------------------
+	
+	
+	public RelationDislike findRelationDislike(Review review){
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("USER");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
+		
+		User user = userService.findByPrincipal();
+		RelationDislike result = relationDislikeRepository.findRelationDislike(user, review);
+		return result;
+	}
+	
 }

@@ -57,3 +57,35 @@
 					onclick="javascript: window.location.replace('meal/browse.do?restaurantId=${restaurant.id}')" 
 					style="float: right;padding: 5px 15px; margin: 0 3px 0 3px;" />
 					
+<display:table pagesize="5" class="displaytag" keepStatus="true" name="comments" requestURI="${requestURI}" id="row">
+
+	<spring:message code="restaurant.comment.user" var="author"/>
+	<display:column title="${author }" property="user.name"/>
+	
+	<spring:message code="restaurant.comment.title" var="title"/>
+	<display:column title="${title }" property="title"/>
+	
+	<spring:message code="restaurant.comment.text" var="text"/>
+	<display:column title="${text }" property="text"/>
+	
+	<spring:message code="restaurant.comment.stars" var="stars"/>
+	<display:column title="${stars }" property="stars"/>
+	
+	<spring:message code="restaurant.comment.moment" var="moment"/>
+	<display:column title="${moment}" sortable="true"><fmt:formatDate value="${row.moment}" pattern="dd/MM/yyyy HH:mm" /></display:column>
+	
+	<display:column>
+		<a href="user/displayById.do?userId=${row.user.id}"><spring:message code="restaurant.user.display" /></a>
+	</display:column>
+	
+	
+<br/>
+	
+</display:table>
+<security:authorize access="hasRole('USER')">
+	<input type="button" name="addComment"
+			value="<spring:message code="restaurant.addComment" />"
+			onclick="javascript: window.location.replace('comment/create.do?restaurantId=${restaurant.id}')" />
+<br/>
+</security:authorize>
+					

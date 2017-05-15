@@ -37,9 +37,10 @@ public class RestaurantController extends AbstractController {
 		Restaurant restaurant;
 
 		restaurant = restaurantService.findOne(restaurantId);
-
+		
 		result = new ModelAndView("restaurant/display");
 		result.addObject("restaurant", restaurant);
+		result.addObject("comments",restaurant.getComments());
 		result.addObject("requestURI", "restaurant/display.do");
 
 		return result;
