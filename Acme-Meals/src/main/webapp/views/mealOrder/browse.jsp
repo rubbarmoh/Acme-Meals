@@ -29,10 +29,22 @@
 
 	<spring:message code="mealOrder.status" var="statusHeader" />
 	<display:column property="status" title="${statusHeader}"/>
-			
+	
 	<display:column>
 		<a href="mealOrder/display.do?mealOrderId=${row.id}"><spring:message code="mealOrder.display" /></a>
 	</display:column>
+	
+	<security:authorize access="hasRole('MANAGER')">
+		<jstl:if test="${row.manager.userAccount.username == pageContext.request.remoteUser &&
+			(row.status=='PENDING' || row.status=='INPROGRESS')}">
+			<display:column>
+				<input type="button" name="step" value="<spring:message code="mealOrder.step" />"
+						onclick="javascript: window.location.replace('mealOrder/step.do?mealOrderId=${row.id}')" />
+			</display:column>
+		</jstl:if>
+	</security:authorize>
+	
+	
 	
 	
 </display:table>

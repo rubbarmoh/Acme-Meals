@@ -43,6 +43,8 @@
 					<li class="arrow"></li>
 					<li><a href="managerActor/restaurant/create.do"><spring:message code="master.page.manager.restaurant.create" /></a></li>
 					<li><a href="managerActor/restaurant/list.do"><spring:message code="master.page.manager.restaurant.list" /></a></li>					
+					<li><a href="mealOrder/browseByManager.do"><spring:message code="master.page.manager.mealOrder.browseByManager" /></a></li>					
+					<li><a href="mealOrder/browseCurrentlyByManager.do"><spring:message code="master.page.manager.mealOrder.browseCurrentlyByManager" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>

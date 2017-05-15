@@ -29,15 +29,54 @@ public class MealOrderController extends AbstractController{
 	
 	// Browse ----------------------------------------------
 	
-	@RequestMapping(value = "/browse", method = RequestMethod.GET)
-	public ModelAndView browse(){
+	@RequestMapping(value = "/browseByUser", method = RequestMethod.GET)
+	public ModelAndView browseByUser(){
 		ModelAndView result;
 		
 		Collection<MealOrder> mealOrders = mealOrderService.findByUser();
 		
 		result = new ModelAndView("mealOrder/browse");
 		result.addObject("mealOrders", mealOrders);
-		result.addObject("requestURI", "mealOrder/browse.do");
+		result.addObject("requestURI", "mealOrder/browseByUser.do");
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/browseCurrentlyByUser", method = RequestMethod.GET)
+	public ModelAndView browseCurrentlyByUser(){
+		ModelAndView result;
+		
+		Collection<MealOrder> mealOrders = mealOrderService.findCurrentlyByUser();
+		
+		result = new ModelAndView("mealOrder/browseCurrently");
+		result.addObject("mealOrders", mealOrders);
+		result.addObject("requestURI", "mealOrder/browseCurrentlyByUser.do");
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/browseByManager", method = RequestMethod.GET)
+	public ModelAndView browseByManager(){
+		ModelAndView result;
+		
+		Collection<MealOrder> mealOrders = mealOrderService.findByManager();
+		
+		result = new ModelAndView("mealOrder/browse");
+		result.addObject("mealOrders", mealOrders);
+		result.addObject("requestURI", "mealOrder/browseByManager.do");
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/browseCurrentlyByManager", method = RequestMethod.GET)
+	public ModelAndView browseCurrentlyByManager(){
+		ModelAndView result;
+		
+		Collection<MealOrder> mealOrders = mealOrderService.findCurrentlyByManager();
+		
+		result = new ModelAndView("mealOrder/browseCurrently");
+		result.addObject("mealOrders", mealOrders);
+		result.addObject("requestURI", "mealOrder/browseCurrentlyByManager.do");
 		
 		return result;
 	}
@@ -51,6 +90,31 @@ public class MealOrderController extends AbstractController{
 		result = new ModelAndView("mealOrder/display");
 		result.addObject("mealOrder", mealOrder);
 		result.addObject("quantities", mealOrder.getQuantities());
+		
+		return result;
+	}
+	
+	// Steps -----------------------------------------------------
+	@RequestMapping(value = "/step", method = RequestMethod.GET)
+	public ModelAndView step(@RequestParam int mealOrderId){
+		ModelAndView result;
+		MealOrder	mealOrder;
+		
+		mealOrder = mealOrderService.findOne(mealOrderId);
+		
+		if(mealOrder.getStatus().equals("PENDING")){
+			mealOrder.setStatus("INPROGRESS");
+		}else{
+			mealOrder.setStatus("FINISHED");
+		}
+		
+		mealOrderService.save(mealOrder);
+		
+		Collection<MealOrder> mealOrders = mealOrderService.findByUser();
+		
+		result = new ModelAndView("mealOrder/browse");
+		result.addObject("mealOrders", mealOrders);
+		result.addObject("requestURI", "mealOrder/browse.do");
 		
 		return result;
 	}

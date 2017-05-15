@@ -12,6 +12,7 @@ import repositories.MealOrderRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Manager;
 import domain.MealOrder;
 import domain.Quantity;
 import domain.User;
@@ -28,6 +29,10 @@ public class MealOrderService {
 			
 			@Autowired
 			private UserService userService;
+			
+			@Autowired
+			private ManagerService managerService;
+
 
 
 			// Constructors -----------------------------------------------------------
@@ -111,6 +116,51 @@ public class MealOrderService {
 			User user = userService.findByPrincipal();
 			
 			Collection<MealOrder> mealOrders = mealOrderRepository.findByUser(user.getId());
+			
+			return mealOrders;
+			
+		}
+		
+		public Collection<MealOrder> findCurrentlyByUser(){
+			UserAccount userAccount;
+			userAccount = LoginService.getPrincipal();
+			Authority au = new Authority();
+			au.setAuthority("USER");
+			Assert.isTrue(userAccount.getAuthorities().contains(au));
+			
+			User user = userService.findByPrincipal();
+			
+			Collection<MealOrder> mealOrders = mealOrderRepository.findCurrentlyByUser(user.getId());
+			
+			return mealOrders;
+			
+		}
+		
+		public Collection<MealOrder> findByManager(){
+			UserAccount userAccount;
+			userAccount = LoginService.getPrincipal();
+			Authority au = new Authority();
+			au.setAuthority("MANAGER");
+			Assert.isTrue(userAccount.getAuthorities().contains(au));
+			
+			Manager manager = managerService.findByPrincipal();
+			
+			Collection<MealOrder> mealOrders = mealOrderRepository.findByManager(manager.getId());
+			
+			return mealOrders;
+			
+		}
+		
+		public Collection<MealOrder> findCurrentlyByManager(){
+			UserAccount userAccount;
+			userAccount = LoginService.getPrincipal();
+			Authority au = new Authority();
+			au.setAuthority("MANAGER");
+			Assert.isTrue(userAccount.getAuthorities().contains(au));
+			
+			Manager manager = managerService.findByPrincipal();
+			
+			Collection<MealOrder> mealOrders = mealOrderRepository.findCurrentlyByManager(manager.getId());
 			
 			return mealOrders;
 			
