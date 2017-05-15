@@ -71,7 +71,7 @@
 		<security:intercept-url pattern="/review/browse.do" access="permitAll" /> 
 		<security:intercept-url pattern="/review/display.do" access="permitAll" /> 
 		<security:intercept-url pattern="/critic/display.do" access="permitAll" /> 
-		
+		<security:intercept-url pattern="/user/displayById.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 

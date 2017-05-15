@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.UserService;
@@ -76,7 +77,20 @@ public class UserController extends AbstractController {
 
 		return result;
 	}
+	//display ----
 
+		@RequestMapping(value = "/displayById", method = RequestMethod.GET)
+		public ModelAndView displayById(@RequestParam int userId) {
+			ModelAndView result;
+			User user;
+
+			user = userService.findOne(userId);
+			result = new ModelAndView("user/display");
+			result.addObject("user", user);
+			result.addObject("requestURI", "user/display.do");
+
+			return result;
+		}
 	// Ancillary methods ---------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(UserForm userForm) {

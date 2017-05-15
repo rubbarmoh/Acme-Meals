@@ -25,6 +25,9 @@
 	pagesize="5"
 	requestURI="${requestURI}" >
 
+	<spring:message code="meal.category.name" var="categoryHeader" />
+	<display:column property="category.name" title="${categoryHeader}" sortable="true"/>
+	
 	<spring:message code="meal.title" var="titleHeader" />
 	<display:column property="title" title="${titleHeader}"/>
 	
