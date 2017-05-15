@@ -9,16 +9,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Manager;
+import domain.Meal;
 import domain.Restaurant;
 
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer> {
-	
+
 	// Search query -------------------------------------------------------
-	
+
 	@Query("select r from Restaurant r where r.name like %?1% or r.address like %?1%")
 	Collection<Restaurant> findByKey(String key);
-	
+
 	// Dashboard ----------------------------------------------------------
 
 	@Query("select r from Restaurant r where r.manager.id=?1")
@@ -68,4 +69,7 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
 
 	@Query("select r from Restaurant r where r.avgStars>=all(select r2.avgStars from Restaurant r2)")
 	List<Restaurant> restaurantMoreStars();
+
+	@Query("select m from Meal m where m.restaurant=?1")
+	List<Meal> mealsPerRestaurant(Restaurant r);
 }

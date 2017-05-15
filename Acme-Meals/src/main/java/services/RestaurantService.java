@@ -116,7 +116,7 @@ public class RestaurantService {
 		Assert.isTrue(restaurant.getId() != 0);
 		restaurantRepository.delete(restaurant);
 	}
-	
+
 	// Other bussiness methods ----------------------------------------------------
 
 	public Collection<Restaurant> findByPrincipal() {
@@ -134,87 +134,87 @@ public class RestaurantService {
 		return result;
 	}
 
-	public Collection<Restaurant> findByKey(String key){
+	public Collection<Restaurant> findByKey(String key) {
 		Collection<Restaurant> result = restaurantRepository.findByKey(key);
 		return result;
 	}
-	
-	public Collection<Restaurant> restaurantByManagerId(int id){
+
+	public Collection<Restaurant> restaurantByManagerId(int id) {
 		Collection<Restaurant> result = restaurantRepository.restaurantByManagerId(id);
 		return result;
 	}
-	
-	public List<Integer> ordersPerRestaurant(Manager manager){
+
+	public List<Integer> ordersPerRestaurant(Manager manager) {
 		List<Integer> result = restaurantRepository.ordersPerRestaurant(manager);
 		return result;
 	}
-	
-	public List<Restaurant> restaurantMoreStars(Manager manager){
+
+	public List<Restaurant> restaurantMoreStars(Manager manager) {
 		List<Restaurant> result = restaurantRepository.restaurantMoreStars(manager);
 		return result;
 	}
-	
-	public List<Restaurant> restaurantLessStars(Manager manager){
+
+	public List<Restaurant> restaurantLessStars(Manager manager) {
 		List<Restaurant> result = restaurantRepository.restaurantLessStars(manager);
 		return result;
 	}
-	
-	public Double avgProfitMyRestaurants(Manager manager){
+
+	public Double avgProfitMyRestaurants(Manager manager) {
 		Double result = restaurantRepository.avgProfitMyRestaurants(manager);
 		return result;
 	}
-	
-	public Double minMaxProfitByRestaurant(Manager manager){
+
+	public Double minMaxProfitByRestaurant(Manager manager) {
 		Double result = restaurantRepository.minMaxProfitByRestaurant(manager);
 		return result;
 	}
-	
-	public List<Object[]> restaurantMoreProfit(Manager manager){
-		 List<Object[]> result = restaurantRepository.restaurantMoreProfit(manager);
+
+	public List<Object[]> restaurantMoreProfit(Manager manager) {
+		List<Object[]> result = restaurantRepository.restaurantMoreProfit(manager);
 		return result;
 	}
-	
-	public List<Restaurant> restaurantsWithMore10PercentOrders(Manager manager){
+
+	public List<Restaurant> restaurantsWithMore10PercentOrders(Manager manager) {
 		List<Restaurant> result = restaurantRepository.restaurantsWithMore10PercentOrders(manager);
 		return result;
 	}
-	
-	public List<Restaurant> restaurantsWithLess10PercentOrders(Manager manager){
+
+	public List<Restaurant> restaurantsWithLess10PercentOrders(Manager manager) {
 		List<Restaurant> result = restaurantRepository.restaurantsWithLess10PercentOrders(manager);
 		return result;
 	}
-	
-	public List<Restaurant> restaurantMoreOrders(){
+
+	public List<Restaurant> restaurantMoreOrders() {
 		List<Restaurant> result = restaurantRepository.restaurantMoreOrders();
 		return result;
 	}
-	
-	public List<Restaurant> restaurantLessOrders(){
+
+	public List<Restaurant> restaurantLessOrders() {
 		List<Restaurant> result = restaurantRepository.restaurantLessOrders();
 		return result;
 	}
-	
-	public Double ratioRestaurantWithSocialIdentity(){
+
+	public Double ratioRestaurantWithSocialIdentity() {
 		Double result = restaurantRepository.ratioRestaurantWithSocialIdentity();
 		return result;
 	}
-	
-	public List<Restaurant> restaurantWithMoreReviews(){
+
+	public List<Restaurant> restaurantWithMoreReviews() {
 		List<Restaurant> result = restaurantRepository.restaurantWithMoreReviews();
 		return result;
 	}
-	
-	public List<Restaurant> restaurantWithLessReviews(){
+
+	public List<Restaurant> restaurantWithLessReviews() {
 		List<Restaurant> result = restaurantRepository.restaurantWithLessReviews();
 		return result;
-	}	
+	}
 
-	public Double ratioRestaurantsPromoted(){
+	public Double ratioRestaurantsPromoted() {
 		Double result = restaurantRepository.ratioRestaurantsPromoted();
 		return result;
 	}
-	
-	public List<Restaurant> restaurantMoreStars(){
+
+	public List<Restaurant> restaurantMoreStars() {
 		List<Restaurant> result = restaurantRepository.restaurantMoreStars();
 		return result;
 	}

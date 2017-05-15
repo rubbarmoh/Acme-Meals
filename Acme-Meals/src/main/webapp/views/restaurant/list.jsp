@@ -39,6 +39,12 @@
 		<a href="restaurant/display.do?restaurantId=${row.id}"><spring:message code="restaurant.display" /></a>
 	</display:column>
 	
+	<display:column>
+		<input type="button" name="create"
+						value="<spring:message code="meal.create" />"
+						onclick="javascript: window.location.replace('managerActor/meal/create.do?restaurantId=${row.id}')"/><br/>
+	</display:column>
+	
 </display:table>
 
 </security:authorize>

@@ -16,9 +16,6 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<!-- Search for a restaurant -->
-
-
 <display:table name="meals"
 	id="row"
 	class="displaytag"
@@ -49,12 +46,6 @@
 						value="<spring:message code="meal.add" />"
 						onclick="javascript: window.location.replace('user/mealOrder/add.do?mealId=${meal.id }')"/><br/>
 	</display:column>
-	</security:authorize>
-
-	<security:authorize access="hasRole('MANAGER')">
-		<input type="button" name="create"
-						value="<spring:message code="meal.create" />"
-						onclick="javascript: window.location.replace('managerActor/meal/create.do')"/><br/>
 	</security:authorize>
 	
 </display:table>
