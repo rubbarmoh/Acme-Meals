@@ -20,6 +20,7 @@ public class Manager extends Reporter {
 	// Relationships -----------------------------------
 	private Collection<MonthlyBill>	monthlyBills;
 	private Collection<Restaurant>	restaurants;
+	private Collection<Category>	categories;
 
 
 	@Valid
@@ -38,6 +39,15 @@ public class Manager extends Reporter {
 	}
 	public void setRestaurants(Collection<Restaurant> restaurants) {
 		this.restaurants = restaurants;
+	}
+	
+	@Valid
+	@OneToMany(mappedBy = "manager")
+	public Collection<Category> getCategories() {
+		return categories;
+	}
+	public void setCategories(Collection<Category> categories) {
+		this.categories = categories;
 	}
 
 }

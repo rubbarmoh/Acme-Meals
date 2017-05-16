@@ -47,6 +47,13 @@
 					<li><a href="mealOrder/browseCurrentlyByManager.do"><spring:message code="master.page.manager.mealOrder.browseCurrentlyByManager" /></a></li>
 				</ul>
 			</li>
+			<li><a class="fNiv"><spring:message	code="master.page.manager.categories" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="managerActor/category/create.do"><spring:message code="master.page.manager.category.create" /></a></li>
+					<li><a href="managerActor/category/list.do"><spring:message code="master.page.manager.category.list" /></a></li>					
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">

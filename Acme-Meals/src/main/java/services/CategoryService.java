@@ -6,12 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.CategoryRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Category;
+import domain.Manager;
+import forms.CategoryForm;
 
 @Service
 @Transactional
@@ -23,6 +27,14 @@ public class CategoryService {
 
 
 	// Supporting services ----------------------------------------------------
+	
+	@Autowired
+	private ManagerService	managerService;
+	
+	@Autowired
+	private Validator		validator;
+	
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -88,4 +100,74 @@ public class CategoryService {
 
 		categoryRepository.delete(category);
 	}
+	
+	// Other bussinnes methods ------------------------------------
+	
+	public Collection<Category> findCategoryByManager(){
+		
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+		
+		Manager manager = managerService.findByPrincipal();
+		
+		Collection<Category> categories = categoryRepository.findCategoryByManger(manager.getId());
+		
+		return categories;
+	}
+	
+	// Form methods -----------------------------------------------
+	
+	public CategoryForm generate(){
+		
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+		
+		CategoryForm result = new CategoryForm();
+		
+		return result;
+	}
+	
+	public CategoryForm generate(int categoryId){
+		
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+		
+		CategoryForm categoryForm = new CategoryForm();
+		Category category = findOne(categoryId);
+		
+		categoryForm.setId(categoryId);
+		categoryForm.setName(category.getName());
+		
+		return categoryForm;
+		
+	}
+	
+	public Category reconstruct(CategoryForm categoryForm, BindingResult binding){
+		
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+		
+		Manager manager = managerService.findByPrincipal();
+		
+		Category category = create();
+		category.setManager(manager);
+		category.setName(categoryForm.getName());
+		
+		validator.validate(category, binding);
+		
+		return category;
+	}
+	
 }

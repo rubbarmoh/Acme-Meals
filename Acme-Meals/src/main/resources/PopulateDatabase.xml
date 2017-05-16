@@ -404,6 +404,13 @@
 				
 			</list>
 		</property>
+		<property name="categories">
+			<list>
+				<ref bean="category1"/>
+				<ref bean="category2"/>
+				<ref bean="category3"/>
+			</list>
+		</property>
 	 </bean>
 	 
 	 <bean id="manager2" class="domain.Manager">
@@ -429,6 +436,12 @@
 				
 			</list>
 		</property>
+		<property name="categories">
+			<list>
+				<ref bean="category4"/>
+				<ref bean="category5"/>
+			</list>
+		</property>
 	 </bean>
 	 
 	 <bean id="manager3" class="domain.Manager">
@@ -450,6 +463,11 @@
 		<property name="reports">
 			<list>
 				
+			</list>
+		</property>
+		<property name="categories">
+			<list>
+				<ref bean="category6"/>
 			</list>
 		</property>
 	 </bean>
@@ -500,7 +518,7 @@
 		<property name="manager" ref="manager1"/>
 		<property name="mealOrders">
 			<list>
-				
+				<ref bean="mealOrder2"/>
 			</list>
 		</property>
 		<property name="meals">
@@ -757,26 +775,32 @@
 	 
 	 <bean id="category1" class="domain.Category">
 		<property name="name" value="Pescado"/>
+		<property name="manager" ref="manager1"/>
 	 </bean>
 	 
 	 <bean id="category2" class="domain.Category">
 		<property name="name" value="Carne"/>
+		<property name="manager" ref="manager1"/>
 	 </bean>
 	 
 	 <bean id="category3" class="domain.Category">
 		<property name="name" value="Comida China"/>
+		<property name="manager" ref="manager1"/>
 	 </bean>
 	 
 	 <bean id="category4" class="domain.Category">
 		<property name="name" value="Comida Japonesa"/>
+		<property name="manager" ref="manager2"/>
 	 </bean>
 	 
 	 <bean id="category5" class="domain.Category">
 		<property name="name" value="Comida Rapida"/>
+		<property name="manager" ref="manager2"/>
 	 </bean>
 	 
 	 <bean id="category6" class="domain.Category">
 		<property name="name" value="Comida Vegana"/>
+		<property name="manager" ref="manager3"/>
 	 </bean>
 	 
 	 <!-- Social Identity -->
