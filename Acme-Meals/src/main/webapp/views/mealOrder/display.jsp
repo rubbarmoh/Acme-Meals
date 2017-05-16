@@ -11,6 +11,8 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<security:authorize access="hasRole('USER')">
+
 <table id="row" class="table">
 	
 	<tbody>
@@ -62,4 +64,10 @@
 	<display:column property="quantity" title="${quantityHeader }" />
 	
 </display:table>
-					
+
+<jstl:if test="${status eq 'DRAFT' }">
+	<input type="submit" name="delete" value="<spring:message code="mealOrder.delete" />" onclick="return confirm('<spring:message code="mealOrder.confirm.delete" />')" />
+</jstl:if>
+	<acme:cancel url="mealOrder/browseByUser.do" code="mealOrder.cancel"/>
+</security:authorize>
+	

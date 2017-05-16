@@ -48,7 +48,7 @@ public class MealOrderService {
 				UserAccount userAccount;
 				userAccount = LoginService.getPrincipal();
 				Authority au = new Authority();
-				au.setAuthority("ADMIN");
+				au.setAuthority("USER");
 				Assert.isTrue(userAccount.getAuthorities().contains(au));
 				ArrayList<Quantity> quantities = new ArrayList<Quantity>();
 				
