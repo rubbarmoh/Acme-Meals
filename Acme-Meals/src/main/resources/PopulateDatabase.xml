@@ -1169,7 +1169,7 @@
 	  
 	  <bean id="mealOrder1" class="domain.MealOrder">
 	  	<property name="moment" value="04/25/2017"/>
-	  	<property name="amount" value="20.55"/>
+	  	<property name="amount" value="9.50"/>
 	  	<property name="status" value="FINISHED"/>
 	  	<property name="pickUp" value="false"/>
 	  	<property name="user" ref="user1"/>
@@ -1181,12 +1181,39 @@
 	  	</property>
 	  </bean>
 	  
+	   <bean id="mealOrder2" class="domain.MealOrder">
+	  	<property name="moment" value="05/12/2017"/>
+	  	<property name="amount" value="43.00"/>
+	  	<property name="status" value="DRAFT"/>
+	  	<property name="pickUp" value="true"/>
+	  	<property name="user" ref="user1"/>
+	  	<property name="restaurant" ref="restaurant1"/>
+	  	<property name="quantities">
+	  		<list>
+	  			<ref bean="quantity2"/>
+	  			<ref bean="quantity3"/>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
 	  <!-- Quantity -->
 	  
 	  <bean id="quantity1" class="domain.Quantity">
 	  	<property name="quantity" value="1"/>
 	  	<property name="mealOrder" ref="mealOrder1"/>
 	  	<property name="meal" ref="meal3"/>
+	  </bean>
+	  
+	  <bean id="quantity2" class="domain.Quantity">
+	  	<property name="quantity" value="1"/>
+	  	<property name="mealOrder" ref="mealOrder2"/>
+	  	<property name="meal" ref="meal1"/>
+	  </bean>
+	  
+	  <bean id="quantity3" class="domain.Quantity">
+	  	<property name="quantity" value="1"/>
+	  	<property name="mealOrder" ref="mealOrder2"/>
+	  	<property name="meal" ref="meal2"/>
 	  </bean>
 	  
 	  <!-- Invoice -->

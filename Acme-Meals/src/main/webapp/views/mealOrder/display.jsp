@@ -65,9 +65,6 @@
 	
 </display:table>
 
-<jstl:if test="${status eq 'DRAFT' }">
-	<input type="submit" name="delete" value="<spring:message code="mealOrder.delete" />" onclick="return confirm('<spring:message code="mealOrder.confirm.delete" />')" />
-</jstl:if>
-	<acme:cancel url="mealOrder/browseByUser.do" code="mealOrder.cancel"/>
+<acme:cancel url="mealOrder/browseByUser.do" code="mealOrder.cancel"/>
 </security:authorize>
 	

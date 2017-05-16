@@ -95,6 +95,7 @@ public class MealOrderController extends AbstractController{
 	}
 	
 	// Steps -----------------------------------------------------
+	
 	@RequestMapping(value = "/step", method = RequestMethod.GET)
 	public ModelAndView step(@RequestParam int mealOrderId){
 		MealOrder	mealOrder;
@@ -111,5 +112,41 @@ public class MealOrderController extends AbstractController{
 		
 		return browseCurrentlyByManager();
 	}
+	
+	// Delete -----------------------------------------
+	
+	@RequestMapping(value="/display", method = RequestMethod.POST, params ="delete")
+	public ModelAndView delete(@RequestParam int mealOrderId){
+		ModelAndView result;
+		MealOrder mealOrder = mealOrderService.findOne(mealOrderId);
+		
+		try{
+			mealOrderService.delete(mealOrder);
+			result = new ModelAndView("redirect:/mealOrder/browseByUser.do");
+		}catch(Throwable oops){
+			String msgCode = "mealOrder.error.delete";
+			result = createEditModelAndViewDelete(msgCode);
+		}
+		
+		return result;
+	}
+	
+	// Ancillary methods ---------------------------------------
+	
+	protected ModelAndView createEditModelAndViewDelete() {
+		ModelAndView result;
 
+		result = createEditModelAndViewDelete(null);
+
+		return result;
+
+	}
+
+	protected ModelAndView createEditModelAndViewDelete(String message) {
+		ModelAndView result;
+
+		result = new ModelAndView("mealOrder/browse");
+
+		return result;
+	}
 }

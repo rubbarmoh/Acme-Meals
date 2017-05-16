@@ -33,7 +33,8 @@ public class MealOrderService {
 			@Autowired
 			private ManagerService managerService;
 
-
+			@Autowired
+			private QuantityService quantityService;
 
 			// Constructors -----------------------------------------------------------
 
@@ -100,6 +101,10 @@ public class MealOrderService {
 				Assert.notNull(mealOrder);
 				Assert.isTrue(mealOrder.getId() != 0);
 				Assert.isTrue(mealOrderRepository.exists(mealOrder.getId()));
+				
+				for(Quantity q: mealOrder.getQuantities()){
+					quantityService.delete(q);
+				}
 
 				mealOrderRepository.delete(mealOrder);
 			}
