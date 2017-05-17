@@ -160,10 +160,17 @@ public class CategoryService {
 		Assert.isTrue(userAccount.getAuthorities().contains(au));
 		
 		Manager manager = managerService.findByPrincipal();
+		Category category;
 		
-		Category category = create();
-		category.setManager(manager);
-		category.setName(categoryForm.getName());
+		if(categoryForm.getId() == 0){
+			category = create();
+			category.setManager(manager);
+			category.setName(categoryForm.getName());
+		}else{
+			category = findOne(categoryForm.getId());
+			category.setName(categoryForm.getName());
+		}
+		
 		
 		validator.validate(category, binding);
 		
