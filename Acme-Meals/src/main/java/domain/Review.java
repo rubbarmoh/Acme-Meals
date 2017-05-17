@@ -9,8 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 
 @Entity
@@ -26,7 +26,7 @@ public class Review extends DomainEntity {
 
 	// Getters and Setters -----------------------------
 
-	@NotNull
+	@NotBlank
 	public String getTitle() {
 		return title;
 	}
@@ -34,7 +34,7 @@ public class Review extends DomainEntity {
 		this.title = title;
 	}
 
-	@NotNull
+	@NotBlank
 	public String getText() {
 		return text;
 	}
@@ -50,13 +50,15 @@ public class Review extends DomainEntity {
 		this.rate = rate;
 	}
 
+
 	// Relationships -----------------------------------
 
-	private Critic critic;
-	private Restaurant restaurant;
-	private Collection<RelationLike> relationLikes;
-	private Collection<RelationDislike> relationDislikes;
-	
+	private Critic						critic;
+	private Restaurant					restaurant;
+	private Collection<RelationLike>	relationLikes;
+	private Collection<RelationDislike>	relationDislikes;
+
+
 	@Valid
 	@ManyToOne(optional = false)
 	public Critic getCritic() {
@@ -65,7 +67,7 @@ public class Review extends DomainEntity {
 	public void setCritic(Critic critic) {
 		this.critic = critic;
 	}
-	
+
 	@Valid
 	@ManyToOne(optional = false)
 	public Restaurant getRestaurant() {
@@ -74,7 +76,7 @@ public class Review extends DomainEntity {
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
 	}
-	
+
 	@Valid
 	@OneToMany(mappedBy = "review")
 	public Collection<RelationLike> getRelationLikes() {
@@ -83,7 +85,7 @@ public class Review extends DomainEntity {
 	public void setRelationLikes(Collection<RelationLike> relationLikes) {
 		this.relationLikes = relationLikes;
 	}
-	
+
 	@Valid
 	@OneToMany(mappedBy = "review")
 	public Collection<RelationDislike> getRelationDislikes() {
