@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-
 import domain.User;
 
 @Repository
@@ -29,4 +28,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	@Query("select u from User u where u.comments.size <= 0.1*(select avg(u2.comments.size) from User u2)")
 	List<User> usersLessThan10PercentComments();
+	
+	@Query("select c.user, sum(c.reports.size) from Comment c group by c.user")
+	List<Object[]> findReported();
 }

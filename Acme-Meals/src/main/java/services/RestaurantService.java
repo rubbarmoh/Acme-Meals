@@ -4,6 +4,8 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -171,8 +173,19 @@ public class RestaurantService {
 		return result;
 	}
 
-	public List<Object[]> restaurantMoreProfit(Manager manager) {
-		List<Object[]> result = restaurantRepository.restaurantMoreProfit(manager);
+	public List<Restaurant> restaurantMoreProfit(Manager manager) {
+		List<Restaurant> result = new ArrayList<Restaurant>();
+		Integer aux = 0;
+		List<Object[]> obj = restaurantRepository.restaurantMoreProfit(manager);
+		for (Object[] o : obj) {
+			if((Integer)o[1]>aux){
+				result = new ArrayList<Restaurant>();
+				result.add((Restaurant)o[0]);
+			}else if((Integer)o[1]==aux){
+				result.add((Restaurant)o[0]);
+			}
+		}
+		
 		return result;
 	}
 

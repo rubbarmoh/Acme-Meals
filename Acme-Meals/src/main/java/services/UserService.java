@@ -210,6 +210,32 @@ public class UserService {
 		return result;
 	}
 	
+	public List<User> findReported(){
+		List<User> result = new ArrayList<User>();
+		
+		List<Object[]> aux = userRepository.findReported();;
+		for (Object[] o : aux) {
+			if((Integer)o[1]>=3)
+				result.add((User)o[0]);
+		}
+
+		return result;
+	}
+	
+	public void banUnban(User user) {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
+		if (user.getBanned() == true) {
+			user.setBanned(false);
+		} else {
+			user.setBanned(true);
+		}
+	}
+	
 	//Forms----------
 
 	public UserForm generateForm(User user) {
