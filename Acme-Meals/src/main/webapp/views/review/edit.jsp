@@ -37,9 +37,7 @@
 		<form:errors cssClass="error" path="rate" />
 		
 		<acme:submit name="save" code="review.save"/>
-		<jstl:if test="${reviewForm.id != 0}">
-			<input type="submit" name="delete" value="<spring:message code="review.delete" />" onclick="return confirm('<spring:message code="review.confirm.delete" />')" />
-		</jstl:if>
+		
 		<acme:cancel code="review.cancel" url="restaurant/browse.do" />
 	
 	</form:form>

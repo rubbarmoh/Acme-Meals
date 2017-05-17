@@ -60,6 +60,12 @@
 				<a href="critic/display.do?criticId=${review.critic.id}"><spring:message code="review.critic.display" /></a>
 			</td>
 		</tr>
+		
+		<tr>
+			<td>
+				<a href="restaurant/display.do?restaurantId=${review.restaurant.id}"><spring:message code="review.restaurant.display" /></a>
+			</td>
+		</tr>
 			
 </table>
 
