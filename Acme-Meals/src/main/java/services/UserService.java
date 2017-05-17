@@ -4,7 +4,9 @@ package services;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -210,13 +212,13 @@ public class UserService {
 		return result;
 	}
 	
-	public List<User> findReported(){
-		List<User> result = new ArrayList<User>();
+	public Map<User,Long> findReported(){
+		Map<User,Long> result = new HashMap<User,Long>();
 		
 		List<Object[]> aux = userRepository.findReported();;
 		for (Object[] o : aux) {
-			if((Integer)o[1]>=3)
-				result.add((User)o[0]);
+			if((Long)o[1]>=3)
+				result.put((User)o[0], (Long)o[1]);
 		}
 
 		return result;
@@ -234,6 +236,7 @@ public class UserService {
 		} else {
 			user.setBanned(true);
 		}
+		save2(user);
 	}
 	
 	//Forms----------

@@ -24,15 +24,15 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="administrator/action-1.do"><spring:message code="master.page.administrator.action.1" /></a></li>
-					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>					
+					<li><a href="administrator/banUnban/browse.do"><spring:message code="master.page.administrator.browseReported" /></a></li>						
+					
 				</ul>
 			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.administrator.manageValue" /></a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="administrator/fee/edit.do"><spring:message code="master.page.administrator.fee" /></a></li>
-					<li><a href="administrator/vatNumber/edit.do"><spring:message code="master.page.administrator.vatNumber" /></a></li>				
+					<li><a href="administrator/vatNumber/edit.do"><spring:message code="master.page.administrator.vatNumber" /></a></li>		
 				</ul>
 			</li>
 		</security:authorize>

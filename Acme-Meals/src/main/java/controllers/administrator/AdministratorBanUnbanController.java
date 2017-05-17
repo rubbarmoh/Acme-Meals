@@ -1,26 +1,18 @@
 
 package controllers.administrator;
 
-import java.util.Collection;
-
-import javax.validation.Valid;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.UserService;
-import services.VATNumberService;
 import controllers.AbstractController;
-import domain.Meal;
-import domain.Restaurant;
 import domain.User;
-import domain.VATNumber;
-import forms.VATNumberForm;
 
 @Controller
 @RequestMapping("/administrator/banUnban")
@@ -43,12 +35,13 @@ public class AdministratorBanUnbanController extends AbstractController {
 	@RequestMapping(value = "/browse", method = RequestMethod.GET)
 	public ModelAndView browse() {
 		ModelAndView result;
-		Collection<User> users;
-		users = userService.findReported();
+		Map<User,Long> map;
+		map = userService.findReported();
 
-		result = new ModelAndView("meal/browse");
-		result.addObject("users", users);
-		result.addObject("requestURI", "meal/browse.do");
+		result = new ModelAndView("user/browseReported");
+		result.addObject("users", map.keySet());
+		result.addObject("num", map);
+		result.addObject("requestURI", "user/browseReported.do");
 
 		return result;
 	}
