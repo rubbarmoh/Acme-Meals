@@ -16,6 +16,7 @@ import repositories.ReviewRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Critic;
 import domain.RelationDislike;
 import domain.RelationLike;
 import domain.Review;
@@ -32,6 +33,9 @@ public class ReviewService {
 
 	@Autowired
 	private Validator			validator;
+
+	@Autowired
+	private CriticService		criticService;
 
 
 	//Constructor---------------------------------------
@@ -116,7 +120,7 @@ public class ReviewService {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Authority au = new Authority();
-		au.setAuthority("MANAGER");
+		au.setAuthority("CRITIC");
 
 		Assert.isTrue(userAccount.getAuthorities().contains(au));
 		ReviewForm result;
@@ -167,7 +171,17 @@ public class ReviewService {
 	}
 
 	public Collection<Review> findByPrincipal() {
-		// TODO Auto-generated method stub
-		return null;
+
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("CRITIC");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
+		Collection<Review> result = new ArrayList<Review>();
+		Critic critic = criticService.findByPrincipal();
+		result = reviewRepository.reviewByCriticId(critic.getId());
+		return result;
 	}
 }

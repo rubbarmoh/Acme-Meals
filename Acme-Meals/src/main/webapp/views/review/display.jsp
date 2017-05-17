@@ -44,6 +44,7 @@
 				<a href="critic/display.do?criticId=${review.critic.id}"><spring:message code="review.critic.display" /></a>
 			</td>
 		</tr>
+			
 </table>
 
 <security:authorize access="hasAnyRole('USER')">

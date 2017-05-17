@@ -41,6 +41,4 @@
 	
 </display:table>
 
-
-
 </security:authorize>

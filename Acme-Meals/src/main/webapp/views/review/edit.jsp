@@ -19,7 +19,7 @@
 
 <security:authorize access="hasRole('CRITIC')">
 
-	<form:form action="managerActor/review/edit.do"	modelAttribute="reviewForm">
+	<form:form action="critic/review/edit.do"	modelAttribute="reviewForm">
 	
 		<form:hidden path="id"/>
 	
@@ -34,7 +34,7 @@
 		<jstl:if test="${reviewForm.id != 0}">
 			<input type="submit" name="delete" value="<spring:message code="review.delete" />" onclick="return confirm('<spring:message code="review.confirm.delete" />')" />
 		</jstl:if>
-		<acme:cancel code="review.cancel" url="managerActor/review/list.do" />
+		<acme:cancel code="review.cancel" url="critic/review/list.do" />
 	
 	</form:form>
 
