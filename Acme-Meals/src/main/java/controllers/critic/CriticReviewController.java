@@ -56,6 +56,24 @@ public class CriticReviewController extends AbstractController {
 		return result;
 	}
 
+	//List--------------------------
+
+	@RequestMapping(value = "/listLike", method = RequestMethod.GET)
+	public ModelAndView listLike() {
+		ModelAndView result;
+		Collection<Review> reviews;
+		Collection<Review> reviewsLike;
+		reviews = reviewService.findByPrincipal();
+		reviewsLike = reviewService.reviewCriticMoreLikes();
+		reviewsLike.retainAll(reviews);
+
+		result = new ModelAndView("review/list");
+		result.addObject("reviews", reviewsLike);
+		result.addObject("requestURI", "critic/review/listLike.do");
+
+		return result;
+	}
+
 	//Creation-------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -88,11 +106,18 @@ public class CriticReviewController extends AbstractController {
 
 		ModelAndView result;
 		Review review;
+		Collection<Integer> stars = new ArrayList<Integer>();
+		stars.add(1);
+		stars.add(2);
+		stars.add(3);
+		stars.add(4);
+		stars.add(5);
 
 		review = reviewService.findOne(reviewId);
 		ReviewForm reviewForm = reviewService.transform(review);
 		Assert.notNull(review);
 		result = new ModelAndView("review/edit");
+		result.addObject("stars", stars);
 		result.addObject("reviewForm", reviewForm);
 
 		return result;

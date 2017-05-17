@@ -119,6 +119,11 @@ public class ReviewService {
 		return result;
 	}
 
+	public List<Review> reviewCriticMoreLikes() {
+		List<Review> result = reviewRepository.reviewCriticMoreLikes();
+		return result;
+	}
+
 	// Forms ----------------------------------------------------------
 
 	public ReviewForm generateForm() {
@@ -191,4 +196,5 @@ public class ReviewService {
 		result = reviewRepository.reviewByCriticId(critic.getId());
 		return result;
 	}
+
 }

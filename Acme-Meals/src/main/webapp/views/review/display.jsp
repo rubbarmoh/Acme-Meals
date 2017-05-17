@@ -38,6 +38,22 @@
 				<jstl:out value="${review.rate }" />
 			</td>
 		</tr>
+		<tr>
+			<th>
+				<spring:message code = "review.likes"/>
+			</th>
+			<td>
+				<jstl:out value="${like }" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<spring:message code = "review.dislikes"/>
+			</th>
+			<td>
+				<jstl:out value="${dislike }" />
+			</td>
+		</tr>
 		
 		<tr>
 			<td>
