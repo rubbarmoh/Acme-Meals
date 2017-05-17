@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.ArrayList;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.ReviewRepository;
 import security.Authority;
@@ -16,89 +19,155 @@ import security.UserAccount;
 import domain.RelationDislike;
 import domain.RelationLike;
 import domain.Review;
+import forms.ReviewForm;
 
 @Service
 @Transactional
 public class ReviewService {
+
 	//Managed repository--------------------------------
-		@Autowired
-		private ReviewRepository reviewRepository;
-		//Supporting Services-------------------------------
-		
-		//Constructor---------------------------------------
-		public ReviewService(){
-			super();
-		}
-		// Simple CRUD methods ----------------------------------------------------
+	@Autowired
+	private ReviewRepository	reviewRepository;
+	//Supporting Services-------------------------------
 
-		public Review create() {
+	@Autowired
+	private Validator			validator;
 
-			UserAccount userAccount;
-			userAccount = LoginService.getPrincipal();
-			Authority au2 = new Authority();
-			au2.setAuthority("CRITIC");
-			Assert.isTrue(userAccount.getAuthorities().contains(au2));
-			Review result;
-			result = new Review();
-			result.setRelationLikes(new ArrayList<RelationLike>());
-			result.setRelationDislikes(new ArrayList<RelationDislike>());
-			
-			return result;
-		}
 
-		public Collection<Review> findAll() {
+	//Constructor---------------------------------------
+	public ReviewService() {
+		super();
+	}
+	// Simple CRUD methods ----------------------------------------------------
 
-			Collection<Review> result;
+	public Review create() {
 
-			result = reviewRepository.findAll();
-			Assert.notNull(result);
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au2 = new Authority();
+		au2.setAuthority("CRITIC");
+		Assert.isTrue(userAccount.getAuthorities().contains(au2));
+		Review result;
+		result = new Review();
+		result.setRelationLikes(new ArrayList<RelationLike>());
+		result.setRelationDislikes(new ArrayList<RelationDislike>());
 
-			return result;
-		}
-
-		public Review findOne(int reviewId) {
-
-			Review result;
-
-			result = reviewRepository.findOne(reviewId);
-			Assert.notNull(result);
-
-			return result;
-		}
-
-		public Review save(Review review) {
-			UserAccount userAccount;
-			userAccount = LoginService.getPrincipal();
-			Authority au2 = new Authority();
-			au2.setAuthority("CRITIC");
-
-			Assert.isTrue(userAccount.getAuthorities().contains(au2));
-
-			Review result;
-			result = reviewRepository.save(review);
-
-			return result;
-		}
-
-		public void delete(Review review) {
-
-			UserAccount userAccount;
-			userAccount = LoginService.getPrincipal();
-			Authority au = new Authority();
-			au.setAuthority("CRITIC");
-
-			Assert.isTrue(userAccount.getAuthorities().contains(au));
-
-			Assert.notNull(review);
-
-			Assert.isTrue(review.getId() != 0);
-			reviewRepository.delete(review);
-		}
-		// Other bussiness methods ----------------------------------------------------
-	
-		public List<Review> reviewMoreLikes(){
-			List<Review> result = reviewRepository.reviewMoreLikes();
-			return result;
-		}
+		return result;
 	}
 
+	public Collection<Review> findAll() {
+
+		Collection<Review> result;
+
+		result = reviewRepository.findAll();
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	public Review findOne(int reviewId) {
+
+		Review result;
+
+		result = reviewRepository.findOne(reviewId);
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	public Review save(Review review) {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au2 = new Authority();
+		au2.setAuthority("CRITIC");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au2));
+
+		Review result;
+		result = reviewRepository.save(review);
+
+		return result;
+	}
+
+	public void delete(Review review) {
+
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("CRITIC");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
+		Assert.notNull(review);
+
+		Assert.isTrue(review.getId() != 0);
+		reviewRepository.delete(review);
+	}
+	// Other bussiness methods ----------------------------------------------------
+
+	public List<Review> reviewMoreLikes() {
+		List<Review> result = reviewRepository.reviewMoreLikes();
+		return result;
+	}
+
+	// Forms ----------------------------------------------------------
+
+	public ReviewForm generateForm() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+		ReviewForm result;
+
+		result = new ReviewForm();
+		return result;
+	}
+
+	public Review reconstruct(ReviewForm reviewForm, BindingResult binding) {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("CRITIC");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
+		Review result;
+
+		if (reviewForm.getId() == 0)
+			result = create();
+		else
+			result = findOne(reviewForm.getId());
+
+		result.setId(reviewForm.getId());
+		result.setTitle(reviewForm.getTitle());
+		result.setText(reviewForm.getText());
+		result.setRate(reviewForm.getRate());
+
+		validator.validate(result, binding);
+
+		return result;
+	}
+
+	public ReviewForm transform(Review review) {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("CRITIC");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+		ReviewForm result = generateForm();
+		result.setId(review.getId());
+		result.setTitle(review.getTitle());
+		result.setText(review.getText());
+		result.setRate(review.getRate());
+
+		return result;
+	}
+
+	public Collection<Review> findByPrincipal() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

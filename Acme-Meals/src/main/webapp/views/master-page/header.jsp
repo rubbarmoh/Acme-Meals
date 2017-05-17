@@ -57,6 +57,10 @@
 			</li>
 		</security:authorize>
 		
+		<security:authorize access="hasRole('CRITIC')">
+			<li><a class="fNiv" href="critic/review/list.do"><spring:message code="master.page.review.list" /></a></li>
+		</security:authorize>
+		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv"><spring:message	code="master.page.register" /></a>
 				<ul>
