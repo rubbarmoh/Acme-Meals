@@ -11,6 +11,6 @@ import domain.Comment;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
-	@Query("select c from Comment c where c.user.banned=false order by c.moment DESC")
-	List<Comment> findAllOrderByMoment();
+	@Query("select c from Comment c where c.user.banned=false and c.restaurant.id=?1 order by c.moment DESC")
+	List<Comment> findAllOrderByMoment(int restaurantId);
 }

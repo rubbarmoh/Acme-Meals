@@ -42,7 +42,7 @@ public class RestaurantController extends AbstractController {
 		Restaurant restaurant;
 
 		restaurant = restaurantService.findOne(restaurantId);
-		Collection<Comment> comments=commentService.findAllOrderByMoment();
+		Collection<Comment> comments=commentService.findAllOrderByMoment(restaurant);
 		result = new ModelAndView("restaurant/display");
 		result.addObject("restaurant", restaurant);
 		result.addObject("comments",comments);

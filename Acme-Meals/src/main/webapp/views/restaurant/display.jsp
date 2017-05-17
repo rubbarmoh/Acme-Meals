@@ -86,7 +86,7 @@
 				</jstl:if>
 			</jstl:forEach>
 			<jstl:if test="${contains==false && row.user.userAccount.username!=pageContext.request.remoteUser}">
-					<a href="comment/report.do?commentId=${row.id}"><spring:message code="restaurant.comment.report" /></a>
+					<a href="report/edit.do?commentId=${row.id}"><spring:message code="restaurant.comment.report" /></a>
 								
 			</jstl:if>
 	</display:column>

@@ -40,6 +40,7 @@
 		<value>/views/comment/messages</value>
 		<value>/views/categories/messages</value>
 		<value>/views/monthlyBill/messages</value>
+		<value>/views/report/messages</value>
 	</util:list>
 
 </beans>

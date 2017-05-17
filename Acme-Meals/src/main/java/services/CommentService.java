@@ -101,9 +101,9 @@ public class CommentService {
 
 			commentRepository.delete(comment);
 		}
-		public Collection<Comment> findAllOrderByMoment(){
+		public Collection<Comment> findAllOrderByMoment(Restaurant r){
 			Collection<Comment>result;
-			result=commentRepository.findAllOrderByMoment();
+			result=commentRepository.findAllOrderByMoment(r.getId());
 			return result;
 		}
 		// Form methods ----------------------------------------------------------
