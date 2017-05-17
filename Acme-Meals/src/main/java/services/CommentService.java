@@ -101,6 +101,11 @@ public class CommentService {
 
 			commentRepository.delete(comment);
 		}
+		public Collection<Comment> findAllOrderByMoment(){
+			Collection<Comment>result;
+			result=commentRepository.findAllOrderByMoment();
+			return result;
+		}
 		// Form methods ----------------------------------------------------------
 
 		public CommentForm generateForm() {

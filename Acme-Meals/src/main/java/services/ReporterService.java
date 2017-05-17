@@ -5,8 +5,12 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+
 import repositories.ReporterRepository;
+import security.LoginService;
 import domain.Reporter;
+
 
 @Service
 @Transactional
@@ -47,6 +51,16 @@ public class ReporterService {
 		}
 
 		// Other bussines methods ---------------------------
-		
+		public Reporter findByPrincipal() {
+			Reporter result;
+			int userAccountId;
+
+			userAccountId = LoginService.getPrincipal().getId();
+			result = reporterRepository.findByUserAccountId(userAccountId);
+
+			Assert.notNull(result);
+
+			return result;
+		}
 		
 }

@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.CommentService;
 import services.RestaurantService;
+import domain.Comment;
 import domain.Restaurant;
 
 @Controller
@@ -21,6 +23,9 @@ public class RestaurantController extends AbstractController {
 
 	@Autowired
 	private RestaurantService	restaurantService;
+
+	@Autowired
+	private CommentService	commentService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -37,10 +42,10 @@ public class RestaurantController extends AbstractController {
 		Restaurant restaurant;
 
 		restaurant = restaurantService.findOne(restaurantId);
-		
+		Collection<Comment> comments=commentService.findAllOrderByMoment();
 		result = new ModelAndView("restaurant/display");
 		result.addObject("restaurant", restaurant);
-		result.addObject("comments",restaurant.getComments());
+		result.addObject("comments",comments);
 		result.addObject("requestURI", "restaurant/display.do");
 
 		return result;

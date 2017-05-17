@@ -19,26 +19,19 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<security:authorize access="hasRole('USER')">
+<security:authorize access="hasAnyRole('USER','MANAGER')">
 
-	<form:form	action="user/comment/edit.do" modelAttribute="commentForm"> 
+	<form:form	action="report/edit.do" modelAttribute="reportForm"> 
 		
-		<form:hidden path="restaurantId"/>
-		
-		
-		<acme:textbox code="comment.title" path="title"/>
-		<acme:textarea code="comment.text" path="text"/>
-		<form:label path="stars">
-			<spring:message code="comment.stars" />
-		</form:label>	
-		<form:select path="stars">
-			<form:options items="${stars}" />
-		</form:select>
-		<form:errors cssClass="error" path="stars" />
+		<form:hidden path="commentId"/>
 		
 		
-		<acme:submit name="save" code="comment.save"/>
-		<acme:cancel code="comment.cancel" url="restaurant/browse.do"/>
+		
+		<acme:textarea code="report.text" path="text"/>
+		
+		
+		<acme:submit name="save" code="report.save"/>
+		<acme:cancel code="report.cancel" url="restaurant/browse.do"/>
 		
 		
 	</form:form>

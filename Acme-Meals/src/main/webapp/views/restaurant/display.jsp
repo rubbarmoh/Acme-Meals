@@ -77,7 +77,20 @@
 	<display:column>
 		<a href="user/displayById.do?userId=${row.user.id}"><spring:message code="restaurant.user.display" /></a>
 	</display:column>
-	
+	<security:authorize access="hasAnyRole('USER','MANAGER')">
+	<display:column>
+	<jstl:set var="contains" value="false" />
+			<jstl:forEach items="${row.reports}" var="report">
+				<jstl:if test="${report.reporter.userAccount.username==pageContext.request.remoteUser}">
+						<jstl:set var="contains" value="true" />
+				</jstl:if>
+			</jstl:forEach>
+			<jstl:if test="${contains==false && row.user.userAccount.username!=pageContext.request.remoteUser}">
+					<a href="comment/report.do?commentId=${row.id}"><spring:message code="restaurant.comment.report" /></a>
+								
+			</jstl:if>
+	</display:column>
+	</security:authorize>
 	
 <br/>
 	
