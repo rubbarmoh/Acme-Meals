@@ -29,7 +29,7 @@
 	<display:column title="${momentHeader}" sortable="false"><fmt:formatDate value="${row.moment }" pattern="dd/MM/yyyy HH:mm" /></display:column>
 	
 	<display:column>
-		<a href="monthlyBill/display.do?monthlyBillId=${row.id}"><spring:message code="monthlyBill.display" /></a>
+		<a href="managerActor/monthlyBill/display.do?monthlyBillId=${row.id}"><spring:message code="monthlyBill.display" /></a>
 	</display:column>
 	
 </display:table>

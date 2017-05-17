@@ -1,5 +1,7 @@
+
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import repositories.MonthlyBillRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Manager;
 import domain.MonthlyBill;
 
 @Service
@@ -19,80 +22,98 @@ public class MonthlyBillService {
 
 	// Managed repository -----------------------------------------------------
 
-			@Autowired
-			private MonthlyBillRepository	monthlyBillRepository;
+	@Autowired
+	private MonthlyBillRepository	monthlyBillRepository;
 
-			// Supporting services ----------------------------------------------------
+	// Supporting services ----------------------------------------------------
+
+	@Autowired
+	private ManagerService			managerService;
 
 
-			// Constructors -----------------------------------------------------------
+	// Constructors -----------------------------------------------------------
 
-			public MonthlyBillService() {
-				super();
-			}
+	public MonthlyBillService() {
+		super();
+	}
 
-			// Simple CRUD methods ----------------------------------------------------
+	// Simple CRUD methods ----------------------------------------------------
 
-			public MonthlyBill create() {
+	public MonthlyBill create() {
 
-				UserAccount userAccount;
-				userAccount = LoginService.getPrincipal();
-				Authority au = new Authority();
-				au.setAuthority("ADMIN");
-				Assert.isTrue(userAccount.getAuthorities().contains(au));
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
 
-				MonthlyBill result;
+		MonthlyBill result;
 
-				result = new MonthlyBill();
+		result = new MonthlyBill();
 
-				return result;
-			}
+		return result;
+	}
 
-			public Collection<MonthlyBill> findAll() {
-				Collection<MonthlyBill> result;
+	public Collection<MonthlyBill> findAll() {
+		Collection<MonthlyBill> result;
 
-				result = monthlyBillRepository.findAll();
-				Assert.notNull(result);
+		result = monthlyBillRepository.findAll();
+		Assert.notNull(result);
 
-				return result;
-			}
+		return result;
+	}
 
-			public MonthlyBill findOne(int monthlyBillId) {
-				Assert.isTrue(monthlyBillId != 0);
+	public MonthlyBill findOne(int monthlyBillId) {
+		Assert.isTrue(monthlyBillId != 0);
 
-				MonthlyBill result;
+		MonthlyBill result;
 
-				result = monthlyBillRepository.findOne(monthlyBillId);
-				Assert.notNull(result);
+		result = monthlyBillRepository.findOne(monthlyBillId);
+		Assert.notNull(result);
 
-				return result;
-			}
+		return result;
+	}
 
-			public MonthlyBill save(MonthlyBill monthlyBill) {
+	public MonthlyBill save(MonthlyBill monthlyBill) {
 
-				UserAccount userAccount;
-				userAccount = LoginService.getPrincipal();
-				Authority au = new Authority();
-				au.setAuthority("ADMIN");
-				Assert.isTrue(userAccount.getAuthorities().contains(au));
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
 
-				Assert.notNull(monthlyBill);
+		Assert.notNull(monthlyBill);
 
-				return monthlyBillRepository.save(monthlyBill);
-			}
+		return monthlyBillRepository.save(monthlyBill);
+	}
 
-			public void delete(MonthlyBill monthlyBill) {
+	public void delete(MonthlyBill monthlyBill) {
 
-				UserAccount userAccount;
-				userAccount = LoginService.getPrincipal();
-				Authority au = new Authority();
-				au.setAuthority("ADMIN");
-				Assert.isTrue(userAccount.getAuthorities().contains(au));
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
 
-				Assert.notNull(monthlyBill);
-				Assert.isTrue(monthlyBill.getId() != 0);
-				Assert.isTrue(monthlyBillRepository.exists(monthlyBill.getId()));
+		Assert.notNull(monthlyBill);
+		Assert.isTrue(monthlyBill.getId() != 0);
+		Assert.isTrue(monthlyBillRepository.exists(monthlyBill.getId()));
 
-				monthlyBillRepository.delete(monthlyBill);
-			}
+		monthlyBillRepository.delete(monthlyBill);
+	}
+
+	public Collection<MonthlyBill> findByPrincipal() {
+
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
+		Collection<MonthlyBill> result = new ArrayList<MonthlyBill>();
+		Manager manager = managerService.findByPrincipal();
+		result = monthlyBillRepository.monthlyBillByManagerId(manager.getId());
+		return result;
+	}
 }
