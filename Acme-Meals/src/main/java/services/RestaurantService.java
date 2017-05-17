@@ -4,8 +4,6 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,8 +95,10 @@ public class RestaurantService {
 		au2.setAuthority("MANAGER");
 		Authority au = new Authority();
 		au.setAuthority("USER");
+		Authority au3 = new Authority();
+		au.setAuthority("CRITIC");
 
-		Assert.isTrue(userAccount.getAuthorities().contains(au2) || userAccount.getAuthorities().contains(au));
+		Assert.isTrue(userAccount.getAuthorities().contains(au2) || userAccount.getAuthorities().contains(au) || userAccount.getAuthorities().contains(au3));
 
 		Restaurant result;
 		result = restaurantRepository.save(restaurant);
@@ -178,14 +178,14 @@ public class RestaurantService {
 		Integer aux = 0;
 		List<Object[]> obj = restaurantRepository.restaurantMoreProfit(manager);
 		for (Object[] o : obj) {
-			if((Integer)o[1]>aux){
+			if ((Integer) o[1] > aux) {
 				result = new ArrayList<Restaurant>();
-				result.add((Restaurant)o[0]);
-			}else if((Integer)o[1]==aux){
-				result.add((Restaurant)o[0]);
+				result.add((Restaurant) o[0]);
+			} else if ((Integer) o[1] == aux) {
+				result.add((Restaurant) o[0]);
 			}
 		}
-		
+
 		return result;
 	}
 
@@ -303,8 +303,14 @@ public class RestaurantService {
 		return result;
 	}
 	public void updateAvgStars(int restaurantId) {
-		Restaurant r=restaurantRepository.findOne(restaurantId);
+		Restaurant r = restaurantRepository.findOne(restaurantId);
 		r.setAvgStars(restaurantRepository.findAvgStars(restaurantId));
+		save(r);
+	}
+
+	public void updateAvgStarsR(int restaurantId) {
+		Restaurant r = restaurantRepository.findOne(restaurantId);
+		r.setAvgStars(restaurantRepository.findAvgStarsR(restaurantId));
 		save(r);
 	}
 

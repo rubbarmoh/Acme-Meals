@@ -37,6 +37,9 @@ public class ReviewService {
 	@Autowired
 	private CriticService		criticService;
 
+	@Autowired
+	private RestaurantService	restaurantService;
+
 
 	//Constructor---------------------------------------
 	public ReviewService() {
@@ -51,8 +54,10 @@ public class ReviewService {
 		Authority au2 = new Authority();
 		au2.setAuthority("CRITIC");
 		Assert.isTrue(userAccount.getAuthorities().contains(au2));
+		Critic critic = criticService.findByPrincipal();
 		Review result;
 		result = new Review();
+		result.setCritic(critic);
 		result.setRelationLikes(new ArrayList<RelationLike>());
 		result.setRelationDislikes(new ArrayList<RelationDislike>());
 
@@ -145,6 +150,7 @@ public class ReviewService {
 			result = findOne(reviewForm.getId());
 
 		result.setId(reviewForm.getId());
+		result.setRestaurant(restaurantService.findOne(reviewForm.getRestId()));
 		result.setTitle(reviewForm.getTitle());
 		result.setText(reviewForm.getText());
 		result.setRate(reviewForm.getRate());
@@ -166,6 +172,7 @@ public class ReviewService {
 		result.setTitle(review.getTitle());
 		result.setText(review.getText());
 		result.setRate(review.getRate());
+		result.setRestId(review.getRestaurant().getId());
 
 		return result;
 	}

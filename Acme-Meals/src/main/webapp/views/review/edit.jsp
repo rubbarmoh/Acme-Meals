@@ -22,19 +22,25 @@
 	<form:form action="critic/review/edit.do"	modelAttribute="reviewForm">
 	
 		<form:hidden path="id"/>
+		<form:hidden path="restId"/>
 	
 		<acme:textbox code="review.title" path="title" />
 		<br/>
-		<acme:textbox code="review.text" path="text" />
+		<acme:textarea code="review.text" path="text" />
 		<br/>
-		<acme:textbox code="review.rate" path="rate" />
-		<br/>
+		<form:label path="rate">
+			<spring:message code="review.rate" />
+		</form:label>	
+		<form:select path="rate">
+			<form:options items="${stars}" />
+		</form:select>
+		<form:errors cssClass="error" path="rate" />
 		
 		<acme:submit name="save" code="review.save"/>
 		<jstl:if test="${reviewForm.id != 0}">
 			<input type="submit" name="delete" value="<spring:message code="review.delete" />" onclick="return confirm('<spring:message code="review.confirm.delete" />')" />
 		</jstl:if>
-		<acme:cancel code="review.cancel" url="critic/review/list.do" />
+		<acme:cancel code="review.cancel" url="restaurant/browse.do" />
 	
 	</form:form>
 

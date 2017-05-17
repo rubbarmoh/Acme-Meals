@@ -16,6 +16,7 @@ import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 public class ReviewForm {
 
 	private int		id;
+	private int		restId;
 
 	private String	title;
 	private String	text;
@@ -54,6 +55,14 @@ public class ReviewForm {
 	}
 	public void setRate(Integer rate) {
 		this.rate = rate;
+	}
+
+	@NotNull
+	public int getRestId() {
+		return restId;
+	}
+	public void setRestId(int restId) {
+		this.restId = restId;
 	}
 
 }

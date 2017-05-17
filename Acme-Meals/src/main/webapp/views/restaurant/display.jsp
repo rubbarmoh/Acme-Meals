@@ -52,6 +52,7 @@
 			</td>
 		</tr>
 </table>
+<br/>
 <input type="button" name="meals"
 					value="<spring:message code="restaurant.meals" />"
 					onclick="javascript: window.location.replace('meal/browse.do?restaurantId=${restaurant.id}')" 
@@ -99,6 +100,12 @@
 	<input type="button" name="addComment"
 			value="<spring:message code="restaurant.addComment" />"
 			onclick="javascript: window.location.replace('user/comment/create.do?restaurantId=${restaurant.id}')" />
+<br/>
+</security:authorize>
+<security:authorize access="hasRole('CRITIC')">
+	<input type="button" name="makeReview"
+			value="<spring:message code="restaurant.makeReview" />"
+			onclick="javascript: window.location.replace('critic/review/create.do?restaurantId=${restaurant.id}')" />
 <br/>
 </security:authorize>
 					

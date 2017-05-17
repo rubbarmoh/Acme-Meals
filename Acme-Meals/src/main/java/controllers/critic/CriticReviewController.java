@@ -1,6 +1,7 @@
 
 package controllers.critic;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.RestaurantService;
 import services.ReviewService;
 import controllers.AbstractController;
+import domain.Restaurant;
 import domain.Review;
 import forms.ReviewForm;
 
@@ -26,7 +29,10 @@ public class CriticReviewController extends AbstractController {
 	//Services-------------------------
 
 	@Autowired
-	private ReviewService	reviewService;
+	private ReviewService		reviewService;
+
+	@Autowired
+	private RestaurantService	restaurantService;
 
 
 	//Constructor----------------------
@@ -45,7 +51,7 @@ public class CriticReviewController extends AbstractController {
 
 		result = new ModelAndView("review/list");
 		result.addObject("reviews", reviews);
-		result.addObject("requestURI", "managerActor/review/list.do");
+		result.addObject("requestURI", "critic/review/list.do");
 
 		return result;
 	}
@@ -53,14 +59,23 @@ public class CriticReviewController extends AbstractController {
 	//Creation-------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam int restaurantId) {
 
 		ModelAndView result;
 		ReviewForm reviewForm;
 
+		Collection<Integer> stars = new ArrayList<Integer>();
+		stars.add(1);
+		stars.add(2);
+		stars.add(3);
+		stars.add(4);
+		stars.add(5);
+
 		reviewForm = reviewService.generateForm();
+		reviewForm.setRestId(restaurantId);
 		result = new ModelAndView("review/create");
 		result.addObject("reviewForm", reviewForm);
+		result.addObject("stars", stars);
 
 		return result;
 
@@ -89,6 +104,7 @@ public class CriticReviewController extends AbstractController {
 
 		ModelAndView result = new ModelAndView();
 		Review review;
+		Review aux;
 
 		if (binding.hasErrors())
 			if (reviewForm.getId() != 0) {
@@ -100,7 +116,9 @@ public class CriticReviewController extends AbstractController {
 			try {
 				review = reviewService.reconstruct(reviewForm, binding);
 
-				reviewService.save(review);
+				aux = reviewService.save(review);
+				Restaurant r = aux.getRestaurant();
+				restaurantService.updateAvgStarsR(r.getId());
 				result = list();
 
 			} catch (Throwable oops) {
@@ -139,9 +157,15 @@ public class CriticReviewController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(Review review, String message) {
 		ModelAndView result;
-
+		Collection<Integer> stars = new ArrayList<Integer>();
+		stars.add(1);
+		stars.add(2);
+		stars.add(3);
+		stars.add(4);
+		stars.add(5);
 		result = new ModelAndView("review/edit");
 		result.addObject("review", review);
+		result.addObject("stars", stars);
 		result.addObject("message", message);
 		return result;
 
@@ -149,10 +173,16 @@ public class CriticReviewController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(ReviewForm review, String message) {
 		ModelAndView result;
+		Collection<Integer> stars = new ArrayList<Integer>();
+		stars.add(1);
+		stars.add(2);
+		stars.add(3);
+		stars.add(4);
+		stars.add(5);
 
 		result = new ModelAndView("review/edit");
 		result.addObject("review", review);
-
+		result.addObject("stars", stars);
 		result.addObject("message", message);
 
 		return result;
@@ -161,9 +191,16 @@ public class CriticReviewController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView2(ReviewForm review, String message) {
 		ModelAndView result;
-
+		Collection<Integer> stars = new ArrayList<Integer>();
+		stars.add(1);
+		stars.add(2);
+		stars.add(3);
+		stars.add(4);
+		stars.add(5);
 		result = new ModelAndView("review/create");
 		result.addObject("review", review);
+
+		result.addObject("stars", stars);
 		result.addObject("message", message);
 
 		return result;

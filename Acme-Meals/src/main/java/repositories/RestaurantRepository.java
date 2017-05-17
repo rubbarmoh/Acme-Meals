@@ -1,3 +1,4 @@
+
 package repositories;
 
 import java.util.Collection;
@@ -71,7 +72,10 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
 
 	@Query("select m from Meal m where m.restaurant=?1")
 	List<Meal> mealsPerRestaurant(Restaurant r);
-	
+
 	@Query("select 1.0*(select sum(c.stars) from Comment c where c.restaurant.id=?1)/count(c1) from Comment c1 where c1.restaurant.id=?1")
 	Double findAvgStars(int restaurantID);
+
+	@Query("select 1.0*(select sum(r.rate) from Review r where r.restaurant.id=?1)/count(r1) from Review r1 where r1.restaurant.id=?1")
+	Double findAvgStarsR(int restaurantID);
 }
