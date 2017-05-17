@@ -58,7 +58,13 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('CRITIC')">
-			<li><a class="fNiv" href="critic/review/list.do"><spring:message code="master.page.review.list" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.review.listmenu" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="critic/review/list.do"><spring:message code="master.page.review.list" /></a></li>
+					<li><a href="critic/review/listLike.do"><spring:message code="master.page.review.listLike" /></a></li>					
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">

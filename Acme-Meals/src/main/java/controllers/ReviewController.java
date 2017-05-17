@@ -13,9 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.RelationLikeService;
 import services.ReviewService;
 import services.UserService;
-import domain.RelationLike;
 import domain.Review;
-import domain.User;
 
 @Controller
 @RequestMapping("/review")
@@ -24,15 +22,15 @@ public class ReviewController extends AbstractController {
 	// Services ------------------------------------------------
 
 	@Autowired
-	private ReviewService	reviewService;
+	private ReviewService		reviewService;
 
 	@Autowired
-	private UserService		userService;
+	private UserService			userService;
 
 	@Autowired
-	private RelationLikeService		relationLikeService;
+	private RelationLikeService	relationLikeService;
 
-	
+
 	// Constructors -----------------------------------------------------------
 
 	public ReviewController() {
@@ -59,14 +57,17 @@ public class ReviewController extends AbstractController {
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam int reviewId) {
 		ModelAndView result;
-		Review review;
-
-		review = reviewService.findOne(reviewId);
+		Review review = reviewService.findOne(reviewId);
+		Integer like, dislike;
+		like = review.getRelationLikes().size();
+		dislike = review.getRelationDislikes().size();
 
 		result = new ModelAndView("review/display");
 		result.addObject("review", review);
+		result.addObject("like", like);
+		result.addObject("dislike", dislike);
 		result.addObject("requestURI", "review/display.do");
-		
+
 		return result;
 	}
 

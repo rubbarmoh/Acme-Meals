@@ -1,3 +1,4 @@
+
 package controllers.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,77 +20,86 @@ import domain.User;
 @Controller
 @RequestMapping("user/review/like")
 public class ReviewLikeController {
+
 	//Services--------------------------------------------------
-	
-		@Autowired
-		private UserService userService;
-		
-		@Autowired
-		private RelationLikeService relationLikeService;
-		
-		@Autowired
-		private RelationDislikeService relationDislikeService;
-		
-		@Autowired
-		private ReviewService reviewService;
-		
-		//Constructor-----------------------------------------------
-		
-		public ReviewLikeController(){
-			super();
-		}
-				
-		// Like ---------------------------------------------
-		@RequestMapping(value="/create", method=RequestMethod.GET)
-		public ModelAndView create(@RequestParam int reviewId) {
-			ModelAndView result;
-			RelationLike relationLike;
-			User user;
-			RelationDislike relationDislike;
-			Review review;
-			
-			review= reviewService.findOne(reviewId);
-			
-			user = userService.findByPrincipal();
-			
-			
-			relationLike = relationLikeService.create();
-			relationLike.setReview(review);
-			relationLike.setUser(user);
 
-			relationLikeService.save(relationLike);
+	@Autowired
+	private UserService				userService;
 
-			relationDislike = relationDislikeService.findRelationDislike(review);
-			
-			if(relationDislike!=null)
-				relationDislikeService.delete(relationDislike);
-			
-			result = new ModelAndView("review/display");
-			result.addObject("review", review);
-			result.addObject("requestURI", "review/display.do");
-			
-			return result;
-		}
-			
-		// UnLike ---------------------------------------------
-				@RequestMapping(value="/delete", method=RequestMethod.GET)
-				public ModelAndView delete(@RequestParam int reviewId) {
-					ModelAndView result;
-					RelationLike relationLike;
-					Review review;
-					
-					review= reviewService.findOne(reviewId);
+	@Autowired
+	private RelationLikeService		relationLikeService;
 
-					relationLike = relationLikeService.findRelationLike(review);
-					
-					if(relationLike!=null)
-						relationLikeService.delete(relationLike);
-					
-					result = new ModelAndView("review/display");
-					result.addObject("review", review);
-					result.addObject("requestURI", "review/display.do");
-					
-					return result;
-				}
-		
+	@Autowired
+	private RelationDislikeService	relationDislikeService;
+
+	@Autowired
+	private ReviewService			reviewService;
+
+
+	//Constructor-----------------------------------------------
+
+	public ReviewLikeController() {
+		super();
+	}
+
+	// Like ---------------------------------------------
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create(@RequestParam int reviewId) {
+		ModelAndView result;
+		RelationLike relationLike;
+		User user;
+		RelationDislike relationDislike;
+		Review review;
+
+		review = reviewService.findOne(reviewId);
+
+		user = userService.findByPrincipal();
+
+		relationLike = relationLikeService.create();
+		relationLike.setReview(review);
+		relationLike.setUser(user);
+
+		relationLikeService.save(relationLike);
+
+		relationDislike = relationDislikeService.findRelationDislike(review);
+
+		if (relationDislike != null)
+			relationDislikeService.delete(relationDislike);
+		Integer like, dislike;
+		like = review.getRelationLikes().size();
+		dislike = review.getRelationDislikes().size();
+		result = new ModelAndView("review/display");
+		result.addObject("review", review);
+		result.addObject("like", like);
+		result.addObject("dislike", dislike);
+		result.addObject("requestURI", "review/display.do");
+
+		return result;
+	}
+
+	// UnLike ---------------------------------------------
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam int reviewId) {
+		ModelAndView result;
+		RelationLike relationLike;
+		Review review;
+
+		review = reviewService.findOne(reviewId);
+
+		relationLike = relationLikeService.findRelationLike(review);
+
+		if (relationLike != null)
+			relationLikeService.delete(relationLike);
+		Integer like, dislike;
+		like = review.getRelationLikes().size();
+		dislike = review.getRelationDislikes().size();
+		result = new ModelAndView("review/display");
+		result.addObject("review", review);
+		result.addObject("like", like);
+		result.addObject("dislike", dislike);
+		result.addObject("requestURI", "review/display.do");
+
+		return result;
+	}
+
 }
