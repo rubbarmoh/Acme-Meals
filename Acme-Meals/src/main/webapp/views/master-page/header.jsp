@@ -47,6 +47,7 @@
 					<li><a href="mealOrder/browseCurrentlyByManager.do"><spring:message code="master.page.manager.mealOrder.browseCurrentlyByManager" /></a></li>
 				</ul>
 			</li>
+			<li><a class="fNiv" href="managerActor/monthlyBill/list.do"><spring:message code="master.page.monthlyBill.list" /></a></li>
 			<li><a class="fNiv"><spring:message	code="master.page.manager.categories" /></a>
 				<ul>
 					<li class="arrow"></li>
