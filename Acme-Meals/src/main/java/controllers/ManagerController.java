@@ -61,7 +61,7 @@ public class ManagerController extends AbstractController {
 		Collection<Restaurant> restaurantsWithMore10PercentOrders = restaurantService.restaurantsWithMore10PercentOrders(manager);
 		Collection<Restaurant> restaurantsWithLess10PercentOrders = restaurantService.restaurantsWithLess10PercentOrders(manager);
 
-		result = new ModelAndView("manager/dashboard");
+		result = new ModelAndView("managerActor/dashboard");
 
 		result.addObject("ordersPerRestaurant", ordersPerRestaurant);
 		result.addObject("restaurants1", restaurants1);

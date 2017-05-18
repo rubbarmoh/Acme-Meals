@@ -185,14 +185,14 @@ public class RestaurantService {
 
 	public List<Restaurant> restaurantMoreProfit(Manager manager) {
 		List<Restaurant> result = new ArrayList<Restaurant>();
-		Integer aux = 0;
+		Double aux = 0.;
 		List<Object[]> obj = restaurantRepository.restaurantMoreProfit(manager);
 		for (Object[] o : obj) {
-			if ((Integer) o[1] > aux) {
+			if ((Double) o[1] > aux) {
 				result = new ArrayList<Restaurant>();
 				result.add((Restaurant) o[0]);
-				aux = (Integer) o[1];
-			} else if ((Integer) o[1] == aux) {
+				aux = (Double) o[1];
+			} else if ((Double) o[1] == aux) {
 				result.add((Restaurant) o[0]);
 			}
 		}
