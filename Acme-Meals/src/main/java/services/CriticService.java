@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -44,17 +45,25 @@ public class CriticService {
 	// Simple CRUD methods ----------------------------------------------------
 
 	public Critic create() {
-		UserAccount userAccount;
-		userAccount = LoginService.getPrincipal();
+		UserAccount userAccounta;
+		userAccounta = LoginService.getPrincipal();
 		Authority au = new Authority();
 		au.setAuthority("ADMIN");
-		Assert.isTrue(userAccount.getAuthorities().contains(au));
+		Assert.isTrue(userAccounta.getAuthorities().contains(au));
+
+		UserAccount userAccount = new UserAccount();
+		List<Authority> authorities = new ArrayList<Authority>();
+		Authority a = new Authority();
+		a.setAuthority(Authority.CRITIC);
+		authorities.add(a);
+		userAccount.addAuthority(a);
 
 		ArrayList<Review> reviews = new ArrayList<Review>();
 
 		Critic result;
 		result = new Critic();
 		result.setReviews(reviews);
+		result.setUserAccount(userAccount);
 		return result;
 	}
 
@@ -75,6 +84,28 @@ public class CriticService {
 	}
 
 	public Critic save(Critic critic) {
+
+		Assert.notNull(critic);
+
+		String password = critic.getUserAccount().getPassword();
+		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		String md5 = encoder.encodePassword(password, null);
+		critic.getUserAccount().setPassword(md5);
+
+		if (critic.getId() != 0) {
+			Assert.isTrue(findByPrincipal().getId() == critic.getId());
+			UserAccount userAccount;
+			userAccount = LoginService.getPrincipal();
+			Authority au = new Authority();
+			au.setAuthority("CRITIC");
+			Assert.isTrue(userAccount.getAuthorities().contains(au));
+		}
+		Critic result = criticRepository.save(critic);
+
+		return result;
+	}
+
+	public Critic save2(Critic critic) {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Authority au = new Authority();
