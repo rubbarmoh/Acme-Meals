@@ -53,11 +53,18 @@
 		</tr>
 </table>
 <br/>
+
+
 <input type="button" name="meals"
-					value="<spring:message code="restaurant.meals" />"
-					onclick="javascript: window.location.replace('meal/browse.do?restaurantId=${restaurant.id}')" 
-					style="float: right;padding: 5px 15px; margin: 0 3px 0 3px;" />
-					
+	value="<spring:message code="restaurant.meals"/>"
+	onclick="javascript: window.location.replace('meal/browse.do?restaurantId=${restaurant.id}')" />
+<br/>
+<security:authorize access="hasRole('USER')">
+<input type="button" name="mealOrder"
+					value="<spring:message code="restaurant.mealOrder" />"
+					onclick="javascript: window.location.replace('user/mealOrder/morder.do?restaurantId=${restaurant.id}')"/> 
+<br/>			
+</security:authorize>				
 <display:table pagesize="5" class="displaytag" keepStatus="true" name="comments" requestURI="${requestURI}" id="row">
 
 	<spring:message code="restaurant.comment.user" var="author"/>

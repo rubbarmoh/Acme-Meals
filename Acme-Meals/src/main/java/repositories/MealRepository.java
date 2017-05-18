@@ -12,6 +12,6 @@ import domain.Restaurant;
 
 @Repository
 public interface MealRepository extends JpaRepository<Meal, Integer> {
-	@Query("select m from Meal m where m.restaurant=?1")
-	List<Meal> mealsPerRestaurant(Restaurant r);
+	@Query("select m from Meal m where m.restaurant.id=?1")
+	List<Meal> mealsPerRestaurant(int restaurantId);
 }

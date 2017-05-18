@@ -41,6 +41,7 @@
 		<value>/views/categories/tiles.xml</value>
 		<value>/views/monthlyBill/tiles.xml</value>
 		<value>/views/report/tiles.xml</value>
+		<value>/views/quantity/tiles.xml</value>
 	</util:list>
 
 </beans>

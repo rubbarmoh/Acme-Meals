@@ -112,7 +112,7 @@ public class MealService {
 	}
 	public Collection<Meal> mealPerRestaurant(Restaurant r) {
 		Collection<Meal> result;
-		result = mealRepository.mealsPerRestaurant(r);
+		result = mealRepository.mealsPerRestaurant(r.getId());
 		return result;
 	}
 

@@ -81,7 +81,7 @@ public class MealOrderService {
 				Authority au = new Authority();
 				au.setAuthority("USER");
 				Authority au2 = new Authority();
-				au.setAuthority("MANAGER");
+				au2.setAuthority("MANAGER");
 				Assert.isTrue(userAccount.getAuthorities().contains(au)||
 						userAccount.getAuthorities().contains(au2));
 
@@ -169,5 +169,14 @@ public class MealOrderService {
 			
 			return mealOrders;
 			
+		}
+		public void updateAmount(int mealOrderId) {
+			MealOrder m=mealOrderRepository.findOne(mealOrderId);
+			Double aux=0.0;
+			for(Quantity q:m.getQuantities()){
+				aux=aux+(q.getQuantity()*q.getMeal().getPrice());
+			}
+			m.setAmount(aux);
+			save(m);
 		}
 }

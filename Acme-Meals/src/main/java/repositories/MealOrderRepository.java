@@ -23,5 +23,6 @@ public interface MealOrderRepository extends JpaRepository<MealOrder, Integer> {
 	
 	@Query("select mo from MealOrder mo where mo.restaurant.manager.id=?1 and (mo.status like 'PENDING' or mo.status like 'INPROGRESS') order by mo.restaurant.name")
 	Collection<MealOrder> findCurrentlyByManager(int managerId);
-
+	
+	
 }
