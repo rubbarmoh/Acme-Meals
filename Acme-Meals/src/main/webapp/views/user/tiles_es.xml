@@ -32,8 +32,12 @@
 	</definition>
 	
 	<definition name="user/browseReported" extends="master.page">	
-		<put-attribute name="title" value="Navegar por Reportados" />
+		<put-attribute name="title" value="Usuario reportados" />
 		<put-attribute name="body" value="/views/user/browseReported.jsp" />
 	</definition>
 	
+	<definition name="user/browseBanned" extends="master.page">	
+		<put-attribute name="title" value="Usuarios baneados" />
+		<put-attribute name="body" value="/views/user/browseReported.jsp" />
+	</definition>
 </tiles-definitions>
