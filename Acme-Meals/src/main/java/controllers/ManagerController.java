@@ -1,6 +1,9 @@
 
 package controllers;
 
+import java.util.Collection;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ManagerService;
+import services.RestaurantService;
 import domain.Manager;
+import domain.Restaurant;
 import forms.ManagerForm;
 
 @Controller
@@ -21,13 +26,60 @@ public class ManagerController extends AbstractController {
 	// Services ------------------------------------------------
 
 	@Autowired
-	private ManagerService	managerService;
+	private ManagerService		managerService;
+
+	@Autowired
+	private RestaurantService	restaurantService;
 
 
 	// Constructor -----------------------------------------------
 
 	public ManagerController() {
 		super();
+	}
+
+	// Dashboard -----------------------------------------------
+
+	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+	public ModelAndView dashboard() {
+
+		ModelAndView result;
+
+		Manager manager = managerService.findByPrincipal();
+
+		Map<Restaurant, Integer> ordersPerRestaurant = restaurantService.ordersPerRestaurant(manager);
+		Collection<Restaurant> restaurants1 = ordersPerRestaurant.keySet();
+
+		Collection<Restaurant> restaurantMoreStars = restaurantService.restaurantMoreStars(manager);
+		Collection<Restaurant> restaurantLessStars = restaurantService.restaurantLessStars(manager);
+
+		Double avgProfitMyRestaurants = restaurantService.avgProfitMyRestaurants(manager);
+		Map<Restaurant, Double> profitByRestaurant = restaurantService.profitByRestaurant(manager);
+		Collection<Restaurant> restaurants = profitByRestaurant.keySet();
+
+		Collection<Restaurant> restaurantMoreProfit = restaurantService.restaurantMoreProfit(manager);
+		Collection<Restaurant> restaurantsWithMore10PercentOrders = restaurantService.restaurantsWithMore10PercentOrders(manager);
+		Collection<Restaurant> restaurantsWithLess10PercentOrders = restaurantService.restaurantsWithLess10PercentOrders(manager);
+
+		result = new ModelAndView("manager/dashboard");
+
+		result.addObject("ordersPerRestaurant", ordersPerRestaurant);
+		result.addObject("restaurants1", restaurants1);
+
+		result.addObject("restaurantMoreStars", restaurantMoreStars);
+		result.addObject("restaurantLessStars", restaurantLessStars);
+		result.addObject("avgProfitMyRestaurants", avgProfitMyRestaurants);
+
+		result.addObject("profitByRestaurant", profitByRestaurant);
+		result.addObject("restaurants", restaurants);
+
+		result.addObject("restaurantMoreProfit", restaurantMoreProfit);
+		result.addObject("restaurantsWithMore10PercentOrders", restaurantsWithMore10PercentOrders);
+		result.addObject("restaurantsWithLess10PercentOrders", restaurantsWithLess10PercentOrders);
+
+		result.addObject("requestURI", "managerActor/dashboard.do");
+
+		return result;
 	}
 
 	// Edit profile ------------------------------------------------

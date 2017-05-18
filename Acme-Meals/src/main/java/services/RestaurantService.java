@@ -3,7 +3,9 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -148,9 +150,13 @@ public class RestaurantService {
 		return result;
 	}
 
-	public List<Integer> ordersPerRestaurant(Manager manager) {
-		List<Integer> result = restaurantRepository.ordersPerRestaurant(manager);
-		return result;
+	public Map<Restaurant, Integer> ordersPerRestaurant(Manager manager) {
+		Map<Restaurant, Integer> map = new HashMap<Restaurant, Integer>();
+		List<Object[]> aux = restaurantRepository.ordersPerRestaurant(manager);
+		for (Object[] o : aux) {
+			map.put((Restaurant) o[0], (Integer) o[1]);
+		}
+		return map;
 	}
 
 	public List<Restaurant> restaurantMoreStars(Manager manager) {
@@ -168,9 +174,13 @@ public class RestaurantService {
 		return result;
 	}
 
-	public Double minMaxProfitByRestaurant(Manager manager) {
-		Double result = restaurantRepository.minMaxProfitByRestaurant(manager);
-		return result;
+	public Map<Restaurant, Double> profitByRestaurant(Manager manager) {
+		Map<Restaurant, Double> map = new HashMap<Restaurant, Double>();
+		List<Object[]> aux = restaurantRepository.profitByRestaurant(manager);
+		for (Object[] o : aux) {
+			map.put((Restaurant) o[0], (Double) o[1]);
+		}
+		return map;
 	}
 
 	public List<Restaurant> restaurantMoreProfit(Manager manager) {
@@ -181,6 +191,7 @@ public class RestaurantService {
 			if ((Integer) o[1] > aux) {
 				result = new ArrayList<Restaurant>();
 				result.add((Restaurant) o[0]);
+				aux = (Integer) o[1];
 			} else if ((Integer) o[1] == aux) {
 				result.add((Restaurant) o[0]);
 			}

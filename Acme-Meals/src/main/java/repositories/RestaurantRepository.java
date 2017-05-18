@@ -25,8 +25,8 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
 	@Query("select r from Restaurant r where r.manager.id=?1")
 	Collection<Restaurant> restaurantByManagerId(int id);
 
-	@Query("select r.mealOrders.size from Restaurant r where r.manager=?1")
-	List<Integer> ordersPerRestaurant(Manager manager);
+	@Query("select r,r.mealOrders.size from Restaurant r where r.manager=?1")
+	List<Object[]> ordersPerRestaurant(Manager manager);
 
 	@Query("select r from Restaurant r where r.manager=?1 and r.avgStars>= all(select r2.avgStars from Restaurant r2 where r2.manager=?1)")
 	List<Restaurant> restaurantMoreStars(Manager manager);
@@ -34,11 +34,11 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
 	@Query("select r from Restaurant r where r.manager=?1 and r.avgStars<= all(select r2.avgStars from Restaurant r2 where r2.manager=?1)")
 	List<Restaurant> restaurantLessStars(Manager manager);
 
-	@Query("select 1.0*(select sum(o.amount) from MealOrder o where o.status='FINISHED' and o.restaurant.manager=?1)/sum(o2.amount) from MealOrder o2 where o2.status='FINISHED' and o2.restaurant.manager=?1")
+	@Query("select 1.0*(select sum(o.amount) from MealOrder o where o.status='FINISHED' and o.restaurant.manager=?1)/count(r) from Restaurant r where r.manager=?1")
 	Double avgProfitMyRestaurants(Manager manager);
 
-	@Query("select sum(o.amount) from MealOrder o where o.status='FINISHED' and o.restaurant.manager=?1")
-	Double minMaxProfitByRestaurant(Manager m);
+	@Query("select o.restaurant,sum(o.amount) from MealOrder o where o.status='FINISHED' and o.restaurant.manager=?1 group by o.restaurant")
+	List<Object[]> profitByRestaurant(Manager m);
 
 	@Query("select o.restaurant,sum(o.amount) from MealOrder o where o.restaurant.manager=?1")
 	List<Object[]> restaurantMoreProfit(Manager m);

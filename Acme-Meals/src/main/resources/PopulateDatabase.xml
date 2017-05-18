@@ -254,6 +254,8 @@
 		<property name="mealOrders">
 			<list>
 				<ref bean="mealOrder1"/>
+				<ref bean="mealOrder2"/>
+				<ref bean="mealOrder3"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -291,7 +293,7 @@
 		</property>
 		<property name="mealOrders">
 			<list>
-				
+				<ref bean="mealOrder4"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -568,6 +570,7 @@
 		<property name="mealOrders">
 			<list>
 				<ref bean="mealOrder1"/>
+				<ref bean="mealOrder3"/>
 			</list>
 		</property>
 		<property name="meals">
@@ -612,12 +615,12 @@
 		<property name="manager" ref="manager1"/>
 		<property name="mealOrders">
 			<list>
-				
+				<ref bean="mealOrder4"/>
 			</list>
 		</property>
 		<property name="meals">
 			<list>
-				
+				<ref bean="meal6"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -1189,6 +1192,19 @@
 	  	</property>
 	  </bean>
 	  
+	  <bean id="meal6" class="domain.Meal">
+	  	<property name="title" value="Ramen"/>
+	  	<property name="description" value="Fideos calentitos en todas las epocas del año."/>
+	  	<property name="price" value="8.00"/>
+	  	<property name="erased" value="false"/>
+	  	<property name="category" ref="category3"/>
+	  	<property name="restaurant" ref="restaurant3"/>
+	  	<property name="quantities">
+	  		<list>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
 	  <!-- Meal Order -->
 	  
 	  <bean id="mealOrder1" class="domain.MealOrder">
@@ -1220,6 +1236,34 @@
 	  	</property>
 	  </bean>
 	  
+	  <bean id="mealOrder3" class="domain.MealOrder">
+	  	<property name="moment" value="04/26/2017"/>
+	  	<property name="amount" value="14.50"/>
+	  	<property name="status" value="FINISHED"/>
+	  	<property name="pickUp" value="false"/>
+	  	<property name="user" ref="user1"/>
+	  	<property name="restaurant" ref="restaurant2"/>
+	  	<property name="quantities">
+	  		<list>
+	  			<ref bean="quantity4"/>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
+	  <bean id="mealOrder4" class="domain.MealOrder">
+	  	<property name="moment" value="04/26/2017"/>
+	  	<property name="amount" value="42.00"/>
+	  	<property name="status" value="FINISHED"/>
+	  	<property name="pickUp" value="false"/>
+	  	<property name="user" ref="user2"/>
+	  	<property name="restaurant" ref="restaurant3"/>
+	  	<property name="quantities">
+	  		<list>
+	  			<ref bean="quantity5"/>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
 	  <!-- Quantity -->
 	  
 	  <bean id="quantity1" class="domain.Quantity">
@@ -1238,6 +1282,18 @@
 	  	<property name="quantity" value="1"/>
 	  	<property name="mealOrder" ref="mealOrder2"/>
 	  	<property name="meal" ref="meal2"/>
+	  </bean>
+	  
+	   <bean id="quantity4" class="domain.Quantity">
+	  	<property name="quantity" value="1"/>
+	  	<property name="mealOrder" ref="mealOrder3"/>
+	  	<property name="meal" ref="meal3"/>
+	  </bean>
+	  
+	  <bean id="quantity5" class="domain.Quantity">
+	  	<property name="quantity" value="2"/>
+	  	<property name="mealOrder" ref="mealOrder4"/>
+	  	<property name="meal" ref="meal4"/>
 	  </bean>
 	  
 	  <!-- Invoice -->
