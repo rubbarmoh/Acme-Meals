@@ -36,4 +36,9 @@
 		<put-attribute name="body" value="/views/user/browseReported.jsp" />
 	</definition>
 	
+	<definition name="user/browseBanned" extends="master.page">	
+		<put-attribute name="title" value="Browse banned" />
+		<put-attribute name="body" value="/views/user/browseReported.jsp" />
+	</definition>
+	
 </tiles-definitions>

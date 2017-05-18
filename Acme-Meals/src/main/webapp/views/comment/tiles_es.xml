@@ -21,6 +21,9 @@
 		<put-attribute name="body" value="/views/comment/edit.jsp" />
 	</definition>
 	
-	
+	<definition name="comment/browseReported" extends="master.page">	
+		<put-attribute name="title" value="Lista de reportes" />
+		<put-attribute name="body" value="/views/comment/browseReported.jsp" />
+	</definition>
 	
 </tiles-definitions>

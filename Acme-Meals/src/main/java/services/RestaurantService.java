@@ -96,7 +96,7 @@ public class RestaurantService {
 		Authority au = new Authority();
 		au.setAuthority("USER");
 		Authority au3 = new Authority();
-		au.setAuthority("CRITIC");
+		au3.setAuthority("CRITIC");
 
 		Assert.isTrue(userAccount.getAuthorities().contains(au2) || userAccount.getAuthorities().contains(au) || userAccount.getAuthorities().contains(au3));
 

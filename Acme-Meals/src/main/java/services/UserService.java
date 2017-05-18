@@ -217,7 +217,18 @@ public class UserService {
 		
 		List<Object[]> aux = userRepository.findReported();;
 		for (Object[] o : aux) {
-			if((Long)o[1]>=3)
+			if((Long)o[1]>=2)
+				result.put((User)o[0], (Long)o[1]);
+		}
+
+		return result;
+	}
+	
+	public Map<User,Long> findBanned(){
+		Map<User,Long> result = new HashMap<User,Long>();
+		
+		List<Object[]> aux = userRepository.findBanned();
+		for (Object[] o : aux) {
 				result.put((User)o[0], (Long)o[1]);
 		}
 

@@ -17,7 +17,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 
-<security:authorize access="isAuthenticated()">
+<security:authorize access="hasRole('ADMIN')">
 
 <display:table name="users"
 	id="row"
@@ -26,15 +26,48 @@
 	requestURI="${requestURI}" >
 	
 	<spring:message code="user.name" var="nameHeader" />
-	<display:column property="name" title="${nameHeader}"/>
+	<display:column title="${nameHeader}">
+		<a href="user/displayById.do?userId=${row.id}"><jstl:out value="${row.name}"/></a>
+	</display:column>
+	
+	<spring:message code="user.numReports" var="numReportHeader" />
+	<display:column title="${numReportHeader}">
+		<jstl:out value="${num[row]}"/>
+	</display:column>
 	
 	<spring:message code="user.reports" var="reportHeader" />
 	<display:column title="${reportHeader}">
-		<jstl:out value="${num[row] }"/>
+		<a href="administrator/banUnban/commentReported.do?userId=${row.id}"><spring:message code="user.reports"/></a>
+	</display:column>
+	
+
+	<spring:message code="user.banned" var="bannedHeader" />
+	<display:column title="${bannedHeader}">
+		<jstl:if test="${row.banned==true}">
+			<spring:message code="user.banned.yes" var="yesH" />
+			<jstl:out value="${yesH}"/>
+		</jstl:if>
+		<jstl:if test="${row.banned==false}">
+			<spring:message code="user.banned.no" var="noH" />
+			<jstl:out value="${noH}"/>
+		</jstl:if>
 	</display:column>
 	
 	
-
+	<display:column>
+		<jstl:choose>
+				<jstl:when test="${row.banned}">
+						<input type="button" name="banUnban"
+						value="<spring:message code="user.unban" />"
+						onclick="javascript: window.location.replace('administrator/banUnban/banUnban.do?userId=${row.id}')"/>
+				</jstl:when>
+				<jstl:otherwise>
+					<input type="button" name="banUnban"
+						value="<spring:message code="user.ban" />"
+						onclick="javascript: window.location.replace('administrator/banUnban/banUnban.do?userId=${row.id}')"/>
+				</jstl:otherwise>
+		</jstl:choose>
+	</display:column>
 </display:table>
 
 </security:authorize>

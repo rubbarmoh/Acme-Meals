@@ -84,8 +84,7 @@
 			<jstl:when test="${containsD == true }">
 				<input type="button" name="unDislike"
 					value="<spring:message code="review.undislike" />"
-					onclick="javascript: window.location.replace('user/review/dislike/delete.do?reviewId=${review.id}')" 
-					style="float: right;padding: 5px 15px; margin: 0 3px 0 3px;" />
+					onclick="javascript: window.location.replace('user/review/dislike/delete.do?reviewId=${review.id}')" />
 			</jstl:when>
 			<jstl:otherwise>
 				<input type="button" name="dislike"

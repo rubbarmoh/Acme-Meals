@@ -2,6 +2,7 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.jpa.criteria.expression.function.CurrentTimeFunction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,6 +106,10 @@ public class CommentService {
 			Collection<Comment>result;
 			result=commentRepository.findAllOrderByMoment(r.getId());
 			return result;
+		}
+		
+		public List<Comment> findReportedComment(int userId){
+			return commentRepository.findReportedComment(userId);
 		}
 		// Form methods ----------------------------------------------------------
 
