@@ -17,100 +17,65 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="${requestURI}" modelAttribute="userForm">
-	<jstl:if test="${userForm.id==0 || userForm.username == pageContext.request.remoteUser}">
+<security:authorize access="hasRole('ADMIN')">
+<form:form action="${requestURI}" modelAttribute="criticForm">
+	<jstl:if test="${criticForm.id==0 || criticForm.username == pageContext.request.remoteUser}">
 		<form:hidden path="id"/>
 		<jstl:choose>
-			<jstl:when test="${userForm.id!=0}">
+			<jstl:when test="${criticForm.id!=0}">
 				<form:hidden path="username"/>
 				<form:hidden path="password"/>
 				<form:hidden path="password2"/>
-				<form:hidden path="agreed"/>
 				<fieldset>
-					<legend align="left"><spring:message code="user.personal.info"/></legend>
+					<legend align="left"><spring:message code="critic.personal.info"/></legend>
 					<br/>
-					<acme:textbox code="user.name" path="name" />
+					<acme:textbox code="critic.name" path="name" />
 					<br/>
-					<acme:textbox code="user.surname" path="surname"/>
+					<acme:textbox code="critic.surname" path="surname"/>
 					<br/>
-					<acme:textbox code="user.email" path="email"/>
+					<acme:textbox code="critic.email" path="email"/>
 					<br/>
-					<acme:textbox code="user.phone" path="phone"/>
+					<acme:textbox code="critic.phone" path="phone"/>
 					<br/>
-					<acme:textbox code="user.address" path="address"/>
+					<acme:textbox code="critic.address" path="address"/>
+					<br/>
+					<acme:textbox code="critic.companyName" path="companyName"/>
 					<br/>
 				</fieldset>
 				
-				<fieldset>
-					<legend align="left"><spring:message code="user.creditCard.info"/></legend>
-					<acme:textbox code="user.creditCard.holderName" path="creditCard.holderName"/>
-					<br/>
-					<br/><spring:message code="user.creditCard.brandName.check" /><br/>			
-					<acme:textbox code="user.creditCard.brandName" path="creditCard.brandName"/>
-					
-					<br/>		
-					<acme:textbox code="user.creditCard.number" path="creditCard.number"/>
-					<br/>			
-					<acme:textbox code="user.creditCard.expirationMonth" path="creditCard.expirationMonth"/>
-					<br/>			
-					<acme:textbox code="user.creditCard.expirationYear" path="creditCard.expirationYear"/>
-					<br/>	
-					<acme:textbox code="user.creditCard.cvv" path="creditCard.cvv"/>
-				</fieldset>
 			</jstl:when>
 			<jstl:otherwise>
 				<fieldset>
-					<legend align="left"><spring:message code="user.account.info"/></legend>
-					<acme:textbox code="user.username" path="username" />
+					<legend align="left"><spring:message code="critic.account.info"/></legend>
+					<acme:textbox code="critic.username" path="username" />
 					<br/>
-					<acme:password code="user.password" path="password"/>
+					<acme:password code="critic.password" path="password"/>
 					<br/>
-					<acme:password code="user.password2" path="password2"/>
-						
-					<br/>
-					<form:checkbox path="agreed"/>
-					<form:label path="agreed">
-						<spring:message code="user.register.agree" />
-						<a href="misc/lopd.do"><spring:message code="user.register.agree.2"/></a>
-					</form:label>
-					<form:errors path="agreed" cssClass="error" />
-					<br/>
+					<acme:password code="critic.password2" path="password2"/>
 				</fieldset>
 				<fieldset>
-					<legend align="left"><spring:message code="user.personal.info"/></legend>
+					<legend align="left"><spring:message code="critic.personal.info"/></legend>
 					<br/>
-					<acme:textbox code="user.name" path="name" />
+					<acme:textbox code="critic.name" path="name" />
 					<br/>
-					<acme:textbox code="user.surname" path="surname"/>
+					<acme:textbox code="critic.surname" path="surname"/>
 					<br/>
-					<acme:textbox code="user.email" path="email"/>
+					<acme:textbox code="critic.email" path="email"/>
 					<br/>
-					<acme:textbox code="user.phone" path="phone"/>
+					<acme:textbox code="critic.phone" path="phone"/>
 					<br/>
-					<acme:textbox code="user.address" path="address"/>
+					<acme:textbox code="critic.address" path="address"/>
 					<br/>
-				</fieldset>
-				
-				<fieldset>
-					<legend align="left"><spring:message code="user.creditCard.info"/></legend>
-					<acme:textbox code="user.creditCard.holderName" path="creditCard.holderName"/>
-					<br/>			
-					<acme:textbox code="user.creditCard.brandName" path="creditCard.brandName"/><spring:message code="user.creditCard.brandName.check" />
-					<br/>		
-					<acme:textbox code="user.creditCard.number" path="creditCard.number"/>
-					<br/>			
-					<acme:textbox code="user.creditCard.expirationMonth" path="creditCard.expirationMonth"/>
-					<br/>			
-					<acme:textbox code="user.creditCard.expirationYear" path="creditCard.expirationYear"/>
-					<br/>	
-					<acme:textbox code="user.creditCard.cvv" path="creditCard.cvv"/>
+					<acme:textbox code="critic.companyName" path="companyName"/>
+					<br/>
 				</fieldset>
 			</jstl:otherwise>
 		</jstl:choose>
 		
 		<br/>
-		<acme:submit name="save" code="user.save"/>
-		<acme:cancel code="user.cancel" url="welcome/index.do" />
+		<acme:submit name="save" code="critic.save"/>
+		<acme:cancel code="critic.cancel" url="welcome/index.do" />
 </jstl:if>
 
 </form:form>
+</security:authorize>

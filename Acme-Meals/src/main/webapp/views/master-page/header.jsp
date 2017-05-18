@@ -29,6 +29,7 @@
 				</ul>
 			</li>
 			<li><a class="fNiv" href="administrator/dashboard.do"><spring:message code="master.page.dashboard" /></a></li>
+			<li><a class="fNiv" href="critic/register.do"><spring:message code="master.page.critic.register" /></a></li>
 			<li><a class="fNiv"><spring:message	code="master.page.administrator.manageValue" /></a>
 				<ul>
 					<li class="arrow"></li>

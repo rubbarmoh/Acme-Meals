@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.ArrayList;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.CriticRepository;
 import security.Authority;
@@ -15,6 +18,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Critic;
 import domain.Review;
+import forms.CriticForm;
 
 @Service
 @Transactional
@@ -22,107 +26,184 @@ public class CriticService {
 
 	// Managed repository -----------------------------------------------------
 
-			@Autowired
-			private CriticRepository	criticRepository;
+	@Autowired
+	private CriticRepository	criticRepository;
+
+	// Supporting services ----------------------------------------------------
+
+	@Autowired
+	private Validator			validator;
 
 
-			// Supporting services ----------------------------------------------------
+	// Constructors -----------------------------------------------------------
 
-			// Constructors -----------------------------------------------------------
+	public CriticService() {
+		super();
+	}
 
-			public CriticService() {
-				super();
-			}
+	// Simple CRUD methods ----------------------------------------------------
 
-			// Simple CRUD methods ----------------------------------------------------
+	public Critic create() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
 
-			public Critic create() {
-				UserAccount userAccount;
-				userAccount = LoginService.getPrincipal();
-				Authority au = new Authority();
-				au.setAuthority("ADMIN");
-				Assert.isTrue(userAccount.getAuthorities().contains(au));
-				
-				ArrayList<Review> reviews = new ArrayList<Review>();
-				
-				Critic result;
-				result = new Critic();
-				result.setReviews(reviews);
-				return result;
-			}
+		ArrayList<Review> reviews = new ArrayList<Review>();
 
-			public Collection<Critic> findAll() {
-				Collection<Critic> result;
+		Critic result;
+		result = new Critic();
+		result.setReviews(reviews);
+		return result;
+	}
 
-				result = criticRepository.findAll();
-				return result;
-			}
+	public Collection<Critic> findAll() {
+		Collection<Critic> result;
 
-			public Critic findOne(int criticId) {
-				Critic result;
+		result = criticRepository.findAll();
+		return result;
+	}
 
-				result = criticRepository.findOne(criticId);
-				Assert.notNull(result);
+	public Critic findOne(int criticId) {
+		Critic result;
 
-				return result;
-			}
+		result = criticRepository.findOne(criticId);
+		Assert.notNull(result);
 
-			public Critic save(Critic critic) {
-				UserAccount userAccount;
-				userAccount = LoginService.getPrincipal();
-				Authority au = new Authority();
-				au.setAuthority("ADMIN");
-				Authority au2 = new Authority();
-				au.setAuthority("CRITIC");
-				Assert.isTrue(userAccount.getAuthorities().contains(au)||userAccount.getAuthorities().contains(au2));
-				Assert.notNull(critic);
+		return result;
+	}
 
-				Critic result;
+	public Critic save(Critic critic) {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Authority au2 = new Authority();
+		au.setAuthority("CRITIC");
+		Assert.isTrue(userAccount.getAuthorities().contains(au) || userAccount.getAuthorities().contains(au2));
+		Assert.notNull(critic);
 
-				result = criticRepository.save(critic);
+		Critic result;
 
-				return result;
-			}
+		result = criticRepository.save(critic);
 
-			public void delete(Critic critic) {
-				UserAccount userAccount;
-				userAccount = LoginService.getPrincipal();
-				Authority au = new Authority();
-				au.setAuthority("ADMIN");
-				Assert.isTrue(userAccount.getAuthorities().contains(au));
-				Assert.notNull(critic);
-				Assert.isTrue(critic.getId() != 0);
+		return result;
+	}
 
-				criticRepository.delete(critic);
-			}
+	public void delete(Critic critic) {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+		Assert.notNull(critic);
+		Assert.isTrue(critic.getId() != 0);
 
-			// Other business methods -------------------------------------------------
+		criticRepository.delete(critic);
+	}
 
-			public Critic findByPrincipal() {
-				Critic result;
-				UserAccount userAccount;
+	// Other business methods -------------------------------------------------
 
-				userAccount = LoginService.getPrincipal();
-				Assert.notNull(userAccount);
-				result = findByUserAccountId(userAccount.getId());
-				Assert.notNull(result);
+	public Critic findByPrincipal() {
+		Critic result;
+		UserAccount userAccount;
 
-				return result;
-			}
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		result = findByUserAccountId(userAccount.getId());
+		Assert.notNull(result);
 
-			public Critic findByUserAccountId(int userAccount) {
-				Assert.notNull(userAccount);
-				Critic result;
+		return result;
+	}
 
-				result = criticRepository.findByUserAccountId(userAccount);
+	public Critic findByUserAccountId(int userAccount) {
+		Assert.notNull(userAccount);
+		Critic result;
 
-				return result;
-			}
-			
-			public List<Double> minMaxAvgReviewsPerCritic(){
-				List<Double> result = criticRepository.minMaxAvgReviewsPerCritic();
-				return result;
-			}
-			
-			
+		result = criticRepository.findByUserAccountId(userAccount);
+
+		return result;
+	}
+
+	public List<Double> minMaxAvgReviewsPerCritic() {
+		List<Double> result = criticRepository.minMaxAvgReviewsPerCritic();
+		return result;
+	}
+
+	//Forms----------
+
+	public CriticForm generateForm(Critic critic) {
+		CriticForm result = new CriticForm();
+
+		result.setId(critic.getId());
+		result.setUsername(critic.getUserAccount().getUsername());
+		result.setPassword(critic.getUserAccount().getPassword());
+		result.setPassword2(critic.getUserAccount().getPassword());
+
+		result.setEmail(critic.getEmail());
+		result.setName(critic.getName());
+		result.setPhone(critic.getPhone());
+		result.setAddress(critic.getAddress());
+		result.setSurname(critic.getSurname());
+		result.setCompanyName(critic.getCompanyName());
+
+		return result;
+	}
+
+	public Critic reconstructEditPersonalData(CriticForm criticForm, BindingResult binding) {
+		Critic result;
+
+		Assert.isTrue(criticForm.getPassword2().equals(criticForm.getPassword()), "notEqualPassword");
+
+		result = criticRepository.findOne(criticForm.getId());
+
+		result.setName(criticForm.getName());
+		result.setSurname(criticForm.getSurname());
+		result.setEmail(criticForm.getEmail());
+		result.setPhone(criticForm.getPhone());
+		result.setAddress(criticForm.getAddress());
+		result.setCompanyName(criticForm.getCompanyName());
+
+		validator.validate(result, binding);
+
+		return result;
+	}
+
+	public CriticForm generate() {
+		CriticForm result;
+		result = new CriticForm();
+
+		return result;
+	}
+
+	public Critic reconstruct(CriticForm criticForm, BindingResult binding) {
+		Critic result = create();
+
+		String password = criticForm.getPassword();
+
+		Assert.isTrue(criticForm.getPassword2().equals(password), "notEqualPassword");
+
+		UserAccount userAccount = new UserAccount();
+		List<Authority> authorities = new ArrayList<Authority>();
+		Authority a = new Authority();
+		a.setAuthority(Authority.CRITIC);
+		authorities.add(a);
+		userAccount.addAuthority(a);
+		userAccount.setPassword(password);
+		userAccount.setUsername(criticForm.getUsername());
+
+		result.setUserAccount(userAccount);
+		result.setName(criticForm.getName());
+		result.setSurname(criticForm.getSurname());
+		result.setEmail(criticForm.getEmail());
+		result.setPhone(criticForm.getPhone());
+		result.setAddress(criticForm.getAddress());
+		result.setCompanyName(criticForm.getCompanyName());
+
+		validator.validate(result, binding);
+
+		return result;
+	}
+
 }
