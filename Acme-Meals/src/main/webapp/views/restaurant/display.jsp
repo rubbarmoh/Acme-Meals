@@ -109,10 +109,27 @@
 			onclick="javascript: window.location.replace('user/comment/create.do?restaurantId=${restaurant.id}')" />
 <br/>
 </security:authorize>
-<security:authorize access="hasRole('CRITIC')">
-	<input type="button" name="makeReview"
+
+<security:authorize access="hasAnyRole('CRITIC')">
+	
+	<jstl:set var="contains" value="false" />
+			<jstl:forEach items="${restaurant.reviews}" var="review">
+				<jstl:if test="${review.critic.userAccount.username==pageContext.request.remoteUser}">
+						<jstl:set var="contains" value="true" />
+						<br/>
+						<p><spring:message code="restaurant.makeReviewDone" /></p>
+			<br/>
+				</jstl:if>
+			</jstl:forEach>
+			<br/>
+			<jstl:if test="${contains==false && review.critic.userAccount.username!=pageContext.request.remoteUser}">
+			<p><spring:message code="restaurant.makeReviewNotDone" /></p>
+					<input type="button" name="makeReview"
 			value="<spring:message code="restaurant.makeReview" />"
 			onclick="javascript: window.location.replace('critic/review/create.do?restaurantId=${restaurant.id}')" />
-<br/>
-</security:authorize>
+			<br/>
+								
+			</jstl:if>
+	
+	</security:authorize>
 					
