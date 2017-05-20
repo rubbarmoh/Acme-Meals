@@ -187,54 +187,67 @@ public class UserService {
 		return validador;
 	}
 
-	public List<Double> minMaxAVGOrdersPerUser(){
-		List<Double> result = userRepository.minMaxAVGOrdersPerUser();
+	public Collection<Double> minMaxAVGOrdersPerUser() {
+
+		Collection<Double> result = new ArrayList<Double>();
+		Double aux;
+
+		aux = userRepository.minOrdersPerUser();
+		result.add(aux);
+
+		aux = userRepository.maxOrdersPerUser();
+		result.add(aux);
+
+		aux = userRepository.avgOrdersPerUser();
+		result.add(aux);
+
 		return result;
 	}
-	
-	public List<User> usersMorethan10PercentOrders(){
+
+	public List<User> usersMorethan10PercentOrders() {
 		List<User> result = userRepository.usersMorethan10PercentOrders();
 		return result;
 	}
-	
-	public List<User> usersLessthan10PercentOrders(){
+
+	public List<User> usersLessthan10PercentOrders() {
 		List<User> result = userRepository.usersLessthan10PercentOrders();
 		return result;
 	}
-	
-	public List<User> usersMoreThan10PercentComments(){
+
+	public List<User> usersMoreThan10PercentComments() {
 		List<User> result = userRepository.usersMoreThan10PercentComments();
 		return result;
 	}
-	
-	public List<User> usersLessThan10PercentComments(){
+
+	public List<User> usersLessThan10PercentComments() {
 		List<User> result = userRepository.usersLessThan10PercentComments();
 		return result;
 	}
-	
-	public Map<User,Long> findReported(){
-		Map<User,Long> result = new HashMap<User,Long>();
-		
-		List<Object[]> aux = userRepository.findReported();;
+
+	public Map<User, Long> findReported() {
+		Map<User, Long> result = new HashMap<User, Long>();
+
+		List<Object[]> aux = userRepository.findReported();
+		;
 		for (Object[] o : aux) {
-			if((Long)o[1]>=2)
-				result.put((User)o[0], (Long)o[1]);
+			if ((Long) o[1] >= 2)
+				result.put((User) o[0], (Long) o[1]);
 		}
 
 		return result;
 	}
-	
-	public Map<User,Long> findBanned(){
-		Map<User,Long> result = new HashMap<User,Long>();
-		
+
+	public Map<User, Long> findBanned() {
+		Map<User, Long> result = new HashMap<User, Long>();
+
 		List<Object[]> aux = userRepository.findBanned();
 		for (Object[] o : aux) {
-				result.put((User)o[0], (Long)o[1]);
+			result.put((User) o[0], (Long) o[1]);
 		}
 
 		return result;
 	}
-	
+
 	public void banUnban(User user) {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
@@ -249,7 +262,7 @@ public class UserService {
 		}
 		save2(user);
 	}
-	
+
 	//Forms----------
 
 	public UserForm generateForm(User user) {

@@ -15,3 +15,28 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+
+<div>
+	<fieldset><legend class="dashLegend"><spring:message code="administrator.minMaxAVGOrdersPerUser" /></legend>
+		<table id="minMaxAVGOrdersPerUser" class="table">
+			<tr>
+				<th><spring:message code="administrator.dashboard.min"/></th>
+				<jstl:if test="${not empty minMaxAVGOrdersPerUser }">
+					<td><jstl:out value="${minMaxAVGOrdersPerUser.get(0) }" /></td>
+				</jstl:if>
+			</tr>
+			<tr>
+				<th><spring:message code="administrator.dashboard.max"/></th>
+				<jstl:if test="${not empty minMaxAVGOrdersPerUser }">
+					<td><jstl:out value="${minMaxAVGOrdersPerUser.get(1) }" /></td>
+				</jstl:if>
+			</tr>
+			<tr>
+				<th><spring:message code="administrator.dashboard.avg"/></th>
+				<jstl:if test="${not empty minMaxAVGOrdersPerUser }">
+					<td><jstl:out value="${minMaxAVGOrdersPerUser.get(2) }" /></td>
+				</jstl:if>
+			</tr>
+		</table>
+	</fieldset>
+</div>
