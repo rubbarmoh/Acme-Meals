@@ -182,9 +182,21 @@ public class ManagerService {
 
 		return validador;
 	}
-	
-	public List<Double> minMaxAvgMonthlyBillsPerManager(){
-		List<Double> result = managerRepository.minMaxAvgMonthlyBillsPerManager();
+
+	public Collection<Double> minMaxAvgMonthlyBillsPerManager() {
+
+		Collection<Double> result = new ArrayList<Double>();
+		Double aux;
+
+		aux = managerRepository.minMonthlyBillsPerManager();
+		result.add(aux);
+
+		aux = managerRepository.maxMonthlyBillsPerManager();
+		result.add(aux);
+
+		aux = managerRepository.avgMonthlyBillsPerManager();
+		result.add(aux);
+
 		return result;
 	}
 

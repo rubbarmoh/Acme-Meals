@@ -157,8 +157,20 @@ public class CriticService {
 		return result;
 	}
 
-	public List<Double> minMaxAvgReviewsPerCritic() {
-		List<Double> result = criticRepository.minMaxAvgReviewsPerCritic();
+	public Collection<Double> minMaxAvgReviewsPerCritic() {
+
+		Collection<Double> result = new ArrayList<Double>();
+		Double aux;
+
+		aux = criticRepository.minReviewsPerCritic();
+		result.add(aux);
+
+		aux = criticRepository.maxReviewsPerCritic();
+		result.add(aux);
+
+		aux = criticRepository.avgReviewsPerCritic();
+		result.add(aux);
+
 		return result;
 	}
 
