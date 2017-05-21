@@ -187,4 +187,98 @@
 	</fieldset>
 </div>
 
+<div>
+	<fieldset><legend class="dashLegend"><spring:message code="administrator.ratioRestaurantsPromoted" /></legend>
+		<table id="ratioRestaurantsPromoted" class="table">
+			<tr>
+				<jstl:if test="${not empty ratioRestaurantsPromoted }">
+					
+						<td>	<jstl:out value="${ratioRestaurantsPromoted} "/><td>
+					
+				</jstl:if>
+			</tr>
+		</table>
+	</fieldset>
+</div>
+
+<div>
+	<fieldset><legend class="dashLegend"><spring:message code="administrator.restaurantMoreStars" /></legend>
+		<table id="restaurantMoreStars" class="table">
+			<tr>
+				<jstl:if test="${not empty restaurantMoreStars }">
+					<jstl:forEach var="X" items="${restaurantMoreStars}">
+					<tr>
+						<td>	<jstl:out value="${X.name} = ${X.avgStars} "/><td>
+					</tr>
+					</jstl:forEach>	
+				</jstl:if>
+			</tr>
+		</table>
+	</fieldset>
+</div>
+
+<div>
+	<fieldset><legend class="dashLegend"><spring:message code="administrator.usersMorethan10PercentOrders" /></legend>
+		<table id="usersMorethan10PercentOrders" class="table">
+			<tr>
+				<jstl:if test="${not empty usersMorethan10PercentOrders }">
+					<jstl:forEach var="X" items="${usersMorethan10PercentOrders}">
+					<tr>
+						<td>	<jstl:out value="${X.name} (${X.userAccount.username})"/><td>
+					</tr>
+					</jstl:forEach>	
+				</jstl:if>
+			</tr>
+		</table>
+	</fieldset>
+</div>
+
+<div>
+	<fieldset><legend class="dashLegend"><spring:message code="administrator.usersLessthan10PercentOrders" /></legend>
+		<table id="usersLessthan10PercentOrders" class="table">
+			<tr>
+				<jstl:if test="${not empty usersLessthan10PercentOrders }">
+					<jstl:forEach var="X" items="${usersLessthan10PercentOrders}">
+					<tr>
+						<td>	<jstl:out value="${X.name} (${X.userAccount.username})"/><td>
+					</tr>
+					</jstl:forEach>	
+				</jstl:if>
+			</tr>
+		</table>
+	</fieldset>
+</div>
+
+<div>
+	<fieldset><legend class="dashLegend"><spring:message code="administrator.usersMoreThan10PercentComments" /></legend>
+		<table id="usersMoreThan10PercentComments" class="table">
+			<tr>
+				<jstl:if test="${not empty usersMoreThan10PercentComments }">
+					<jstl:forEach var="X" items="${usersMoreThan10PercentComments}">
+					<tr>
+						<td>	<jstl:out value="${X.name} (${X.userAccount.username})"/><td>
+					</tr>
+					</jstl:forEach>	
+				</jstl:if>
+			</tr>
+		</table>
+	</fieldset>
+</div>
+
+<div>
+	<fieldset><legend class="dashLegend"><spring:message code="administrator.usersLessThan10PercentComments" /></legend>
+		<table id="usersLessThan10PercentComments" class="table">
+			<tr>
+				<jstl:if test="${not empty usersLessThan10PercentComments }">
+					<jstl:forEach var="X" items="${usersLessThan10PercentComments}">
+					<tr>
+						<td>	<jstl:out value="${X.name} (${X.userAccount.username})"/><td>
+					</tr>
+					</jstl:forEach>	
+				</jstl:if>
+			</tr>
+		</table>
+	</fieldset>
+</div>
+
 </security:authorize>
