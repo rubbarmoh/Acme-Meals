@@ -25,6 +25,7 @@ import services.ReviewService;
 import services.UserService;
 import domain.Restaurant;
 import domain.Review;
+import domain.User;
 
 @Controller
 @RequestMapping("/administrator")
@@ -70,6 +71,12 @@ public class AdministratorController extends AbstractController {
 		Collection<Restaurant> restaurantWithLessReviews = restaurantService.restaurantWithLessReviews();
 		Collection<Review> reviewMoreLikes = reviewService.reviewMoreLikes();
 		Collection<Double> minMaxAvgMonthlyBillsPerManager = managerService.minMaxAvgMonthlyBillsPerManager();
+		Double ratioRestaurantsPromoted = restaurantService.ratioRestaurantsPromoted();
+		Collection<Restaurant> restaurantMoreStars = restaurantService.restaurantMoreStars();
+		Collection<User> usersMorethan10PercentOrders = userService.usersMorethan10PercentOrders();
+		Collection<User> usersLessthan10PercentOrders = userService.usersLessthan10PercentOrders();
+		Collection<User> usersMoreThan10PercentComments = userService.usersMoreThan10PercentComments();
+		Collection<User> usersLessThan10PercentComments = userService.usersLessThan10PercentComments();
 
 		result = new ModelAndView("administrator/dashboard");
 
@@ -82,6 +89,12 @@ public class AdministratorController extends AbstractController {
 		result.addObject("restaurantWithLessReviews", restaurantWithLessReviews);
 		result.addObject("reviewMoreLikes", reviewMoreLikes);
 		result.addObject("minMaxAvgMonthlyBillsPerManager", minMaxAvgMonthlyBillsPerManager);
+		result.addObject("ratioRestaurantsPromoted", ratioRestaurantsPromoted);
+		result.addObject("restaurantMoreStars", restaurantMoreStars);
+		result.addObject("usersMorethan10PercentOrders", usersMorethan10PercentOrders);
+		result.addObject("usersLessthan10PercentOrders", usersLessthan10PercentOrders);
+		result.addObject("usersMoreThan10PercentComments", usersMoreThan10PercentComments);
+		result.addObject("usersLessThan10PercentComments", usersLessThan10PercentComments);
 
 		result.addObject("requestURI", "administrator/dashboard.do");
 
