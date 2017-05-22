@@ -32,7 +32,7 @@
 	<display:column title="${momentendingHeader}" sortable="false"><fmt:formatDate value="${row.ending }" pattern="dd/MM/yyyy HH:mm" /></display:column>
 	
 	<spring:message code="promote.timesDisplayed" var="timesDisplayedHeader" />
-	<display:column property="promote.timesDisplayed" title="${timesDisplayedHeader}" sortable="true"/>
+	<display:column property="timesDisplayed" title="${timesDisplayedHeader}" sortable="true"/>
 	
 	<display:column>
 		<a href="restaurant/display.do?restaurantId=${row.restaurant.id}"><spring:message code="promote.display.restaurant" /></a>

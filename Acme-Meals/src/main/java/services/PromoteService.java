@@ -1,5 +1,7 @@
+
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,27 +9,31 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import domain.Promote;
-
 import repositories.PromoteRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Manager;
+import domain.Promote;
 
 @Service
 @Transactional
 public class PromoteService {
+
 	// Managed repository -----------------------------------------------------
 	@Autowired
-	private PromoteRepository promoteRepository;
+	private PromoteRepository	promoteRepository;
 	// Supporting services ----------------------------------------------------
+
+	@Autowired
+	private ManagerService		managerService;
 
 
 	// Constructors -----------------------------------------------------------
 
 	public PromoteService() {
 		super();
-		}
+	}
 	// Simple CRUD methods ----------------------------------------------------
 
 	public Promote create() {
@@ -89,8 +95,22 @@ public class PromoteService {
 
 		Assert.isTrue(promote.getId() != 0);
 
-		
 		promoteRepository.delete(promote);
 	}
 	// Other bussiness methods ----------------------------------------------------
+
+	public Collection<Promote> findByPrincipal() {
+
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
+		Collection<Promote> result = new ArrayList<Promote>();
+		Manager manager = managerService.findByPrincipal();
+		result = promoteRepository.promoteByManagerId(manager.getId());
+		return result;
+	}
 }
