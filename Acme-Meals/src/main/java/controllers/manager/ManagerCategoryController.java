@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -122,8 +123,9 @@ public class ManagerCategoryController extends AbstractController{
 		Category category = categoryService.findOne(categoryId);
 		
 		try{
+			Assert.isTrue(!categoryService.categoryUsed(category));
 			categoryService.delete(category);
-			result = new ModelAndView("redirect:/managerActor/category/list.do");
+			result = new ModelAndView("redirect:/managerActor/category/list.do");			
 		}catch(Throwable oops){
 			String msgCode = "category.error.delete";
 			result = createEditModelAndViewDelete(msgCode);
@@ -157,8 +159,11 @@ public class ManagerCategoryController extends AbstractController{
 	
 	protected ModelAndView createEditModelAndViewDelete(String message) {
 		ModelAndView result;
+		Collection<Category> categories = categoryService.findCategoryByManager();
 
 		result = new ModelAndView("category/list");
+		result.addObject("categories", categories);
+		result.addObject("message", message);
 
 		return result;
 

@@ -175,5 +175,22 @@ public class MealService {
 		result.setCategory(meal.getCategory());
 		return result;
 	}
+	
+	public Collection<Restaurant> searchByCategory(String name){
+		Collection<Meal> meals = mealRepository.mealsByCategory(name);
+		Collection<Restaurant> result = new ArrayList<Restaurant>();;
+		
+		for(Meal m:meals){
+			result.add(m.getRestaurant());
+		}
+		
+		return result;
+	}
+	
+	public Collection<Meal> mealsByCategory(String name){
+		Collection<Meal> meals = mealRepository.mealsByCategory(name);
+		
+		return meals;
+	}
 
 }

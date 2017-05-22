@@ -15,6 +15,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Category;
 import domain.Manager;
+import domain.Meal;
 import forms.CategoryForm;
 
 @Service
@@ -34,6 +35,8 @@ public class CategoryService {
 	@Autowired
 	private Validator		validator;
 	
+	@Autowired
+	private MealService 	mealService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -118,6 +121,17 @@ public class CategoryService {
 		return categories;
 	}
 	
+	public boolean categoryUsed(Category category){
+		Collection<Meal> meals = mealService.mealsByCategory(category.getName());
+		boolean result = false;
+		
+		if(!meals.isEmpty()){
+			result = true;
+		}
+		
+		return result;
+	}
+	
 	// Form methods -----------------------------------------------
 	
 	public CategoryForm generate(){
@@ -176,5 +190,7 @@ public class CategoryService {
 		
 		return category;
 	}
+	
+	
 	
 }

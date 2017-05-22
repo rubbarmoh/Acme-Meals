@@ -43,6 +43,9 @@ public class RestaurantService {
 
 	@Autowired
 	private ManagerService			managerService;
+	
+	@Autowired
+	private MealService				mealService;
 
 
 	//Constructor---------------------------------------
@@ -142,6 +145,12 @@ public class RestaurantService {
 
 	public Collection<Restaurant> findByKey(String key) {
 		Collection<Restaurant> result = restaurantRepository.findByKey(key);
+		Collection<Restaurant> restaurantsByCategory = mealService.searchByCategory(key);
+		for(Restaurant r: restaurantsByCategory){
+			if(!result.contains(r)){
+				result.add(r);
+			}
+		}
 		return result;
 	}
 

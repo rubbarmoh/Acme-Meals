@@ -17,7 +17,7 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
 
 	// Search query -------------------------------------------------------
 
-	@Query("select r from Restaurant r where r.name like %?1% or r.address like %?1%")
+	@Query("select r from Restaurant r where r.name like %?1% or r.address like %?1% or r.city like %?1%")
 	Collection<Restaurant> findByKey(String key);
 
 	// Dashboard ----------------------------------------------------------
