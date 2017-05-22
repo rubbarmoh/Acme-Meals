@@ -16,6 +16,9 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<p><spring:message code="welcome.greeting.prefix" /> ${name}<spring:message code="welcome.greeting.suffix" /></p>
+<jstl:if test="${banned == true }">
+	<script>alert("<spring:message code="welcome.chorbi.banned"/>")</script>
+	<script>window.location.href="j_spring_security_logout"</script>
+</jstl:if>
 
 <p><spring:message code="welcome.greeting.current.time" /> ${moment}</p> 
