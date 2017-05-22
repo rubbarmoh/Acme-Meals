@@ -49,5 +49,11 @@
 	</security:authorize>
 	
 </display:table>
+<security:authorize access="hasRole('MANAGER')">
 
+		<input type="button" name="create"
+						value="<spring:message code="meal.create" />"
+						onclick="javascript: window.location.replace('managerActor/meal/create.do?restaurantId=${restaurant.id}')"/><br/>
+
+</security:authorize>
 

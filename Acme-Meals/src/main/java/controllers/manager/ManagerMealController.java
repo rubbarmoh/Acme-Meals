@@ -75,6 +75,7 @@ public class ManagerMealController extends AbstractController {
 		Assert.notNull(meal);
 		result = new ModelAndView("meal/edit");
 		result.addObject("mealForm", mealForm);
+		result.addObject("categories", getCategories());
 
 		return result;
 
@@ -97,7 +98,7 @@ public class ManagerMealController extends AbstractController {
 				meal = mealService.reconstruct(mealForm, binding);
 
 				mealService.save(meal);
-				result = new ModelAndView("restaurant/list");
+				result = new ModelAndView("redirect:../../meal/browse.do?restaurantId=" + mealForm.getrId());
 
 			} catch (Throwable oops) {
 				String msgCode = "meal.save.error";
@@ -122,7 +123,7 @@ public class ManagerMealController extends AbstractController {
 			try {
 				Meal meal = mealService.reconstruct(mealForm, binding);
 				mealService.delete(meal);
-				result = new ModelAndView("restaurant/list");
+				result = new ModelAndView("redirect:../../meal/browse.do?restaurantId=" + mealForm.getrId());
 			} catch (Throwable oops) {
 				String msgCode = "meal.save.error";
 

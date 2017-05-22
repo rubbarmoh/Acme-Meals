@@ -168,6 +168,7 @@ public class MealService {
 
 		Assert.isTrue(userAccount.getAuthorities().contains(au));
 		MealForm result = generateForm();
+		result.setrId(meal.getRestaurant().getId());
 		result.setId(meal.getId());
 		result.setTitle(meal.getTitle());
 		result.setDescription(meal.getDescription());
@@ -175,21 +176,22 @@ public class MealService {
 		result.setCategory(meal.getCategory());
 		return result;
 	}
-	
-	public Collection<Restaurant> searchByCategory(String name){
+
+	public Collection<Restaurant> searchByCategory(String name) {
 		Collection<Meal> meals = mealRepository.mealsByCategory(name);
-		Collection<Restaurant> result = new ArrayList<Restaurant>();;
-		
-		for(Meal m:meals){
+		Collection<Restaurant> result = new ArrayList<Restaurant>();
+		;
+
+		for (Meal m : meals) {
 			result.add(m.getRestaurant());
 		}
-		
+
 		return result;
 	}
-	
-	public Collection<Meal> mealsByCategory(String name){
+
+	public Collection<Meal> mealsByCategory(String name) {
 		Collection<Meal> meals = mealRepository.mealsByCategory(name);
-		
+
 		return meals;
 	}
 
