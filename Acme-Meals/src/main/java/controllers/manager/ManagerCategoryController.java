@@ -70,6 +70,7 @@ public class ManagerCategoryController extends AbstractController{
 		}else{
 			try{
 				category = categoryService.reconstruct(categoryForm, binding);
+				Assert.isTrue(categoryService.exist(category));
 				categoryService.save(category);
 				result = new ModelAndView("redirect:/managerActor/category/list.do");
 			}catch(Throwable oops){

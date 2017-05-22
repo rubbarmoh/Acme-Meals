@@ -106,6 +106,15 @@ public class CategoryService {
 	
 	// Other bussinnes methods ------------------------------------
 	
+	public boolean exist(Category category){
+		Collection<Category> categories = findAll();
+		boolean result = false;
+		if(categories.contains(category)){
+			result = true;
+		}
+		return result;
+	}
+	
 	public Collection<Category> findCategoryByManager(){
 		
 		UserAccount userAccount;
