@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,10 @@ import repositories.MonthlyBillRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Fee;
 import domain.Manager;
 import domain.MonthlyBill;
+import domain.Promote;
 
 @Service
 @Transactional
@@ -29,6 +32,12 @@ public class MonthlyBillService {
 
 	@Autowired
 	private ManagerService			managerService;
+
+	@Autowired
+	PromoteService					promoteService;
+
+	@Autowired
+	FeeService						feeService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -115,5 +124,21 @@ public class MonthlyBillService {
 		Manager manager = managerService.findByPrincipal();
 		result = monthlyBillRepository.monthlyBillByManagerId(manager.getId());
 		return result;
+	}
+
+	public Collection<MonthlyBill> generateMonthlyBills() {
+		Collection<MonthlyBill> mbs = new ArrayList<MonthlyBill>();
+		MonthlyBill mb = create();
+		Date date = new Date(System.currentTimeMillis() - 1);
+		Double cost = 0.;
+		Fee fee = feeService.find();
+		for (Promote p : promoteService.findAll()) {
+			cost = p.getTimesDisplayed() * fee.getValue();
+			mb.setMoment(date);
+			mb.setCost(cost);
+			mbs.add(mb);
+		}
+
+		return mbs;
 	}
 }

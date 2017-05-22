@@ -29,6 +29,7 @@
 				</ul>
 			</li>
 			<li><a class="fNiv" href="administrator/dashboard.do"><spring:message code="master.page.dashboard" /></a></li>
+			<li><a class="fNiv" href="administrator/monthlyBill/generate.do"><spring:message code="master.page.monthlyBill.generate" /></a></li>
 			<li><a class="fNiv" href="critic/register.do"><spring:message code="master.page.critic.register" /></a></li>
 			<li><a class="fNiv"><spring:message	code="master.page.administrator.manageValue" /></a>
 				<ul>
