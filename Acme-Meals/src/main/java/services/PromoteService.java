@@ -45,6 +45,7 @@ public class PromoteService {
 		Assert.isTrue(userAccount.getAuthorities().contains(au));
 		Promote result;
 		result = new Promote();
+		result.setTimesDisplayed(0);
 		return result;
 	}
 

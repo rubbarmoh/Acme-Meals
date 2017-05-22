@@ -26,10 +26,10 @@
 	requestURI="${requestURI}" >
 			
 	<spring:message code="promote.beginning" var="momentHeader" />
-	<display:column title="${momentHeader}" sortable="false"><fmt:formatDate value="${row.beginning }" pattern="dd/MM/yyyy HH:mm" /></display:column>
+	<display:column title="${momentHeader}" sortable="false"><fmt:formatDate value="${row.beginning }" pattern="dd/MM/yyyy" /></display:column>
 	
 	<spring:message code="promote.ending" var="momentendingHeader" />
-	<display:column title="${momentendingHeader}" sortable="false"><fmt:formatDate value="${row.ending }" pattern="dd/MM/yyyy HH:mm" /></display:column>
+	<display:column title="${momentendingHeader}" sortable="false"><fmt:formatDate value="${row.ending }" pattern="dd/MM/yyyy" /></display:column>
 	
 	<spring:message code="promote.timesDisplayed" var="timesDisplayedHeader" />
 	<display:column property="timesDisplayed" title="${timesDisplayedHeader}" sortable="true"/>

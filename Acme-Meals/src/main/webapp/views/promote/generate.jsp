@@ -23,6 +23,7 @@
 	<form:form	action="${requestURI}"	modelAttribute="promote"> 
 	
 		<form:hidden path="id"/>
+		<form:hidden path="timesDisplayed"/>
 		
 		<acme:textbox code="promote.beginning" path="beginning"/>
 		<acme:textbox code="promote.ending" path="ending"/>
@@ -35,7 +36,7 @@
 		<form:errors cssClass="error" path="restaurant" />
 		
 		<acme:submit name="save" code="promote.save"/>
-		<acme:cancel code="promote.cancel" url="promote/list.do"/>
+		<acme:cancel code="promote.cancel" url="managerActor/promote/list.do"/>
 		
 		
 	</form:form>
