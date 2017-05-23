@@ -78,8 +78,7 @@ public class ManagerPromoteController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		Collection<Promote> promotes;
-		promotes = promoteService.findByPrincipal();
+		Collection<Promote> promotes = promoteService.findByPrincipal();
 
 		result = new ModelAndView("promote/list");
 		result.addObject("promotes", promotes);
@@ -107,6 +106,7 @@ public class ManagerPromoteController extends AbstractController {
 	}
 
 	private Map<Integer, String> getRestaurants() {
+
 		Collection<Restaurant> rs;
 		rs = restaurantService.findByPrincipal();
 

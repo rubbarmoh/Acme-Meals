@@ -21,4 +21,78 @@
 	<script>window.location.href="j_spring_security_logout"</script>
 </jstl:if>
 
+<table id="row" class="table" style="border:none">
+	<tr>
+	<td>
+	<h2><spring:message code="welcome.restaurant" /></h2>
+	<table id="row" class="table" style="width: 600px; height: 200px">
+	<tbody>
+		<tr>
+			<td rowspan="10">
+				<img src="${restaurant.picture}" width="200" height="200" >
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<spring:message code = "restaurant.name"/>
+			</th>
+			<td>
+				<jstl:out value="${restaurant.name }" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<spring:message code = "restaurant.avgStars"/>
+			</th>
+			<td>
+				<jstl:out value="${restaurant.avgStars }" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<spring:message code = "restaurant.display"/>
+			</th>
+			<td>
+				<input type="button" name="display"
+						value="<spring:message code="restaurant.display" />"
+						onclick="javascript: window.location.replace('restaurant/display.do?restaurantId=${restaurant.id}')"/><br/>
+			</td>
+		</tr>
+		</table>
+		</td>
+		<td>
+		<h2><spring:message code="welcome.review" /></h2>
+		<table id="row" class="table" style="width: 600px; height: 200px">
+		<tbody>
+		<tr>
+			<th>
+				<spring:message code = "review.title"/>
+			</th>
+			<td>
+				<jstl:out value="${review.title }" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<spring:message code = "review.rate"/>
+			</th>
+			<td>
+				<jstl:out value="${review.rate }" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<spring:message code = "review.display"/>
+			</th>
+			<td>
+				<input type="button" name="display"
+						value="<spring:message code="review.display" />"
+						onclick="javascript: window.location.replace('review/display.do?reviewId=${review.id}')"/><br/>
+			</td>
+		</tr>
+	</table>
+	</td>
+	</tr>
+</table>
+
 <p><spring:message code="welcome.greeting.current.time" /> ${moment}</p> 

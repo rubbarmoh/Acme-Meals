@@ -3,6 +3,8 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Manager;
 import domain.Promote;
+import domain.Restaurant;
 
 @Service
 @Transactional
@@ -27,6 +30,9 @@ public class PromoteService {
 
 	@Autowired
 	private ManagerService		managerService;
+
+	@Autowired
+	private RestaurantService	restaurantService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -113,5 +119,77 @@ public class PromoteService {
 		Manager manager = managerService.findByPrincipal();
 		result = promoteRepository.promoteByManagerId(manager.getId());
 		return result;
+	}
+
+	public Boolean isActive(Promote p) {
+		Boolean b = false;
+		Date date = new Date(System.currentTimeMillis());
+		if ((p.getBeginning().before(date)) && (p.getEnding().after(date))) {
+			b = true;
+		}
+		return b;
+	}
+
+	public Collection<Restaurant> promoteActive(Collection<Promote> promotes) {
+
+		Collection<Restaurant> rest = new ArrayList<Restaurant>();
+		Collection<Restaurant> result = new ArrayList<Restaurant>();
+		rest = restaurantService.findByPrincipal();
+
+		for (Restaurant r : rest) {
+			for (Promote p : r.getPromotes()) {
+				if (isActive(p) == true) {
+					result.add(r);
+				}
+			}
+
+		}
+
+		return result;
+	}
+
+	public Collection<Restaurant> promoteActiveBanner() {
+		Collection<Restaurant> rest = new ArrayList<Restaurant>();
+		Collection<Restaurant> result = new ArrayList<Restaurant>();
+		rest = restaurantService.findAll();
+
+		for (Restaurant r : rest) {
+			for (Promote p : r.getPromotes()) {
+				if (isActive(p) == true) {
+					result.add(r);
+				}
+			}
+		}
+
+		return result;
+	}
+
+	public Collection<Promote> promotesActive() {
+		Collection<Promote> rest = new ArrayList<Promote>();
+		Collection<Promote> result = new ArrayList<Promote>();
+		rest = findAll();
+
+		for (Promote p : rest) {
+			if (isActive(p) == true) {
+				result.add(p);
+			}
+		}
+
+		return result;
+	}
+
+	public Restaurant findRandom() {
+		Restaurant r = new Restaurant();
+		Object[] ts = promoteActiveBanner().toArray();
+		int min = 0;
+		int max = ts.length;
+		int randomNum = ThreadLocalRandom.current().nextInt(min, max);
+		r = (Restaurant) ts[randomNum];
+		for (Promote p : promotesActive()) {
+			if (p.getRestaurant() == r) {
+				p.setTimesDisplayed(p.getTimesDisplayed() + 1);
+			}
+		}
+		return r;
 	}
 }
