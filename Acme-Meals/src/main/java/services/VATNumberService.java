@@ -124,7 +124,7 @@ public class VATNumberService {
 
 	public VATNumber reconstruct(VATNumberForm vatNumberForm, BindingResult binding) {
 		VATNumber result = findOne(vatNumberForm.getId());
-
+		
 		result.setValue(vatNumberForm.getValue());
 
 		validator.validate(result, binding);

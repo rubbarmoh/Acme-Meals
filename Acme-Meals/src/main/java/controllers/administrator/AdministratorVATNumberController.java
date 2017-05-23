@@ -52,7 +52,7 @@ public class AdministratorVATNumberController extends AbstractController {
 		VATNumber vatNumber;
 
 		if (binding.hasErrors()) {
-			result = createEditModelAndView(vatNumberForm);
+			result = createEditModelAndView(vatNumberForm, "vatNumber.edit.error");
 		} else {
 			try {
 				vatNumber = vatNumberService.reconstruct(vatNumberForm, binding);
