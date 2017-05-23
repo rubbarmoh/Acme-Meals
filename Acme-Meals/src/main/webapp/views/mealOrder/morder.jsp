@@ -108,6 +108,9 @@
 	
 </display:table>
 <jstl:if test="${mealOrder.status=='DRAFT'}">
+<input type="button" name="end"
+						value="<spring:message code="mealOrder.end" />"
+						onclick="window.location.replace('user/mealOrder/edit.do?mealOrderId=${mealOrder.id }&restaurantId=${restaurant.id }')"/><br/>
 <form:form	action="user/mealOrder/delete.do?mealOrderId=${mealOrder.id }"> 
 			<input type="submit" name="delete"
 						value="<spring:message code="mealOrder.delete" />"

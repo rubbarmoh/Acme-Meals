@@ -7,15 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.MealOrderRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Manager;
+
 import domain.MealOrder;
 import domain.Quantity;
+
 import domain.User;
+import forms.MealOrderForm;
+
 
 @Service
 @Transactional
@@ -35,6 +41,9 @@ public class MealOrderService {
 
 			@Autowired
 			private QuantityService quantityService;
+			
+			@Autowired
+			private Validator validator;
 
 			// Constructors -----------------------------------------------------------
 
@@ -178,5 +187,22 @@ public class MealOrderService {
 			}
 			m.setAmount(aux);
 			save(m);
+		}
+		public MealOrderForm generateForm(){
+			MealOrderForm result=new MealOrderForm();
+			return result;
+		}
+		public MealOrder reconstruct(MealOrderForm mealOrderForm, BindingResult binding) {
+			MealOrder result;
+			result = mealOrderRepository.findOne(mealOrderForm.getMealOrderId());
+			result.setDeliveryAdress(mealOrderForm.getDeliveryAdress());
+			if(mealOrderForm.getPickUp()){
+				result.setPickUp(true);
+			}else{
+				result.setPickUp(false);
+			}
+			
+			validator.validate(result, binding);
+			return result;
 		}
 }

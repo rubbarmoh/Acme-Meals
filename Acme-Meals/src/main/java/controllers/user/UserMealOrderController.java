@@ -2,8 +2,11 @@ package controllers.user;
 
 import java.util.Date;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +21,8 @@ import domain.MealOrder;
 import domain.Quantity;
 import domain.Restaurant;
 import domain.User;
+import forms.MealOrderForm;
+import forms.QuantityForm;
 
 @Controller
 @RequestMapping("user/mealOrder")
@@ -94,6 +99,66 @@ public class UserMealOrderController extends AbstractController{
 			}
 				
 			
+			return result;
+
+		}
+		//Creation-------------------------
+
+		@RequestMapping(value = "/edit", method = RequestMethod.GET)
+		public ModelAndView edit(@RequestParam int mealOrderId,int restaurantId) {
+
+			ModelAndView result;
+			MealOrderForm mealOrderForm;
+
+			mealOrderForm = mealOrderService.generateForm();
+			mealOrderForm.setRestaurantId(restaurantId);
+			mealOrderForm.setMealOrderId(mealOrderId);
+
+
+			result = createEditModelAndView(mealOrderForm, null);
+			return result;
+
+		}
+		@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+		public ModelAndView save(@Valid MealOrderForm mealOrderForm, BindingResult binding) {
+
+			ModelAndView result = new ModelAndView();
+			MealOrder mealOrder;
+			MealOrder aux;
+			
+			if (binding.hasErrors()) {
+				result = createEditModelAndView(mealOrderForm, null);
+			} else {
+				try {
+					mealOrder =mealOrderService.reconstruct(mealOrderForm, binding);
+					Restaurant r=restaurantService.findOne(mealOrderForm.getRestaurantId());
+					mealOrder.setStatus("PENDING");
+					if(r.getMinimunAmount()!=null){
+						Double am=mealOrder.getAmount()+r.getMinimunAmount();
+						mealOrder.setAmount(am);
+					}
+					aux = mealOrderService.save(mealOrder);
+					int id = mealOrderForm.getRestaurantId();
+					result = new ModelAndView("redirect:../../restaurant/display.do?restaurantId="+id);
+
+				} catch (Throwable oops) {
+					String msgCode;
+					msgCode = "mealOrder.err";
+					result = createEditModelAndView(mealOrderForm, msgCode);
+				}
+			}
+			return result;
+		}
+		//Ancillary Methods---------------------------
+
+		protected ModelAndView createEditModelAndView(MealOrderForm mealOrderForm, String message) {
+			ModelAndView result;
+			
+
+			result = new ModelAndView("mealOrder/edit");
+			result.addObject("mealOrderForm",mealOrderForm);
+			result.addObject("message", message);
+
 			return result;
 
 		}

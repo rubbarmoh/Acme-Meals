@@ -102,7 +102,7 @@
 		<security:intercept-url pattern="/user/quantity/add.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/user/quantity/edit.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/user/quantity/delete.do" access="hasRole('USER')" />
-		
+		<security:intercept-url pattern="/user/mealOrder/edit.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/review/browse.do" access="permitAll" /> 
 		<security:intercept-url pattern="/review/display.do" access="permitAll" /> 
 		<security:intercept-url pattern="/critic/display.do" access="permitAll" /> 
