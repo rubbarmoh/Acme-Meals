@@ -40,13 +40,7 @@
 	<spring:message code="meal.price" var="priceHeader" />
 	<display:column property="price" title="${priceHeader}"/>
 
-	<security:authorize access="hasRole('USER')">
-	<display:column>
-			<input type="button" name="add"
-						value="<spring:message code="meal.add" />"
-						onclick="javascript: window.location.replace('user/mealOrder/add.do?mealId=${meal.id }')"/><br/>
-	</display:column>
-	</security:authorize>
+	
 	
 </display:table>
 <security:authorize access="hasRole('MANAGER')">

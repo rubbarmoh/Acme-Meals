@@ -10,15 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.MealOrderService;
+import services.QuantityService;
 import services.RestaurantService;
 import services.UserService;
-
 import controllers.AbstractController;
 import domain.MealOrder;
-import domain.RelationDislike;
-import domain.RelationLike;
+import domain.Quantity;
 import domain.Restaurant;
-import domain.Review;
 import domain.User;
 
 @Controller
@@ -30,6 +28,8 @@ public class UserMealOrderController extends AbstractController{
 	
 	@Autowired
 	private RestaurantService restaurantService;
+	@Autowired
+	private QuantityService quantityService;
 	
 	@Autowired
 	private UserService userService;
@@ -76,6 +76,26 @@ public class UserMealOrderController extends AbstractController{
 			result.addObject("requestURI", "mealOrder/morder.do");
 
 			return result;
+		}
+		@RequestMapping(value = "/delete", method = RequestMethod.POST)
+		public ModelAndView delete(@RequestParam int mealOrderId) {
+
+			ModelAndView result= new ModelAndView();
+			MealOrder mealOrder;
+			mealOrder=mealOrderService.findOne(mealOrderId);
+			int restaurantId=mealOrder.getRestaurant().getId();
+			if(mealOrder.getStatus().equals("DRAFT")){
+				for(Quantity q:mealOrder.getQuantities()){
+					quantityService.delete(q);
+				}
+				mealOrderService.delete(mealOrder);
+				
+				result = new ModelAndView("redirect:../../restaurant/display.do?restaurantId="+restaurantId);
+			}
+				
+			
+			return result;
+
 		}
 
 }

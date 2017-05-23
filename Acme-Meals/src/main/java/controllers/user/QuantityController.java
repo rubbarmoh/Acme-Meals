@@ -74,6 +74,20 @@ public QuantityController(){
 		}
 		return result;
 	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public ModelAndView delete(@RequestParam int quantityId) {
+
+		ModelAndView result;
+		Quantity quantity;
+		quantity=quantityService.findOne(quantityId);
+		int restaurantId=quantity.getMeal().getRestaurant().getId();
+		quantityService.delete(quantity);
+		
+		result = new ModelAndView("redirect:../mealOrder/morder.do?restaurantId="+restaurantId);
+		return result;
+
+	}
 	//Ancillary Methods---------------------------
 
 	protected ModelAndView createEditModelAndView(QuantityForm quantityForm, String message) {
