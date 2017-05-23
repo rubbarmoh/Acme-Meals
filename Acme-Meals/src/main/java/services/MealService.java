@@ -138,7 +138,7 @@ public class MealService {
 		au.setAuthority("MANAGER");
 
 		Assert.isTrue(userAccount.getAuthorities().contains(au));
-
+		Assert.isTrue(!mealForm.getPrice().isNaN());
 		Restaurant restaurant = restaurantService.findOne(mealForm.getrId());
 
 		Meal result;

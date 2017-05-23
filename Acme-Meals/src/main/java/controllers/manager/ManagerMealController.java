@@ -180,7 +180,7 @@ public class ManagerMealController extends AbstractController {
 
 	private Map<Integer, String> getCategories() {
 		Collection<Category> cs;
-		cs = categoryService.findAll();
+		cs = categoryService.findCategoryByManager();
 
 		Map<Integer, String> categories = new HashMap<Integer, String>();
 		for (Category c : cs) {
