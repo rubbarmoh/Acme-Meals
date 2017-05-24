@@ -1107,21 +1107,21 @@
 	  <bean id="promote1" class="domain.Promote">
 	  	<property name="beginning" value="02/25/2016" />
 	  	<property name="ending" value="02/25/2017" />
-	  	<property name="timesDisplayed" value="7" />
+	  	<property name="timesDisplayed" value="10" />
 	  	<property name="restaurant" ref="restaurant1" />
 	  </bean>
 	  
 	  <bean id="promote2" class="domain.Promote">
 	  	<property name="beginning" value="04/30/2017" />
 	  	<property name="ending" value="12/25/2017" />
-	  	<property name="timesDisplayed" value="7" />
+	  	<property name="timesDisplayed" value="0" />
 	  	<property name="restaurant" ref="restaurant1" />
 	  </bean>
 	  
 	  <bean id="promote3" class="domain.Promote">
 	  	<property name="beginning" value="04/25/2017" />
 	  	<property name="ending" value="09/25/2017" />
-	  	<property name="timesDisplayed" value="3" />
+	  	<property name="timesDisplayed" value="0" />
 	  	<property name="restaurant" ref="restaurant3" />
 	  </bean>
 	  
