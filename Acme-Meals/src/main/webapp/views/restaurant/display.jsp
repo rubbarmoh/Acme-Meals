@@ -11,8 +11,8 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<table id="row" class="table">
-	
+<table id="row" class="table" style="width: 90%">
+
 	<tbody>
 		<tr>
 			<td rowspan="10">
@@ -20,36 +20,46 @@
 			</td>
 		</tr>
 		<tr>
-			<th>
-				<spring:message code = "restaurant.name"/>
-			</th>
-			<td>
-				<jstl:out value="${restaurant.name }" />
-			</td>
+			<th><spring:message code = "restaurant.name"/></th>
+			<th><spring:message code = "restaurant.manager"/></th>
 		</tr>
 		<tr>
-			<th>
-				<spring:message code = "restaurant.city"/>
-			</th>
-			<td>
-				<jstl:out value="${restaurant.city }" />
-			</td>
+			<td><jstl:out value="${restaurant.name }" /></td>
+			<td><jstl:out value="${restaurant.manager.name }" /></td>
 		</tr>
 		<tr>
-			<th>
-				<spring:message code = "restaurant.address"/>
-			</th>
-			<td>
-				<jstl:out value="${restaurant.address }" />
-			</td>
+			<th><spring:message code = "restaurant.city"/></th>
+			<th><spring:message code = "restaurant.address"/></th>
 		</tr>
 		<tr>
-			<th>
-				<spring:message code = "restaurant.phone"/>
-			</th>
-			<td>
-				<jstl:out value="${restaurant.phone }" />
-			</td>
+			<td><jstl:out value="${restaurant.city }" /></td>
+			<td><jstl:out value="${restaurant.address }" /></td>
+		</tr>
+		<tr>
+			<th><spring:message code = "restaurant.phone"/></th>
+			<th><spring:message code = "restaurant.email"/></th>
+		</tr>
+		<tr>
+			<td><jstl:out value="${restaurant.phone }" /></td>
+			<td><jstl:out value="${restaurant.email }" /></td>
+		</tr>
+		<tr>
+			<th><spring:message code = "restaurant.deliveryService"/></th>
+			<jstl:if test="${restaurant.deliveryService == true}">
+				<th><spring:message code = "restaurant.costDelivery"/></th>
+				<th><spring:message code = "restaurant.minimunAmount"/></th>
+			</jstl:if>
+		</tr>
+		<tr>
+			<td><jstl:out value="${restaurant.deliveryService }" /></td>
+			<jstl:if test="${restaurant.deliveryService == true}">
+				<td><spring:message code = "restaurant.costDelivery"/></td>
+				<td><spring:message code = "restaurant.minimunAmount"/></td>
+			</jstl:if>
+		</tr>
+		<tr>
+			<th><spring:message code = "restaurant.avgStars"/></th>
+			<td><jstl:out value="${restaurant.avgStars }" /></td>
 		</tr>
 </table>
 <br/>
