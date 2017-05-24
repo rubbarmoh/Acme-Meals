@@ -1,5 +1,6 @@
 package controllers.user;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.validation.Valid;
@@ -12,17 +13,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.InvoiceService;
 import services.MealOrderService;
 import services.QuantityService;
 import services.RestaurantService;
 import services.UserService;
+import services.VATNumberService;
 import controllers.AbstractController;
+import domain.Invoice;
 import domain.MealOrder;
 import domain.Quantity;
 import domain.Restaurant;
 import domain.User;
+import domain.VATNumber;
 import forms.MealOrderForm;
-import forms.QuantityForm;
+
 
 @Controller
 @RequestMapping("user/mealOrder")
@@ -38,6 +43,12 @@ public class UserMealOrderController extends AbstractController{
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private InvoiceService invoiceService;
+	
+	@Autowired
+	private VATNumberService vatNumberService;
 	
 	//Constructor
 	public UserMealOrderController(){
@@ -125,7 +136,17 @@ public class UserMealOrderController extends AbstractController{
 			ModelAndView result = new ModelAndView();
 			MealOrder mealOrder;
 			MealOrder aux;
-			
+			Invoice invoice;
+			Invoice aux2;
+			String v="";
+			Collection<VATNumber>vat;
+			vat=vatNumberService.findAll();
+			for(VATNumber c:vat){
+				if(c!=null){
+					v=c.getValue();
+					break;
+				}
+			}
 			if (binding.hasErrors()) {
 				result = createEditModelAndView(mealOrderForm, null);
 			} else {
@@ -138,8 +159,16 @@ public class UserMealOrderController extends AbstractController{
 						mealOrder.setAmount(am);
 					}
 					aux = mealOrderService.save(mealOrder);
-					int id = mealOrderForm.getRestaurantId();
-					result = new ModelAndView("redirect:../../restaurant/display.do?restaurantId="+id);
+					invoice=invoiceService.create();
+					invoice.setMealOrder(aux);
+					Date d= new Date(System.currentTimeMillis()-1000);
+					invoice.setMoment(d);
+					invoice.setName(aux.getUser().getName());
+					invoice.setSurname(aux.getUser().getSurname());
+					invoice.setVatNumber(v);
+					aux2=invoiceService.save(invoice);
+					int id = aux2.getId();
+					result = new ModelAndView("redirect:../../invoice/display.do?invoiceId="+id);
 
 				} catch (Throwable oops) {
 					String msgCode;
