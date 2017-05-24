@@ -39,7 +39,6 @@ public class MonthlyBill extends DomainEntity {
 		this.moment = moment;
 	}
 
-	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm")
 	public Date getPaidMoment() {
@@ -57,8 +56,10 @@ public class MonthlyBill extends DomainEntity {
 		this.cost = cost;
 	}
 
+
 	// Relationships -----------------------------------
-	private Manager manager;
+	private Manager	manager;
+
 
 	@Valid
 	@ManyToOne(optional = false)
@@ -68,6 +69,5 @@ public class MonthlyBill extends DomainEntity {
 	public void setManager(Manager manager) {
 		this.manager = manager;
 	}
-	
-	
+
 }

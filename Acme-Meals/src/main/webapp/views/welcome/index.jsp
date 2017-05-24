@@ -65,26 +65,26 @@
 		<table id="row" class="table" style="width: 600px; height: 200px">
 		<tbody>
 		<tr>
-			<th>
+			<th width=100px>
 				<spring:message code = "review.title"/>
 			</th>
-			<td>
+			<td width=100px>
 				<jstl:out value="${review.title }" />
 			</td>
 		</tr>
 		<tr>
-			<th>
+			<th width=100px>
 				<spring:message code = "review.rate"/>
 			</th>
-			<td>
+			<td width=100px>
 				<jstl:out value="${review.rate }" />
 			</td>
 		</tr>
 		<tr>
-			<th>
+			<th width=100px>
 				<spring:message code = "review.display"/>
 			</th>
-			<td>
+			<td width=100px>
 				<input type="button" name="display"
 						value="<spring:message code="review.display" />"
 						onclick="javascript: window.location.replace('review/display.do?reviewId=${review.id}')"/><br/>
