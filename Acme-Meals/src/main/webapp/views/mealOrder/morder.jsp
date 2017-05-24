@@ -20,7 +20,7 @@
 
 
 <security:authorize access="hasRole('USER')">
-
+<jstl:if test="${mealOrder.user.userAccount.username==pageContext.request.remoteUser }">
 <table id="row" class="table">
 	
 	<tbody>
@@ -108,13 +108,16 @@
 	
 </display:table>
 <jstl:if test="${mealOrder.status=='DRAFT'}">
+	<jstl:if test="${mealOrder.amount>0.0 && (mealOrder.amount>=mealOrder.restaurant.minimunAmount || mealOrder.restaurant.minimunAmount==null)}">
 <input type="button" name="end"
 						value="<spring:message code="mealOrder.end" />"
 						onclick="window.location.replace('user/mealOrder/edit.do?mealOrderId=${mealOrder.id }&restaurantId=${restaurant.id }')"/><br/>
+	</jstl:if>
 <form:form	action="user/mealOrder/delete.do?mealOrderId=${mealOrder.id }"> 
 			<input type="submit" name="delete"
 						value="<spring:message code="mealOrder.delete" />"
 						onclick="return confirm('<spring:message code="mealOrder.confirm.delete" />')"/><br/>
 						</form:form>
+</jstl:if>
 </jstl:if>
 </security:authorize>

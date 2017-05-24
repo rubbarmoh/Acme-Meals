@@ -198,8 +198,11 @@ public class MealOrderService {
 			result.setDeliveryAdress(mealOrderForm.getDeliveryAdress());
 			if(mealOrderForm.getPickUp()){
 				result.setPickUp(true);
+				Assert.isTrue((result.getDeliveryAdress().equals("")),"pickupMarked");
 			}else{
 				result.setPickUp(false);
+				result.setDeliveryAdress(mealOrderForm.getDeliveryAdress());
+				Assert.isTrue(!(result.getDeliveryAdress().equals("")),"adressNotValid");
 			}
 			
 			validator.validate(result, binding);

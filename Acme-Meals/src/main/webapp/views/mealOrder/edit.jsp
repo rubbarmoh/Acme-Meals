@@ -30,7 +30,7 @@
 		<br/>
 		<acme:textbox code="mealOrder.deliveryAdress" path="deliveryAdress"/>
 		<acme:submit name="save" code="mealOrder.save"/>
-		<acme:cancel code="mealOrder.cancel" url="user/mealOrder/morder.do?restaurantId=${restaurantId}"/>
+		<acme:cancel code="mealOrder.cancel" url="user/mealOrder/morder.do?restaurantId=${mealOrderForm.restaurantId}"/>
 		
 		
 	</form:form>

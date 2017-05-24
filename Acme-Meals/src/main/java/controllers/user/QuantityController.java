@@ -83,7 +83,7 @@ public QuantityController(){
 		quantity=quantityService.findOne(quantityId);
 		int restaurantId=quantity.getMeal().getRestaurant().getId();
 		quantityService.delete(quantity);
-		
+		mealOrderService.updateAmount(quantity.getMealOrder().getId());
 		result = new ModelAndView("redirect:../mealOrder/morder.do?restaurantId="+restaurantId);
 		return result;
 

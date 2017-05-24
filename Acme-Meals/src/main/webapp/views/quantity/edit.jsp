@@ -29,7 +29,7 @@
 		
 		<acme:textbox code="quantity.quantity" path="quantity"/>
 		<acme:submit name="save" code="quantity.save"/>
-		<acme:cancel code="quantity.cancel" url="user/mealOrder/morder.do?restaurantId=${restaurantId}"/>
+		<acme:cancel code="quantity.cancel" url="user/mealOrder/morder.do?restaurantId=${quantityForm.restaurantId}"/>
 		
 		
 	</form:form>
