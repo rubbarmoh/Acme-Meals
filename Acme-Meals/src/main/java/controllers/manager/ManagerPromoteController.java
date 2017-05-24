@@ -1,6 +1,7 @@
 
 package controllers.manager;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -112,10 +113,19 @@ public class ManagerPromoteController extends AbstractController {
 
 		Collection<Restaurant> rs;
 		rs = restaurantService.findByPrincipal();
+		Collection<Promote> promotes = promoteService.findByPrincipal();
+		Collection<Promote> promotesActiveP = promoteService.promotesActivePrincipal(promotes);
+		Collection<Promote> def = new ArrayList<Promote>();
+		def.addAll(promotes);
+		def.removeAll(promotesActiveP);
 
 		Map<Integer, String> restaurants = new HashMap<Integer, String>();
 		for (Restaurant r : rs) {
-			restaurants.put(r.getId(), r.getName());
+			for (Promote p : def) {
+				if (p.getRestaurant() == r || r.getPromotes().isEmpty()) {
+					restaurants.put(r.getId(), r.getName());
+				}
+			}
 		}
 		return restaurants;
 	}
