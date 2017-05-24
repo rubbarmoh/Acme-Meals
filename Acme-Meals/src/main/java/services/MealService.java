@@ -115,6 +115,12 @@ public class MealService {
 		result = mealRepository.mealsPerRestaurant(r.getId());
 		return result;
 	}
+	
+	public Collection<Meal> mealAvailablePerRestaurant(Restaurant r) {
+		Collection<Meal> result;
+		result = mealRepository.mealsAvailablePerRestaurant(r.getId());
+		return result;
+	}
 
 	// Forms ----------------------------------------------------------
 

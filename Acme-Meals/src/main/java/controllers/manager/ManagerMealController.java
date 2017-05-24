@@ -98,7 +98,7 @@ public class ManagerMealController extends AbstractController {
 				meal = mealService.reconstruct(mealForm, binding);
 
 				mealService.save(meal);
-				result = new ModelAndView("redirect:../../meal/browse.do?restaurantId=" + mealForm.getrId());
+				result = new ModelAndView("redirect:../../restaurant/display.do?restaurantId=" + meal.getRestaurant().getId());
 
 			} catch (Throwable oops) {
 				String msgCode = "meal.save.error";
@@ -112,23 +112,20 @@ public class ManagerMealController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(MealForm mealForm, BindingResult binding) {
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam int mealId) {
 
 		ModelAndView result;
 
-		if (binding.hasErrors())
-			result = createEditModelAndView(mealForm, null);
-		else
-			try {
-				Meal meal = mealService.reconstruct(mealForm, binding);
-				mealService.delete(meal);
-				result = new ModelAndView("redirect:../../meal/browse.do?restaurantId=" + mealForm.getrId());
-			} catch (Throwable oops) {
-				String msgCode = "meal.save.error";
-
-				result = createEditModelAndView(mealForm, msgCode);
-			}
+			Meal meal = mealService.findOne(mealId);
+				if(meal.getErased()){
+					meal.setErased(false);
+				}else{
+					meal.setErased(true);
+				}
+				mealService.save(meal);
+				result = new ModelAndView("redirect:../../restaurant/display.do?restaurantId=" + meal.getRestaurant().getId());
+			
 		return result;
 	}
 
