@@ -178,6 +178,32 @@ public class PromoteService {
 		return result;
 	}
 
+	public Collection<Promote> promotesActivePrincipal(Collection<Promote> promotes) {
+
+		Collection<Promote> result = new ArrayList<Promote>();
+
+		for (Promote p : promotes) {
+			if (isActive(p) == true) {
+				result.add(p);
+			}
+		}
+
+		return result;
+	}
+
+	public Collection<Promote> promotesNActivePrincipal(Collection<Promote> promotes) {
+
+		Collection<Promote> result = new ArrayList<Promote>();
+
+		for (Promote p : promotes) {
+			if (isActive(p) == false) {
+				result.add(p);
+			}
+		}
+
+		return result;
+	}
+
 	public Restaurant findRandom() {
 		Restaurant r = new Restaurant();
 		Object[] ts = promoteActiveBanner().toArray();

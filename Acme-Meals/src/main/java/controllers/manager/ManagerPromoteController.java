@@ -79,9 +79,12 @@ public class ManagerPromoteController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Promote> promotes = promoteService.findByPrincipal();
-
+		Collection<Promote> promotesActiveP = promoteService.promotesActivePrincipal(promotes);
+		Collection<Promote> promotesNActiveP = promoteService.promotesNActivePrincipal(promotes);
 		result = new ModelAndView("promote/list");
 		result.addObject("promotes", promotes);
+		result.addObject("promotesActiveP", promotesActiveP);
+		result.addObject("promotesNActiveP", promotesNActiveP);
 		result.addObject("requestURI", "managerActor/promote/list.do");
 
 		return result;

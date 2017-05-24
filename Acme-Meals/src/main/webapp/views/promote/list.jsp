@@ -19,7 +19,30 @@
 
 <security:authorize access="hasRole('MANAGER')">
 
-<display:table name="promotes"
+<h2><spring:message code="promote.active" /></h2>
+<display:table name="promotesActiveP"
+	id="row"
+	class="displaytag"
+	pagesize="5"
+	requestURI="${requestURI}" >
+			
+	<spring:message code="promote.beginning" var="momentHeader" />
+	<display:column title="${momentHeader}" sortable="false"><fmt:formatDate value="${row.beginning }" pattern="dd/MM/yyyy" /></display:column>
+	
+	<spring:message code="promote.ending" var="momentendingHeader" />
+	<display:column title="${momentendingHeader}" sortable="false"><fmt:formatDate value="${row.ending }" pattern="dd/MM/yyyy" /></display:column>
+	
+	<spring:message code="promote.timesDisplayed" var="timesDisplayedHeader" />
+	<display:column property="timesDisplayed" title="${timesDisplayedHeader}" sortable="true"/>
+	
+	<display:column>
+		<a href="restaurant/display.do?restaurantId=${row.restaurant.id}"><spring:message code="promote.display.restaurant" /></a>
+	</display:column>
+	
+</display:table>
+
+<h2><spring:message code="promote.nactive" /></h2>
+<display:table name="promotesNActiveP"
 	id="row"
 	class="displaytag"
 	pagesize="5"
