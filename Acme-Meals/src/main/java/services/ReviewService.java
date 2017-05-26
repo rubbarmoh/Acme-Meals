@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -195,6 +196,16 @@ public class ReviewService {
 		Critic critic = criticService.findByPrincipal();
 		result = reviewRepository.reviewByCriticId(critic.getId());
 		return result;
+	}
+
+	public Review findRandom() {
+		Review r = new Review();
+		Object[] ts = findAll().toArray();
+		int min = 0;
+		int max = ts.length;
+		int randomNum = ThreadLocalRandom.current().nextInt(min, max);
+		r = (Review) ts[randomNum];
+		return r;
 	}
 
 }

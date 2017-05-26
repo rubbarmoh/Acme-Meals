@@ -35,7 +35,7 @@
 		<br/>
 		<acme:textbox code="restaurant.picture" path="picture" />
 		<br/>
-		<acme:textbox code="restaurant.deliveryService" path="deliveryService" />
+		<acme:checkbox code="restaurant.deliveryService" path="deliveryService" />
 		<br/>
 		<acme:textbox code="restaurant.costDelivery" path="costDelivery" />
 		<br/>

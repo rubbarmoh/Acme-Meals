@@ -294,8 +294,14 @@ public class RestaurantService {
 		result.setEmail(restaurantForm.getEmail());
 		result.setPicture(restaurantForm.getPicture());
 		result.setDeliveryService(restaurantForm.getDeliveryService());
-		result.setCostDelivery(restaurantForm.getCostDelivery());
-		result.setMinimunAmount(restaurantForm.getMinimunAmount());
+		if(restaurantForm.getDeliveryService()){
+			result.setCostDelivery(restaurantForm.getCostDelivery());
+			result.setMinimunAmount(restaurantForm.getMinimunAmount());
+		}else{
+			result.setCostDelivery(null);
+			result.setMinimunAmount(null);
+		}
+
 
 		validator.validate(result, binding);
 

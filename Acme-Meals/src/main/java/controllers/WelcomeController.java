@@ -19,7 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.PromoteService;
+import services.ReviewService;
 import services.UserService;
+import domain.Restaurant;
+import domain.Review;
 import domain.User;
 
 @Controller
@@ -27,10 +31,15 @@ import domain.User;
 public class WelcomeController extends AbstractController {
 
 	@Autowired
-	private UserService	userService;
+	private UserService		userService;
 
-	
-	
+	@Autowired
+	private PromoteService	promoteService;
+
+	@Autowired
+	private ReviewService	reviewService;
+
+
 	// Constructors -----------------------------------------------------------
 
 	public WelcomeController() {
@@ -45,9 +54,12 @@ public class WelcomeController extends AbstractController {
 		SimpleDateFormat formatter;
 		String moment;
 
+		Restaurant r = promoteService.findRandom();
+		Review re = reviewService.findRandom();
+
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		moment = formatter.format(new Date());
-		
+
 		User user = null;
 
 		try {
@@ -60,11 +72,13 @@ public class WelcomeController extends AbstractController {
 			result = new ModelAndView("welcome/index");
 			result.addObject("banned", true);
 
-		} else
-		
+		} else {
 			result = new ModelAndView("welcome/index");
 			result.addObject("name", name);
 			result.addObject("moment", moment);
+			result.addObject("restaurant", r);
+			result.addObject("review", re);
+		}
 
 		return result;
 	}

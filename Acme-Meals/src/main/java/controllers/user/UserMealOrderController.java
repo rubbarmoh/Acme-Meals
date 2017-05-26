@@ -1,25 +1,33 @@
 package controllers.user;
 
+import java.util.Collection;
 import java.util.Date;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.InvoiceService;
 import services.MealOrderService;
+import services.QuantityService;
 import services.RestaurantService;
 import services.UserService;
-
+import services.VATNumberService;
 import controllers.AbstractController;
+import domain.Invoice;
 import domain.MealOrder;
-import domain.RelationDislike;
-import domain.RelationLike;
+import domain.Quantity;
 import domain.Restaurant;
-import domain.Review;
 import domain.User;
+import domain.VATNumber;
+import forms.MealOrderForm;
+
 
 @Controller
 @RequestMapping("user/mealOrder")
@@ -30,9 +38,17 @@ public class UserMealOrderController extends AbstractController{
 	
 	@Autowired
 	private RestaurantService restaurantService;
+	@Autowired
+	private QuantityService quantityService;
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private InvoiceService invoiceService;
+	
+	@Autowired
+	private VATNumberService vatNumberService;
 	
 	//Constructor
 	public UserMealOrderController(){
@@ -76,6 +92,109 @@ public class UserMealOrderController extends AbstractController{
 			result.addObject("requestURI", "mealOrder/morder.do");
 
 			return result;
+		}
+		@RequestMapping(value = "/delete", method = RequestMethod.POST)
+		public ModelAndView delete(@RequestParam int mealOrderId) {
+
+			ModelAndView result= new ModelAndView();
+			MealOrder mealOrder;
+			mealOrder=mealOrderService.findOne(mealOrderId);
+			int restaurantId=mealOrder.getRestaurant().getId();
+			if(mealOrder.getStatus().equals("DRAFT")){
+				for(Quantity q:mealOrder.getQuantities()){
+					quantityService.delete(q);
+				}
+				mealOrderService.delete(mealOrder);
+				
+				result = new ModelAndView("redirect:../../restaurant/display.do?restaurantId="+restaurantId);
+			}
+				
+			
+			return result;
+
+		}
+		//Creation-------------------------
+
+		@RequestMapping(value = "/edit", method = RequestMethod.GET)
+		public ModelAndView edit(@RequestParam int mealOrderId,int restaurantId) {
+
+			ModelAndView result;
+			MealOrderForm mealOrderForm;
+
+			mealOrderForm = mealOrderService.generateForm();
+			mealOrderForm.setRestaurantId(restaurantId);
+			mealOrderForm.setMealOrderId(mealOrderId);
+
+
+			result = createEditModelAndView(mealOrderForm, null);
+			return result;
+
+		}
+		@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+		public ModelAndView save(@Valid MealOrderForm mealOrderForm, BindingResult binding) {
+
+			ModelAndView result = new ModelAndView();
+			MealOrder mealOrder;
+			MealOrder aux;
+			Invoice invoice;
+			Invoice aux2;
+			String v="";
+			Collection<VATNumber>vat;
+			vat=vatNumberService.findAll();
+			for(VATNumber c:vat){
+				if(c!=null){
+					v=c.getValue();
+					break;
+				}
+			}
+			if (binding.hasErrors()) {
+				result = createEditModelAndView(mealOrderForm, null);
+			} else {
+				try {
+					mealOrder =mealOrderService.reconstruct(mealOrderForm, binding);
+					Restaurant r=restaurantService.findOne(mealOrderForm.getRestaurantId());
+					mealOrder.setStatus("PENDING");
+					if(r.getMinimunAmount()!=null){
+						Double am=mealOrder.getAmount()+r.getMinimunAmount();
+						mealOrder.setAmount(am);
+					}
+					aux = mealOrderService.save(mealOrder);
+					invoice=invoiceService.create();
+					invoice.setMealOrder(aux);
+					Date d= new Date(System.currentTimeMillis()-1000);
+					invoice.setMoment(d);
+					invoice.setName(aux.getUser().getName());
+					invoice.setSurname(aux.getUser().getSurname());
+					invoice.setVatNumber(v);
+					aux2=invoiceService.save(invoice);
+					int id = aux2.getId();
+					result = new ModelAndView("redirect:../../invoice/display.do?invoiceId="+id);
+
+				} catch (Throwable oops) {
+					String msgCode;
+					msgCode = "mealOrder.err";
+					if (oops.getMessage().equals("pickUpMarked")) {
+						msgCode = "mealOrder.pickUpMarked";
+					} else if (oops.getMessage().equals("adressNotValid")) {
+						msgCode = "mealOrder.adressNotValid";
+					} 
+					result = createEditModelAndView(mealOrderForm, msgCode);
+				}
+			}
+			return result;
+		}
+		//Ancillary Methods---------------------------
+
+		protected ModelAndView createEditModelAndView(MealOrderForm mealOrderForm, String message) {
+			ModelAndView result;
+			
+
+			result = new ModelAndView("mealOrder/edit");
+			result.addObject("mealOrderForm",mealOrderForm);
+			result.addObject("message", message);
+
+			return result;
+
 		}
 
 }

@@ -115,6 +115,12 @@ public class MealService {
 		result = mealRepository.mealsPerRestaurant(r.getId());
 		return result;
 	}
+	
+	public Collection<Meal> mealAvailablePerRestaurant(Restaurant r) {
+		Collection<Meal> result;
+		result = mealRepository.mealsAvailablePerRestaurant(r.getId());
+		return result;
+	}
 
 	// Forms ----------------------------------------------------------
 
@@ -138,7 +144,7 @@ public class MealService {
 		au.setAuthority("MANAGER");
 
 		Assert.isTrue(userAccount.getAuthorities().contains(au));
-
+		Assert.isTrue(!mealForm.getPrice().isNaN());
 		Restaurant restaurant = restaurantService.findOne(mealForm.getrId());
 
 		Meal result;

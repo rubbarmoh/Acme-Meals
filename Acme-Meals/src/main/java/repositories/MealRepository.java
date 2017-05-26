@@ -17,4 +17,7 @@ public interface MealRepository extends JpaRepository<Meal, Integer> {
 	
 	@Query("select m from Meal m where m.restaurant.id=?1")
 	List<Meal> mealsPerRestaurant(int restaurantId);
+	
+	@Query("select m from Meal m where m.restaurant.id=?1 and m.erased=false")
+	List<Meal> mealsAvailablePerRestaurant(int restaurantId);
 }

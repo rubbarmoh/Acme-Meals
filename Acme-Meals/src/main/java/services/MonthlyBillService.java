@@ -126,19 +126,19 @@ public class MonthlyBillService {
 		return result;
 	}
 
-	public Collection<MonthlyBill> generateMonthlyBills() {
-		Collection<MonthlyBill> mbs = new ArrayList<MonthlyBill>();
+	public void generateMonthlyBills() {
 		MonthlyBill mb = create();
 		Date date = new Date(System.currentTimeMillis() - 1);
 		Double cost = 0.;
 		Fee fee = feeService.find();
-		for (Promote p : promoteService.findAll()) {
+		for (Promote p : promoteService.promotesActive()) {
 			cost = p.getTimesDisplayed() * fee.getValue();
 			mb.setMoment(date);
 			mb.setCost(cost);
-			mbs.add(mb);
+			mb.setManager(p.getRestaurant().getManager());
+			save(mb);
+			p.setTimesDisplayed(0);
 		}
 
-		return mbs;
 	}
 }

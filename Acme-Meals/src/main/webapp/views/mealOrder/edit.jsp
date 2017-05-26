@@ -21,15 +21,16 @@
 
 <security:authorize access="hasRole('USER')">
 
-	<form:form	action="user/quantity/edit.do" modelAttribute="quantityForm"> 
+	<form:form	action="user/mealOrder/edit.do" modelAttribute="mealOrderForm"> 
 		
-		<form:hidden path="mealOrderId"/>
-		<form:hidden path="mealId"/>
 		<form:hidden path="restaurantId"/>
+		<form:hidden path="mealOrderId"/>
 		
-		<acme:textbox code="quantity.quantity" path="quantity"/>
-		<acme:submit name="save" code="quantity.save"/>
-		<acme:cancel code="quantity.cancel" url="user/mealOrder/morder.do?restaurantId=${quantityForm.restaurantId}"/>
+		<acme:checkbox code="mealOrder.pickUp" path="pickUp" />
+		<br/>
+		<acme:textbox code="mealOrder.deliveryAdress" path="deliveryAdress"/>
+		<acme:submit name="save" code="mealOrder.save"/>
+		<acme:cancel code="mealOrder.cancel" url="user/mealOrder/morder.do?restaurantId=${mealOrderForm.restaurantId}"/>
 		
 		
 	</form:form>
