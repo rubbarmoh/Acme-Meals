@@ -84,6 +84,14 @@ public class CriticService {
 	}
 
 	public Critic save(Critic critic) {
+		
+		UserAccount userAccount2;
+		userAccount2 = LoginService.getPrincipal();
+		Authority au3 = new Authority();
+		au3.setAuthority("ADMIN");
+		Authority au2 = new Authority();
+		au2.setAuthority("CRITIC");
+		Assert.isTrue(userAccount2.getAuthorities().contains(au3) || userAccount2.getAuthorities().contains(au2));
 
 		Assert.notNull(critic);
 
