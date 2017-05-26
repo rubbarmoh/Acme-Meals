@@ -61,4 +61,19 @@ public class ManagerMonthlyBillController extends AbstractController {
 		return result;
 	}
 
+	//Pay --------------
+
+	@RequestMapping(value = "/pay", method = RequestMethod.GET)
+	public ModelAndView pay(@RequestParam int monthlyBillId) {
+		ModelAndView result;
+		MonthlyBill monthlyBill;
+
+		monthlyBill = monthlyBillService.findOne(monthlyBillId);
+		monthlyBillService.payMonthlyBill(monthlyBill);
+
+		result = display(monthlyBillId);
+
+		return result;
+	}
+
 }

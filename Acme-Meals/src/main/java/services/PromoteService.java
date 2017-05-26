@@ -205,6 +205,7 @@ public class PromoteService {
 	}
 
 	public Restaurant findRandom() {
+
 		Restaurant r = new Restaurant();
 		Object[] ts = promoteActiveBanner().toArray();
 		int min = 0;
@@ -213,7 +214,9 @@ public class PromoteService {
 		r = (Restaurant) ts[randomNum];
 		for (Promote p : promotesActive()) {
 			if (p.getRestaurant() == r) {
+
 				p.setTimesDisplayed(p.getTimesDisplayed() + 1);
+
 			}
 		}
 		return r;

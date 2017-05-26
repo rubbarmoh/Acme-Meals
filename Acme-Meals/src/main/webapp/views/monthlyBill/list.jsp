@@ -24,13 +24,25 @@
 	class="displaytag"
 	pagesize="5"
 	requestURI="${requestURI}" >
-			
-	<spring:message code="monthlyBill.moment" var="momentHeader" />
-	<display:column title="${momentHeader}" sortable="false"><fmt:formatDate value="${row.moment }" pattern="dd/MM/yyyy HH:mm" /></display:column>
 	
-	<display:column>
-		<a href="managerActor/monthlyBill/display.do?monthlyBillId=${row.id}"><spring:message code="monthlyBill.display" /></a>
-	</display:column>
+	<jstl:choose>
+		<jstl:when test="${row.paidMoment eq null }">
+			<spring:message code="monthlyBill.moment" var="momentHeader" />
+			<display:column style="background-color:grey" title="${momentHeader}" sortable="false"><fmt:formatDate value="${row.moment }" pattern="dd/MM/yyyy HH:mm" /></display:column>
+			
+			<display:column style="background-color:grey">
+				<a href="managerActor/monthlyBill/display.do?monthlyBillId=${row.id}"><spring:message code="monthlyBill.display" /></a>
+			</display:column>
+		</jstl:when>
+		<jstl:otherwise>
+			<spring:message code="monthlyBill.moment" var="momentHeader" />
+			<display:column style="background-color:lightblue" title="${momentHeader}" sortable="false"><fmt:formatDate value="${row.moment }" pattern="dd/MM/yyyy HH:mm" /></display:column>
+			
+			<display:column style="background-color:lightblue">
+				<a href="managerActor/monthlyBill/display.do?monthlyBillId=${row.id}"><spring:message code="monthlyBill.display" /></a>
+			</display:column>
+		</jstl:otherwise>
+	</jstl:choose>
 	
 </display:table>
 

@@ -141,4 +141,9 @@ public class MonthlyBillService {
 		}
 
 	}
+
+	public void payMonthlyBill(MonthlyBill mb) {
+		Date date = new Date(System.currentTimeMillis() - 1);
+		mb.setPaidMoment(date);
+	}
 }

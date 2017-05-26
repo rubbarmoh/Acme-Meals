@@ -11,6 +11,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<security:authorize access="hasAnyRole('MANAGER')">
 <table id="row" class="table">
 	
 	<tbody>
@@ -24,6 +25,14 @@
 		</tr>
 		<tr>
 			<th>
+				<spring:message code = "monthlyBill.moment"/>
+			</th>
+			<td>
+				<fmt:formatDate value="${monthlyBill.moment }" pattern="dd/MM/yyyy HH:mm" />
+			</td>
+		</tr>
+		<tr>
+			<th>
 				<spring:message code = "monthlyBill.paidMoment"/>
 			</th>
 			<td>
@@ -32,10 +41,22 @@
 		</tr>
 		<tr>
 			<th>
-				<spring:message code = "monthlyBill.moment"/>
+				<spring:message code = "monthlyBill.pay"/>
 			</th>
-			<td>
-				<fmt:formatDate value="${monthlyBill.paidMoment }" pattern="dd/MM/yyyy HH:mm" />
-			</td>
+			<jstl:choose>
+				<jstl:when test="${monthlyBill.paidMoment eq null }">
+					<td>
+					<input type="button" name="pay"
+					value="<spring:message code="monthlyBill.payB" />"
+					onclick="javascript: window.location.replace('managerActor/monthlyBill/pay.do?monthlyBillId=${monthlyBill.id}')" />
+					</td>
+				</jstl:when>
+				<jstl:otherwise>
+					<td>
+					<spring:message code = "monthlyBill.apay"/>
+					</td>
+				</jstl:otherwise>
+			</jstl:choose>
 		</tr>
 </table>
+</security:authorize>
