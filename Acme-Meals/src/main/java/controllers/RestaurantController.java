@@ -87,7 +87,7 @@ public class RestaurantController extends AbstractController {
 			ModelAndView result;
 			Collection<Restaurant>restaurants;
 
-			restaurants = restaurantService.findAll();
+			restaurants = restaurantService.findEnabledRestaurants();
 
 			result = new ModelAndView("restaurant/browse");
 			result.addObject("restaurants", restaurants);

@@ -33,10 +33,17 @@ public class Restaurant extends DomainEntity {
 	private Boolean	deliveryService;
 	private Double	costDelivery;
 	private Double	minimunAmount;
+	private Boolean erased;
 
 
 	// Getters and Setters -----------------------------
-
+	@NotNull
+	public Boolean getErased() {
+		return erased;
+	}
+	public void setErased(Boolean erased) {
+		this.erased = erased;
+	}
 	@NotBlank
 	public String getName() {
 		return name;

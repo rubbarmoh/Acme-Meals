@@ -22,6 +22,7 @@
 	<form:form action="managerActor/restaurant/edit.do"	modelAttribute="restaurantForm">
 	
 		<form:hidden path="id"/>
+		
 	
 		<acme:textbox code="restaurant.name" path="name" />
 		<br/>
@@ -42,8 +43,11 @@
 		<acme:textbox code="restaurant.minimunAmount" path="minimunAmount" />
 		<br/>
 		<acme:submit name="save" code="restaurant.save"/>
-		<jstl:if test="${restaurantForm.id != 0}">
-			<input type="submit" name="delete" value="<spring:message code="restaurant.delete" />" onclick="return confirm('<spring:message code="restaurant.confirm.delete" />')" />
+		<jstl:if test="${restaurantForm.id != 0 && restaurantForm.erased==false}">
+			<input type="submit" name="delete" value="<spring:message code="restaurant.disable" />" onclick="return confirm('<spring:message code="restaurant.confirm.disable" />')" />
+		</jstl:if>
+		<jstl:if test="${restaurantForm.id != 0 && restaurantForm.erased==true}">
+			<input type="submit" name="enable" value="<spring:message code="restaurant.enable" />" onclick="return confirm('<spring:message code="restaurant.confirm.enable" />')" />
 		</jstl:if>
 		<acme:cancel code="restaurant.cancel" url="managerActor/restaurant/list.do" />
 	

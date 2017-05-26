@@ -143,6 +143,31 @@ public class ManagerRestaurantController extends AbstractController {
 			}
 		return result;
 	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "enable")
+	public ModelAndView enable(RestaurantForm restaurantForm, BindingResult binding) {
+
+		ModelAndView result;
+
+		if (binding.hasErrors())
+			result = createEditModelAndView(restaurantForm, null);
+		else
+			try {
+				Restaurant restaurant = restaurantService.reconstruct(restaurantForm, binding);
+				restaurantService.enable(restaurant);
+				result = list();
+			} catch (Throwable oops) {
+				String msgCode = "restaurant.save.error";
+
+				if (oops.getMessage().equals("nullCreditCard"))
+					msgCode = "restaurant.nullCreditCard";
+				else if (oops.getMessage().equals("badCreditCard"))
+					msgCode = "restaurant.badCreditCard";
+
+				result = createEditModelAndView(restaurantForm, msgCode);
+			}
+		return result;
+	}
 
 	//Ancillary Methods---------------------------
 

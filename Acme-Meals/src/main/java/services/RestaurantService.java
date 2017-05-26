@@ -70,6 +70,7 @@ public class RestaurantService {
 		result.setReviews(new ArrayList<Review>());
 		result.setPromotes(new ArrayList<Promote>());
 		result.setSocialIdentities(new ArrayList<SocialIdentity>());
+		result.setErased(false);
 		return result;
 	}
 
@@ -123,7 +124,19 @@ public class RestaurantService {
 		Assert.notNull(restaurant);
 
 		Assert.isTrue(restaurant.getId() != 0);
-		restaurantRepository.delete(restaurant);
+		restaurant.setErased(true);
+	}
+	public void enable(Restaurant restaurant){
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
+		Assert.notNull(restaurant);
+		Assert.isTrue(restaurant.getId() != 0);
+		restaurant.setErased(false);
 	}
 
 	// Other bussiness methods ----------------------------------------------------
@@ -293,6 +306,8 @@ public class RestaurantService {
 		result.setAddress(restaurantForm.getAddress());
 		result.setEmail(restaurantForm.getEmail());
 		result.setPicture(restaurantForm.getPicture());
+		restaurantForm.setErased(false);
+		result.setErased(restaurantForm.getErased());
 		result.setDeliveryService(restaurantForm.getDeliveryService());
 		if(restaurantForm.getDeliveryService()){
 			result.setCostDelivery(restaurantForm.getCostDelivery());
@@ -326,6 +341,7 @@ public class RestaurantService {
 		result.setDeliveryService(restaurant.getDeliveryService());
 		result.setCostDelivery(restaurant.getCostDelivery());
 		result.setMinimunAmount(restaurant.getMinimunAmount());
+		result.setErased(restaurant.getErased());
 		return result;
 	}
 	public void updateAvgStars(int restaurantId) {
@@ -338,6 +354,11 @@ public class RestaurantService {
 		Restaurant r = restaurantRepository.findOne(restaurantId);
 		r.setAvgStars(restaurantRepository.findAvgStarsR(restaurantId));
 		save(r);
+	}
+	public Collection<Restaurant> findEnabledRestaurants(){
+		Collection<Restaurant>result;
+		result=restaurantRepository.findEnabledRestaurants();
+		return result;
 	}
 
 }

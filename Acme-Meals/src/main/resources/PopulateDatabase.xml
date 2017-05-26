@@ -518,6 +518,7 @@
 		<property name="avgStars" value="4.5" />
 		<property name="deliveryService" value="false" />
 		<property name="manager" ref="manager1"/>
+		<property name="erased"	value="false"/>
 		<property name="mealOrders">
 			<list>
 				<ref bean="mealOrder2"/>
@@ -566,6 +567,7 @@
 		<property name="deliveryService" value="true" />
 		<property name="costDelivery" value="2.00" />
 		<property name="minimunAmount" value="15.00" />
+		<property name="erased"	value="false"/>
 		<property name="manager" ref="manager1"/>
 		<property name="mealOrders">
 			<list>
@@ -610,6 +612,7 @@
 		<property name="picture" value="http://www.emtstatic.com/2010/04/panteonfeliz.jpg" />
 		<property name="avgStars" value="2.3" />
 		<property name="deliveryService" value="true" />
+		<property name="erased"	value="false"/>
 		<property name="costDelivery" value="1.00" />
 		<property name="minimunAmount" value="10.00" />
 		<property name="manager" ref="manager1"/>
@@ -655,6 +658,7 @@
 		<property name="picture" value="https://madridevoltion.files.wordpress.com/2012/06/maki-restaurante-japones-malasac3b1a.jpg" />
 		<property name="avgStars" value="0.0" />
 		<property name="deliveryService" value="false" />
+		<property name="erased"	value="false"/>
 		<property name="manager" ref="manager2"/>
 		<property name="mealOrders">
 			<list>
@@ -698,6 +702,7 @@
 		<property name="avgStars" value="0.0" />
 		<property name="deliveryService" value="true" />
 		<property name="costDelivery" value="3.00" />
+		<property name="erased"	value="false"/>
 		<property name="minimunAmount" value="10.00" />
 		<property name="manager" ref="manager2"/>
 		<property name="mealOrders">
@@ -741,6 +746,7 @@
 		<property name="picture" value="http://s3.eestatic.com/2017/03/30/social/Acoso-Dieta_vegana-Restaurantes-La_Jungla_204740027_31771887_1024x576.jpg" />
 		<property name="avgStars" value="0.0" />
 		<property name="deliveryService" value="false" />
+		<property name="erased"	value="false"/>
 		<property name="manager" ref="manager3"/>
 		<property name="mealOrders">
 			<list>

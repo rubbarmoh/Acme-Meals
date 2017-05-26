@@ -78,4 +78,7 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
 
 	@Query("select 1.0*(select sum(r.rate) from Review r where r.restaurant.id=?1)/count(r1) from Review r1 where r1.restaurant.id=?1")
 	Double findAvgStarsR(int restaurantID);
+	
+	@Query("select r from Restaurant r where r.erased='false'")
+	List<Restaurant> findEnabledRestaurants();
 }
