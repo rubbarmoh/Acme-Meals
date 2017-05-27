@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.LoginService;
+import security.UserAccount;
 import services.PromoteService;
 import services.ReviewService;
 import services.UserService;
@@ -54,17 +56,23 @@ public class WelcomeController extends AbstractController {
 		SimpleDateFormat formatter;
 		String moment;
 
-		Restaurant r = promoteService.findRandom();
-		Review re = reviewService.findRandom();
-
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		moment = formatter.format(new Date());
 
 		User user = null;
-
+		UserAccount userAccount = null;
 		try {
 			user = userService.findByPrincipal();
+			userAccount = LoginService.getPrincipal();
 		} catch (Exception e) {
+		}
+
+		Restaurant r = null;
+		Review re = null;
+
+		if (user != null || userAccount == null) {
+			r = promoteService.findRandom();
+			re = reviewService.findRandom();
 		}
 
 		if (user != null && user.getBanned() == true) {
