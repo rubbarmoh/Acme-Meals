@@ -109,8 +109,23 @@ public class CategoryService {
 	public boolean exist(Category category){
 		Collection<Category> categories = findAll();
 		boolean result = false;
-		if(categories.contains(category)){
-			result = true;
+		for(Category c: categories){
+			result = c.getName().equals(category.getName());
+			if(result){
+				break;
+			}
+		}
+		return result;
+	}
+	
+	public boolean exist(String category){
+		Collection<Category> categories = findAll();
+		boolean result = false;
+		for(Category c: categories){
+			result = c.getName().equals(category);
+			if(result){
+				break;
+			}
 		}
 		return result;
 	}
@@ -191,6 +206,7 @@ public class CategoryService {
 			category.setName(categoryForm.getName());
 		}else{
 			category = findOne(categoryForm.getId());
+			Assert.isTrue(!exist(categoryForm.getName()));
 			category.setName(categoryForm.getName());
 		}
 		

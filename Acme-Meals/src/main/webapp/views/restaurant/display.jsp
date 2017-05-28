@@ -106,7 +106,7 @@
 				<jstl:choose>
 					<jstl:when test="${row.erased == false}">
 						<input type="button" name="delete"
-								value="<spring:message code="restaurant.disabled" />"
+								value="<spring:message code="restaurant.disable" />"
 								onclick="javascript: window.location.replace('managerActor/meal/delete.do?mealId=${row.id}')"/>
 					</jstl:when>
 					<jstl:otherwise>

@@ -26,8 +26,9 @@
 		<acme:textbox code="category.name" path="name"/>
 		
 		<acme:submit name="save" code="category.save"/>
-
-		<input type="submit" name="delete" value="<spring:message code="category.delete" />" onclick="return confirm('<spring:message code="category.confirm.delete" />')" />
+		<jstl:if test="${categoryForm.id != 0 }">
+			<input type="submit" name="delete" value="<spring:message code="category.delete" />" onclick="return confirm('<spring:message code="category.confirm.delete" />')" />
+		</jstl:if>
 		<acme:cancel code="category.cancel" url="managerActor/category/list.do"/>	
 		
 		
