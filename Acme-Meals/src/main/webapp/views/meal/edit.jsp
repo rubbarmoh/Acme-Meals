@@ -40,9 +40,6 @@
 		<form:errors cssClass="error" path="category" />
 		
 		<acme:submit name="save" code="meal.save"/>
-		<jstl:if test="${mealForm.id != 0}">
-			<input type="submit" name="delete" value="<spring:message code="meal.delete" />" onclick="return confirm('<spring:message code="meal.confirm.delete" />')" />
-		</jstl:if>
 		<acme:cancel code="meal.cancel" url="restaurant/display.do?restaurantId=${mealForm.rId} " />
 	
 	</form:form>
