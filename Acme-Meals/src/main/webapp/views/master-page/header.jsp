@@ -60,6 +60,7 @@
 			<li><a class="fNiv" href="managerActor/monthlyBill/list.do"><spring:message code="master.page.monthlyBill.list" /></a></li>
 			<li><a class="fNiv" href="managerActor/promote/list.do"><spring:message code="master.page.promote.list" /></a></li>
 			<li><a class="fNiv" href="managerActor/dashboard.do"><spring:message code="master.page.dashboard" /></a></li>
+			<li><a class="fNiv" href="socialIdentity/browse.do"><spring:message code="master.page.socialIdentities" /></a></li>
 			<li><a class="fNiv"><spring:message	code="master.page.manager.categories" /></a>
 				<ul>
 					<li class="arrow"></li>

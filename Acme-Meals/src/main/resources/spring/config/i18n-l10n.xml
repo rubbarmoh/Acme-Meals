@@ -43,6 +43,7 @@
 		<value>/views/report/messages</value>
 		<value>/views/quantity/messages</value>
 		<value>/views/promote/messages</value>
+		<value>/views/socialIdentity/messages</value>
 	</util:list>
 
 </beans>

@@ -43,6 +43,7 @@
 		<value>/views/report/tiles.xml</value>
 		<value>/views/quantity/tiles.xml</value>
 		<value>/views/promote/tiles.xml</value>
+		<value>/views/socialIdentity/tiles.xml</value>
 	</util:list>
 
 </beans>
