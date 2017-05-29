@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.RelationLikeService;
 import services.ReviewService;
-import services.UserService;
 import domain.Review;
 
 @Controller
@@ -23,13 +21,6 @@ public class ReviewController extends AbstractController {
 
 	@Autowired
 	private ReviewService		reviewService;
-
-	@Autowired
-	private UserService			userService;
-
-	@Autowired
-	private RelationLikeService	relationLikeService;
-
 
 	// Constructors -----------------------------------------------------------
 

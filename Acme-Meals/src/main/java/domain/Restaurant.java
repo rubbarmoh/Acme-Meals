@@ -8,6 +8,8 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -19,6 +21,8 @@ import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(uniqueConstraints =
+	{ @UniqueConstraint(columnNames = {"name", "address", "city", "manager_id"})})
 public class Restaurant extends DomainEntity {
 
 	// Attributes --------------------------------------
