@@ -36,6 +36,7 @@ public class AdministratorMonthBillController extends AbstractController {
 	public ModelAndView generate() {
 		ModelAndView result;
 		monthlyBillService.generateMonthlyBills();
+		monthlyBillService.generateMonthlyBillsLD();
 		result = new ModelAndView("redirect:../../welcome/index.do");
 
 		return result;

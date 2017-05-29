@@ -142,6 +142,24 @@ public class MonthlyBillService {
 
 	}
 
+	public void generateMonthlyBillsLD() {
+		MonthlyBill mb = create();
+		Date date = new Date(System.currentTimeMillis() - 1);
+		Double cost = 0.;
+		Fee fee = feeService.find();
+		for (Promote p : promoteService.promotesNActive()) {
+			if (p.getTimesDisplayed() > 0) {
+				cost = p.getTimesDisplayed() * fee.getValue();
+				mb.setMoment(date);
+				mb.setCost(cost);
+				mb.setManager(p.getRestaurant().getManager());
+				save(mb);
+				p.setTimesDisplayed(0);
+			}
+		}
+
+	}
+
 	public void payMonthlyBill(MonthlyBill mb) {
 		Date date = new Date(System.currentTimeMillis() - 1);
 		mb.setPaidMoment(date);

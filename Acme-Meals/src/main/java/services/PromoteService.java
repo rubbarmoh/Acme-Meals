@@ -179,6 +179,20 @@ public class PromoteService {
 		return result;
 	}
 
+	public Collection<Promote> promotesNActive() {
+		Collection<Promote> rest = new ArrayList<Promote>();
+		Collection<Promote> result = new ArrayList<Promote>();
+		rest = findAll();
+
+		for (Promote p : rest) {
+			if (isActive(p) == false) {
+				result.add(p);
+			}
+		}
+
+		return result;
+	}
+
 	public Collection<Promote> promotesActivePrincipal(Collection<Promote> promotes) {
 
 		Collection<Promote> result = new ArrayList<Promote>();
