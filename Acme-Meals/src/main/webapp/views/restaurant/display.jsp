@@ -15,7 +15,7 @@
 
 	<tbody>
 		<tr>
-			<td rowspan="10">
+			<td rowspan="11">
 				<img src="${restaurant.picture}" width="200" height="200" >
 			</td>
 		</tr>
@@ -51,14 +51,22 @@
 			</jstl:if>
 		</tr>
 		<tr>
-			<td><jstl:out value="${restaurant.deliveryService }" /></td>
-			<jstl:if test="${restaurant.deliveryService == true}">
-				<td><spring:message code = "restaurant.costDelivery"/></td>
-				<td><spring:message code = "restaurant.minimunAmount"/></td>
-			</jstl:if>
+			<jstl:choose>
+				<jstl:when test="${restaurant.deliveryService == true}">
+						<td><spring:message code = "restaurant.yes"/></td>
+						<td><jstl:out value="${restaurant.costDelivery }"/></td>
+						<td><jstl:out value="${restaurant.minimunAmount }"/></td>
+				</jstl:when>
+				<jstl:otherwise>
+						<td><spring:message code = "restaurant.no"/></td>
+				</jstl:otherwise>
+			</jstl:choose>
+			
 		</tr>
 		<tr>
 			<th><spring:message code = "restaurant.avgStars"/></th>
+		</tr>
+		<tr>
 			<td><jstl:out value="${restaurant.avgStars }" /></td>
 		</tr>
 </table>
