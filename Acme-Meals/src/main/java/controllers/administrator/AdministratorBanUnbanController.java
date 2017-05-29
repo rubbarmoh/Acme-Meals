@@ -27,14 +27,15 @@ public class AdministratorBanUnbanController extends AbstractController {
 	//Services-------------------------
 
 	@Autowired
-	private UserService	userService;
+	private UserService		userService;
 
 	@Autowired
 	private CommentService	commentService;
-	
+
 	@Autowired
 	private ReportService	reportService;
-	
+
+
 	//Constructor----------------------
 
 	public AdministratorBanUnbanController() {
@@ -42,11 +43,11 @@ public class AdministratorBanUnbanController extends AbstractController {
 	}
 
 	//Browse-------------------------------------------------------
-	
+
 	@RequestMapping(value = "/browse", method = RequestMethod.GET)
 	public ModelAndView browse() {
 		ModelAndView result;
-		Map<User,Long> map;
+		Map<User, Long> map;
 		map = userService.findReported();
 
 		result = new ModelAndView("user/browseReported");
@@ -56,34 +57,34 @@ public class AdministratorBanUnbanController extends AbstractController {
 
 		return result;
 	}
-	
+
 	//Browse-------------------------------------------------------
-	
-		@RequestMapping(value = "/browseBanned", method = RequestMethod.GET)
-		public ModelAndView browseBanned() {
-			ModelAndView result;
-			Map<User,Long> map;
-			map = userService.findBanned();
 
-			result = new ModelAndView("user/browseBanned");
-			result.addObject("users", map.keySet());
-			result.addObject("num", map);
-			result.addObject("requestURI", "user/browseBanned.do");
+	@RequestMapping(value = "/browseBanned", method = RequestMethod.GET)
+	public ModelAndView browseBanned() {
+		ModelAndView result;
+		Map<User, Long> map;
+		map = userService.findBanned();
 
-			return result;
-		}
-	
+		result = new ModelAndView("user/browseBanned");
+		result.addObject("users", map.keySet());
+		result.addObject("num", map);
+		result.addObject("requestURI", "user/browseBanned.do");
+
+		return result;
+	}
+
 	// Comment reported -------------------------------------------
-	
+
 	@RequestMapping(value = "/commentReported", method = RequestMethod.GET)
 	public ModelAndView commentReported(@RequestParam int userId) {
 		ModelAndView result;
 		List<Comment> comments;
 		comments = commentService.findReportedComment(userId);
-		
+
 		Map<Comment, List<Report>> mapa = new HashMap<Comment, List<Report>>();
-		
-		for(Comment c : comments){
+
+		for (Comment c : comments) {
 			mapa.put(c, (List<Report>) c.getReports());
 		}
 
@@ -94,37 +95,37 @@ public class AdministratorBanUnbanController extends AbstractController {
 
 		return result;
 	}
-	
+
 	//BanUnban -----
 
-		@RequestMapping(value = "/banUnban", method = RequestMethod.GET)
-		public ModelAndView banUnban(@RequestParam int userId) {
-			ModelAndView result;
-			User user = userService.findOne(userId);
-			try {
-				userService.banUnban(user);
-				result = browse();
-			} catch (Throwable oops) {
-				result = browse();
-				result.addObject("message", "master-page.commit.error");
-			}
-
-			return result;
+	@RequestMapping(value = "/banUnban", method = RequestMethod.GET)
+	public ModelAndView banUnban(@RequestParam int userId) {
+		ModelAndView result;
+		User user = userService.findOne(userId);
+		try {
+			userService.banUnban(user);
+			result = browse();
+		} catch (Throwable oops) {
+			result = browse();
+			result.addObject("message", "master-page.commit.error");
 		}
+
+		return result;
+	}
 
 	// Delete report -------------------------------------------------------
-		@RequestMapping(value = "/deleteReport", method = RequestMethod.GET)
-		public ModelAndView deleteReport(@RequestParam int reportId) {
-			ModelAndView result;
-			Report report = reportService.findOne(reportId);
-			try {
-				reportService.delete(report);
-				result = browse();
-			} catch (Throwable oops) {
-				result = browse();
-				result.addObject("message", "master-page.commit.error");
-			}
-
-			return result;
+	@RequestMapping(value = "/deleteReport", method = RequestMethod.GET)
+	public ModelAndView deleteReport(@RequestParam int reportId) {
+		ModelAndView result;
+		Report report = reportService.findOne(reportId);
+		try {
+			reportService.delete(report);
+			result = browse();
+		} catch (Throwable oops) {
+			result = browse();
+			result.addObject("message", "master-page.commit.error");
 		}
+
+		return result;
+	}
 }
