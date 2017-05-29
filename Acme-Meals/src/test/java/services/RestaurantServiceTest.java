@@ -150,30 +150,31 @@ public class RestaurantServiceTest extends AbstractTest {
 			public void driverEdit() throws ParseException {
 				Object testingData[][] = {
 						
-					{// Listar restaurantes propios siendo manager1
-						"manager1", null},
-					{// Listar restaurantes propios siendo manager2
-						"manager2", null},
-					{// Listar los restaurantes propios siendo un usuario
-						"user1", IllegalArgumentException.class},
-					{// Listar los restaurantes propios sin autenticar
-						null, IllegalArgumentException.class},
+					{// Editar un restaurante propio
+						"manager1", 106, "Prueba",null},
+					{// Editar un restaurante siendo manager, pero no su propietario
+						"manager2", 106, "Prueba", NullPointerException.class},
+					{// Editar un restaurante siendo usuario
+						"user1", 106, "Prueba", NullPointerException.class}
 				};
 				
 				for (int i = 0; i < testingData.length; i++)
-					templateEdit((String) testingData[i][0], (Class<?>) testingData[i][1]);
+					templateEdit((String) testingData[i][0], (int) testingData[i][1],(String) testingData[i][2],(Class<?>) testingData[i][3]);
 			}
 			
 
-			protected void templateEdit(String username, Class<?> expected) throws ParseException {
+			protected void templateEdit(String username, int restaurantId, String nombre, Class<?> expected) throws ParseException {
 			
 				Class<?> caught = null;
 				
 				try {
 					authenticate(username); // Iniciamos sesión con el usuario
-					
-					Collection<Restaurant> restaurants = restaurantService.findByPrincipal();
-					Assert.isTrue(!restaurants.isEmpty());
+					Restaurant s;
+					Restaurant r= restaurantService.findOne(restaurantId);
+					r.setName(nombre);
+					s = restaurantService.save(r);
+					Assert.isTrue(s!=null);
+					Assert.isTrue(s.getName().equals(nombre));
 
 					unauthenticate();
 				} catch (Throwable oops) {
@@ -182,4 +183,50 @@ public class RestaurantServiceTest extends AbstractTest {
 				checkExceptions(expected, caught);
 			}
 
+			// Tests --------------------------------------------------
+
+			/*
+			 * Manage his/her restaurants, which includes creating, listing, editing and disabled them.
+			 * 
+			 * Vamos a probar a deshabilitar los restaurantes
+			 */
+			@Test
+			public void driverDisabled() throws ParseException {
+				Object testingData[][] = {
+						
+					{// Listar restaurantes propios siendo manager1
+						"manager1", 106, null},
+					{// Listar restaurantes propios siendo manager2
+						"manager2", 106, IllegalArgumentException.class},
+					{// Listar los restaurantes propios siendo un usuario
+						"user1", 106, IllegalArgumentException.class},
+					{// Listar los restaurantes propios sin autenticar
+						null, 106, IllegalArgumentException.class},
+				};
+				
+				for (int i = 0; i < testingData.length; i++)
+					templateDisabled((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][2]);
+			}
+			
+
+			protected void templateDisabled(String username, int restaurantId, Class<?> expected) throws ParseException {
+			
+				Class<?> caught = null;
+				
+				try {
+					authenticate(username); // Iniciamos sesión con el usuario
+					Restaurant r= restaurantService.findOne(restaurantId);
+					restaurantService.delete(r);
+					Restaurant s =  restaurantService.findOne(restaurantId);
+					Assert.isTrue(s!=null);
+					Assert.isTrue(s.getErased());
+
+					unauthenticate();
+				} catch (Throwable oops) {
+					caught = oops.getClass();
+				}
+				checkExceptions(expected, caught);
+			}
+
+			
 }

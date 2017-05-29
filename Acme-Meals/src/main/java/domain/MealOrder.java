@@ -22,8 +22,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-@Table(uniqueConstraints =
-		{ @UniqueConstraint(columnNames = "status")})
 public class MealOrder extends DomainEntity {
 
 	// Attributes --------------------------------------

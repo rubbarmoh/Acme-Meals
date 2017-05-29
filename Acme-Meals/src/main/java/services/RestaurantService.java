@@ -107,8 +107,9 @@ public class RestaurantService {
 		Assert.isTrue(userAccount.getAuthorities().contains(au2) || userAccount.getAuthorities().contains(au) || userAccount.getAuthorities().contains(au3));
 		Restaurant result;
 		
-		if(userAccount.getAuthorities().contains(au2) &&
-				restaurant.getManager().getUserAccount().equals(userAccount)){
+		if(userAccount.getAuthorities().contains(au2) && 
+				(restaurant.getManager().getUserAccount().getUsername().equals(userAccount.getUsername()) ||
+				 restaurant.getId()==0)){
 			result = restaurantRepository.save(restaurant);
 		}else{
 			Assert.isTrue(check(restaurant));
@@ -126,10 +127,9 @@ public class RestaurantService {
 		au.setAuthority("MANAGER");
 
 		Assert.isTrue(userAccount.getAuthorities().contains(au));
-
 		Assert.notNull(restaurant);
-
 		Assert.isTrue(restaurant.getId() != 0);
+		Assert.isTrue(restaurant.getManager().getUserAccount().equals(userAccount));
 		restaurant.setErased(true);
 	}
 	public void enable(Restaurant restaurant){
@@ -369,29 +369,32 @@ public class RestaurantService {
 	
 	private Boolean check(Restaurant r){
 	
+		Boolean result = false;
 		Restaurant restaurant = findOne(r.getId());
 		
-		if(r.getDeliveryService()==restaurant.getDeliveryService() &&
-		   r.getErased()==restaurant.getErased() &&
+		if(r.getDeliveryService().equals(restaurant.getDeliveryService()) &&
+		   r.getErased().equals(restaurant.getErased()) &&
 		   r.getAddress().equals(restaurant.getAddress()) &&
 		   r.getCity().equals(restaurant.getCity()) &&
-		   r.getCostDelivery()==restaurant.getCostDelivery() && 
+		   r.getCostDelivery().equals(restaurant.getCostDelivery()) && 
 		   r.getEmail().equals(restaurant.getEmail()) &&
 		   r.getManager().equals(restaurant.getManager()) &&
 		   r.getMealOrders().equals(restaurant.getMealOrders()) &&
 		   r.getMeals().equals(restaurant.getMeals()) &&
-		   r.getMinimunAmount()==restaurant.getMinimunAmount()&&
+		   r.getMinimunAmount().equals(restaurant.getMinimunAmount())&&
 		   r.getName().equals(restaurant.getName()) &&
 		   r.getPhone().equals(restaurant.getPhone()) &&
 		   r.getPicture().equals(restaurant.getPicture()) &&
 		   r.getPromotes().equals(restaurant.getPromotes()) &&
 		   r.getReviews().equals(restaurant.getReviews()) &&
 		   r.getSocialIdentities().equals(restaurant.getSocialIdentities())){
-			return true;
-		}else{
-			return false;
-		}
 			
+			System.out.println(r.getName());
+			System.out.println(restaurant.getName());
+			result = true;
+			
+		}
+		return result;
 	}
 
 }
