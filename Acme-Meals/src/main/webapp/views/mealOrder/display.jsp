@@ -11,7 +11,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<security:authorize access="hasRole('USER')">
+<security:authorize access="hasAnyRole('USER','MANAGER')">
 
 <table id="row" class="table">
 	
@@ -64,6 +64,9 @@
 	<display:column property="quantity" title="${quantityHeader }" />
 	
 </display:table>
+</security:authorize>
+
+<security:authorize access="hasRole('USER')">
 
 <acme:cancel url="mealOrder/browseByUser.do" code="mealOrder.cancel"/>
 </security:authorize>
