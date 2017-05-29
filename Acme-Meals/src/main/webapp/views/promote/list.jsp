@@ -35,6 +35,9 @@
 	<spring:message code="promote.timesDisplayed" var="timesDisplayedHeader" />
 	<display:column property="timesDisplayed" title="${timesDisplayedHeader}" sortable="true"/>
 	
+	<spring:message code="promote.totalDisplayed" var="totalDisplayedHeader" />
+	<display:column property="totalDisplayed" title="${totalDisplayedHeader}" sortable="true"/>
+	
 	<display:column>
 		<a href="restaurant/display.do?restaurantId=${row.restaurant.id}"><spring:message code="promote.display.restaurant" /></a>
 	</display:column>
@@ -56,6 +59,9 @@
 	
 	<spring:message code="promote.timesDisplayed" var="timesDisplayedHeader" />
 	<display:column property="timesDisplayed" title="${timesDisplayedHeader}" sortable="true"/>
+	
+	<spring:message code="promote.totalDisplayed" var="totalDisplayedHeader" />
+	<display:column property="totalDisplayed" title="${totalDisplayedHeader}" sortable="true"/>
 	
 	<display:column>
 		<a href="restaurant/display.do?restaurantId=${row.restaurant.id}"><spring:message code="promote.display.restaurant" /></a>

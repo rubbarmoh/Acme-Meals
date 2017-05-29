@@ -52,6 +52,7 @@ public class PromoteService {
 		Promote result;
 		result = new Promote();
 		result.setTimesDisplayed(0);
+		result.setTotalDisplayed(0);
 		return result;
 	}
 
@@ -214,8 +215,8 @@ public class PromoteService {
 		r = (Restaurant) ts[randomNum];
 		for (Promote p : promotesActive()) {
 			if (p.getRestaurant() == r) {
-
 				p.setTimesDisplayed(p.getTimesDisplayed() + 1);
+				p.setTotalDisplayed(p.getTotalDisplayed() + 1);
 
 			}
 		}

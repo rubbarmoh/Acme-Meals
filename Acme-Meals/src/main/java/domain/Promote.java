@@ -24,6 +24,7 @@ public class Promote extends DomainEntity {
 	private Date	beginning;
 	private Date	ending;
 	private Integer	timesDisplayed;
+	private Integer	totalDisplayed;
 
 
 	// Getters and Setters -----------------------------
@@ -57,8 +58,19 @@ public class Promote extends DomainEntity {
 		this.timesDisplayed = timesDisplayed;
 	}
 
+	@Min(0)
+	@NotNull
+	public Integer getTotalDisplayed() {
+		return totalDisplayed;
+	}
+	public void setTotalDisplayed(Integer totalDisplayed) {
+		this.totalDisplayed = totalDisplayed;
+	}
+
+
 	// Relationships -----------------------------------
-	private Restaurant restaurant;
+	private Restaurant	restaurant;
+
 
 	@Valid
 	@ManyToOne(optional = false)
@@ -68,6 +80,5 @@ public class Promote extends DomainEntity {
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
 	}
-	
-	
+
 }

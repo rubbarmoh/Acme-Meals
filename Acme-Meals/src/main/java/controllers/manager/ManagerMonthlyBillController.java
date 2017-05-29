@@ -39,8 +39,15 @@ public class ManagerMonthlyBillController extends AbstractController {
 
 		monthlyBill = monthlyBillService.findOne(monthlyBillId);
 
+		String aux = "";
+		if (monthlyBill.getPaidMoment() == null) {
+			aux = "";
+		} else {
+			aux = "Se ha realizado el pago con la tarjeta ************" + monthlyBill.getManager().getCreditCard().getNumber().substring(12);
+		}
 		result = new ModelAndView("monthlyBill/display");
 		result.addObject("monthlyBill", monthlyBill);
+		result.addObject("aux", aux);
 		result.addObject("requestURI", "managerActor/monthlyBill/display.do");
 
 		return result;
