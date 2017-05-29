@@ -12,7 +12,7 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <security:authorize access="hasAnyRole('MANAGER')">
-<table id="row" class="table">
+<table id="row" class="table" >
 	
 	<tbody>
 		<tr>
@@ -57,6 +57,36 @@
 					</td>
 				</jstl:otherwise>
 			</jstl:choose>
+		</tr>
+</table>
+</security:authorize>
+<security:authorize access="hasAnyRole('ADMIN')">
+<table id="row" class="table">
+	
+	<tbody>
+		<tr>
+			<th>
+				<spring:message code = "monthlyBill.cost"/>
+			</th>
+			<td>
+				<jstl:out value="${monthlyBill.cost }" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<spring:message code = "monthlyBill.moment"/>
+			</th>
+			<td>
+				<fmt:formatDate value="${monthlyBill.moment }" pattern="dd/MM/yyyy HH:mm" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<spring:message code = "monthlyBill.paidMoment"/>
+			</th>
+			<td>
+				<fmt:formatDate value="${monthlyBill.paidMoment }" pattern="dd/MM/yyyy HH:mm" />
+			</td>
 		</tr>
 </table>
 </security:authorize>

@@ -47,3 +47,40 @@
 </display:table>
 
 </security:authorize>
+
+<security:authorize access="hasRole('ADMIN')">
+
+<display:table name="monthlyBills"
+	id="row"
+	class="displaytag"
+	pagesize="5"
+	requestURI="${requestURI}" >
+	
+	<jstl:choose>
+		<jstl:when test="${row.paidMoment eq null }">
+			<spring:message code="monthlyBill.manager" var="managerHeader" />
+			<display:column style="background-color:grey" title="${managerHeader}"><jstl:out value="${row.manager.userAccount.username}"/></display:column>
+		
+			<spring:message code="monthlyBill.moment" var="momentHeader" />
+			<display:column style="background-color:grey" title="${momentHeader}" sortable="false"><fmt:formatDate value="${row.moment }" pattern="dd/MM/yyyy HH:mm" /></display:column>
+			
+			<display:column style="background-color:grey">
+				<a href="administrator/monthlyBill/display.do?monthlyBillId=${row.id}"><spring:message code="monthlyBill.display" /></a>
+			</display:column>
+		</jstl:when>
+		<jstl:otherwise>
+			<spring:message code="monthlyBill.manager" var="managerHeader" />
+			<display:column style="background-color:lightblue" title="${managerHeader}"><jstl:out value="${row.manager.userAccount.username}"/></display:column>
+		
+			<spring:message code="monthlyBill.moment" var="momentHeader" />
+			<display:column style="background-color:lightblue" title="${momentHeader}" sortable="false"><fmt:formatDate value="${row.moment }" pattern="dd/MM/yyyy HH:mm" /></display:column>
+			
+			<display:column style="background-color:lightblue">
+				<a href="administrator/monthlyBill/display.do?monthlyBillId=${row.id}"><spring:message code="monthlyBill.display" /></a>
+			</display:column>
+		</jstl:otherwise>
+	</jstl:choose>
+	
+</display:table>
+
+</security:authorize>
