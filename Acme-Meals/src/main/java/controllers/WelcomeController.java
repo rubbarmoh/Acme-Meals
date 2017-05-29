@@ -62,8 +62,9 @@ public class WelcomeController extends AbstractController {
 		User user = null;
 		UserAccount userAccount = null;
 		try {
-			user = userService.findByPrincipal();
 			userAccount = LoginService.getPrincipal();
+			user = userService.findByPrincipal();
+
 		} catch (Exception e) {
 		}
 
