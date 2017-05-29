@@ -140,6 +140,7 @@ public class UserMealOrderController extends AbstractController{
 			Invoice aux2;
 			String v="";
 			Collection<VATNumber>vat;
+			
 			vat=vatNumberService.findAll();
 			for(VATNumber c:vat){
 				if(c!=null){
@@ -155,7 +156,7 @@ public class UserMealOrderController extends AbstractController{
 					Restaurant r=restaurantService.findOne(mealOrderForm.getRestaurantId());
 					mealOrder.setStatus("PENDING");
 					if(r.getMinimunAmount()!=null){
-						Double am=mealOrder.getAmount()+r.getMinimunAmount();
+						Double am=mealOrder.getAmount()+r.getCostDelivery();
 						mealOrder.setAmount(am);
 					}
 					aux = mealOrderService.save(mealOrder);
@@ -166,6 +167,7 @@ public class UserMealOrderController extends AbstractController{
 					invoice.setName(aux.getUser().getName());
 					invoice.setSurname(aux.getUser().getSurname());
 					invoice.setVatNumber(v);
+					invoice.setDescription("Se ha realizado el pago con la tarjeta ************"+ mealOrder.getUser().getCreditCard().getNumber().substring(12)+ " una cantidad de "+mealOrder.getAmount());
 					aux2=invoiceService.save(invoice);
 					int id = aux2.getId();
 					result = new ModelAndView("redirect:../../invoice/display.do?invoiceId="+id);

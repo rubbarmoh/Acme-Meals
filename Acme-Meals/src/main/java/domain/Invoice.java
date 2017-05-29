@@ -26,7 +26,7 @@ public class Invoice extends DomainEntity {
 	private String	vatNumber;
 	private String	name;
 	private String	surname;
-
+	private String description;
 
 	// Getters and Setters -----------------------------
 
@@ -36,6 +36,13 @@ public class Invoice extends DomainEntity {
 	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm")
 	public Date getMoment() {
 		return moment;
+	}
+	@NotBlank
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public void setMoment(Date moment) {
 		this.moment = moment;

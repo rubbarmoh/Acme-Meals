@@ -40,6 +40,14 @@
 		</tr>
 		<tr>
 			<th>
+				<spring:message code = "invoice.description"/>
+			</th>
+			<td>
+				<jstl:out value="${invoice.description }" />
+			</td>
+			</tr>
+		<tr>
+			<th>
 				<spring:message code = "invoice.moment"/>
 			</th>
 			<td>
