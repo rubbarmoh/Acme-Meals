@@ -77,20 +77,39 @@ public class UserController extends AbstractController {
 
 		return result;
 	}
+
+	//displayPrinicpal ----
+
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display() {
+		ModelAndView result;
+		User user;
+
+		user = userService.findByPrincipal();
+
+		user = userService.encryptCreditCard(user);
+
+		result = new ModelAndView("user/display");
+		result.addObject("user", user);
+		result.addObject("requestURI", "user/display.do");
+
+		return result;
+	}
+
 	//display ----
 
-		@RequestMapping(value = "/displayById", method = RequestMethod.GET)
-		public ModelAndView displayById(@RequestParam int userId) {
-			ModelAndView result;
-			User user;
+	@RequestMapping(value = "/displayById", method = RequestMethod.GET)
+	public ModelAndView displayById(@RequestParam int userId) {
+		ModelAndView result;
+		User user;
 
-			user = userService.findOne(userId);
-			result = new ModelAndView("user/display");
-			result.addObject("user", user);
-			result.addObject("requestURI", "user/display.do");
+		user = userService.findOne(userId);
+		result = new ModelAndView("user/display");
+		result.addObject("user", user);
+		result.addObject("requestURI", "user/display.do");
 
-			return result;
-		}
+		return result;
+	}
 	// Ancillary methods ---------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(UserForm userForm) {

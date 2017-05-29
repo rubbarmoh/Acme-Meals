@@ -108,6 +108,7 @@
 				<security:authorize access="hasRole('MANAGER')">
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="managerActor/display.do"><spring:message code="master.page.display.manager" /></a></li>
 					<li><a href="managerActor/edit.do"><spring:message code="master.page.edit.manager" /></a></li>					
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
@@ -115,6 +116,7 @@
 				<security:authorize access="hasRole('USER')">
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="user/display.do"><spring:message code="master.page.display.user" /></a></li>		
 					<li><a href="user/edit.do"><spring:message code="master.page.edit.user" /></a></li>					
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>

@@ -263,6 +263,33 @@ public class UserService {
 		save2(user);
 	}
 
+	public User encryptCreditCard(User user) {
+
+		User result = create();
+
+		result.setId(user.getId());
+		result.setUserAccount(user.getUserAccount());
+		result.setEmail(user.getEmail());
+		result.setName(user.getName());
+		result.setPhone(user.getPhone());
+		result.setAddress(user.getAddress());
+		result.setSurname(user.getSurname());
+
+		CreditCard caux = new CreditCard();
+		String aux;
+		caux.setBrandName(user.getCreditCard().getBrandName());
+		caux.setCvv(user.getCreditCard().getCvv());
+		caux.setExpirationMonth(user.getCreditCard().getExpirationMonth());
+		caux.setExpirationYear(user.getCreditCard().getExpirationYear());
+		caux.setHolderName(user.getCreditCard().getHolderName());
+		aux = "************" + user.getCreditCard().getNumber().substring(12);
+		caux.setNumber(aux);
+		result.setCreditCard(caux);
+
+		return result;
+
+	}
+
 	//Forms----------
 
 	public UserForm generateForm(User user) {

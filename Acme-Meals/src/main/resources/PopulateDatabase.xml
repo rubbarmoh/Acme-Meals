@@ -166,7 +166,7 @@
 	<bean id="creditCard2" class="domain.CreditCard">
 	  <property name="holderName" value="Nomis Aege" />
 	  <property name="brandName" value="MasterCard" />
-	  <property name="number" value="348336595595090" />
+	  <property name="number" value="5835894060330673" />
 	  <property name="expirationMonth" value="12" />
 	  <property name="expirationYear" value="2017" />
 	  <property name="cvv" value="998" />
@@ -1305,6 +1305,7 @@
 	  <!-- Invoice -->
 	  
 	  <bean id="invoice1" class="domain.Invoice">
+	 	<property name="description" value="Se ha realizado tu pedido con la tarjeta ************5756"/>
 	  	<property name="moment" value="04/25/2017 18:30"/>
 	  	<property name="vatNumber" value="ES-78245688"/>
 	  	<property name="name" value="Irene"/>

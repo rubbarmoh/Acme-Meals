@@ -200,6 +200,32 @@ public class ManagerService {
 		return result;
 	}
 
+	public Manager encryptCreditCard(Manager manager) {
+
+		Manager result = create();
+
+		result.setId(manager.getId());
+		result.setUserAccount(manager.getUserAccount());
+		result.setEmail(manager.getEmail());
+		result.setName(manager.getName());
+		result.setPhone(manager.getPhone());
+		result.setAddress(manager.getAddress());
+		result.setSurname(manager.getSurname());
+
+		CreditCard caux = new CreditCard();
+		String aux;
+		caux.setBrandName(manager.getCreditCard().getBrandName());
+		caux.setCvv(manager.getCreditCard().getCvv());
+		caux.setExpirationMonth(manager.getCreditCard().getExpirationMonth());
+		caux.setExpirationYear(manager.getCreditCard().getExpirationYear());
+		caux.setHolderName(manager.getCreditCard().getHolderName());
+		aux = "************" + manager.getCreditCard().getNumber().substring(12);
+		caux.setNumber(aux);
+		result.setCreditCard(caux);
+
+		return result;
+
+	}
 	//Forms----------
 
 	public ManagerForm generateForm(Manager manager) {

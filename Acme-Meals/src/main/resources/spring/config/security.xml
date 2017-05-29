@@ -44,7 +44,9 @@
 		<security:intercept-url pattern="/managerActor/register.do" access="permitAll" /> 
 		<security:intercept-url pattern="/user/register.do" access="permitAll" /> 
 		
+		<security:intercept-url pattern="/managerActor/display.do" access="hasRole('MANAGER')" /> 
 		<security:intercept-url pattern="/managerActor/edit.do" access="hasRole('MANAGER')" /> 
+		<security:intercept-url pattern="/user/display.do" access="hasRole('USER')" /> 
 		<security:intercept-url pattern="/user/edit.do" access="hasRole('USER')" /> 
 
 		<security:intercept-url pattern="/administrator/dashboard.do" access="hasRole('ADMIN')" />

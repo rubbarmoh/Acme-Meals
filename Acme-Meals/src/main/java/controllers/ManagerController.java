@@ -38,6 +38,24 @@ public class ManagerController extends AbstractController {
 		super();
 	}
 
+	//displayPrinicpal ----
+
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display() {
+		ModelAndView result;
+		Manager manager;
+
+		manager = managerService.findByPrincipal();
+
+		manager = managerService.encryptCreditCard(manager);
+
+		result = new ModelAndView("managerActor/display");
+		result.addObject("manager", manager);
+		result.addObject("requestURI", "managerActor/display.do");
+
+		return result;
+	}
+
 	// Dashboard -----------------------------------------------
 
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
