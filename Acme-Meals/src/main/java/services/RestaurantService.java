@@ -105,10 +105,16 @@ public class RestaurantService {
 		au3.setAuthority("CRITIC");
 
 		Assert.isTrue(userAccount.getAuthorities().contains(au2) || userAccount.getAuthorities().contains(au) || userAccount.getAuthorities().contains(au3));
-
 		Restaurant result;
-		result = restaurantRepository.save(restaurant);
-
+		
+		if(userAccount.getAuthorities().contains(au2) &&
+				restaurant.getManager().getUserAccount().equals(userAccount)){
+			result = restaurantRepository.save(restaurant);
+		}else{
+			Assert.isTrue(check(restaurant));
+			result = restaurantRepository.save(restaurant);
+		}
+		
 		return result;
 	}
 
@@ -359,6 +365,33 @@ public class RestaurantService {
 		Collection<Restaurant>result;
 		result=restaurantRepository.findEnabledRestaurants();
 		return result;
+	}
+	
+	private Boolean check(Restaurant r){
+	
+		Restaurant restaurant = findOne(r.getId());
+		
+		if(r.getDeliveryService()==restaurant.getDeliveryService() &&
+		   r.getErased()==restaurant.getErased() &&
+		   r.getAddress().equals(restaurant.getAddress()) &&
+		   r.getCity().equals(restaurant.getCity()) &&
+		   r.getCostDelivery()==restaurant.getCostDelivery() && 
+		   r.getEmail().equals(restaurant.getEmail()) &&
+		   r.getManager().equals(restaurant.getManager()) &&
+		   r.getMealOrders().equals(restaurant.getMealOrders()) &&
+		   r.getMeals().equals(restaurant.getMeals()) &&
+		   r.getMinimunAmount()==restaurant.getMinimunAmount()&&
+		   r.getName().equals(restaurant.getName()) &&
+		   r.getPhone().equals(restaurant.getPhone()) &&
+		   r.getPicture().equals(restaurant.getPicture()) &&
+		   r.getPromotes().equals(restaurant.getPromotes()) &&
+		   r.getReviews().equals(restaurant.getReviews()) &&
+		   r.getSocialIdentities().equals(restaurant.getSocialIdentities())){
+			return true;
+		}else{
+			return false;
+		}
+			
 	}
 
 }
