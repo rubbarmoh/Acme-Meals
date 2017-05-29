@@ -33,7 +33,7 @@
 		<acme:textbox code="socialIdentity.link" path="link"/>
 		<acme:textbox code="socialIdentity.picture" path="picture"/>
 		<acme:submit name="save" code="socialIdentity.save"/>
-		<jstl:if test="${socialIdentity.id!=0}">
+		<jstl:if test="${socialIdentityForm.id!=0}">
 			<input type="submit" name="delete" value="<spring:message code="socialIdentity.delete" />" onclick="return confirm('<spring:message code="socialIdentity.confirm.delete" />')" />
 		</jstl:if>
 		<acme:cancel code="socialIdentity.cancel" url="socialIdentity/browse.do"/>

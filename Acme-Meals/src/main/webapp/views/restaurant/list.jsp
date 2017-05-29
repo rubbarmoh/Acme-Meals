@@ -39,6 +39,10 @@
 		<a href="restaurant/display.do?restaurantId=${row.id}"><spring:message code="restaurant.display" /></a>
 	</display:column>
 	
+	<display:column>
+		<a href="socialIdentity/create.do?restaurantId=${row.id}"><spring:message code="restaurant.socialIdentity" /></a>
+	</display:column>
+	
 	
 	
 </display:table>

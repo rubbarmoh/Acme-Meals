@@ -66,7 +66,8 @@ public class ManagerSocialIdentityController extends AbstractController{
 			SocialIdentityForm socialIdentityForm;
 
 			socialIdentityForm = socialIdentityService.generateForm(restaurantId);
-			result = createEditModelAndView(socialIdentityForm, null);
+			result = new ModelAndView("socialIdentity/create");
+			result.addObject("socialIdentityForm", socialIdentityForm);
 
 			return result;
 
