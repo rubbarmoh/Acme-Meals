@@ -203,6 +203,7 @@ public class MealOrderService {
 				result.setPickUp(false);
 				result.setDeliveryAdress(mealOrderForm.getDeliveryAdress());
 				Assert.isTrue(!(result.getDeliveryAdress().equals("")),"adressNotValid");
+				Assert.isTrue(result.getRestaurant().getDeliveryService(),"noDeliveryService");
 			}
 			
 			validator.validate(result, binding);

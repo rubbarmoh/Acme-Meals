@@ -179,7 +179,9 @@ public class UserMealOrderController extends AbstractController{
 						msgCode = "mealOrder.pickUpMarked";
 					} else if (oops.getMessage().equals("adressNotValid")) {
 						msgCode = "mealOrder.adressNotValid";
-					} 
+					} else if (oops.getMessage().equals("noDeliveryService")){
+						msgCode="mealOrder.noDeliveryService";
+					}
 					result = createEditModelAndView(mealOrderForm, msgCode);
 				}
 			}
