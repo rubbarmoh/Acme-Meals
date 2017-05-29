@@ -97,11 +97,11 @@ public class UserServiceTest extends AbstractTest {
 	public void driverEditUser() {
 		Object testingData[][] = {
 			{
-				null, "", IllegalArgumentException.class
+				null, "newName", IllegalArgumentException.class
 			}, // Editamos perfil con un usuario no autenticado
 			{
-				"user1", "", IllegalArgumentException.class
-			}, // Editamos perfil pero dejamos en blanco la casilla de edicion
+				"admin", "newName", IllegalArgumentException.class
+			}, // Editamos perfil con un admin
 			{
 				"user1", "newName", null
 			}
@@ -118,8 +118,8 @@ public class UserServiceTest extends AbstractTest {
 			authenticate(username); // Nos autenticamos
 			User user = userService.findByPrincipal();
 			user.setName(name);
-			Assert.isTrue(user != null);
-			userService.save2(user);
+			user = userService.save2(user);
+			Assert.notNull(user);
 			unauthenticate();
 		} catch (Throwable oops) {
 			caught = oops.getClass();
