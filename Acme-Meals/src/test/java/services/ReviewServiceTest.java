@@ -138,9 +138,9 @@ public class ReviewServiceTest extends AbstractTest {
 			{// Editar un review propio
 				"critic1", 121, "Prueba", null
 			}, {// Editar un review siendo critic, pero no su propietario
-				"critic2", 121, "Prueba", NullPointerException.class
+				"critic2", 121, "Prueba", IllegalArgumentException.class
 			}, {// Editar un review siendo usuario
-				"user1", 121, "Prueba", NullPointerException.class
+				"user1", 121, "Prueba", IllegalArgumentException.class
 			}
 		};
 
@@ -155,10 +155,9 @@ public class ReviewServiceTest extends AbstractTest {
 		try {
 			authenticate(username); // Iniciamos sesión con el usuario
 			Review s;
-			Review r1 = reviewService.findOne(reviewId);
 			Review r = reviewService.findOne(reviewId);
 			r.setText(text);
-			Assert.isTrue(reviewService.check(r, r1) == true);
+			Assert.isTrue(reviewService.check(r) == true);
 			s = reviewService.save(r);
 			Assert.isTrue(s != null);
 			Assert.isTrue(s.getText().equals(text));

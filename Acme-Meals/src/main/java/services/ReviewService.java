@@ -212,17 +212,12 @@ public class ReviewService {
 		return r;
 	}
 
-	public Boolean check(Review r, Review r2) {
+	public Boolean check(Review r) {
 
 		Boolean result = false;
-
-		if (r.getRate().equals(r2.getRate()) && r.getCritic().equals(r2.getCritic()) && r.getRestaurant().equals(r2.getRestaurant()) && r.getTitle().equals(r2.getTitle()) && r.getText().equals(r2.getText())
-			&& r.getRelationLikes().equals(r2.getRelationLikes()) && r.getRelationDislikes().equals(r2.getRelationDislikes())) {
-
-			System.out.println(r.getText());
-			System.out.println(r2.getText());
+		Critic critic = criticService.findByPrincipal();
+		if (r.getCritic().equals(critic)) {
 			result = true;
-
 		}
 		return result;
 	}

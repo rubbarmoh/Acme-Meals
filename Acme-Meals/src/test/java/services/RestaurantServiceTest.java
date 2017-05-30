@@ -150,9 +150,9 @@ public class RestaurantServiceTest extends AbstractTest {
 			{// Editar un restaurante propio
 				"manager1", 106, "Prueba", null
 			}, {// Editar un restaurante siendo manager, pero no su propietario
-				"manager2", 106, "Prueba", NullPointerException.class
+				"manager2", 106, "Prueba", IllegalArgumentException.class
 			}, {// Editar un restaurante siendo usuario
-				"user1", 106, "Prueba", NullPointerException.class
+				"user1", 106, "Prueba", IllegalArgumentException.class
 			}
 		};
 
@@ -169,6 +169,7 @@ public class RestaurantServiceTest extends AbstractTest {
 			Restaurant s;
 			Restaurant r = restaurantService.findOne(restaurantId);
 			r.setName(nombre);
+			Assert.isTrue(restaurantService.check(r) == true);
 			s = restaurantService.save(r);
 			Assert.isTrue(s != null);
 			Assert.isTrue(s.getName().equals(nombre));
