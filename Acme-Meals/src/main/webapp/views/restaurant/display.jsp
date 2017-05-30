@@ -69,15 +69,16 @@
 		<tr>
 			<td><jstl:out value="${restaurant.avgStars }" /></td>
 		</tr>
-		<jstl:forEach items="${restaurant.socialIdentities}" var="socialIdentity">
-			<tr>
+		<tr>
+			<td></td>
 				<th><spring:message code = "socialIdentity.socialNetwork"/></th>
 				<th><spring:message code = "socialIdentity.link"/></th>
-			</tr>
-			
-				<tr>
+		</tr>
+		<jstl:forEach items="${restaurant.socialIdentities}" var="socialIdentity">
+			<tr>
+			<td></td>
 				<td><jstl:out value="${socialIdentity.socialNetwork}" /></td>
-				<td><a href="socialIdentity.link"><jstl:out value="${socialIdentity.link}"/></a></td>
+				<td><a href="${socialIdentity.link}"><jstl:out value="${socialIdentity.link}"/></a></td>
 			</tr>
 		</jstl:forEach>
 </table>
