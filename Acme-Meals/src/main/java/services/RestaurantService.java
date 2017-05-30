@@ -172,6 +172,13 @@ public class RestaurantService {
 	}
 
 	public Map<Restaurant, Integer> ordersPerRestaurant(Manager manager) {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		Map<Restaurant, Integer> map = new HashMap<Restaurant, Integer>();
 		List<Object[]> aux = restaurantRepository.ordersPerRestaurant(manager);
 		for (Object[] o : aux) {
@@ -181,21 +188,49 @@ public class RestaurantService {
 	}
 
 	public List<Restaurant> restaurantMoreStars(Manager manager) {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		List<Restaurant> result = restaurantRepository.restaurantMoreStars(manager);
 		return result;
 	}
 
 	public List<Restaurant> restaurantLessStars(Manager manager) {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		List<Restaurant> result = restaurantRepository.restaurantLessStars(manager);
 		return result;
 	}
 
 	public Double avgProfitMyRestaurants(Manager manager) {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		Double result = restaurantRepository.avgProfitMyRestaurants(manager);
 		return result;
 	}
 
 	public Map<Restaurant, Double> profitByRestaurant(Manager manager) {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		Map<Restaurant, Double> map = new HashMap<Restaurant, Double>();
 		List<Object[]> aux = restaurantRepository.profitByRestaurant(manager);
 		for (Object[] o : aux) {
@@ -205,6 +240,13 @@ public class RestaurantService {
 	}
 
 	public List<Restaurant> restaurantMoreProfit(Manager manager) {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		List<Restaurant> result = new ArrayList<Restaurant>();
 		Double aux = 0.;
 		List<Object[]> obj = restaurantRepository.restaurantMoreProfit(manager);
@@ -222,11 +264,25 @@ public class RestaurantService {
 	}
 
 	public List<Restaurant> restaurantsWithMore10PercentOrders(Manager manager) {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		List<Restaurant> result = restaurantRepository.restaurantsWithMore10PercentOrders(manager);
 		return result;
 	}
 
 	public List<Restaurant> restaurantsWithLess10PercentOrders(Manager manager) {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		List<Restaurant> result = restaurantRepository.restaurantsWithLess10PercentOrders(manager);
 		return result;
 	}
