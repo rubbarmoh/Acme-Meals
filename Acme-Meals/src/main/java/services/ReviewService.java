@@ -121,6 +121,13 @@ public class ReviewService {
 	}
 
 	public List<Review> reviewCriticMoreLikes() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("CRITIC");
+
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		List<Review> result = reviewRepository.reviewCriticMoreLikes();
 		return result;
 	}

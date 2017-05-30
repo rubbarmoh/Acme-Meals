@@ -169,4 +169,42 @@ public class ReviewServiceTest extends AbstractTest {
 		checkExceptions(expected, caught);
 	}
 
+	/*
+	 * A listing with his or her reviews sorted according to the number of likes that they
+	 * have got.
+	 */
+	@Test
+	public void driverListLike() throws ParseException {
+		Object testingData[][] = {
+
+			{// Listar reviews propios siendo critic1
+				"critic1", null
+			}, {// Listar los reviews propios siendo un usuario
+				"user1", IllegalArgumentException.class
+			}, {// Listar los reviews propios sin autenticar
+				null, IllegalArgumentException.class
+			},
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			templateListLike((String) testingData[i][0], (Class<?>) testingData[i][1]);
+	}
+
+	protected void templateListLike(String username, Class<?> expected) throws ParseException {
+
+		Class<?> caught = null;
+
+		try {
+			authenticate(username); // Iniciamos sesión con el usuario
+
+			Collection<Review> reviews = reviewService.reviewCriticMoreLikes();
+			Assert.isTrue(!reviews.isEmpty());
+
+			unauthenticate();
+		} catch (Throwable oops) {
+			caught = oops.getClass();
+		}
+		checkExceptions(expected, caught);
+	}
+
 }
