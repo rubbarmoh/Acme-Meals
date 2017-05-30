@@ -203,8 +203,12 @@ public class ReviewService {
 		Object[] ts = findAll().toArray();
 		int min = 0;
 		int max = ts.length;
-		int randomNum = ThreadLocalRandom.current().nextInt(min, max);
-		r = (Review) ts[randomNum];
+		if(ts.length != 0){
+			max = ts.length;
+		
+			int randomNum = ThreadLocalRandom.current().nextInt(min, max);
+			r = (Review) ts[randomNum];
+		}
 		return r;
 	}
 

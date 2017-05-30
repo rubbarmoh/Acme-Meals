@@ -224,16 +224,21 @@ public class PromoteService {
 		Restaurant r = new Restaurant();
 		Object[] ts = promoteActiveBanner().toArray();
 		int min = 0;
-		int max = ts.length;
-		int randomNum = ThreadLocalRandom.current().nextInt(min, max);
-		r = (Restaurant) ts[randomNum];
-		for (Promote p : promotesActive()) {
-			if (p.getRestaurant() == r) {
-				p.setTimesDisplayed(p.getTimesDisplayed() + 1);
-				p.setTotalDisplayed(p.getTotalDisplayed() + 1);
-
+		
+		int max = 0;
+		if(ts.length != 0){
+			max = ts.length;
+		
+			int randomNum = ThreadLocalRandom.current().nextInt(min, max);
+			r = (Restaurant) ts[randomNum];
+			for (Promote p : promotesActive()) {
+				if (p.getRestaurant() == r) {
+					p.setTimesDisplayed(p.getTimesDisplayed() + 1);
+					p.setTotalDisplayed(p.getTotalDisplayed() + 1);
+	
+				}
 			}
 		}
-		return r;
+		return r ;
 	}
 }

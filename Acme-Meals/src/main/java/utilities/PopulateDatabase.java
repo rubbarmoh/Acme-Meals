@@ -51,7 +51,7 @@ public class PopulateDatabase {
 			System.out.printf("Creating database `%s' (%s).%n", databaseUtil.getDatabaseName(), databaseUtil.getDatabaseDialectName());
 			databaseUtil.recreateDatabase();
 
-			System.out.print("Reading web of entities from `PopulateDatabaseEmpt.xml'");
+			System.out.print("Reading web of entities from `PopulateDatabase.xml'");
 			populationContext = new ClassPathXmlApplicationContext("classpath:PopulateDatabase.xml");
 			entityMap = populationContext.getBeansWithAnnotation(Entity.class);
 			System.out.printf(" (%d entities found).%n", entityMap.size());

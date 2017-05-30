@@ -22,8 +22,10 @@
 </jstl:if>
 <security:authorize
 	access="isAnonymous()">
+
 <table id="row" class="table" style="border:none">
 	<tr>
+	<jstl:if test ="${restaurant != null }">
 	<td>
 	<h2><spring:message code="welcome.restaurant" /></h2>
 	<table id="row" class="table" style="width: 600px; height: 200px">
@@ -61,6 +63,8 @@
 		</tr>
 		</table>
 		</td>
+		</jstl:if>
+		<jstl:if test ="${review != null }">
 		<td>
 		<h2><spring:message code="welcome.review" /></h2>
 		<table id="row" class="table" style="width: 600px; height: 200px">
@@ -93,6 +97,7 @@
 		</tr>
 	</table>
 	</td>
+	</jstl:if>
 	</tr>
 </table>
 </security:authorize>
@@ -101,6 +106,7 @@
 	access="hasRole('USER')">
 <table id="row" class="table" style="border:none">
 	<tr>
+	<jstl:if test ="${restaurant != null }">
 	<td>
 	<h2><spring:message code="welcome.restaurant" /></h2>
 	<table id="row" class="table" style="width: 600px; height: 200px">
@@ -138,6 +144,8 @@
 		</tr>
 		</table>
 		</td>
+	</jstl:if>
+	<jstl:if test ="${review != null }">
 		<td>
 		<h2><spring:message code="welcome.review" /></h2>
 		<table id="row" class="table" style="width: 600px; height: 200px">
@@ -170,6 +178,7 @@
 		</tr>
 	</table>
 	</td>
+	</jstl:if>
 	</tr>
 </table>
 </security:authorize>
