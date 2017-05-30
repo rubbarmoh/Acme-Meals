@@ -185,6 +185,12 @@ public class ManagerService {
 
 	public Collection<Double> minMaxAvgMonthlyBillsPerManager() {
 
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		Collection<Double> result = new ArrayList<Double>();
 		Double aux;
 

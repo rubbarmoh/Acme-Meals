@@ -84,7 +84,7 @@ public class CriticService {
 	}
 
 	public Critic save(Critic critic) {
-		
+
 		UserAccount userAccount2;
 		userAccount2 = LoginService.getPrincipal();
 		Authority au3 = new Authority();
@@ -166,6 +166,12 @@ public class CriticService {
 	}
 
 	public Collection<Double> minMaxAvgReviewsPerCritic() {
+
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
 
 		Collection<Double> result = new ArrayList<Double>();
 		Double aux;

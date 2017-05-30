@@ -232,36 +232,78 @@ public class RestaurantService {
 	}
 
 	public List<Restaurant> restaurantMoreOrders() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		List<Restaurant> result = restaurantRepository.restaurantMoreOrders();
 		return result;
 	}
 
 	public List<Restaurant> restaurantLessOrders() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		List<Restaurant> result = restaurantRepository.restaurantLessOrders();
 		return result;
 	}
 
 	public Double ratioRestaurantWithSocialIdentity() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		Double result = restaurantRepository.ratioRestaurantWithSocialIdentity();
 		return result;
 	}
 
 	public List<Restaurant> restaurantWithMoreReviews() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		List<Restaurant> result = restaurantRepository.restaurantWithMoreReviews();
 		return result;
 	}
 
 	public List<Restaurant> restaurantWithLessReviews() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		List<Restaurant> result = restaurantRepository.restaurantWithLessReviews();
 		return result;
 	}
 
 	public Double ratioRestaurantsPromoted() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		Double result = restaurantRepository.ratioRestaurantsPromoted();
 		return result;
 	}
 
 	public List<Restaurant> restaurantMoreStars() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		List<Restaurant> result = restaurantRepository.restaurantMoreStars();
 		return result;
 	}

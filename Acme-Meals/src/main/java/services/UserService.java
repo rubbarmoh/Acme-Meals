@@ -189,6 +189,12 @@ public class UserService {
 
 	public Collection<Double> minMaxAVGOrdersPerUser() {
 
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		Collection<Double> result = new ArrayList<Double>();
 		Double aux;
 
@@ -205,21 +211,45 @@ public class UserService {
 	}
 
 	public List<User> usersMorethan10PercentOrders() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		List<User> result = userRepository.usersMorethan10PercentOrders();
 		return result;
 	}
 
 	public List<User> usersLessthan10PercentOrders() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		List<User> result = userRepository.usersLessthan10PercentOrders();
 		return result;
 	}
 
 	public List<User> usersMoreThan10PercentComments() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		List<User> result = userRepository.usersMoreThan10PercentComments();
 		return result;
 	}
 
 	public List<User> usersLessThan10PercentComments() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		List<User> result = userRepository.usersLessThan10PercentComments();
 		return result;
 	}

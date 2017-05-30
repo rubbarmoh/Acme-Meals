@@ -116,6 +116,13 @@ public class ReviewService {
 	// Other bussiness methods ----------------------------------------------------
 
 	public List<Review> reviewMoreLikes() {
+
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		List<Review> result = reviewRepository.reviewMoreLikes();
 		return result;
 	}
