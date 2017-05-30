@@ -117,4 +117,45 @@ public class MonthlyBillServiceTest extends AbstractTest {
 		checkExceptions(expected, caught);
 	}
 
+	// Tests --------------------------------------------------
+
+	/*
+	 * List monthly bills.
+	 * 
+	 * Listar
+	 */
+	@Test
+	public void driverListManager() throws ParseException {
+		Object testingData[][] = {
+
+			{// Listar monthlyBills como admin
+				"manager1", null
+			}, {// Listar monthlyBills como user
+				"user1", IllegalArgumentException.class
+			}, {// Listar monthlyBills como usuario no autenticado
+				null, IllegalArgumentException.class
+			},
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			templateListManager((String) testingData[i][0], (Class<?>) testingData[i][1]);
+	}
+
+	protected void templateListManager(String username, Class<?> expected) throws ParseException {
+
+		Class<?> caught = null;
+
+		try {
+			authenticate(username); // Iniciamos sesión con el usuario
+
+			Collection<MonthlyBill> MonthlyBills = monthlyBillService.findByPrincipal();
+			Assert.notEmpty(MonthlyBills);
+
+			unauthenticate();
+		} catch (Throwable oops) {
+			caught = oops.getClass();
+		}
+		checkExceptions(expected, caught);
+	}
+
 }
