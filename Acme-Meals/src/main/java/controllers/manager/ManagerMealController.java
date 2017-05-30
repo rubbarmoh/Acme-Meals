@@ -118,12 +118,7 @@ public class ManagerMealController extends AbstractController {
 		ModelAndView result;
 
 			Meal meal = mealService.findOne(mealId);
-				if(meal.getErased()){
-					meal.setErased(false);
-				}else{
-					meal.setErased(true);
-				}
-				mealService.save(meal);
+			mealService.disable(meal);
 				result = new ModelAndView("redirect:../../restaurant/display.do?restaurantId=" + meal.getRestaurant().getId());
 			
 		return result;

@@ -92,11 +92,15 @@ public class MealService {
 		Assert.isTrue(userAccount.getAuthorities().contains(au));
 
 		Assert.notNull(meal);
-
+		
+		Assert.isTrue(userAccount.getAuthorities().contains(au) && 
+				(meal.getRestaurant().getManager().getUserAccount().getUsername().equals(userAccount.getUsername()) ||
+				 meal.getId()==0));
+			
 		return mealRepository.save(meal);
 	}
 
-	public void delete(Meal meal) {
+	public void disable(Meal meal) {
 
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
@@ -106,9 +110,14 @@ public class MealService {
 
 		Assert.notNull(meal);
 		Assert.isTrue(meal.getId() != 0);
-		Assert.isTrue(mealRepository.exists(meal.getId()));
+		
 
-		mealRepository.delete(meal);
+		if(meal.getErased()){
+			meal.setErased(false);
+		}else{
+			meal.setErased(true);
+		}
+		mealRepository.save(meal);
 	}
 	public Collection<Meal> mealPerRestaurant(Restaurant r) {
 		Collection<Meal> result;

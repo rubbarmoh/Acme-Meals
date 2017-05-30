@@ -130,7 +130,7 @@
 					</jstl:when>
 					<jstl:otherwise>
 						<input type="button" name="delete"
-								value="<spring:message code="restaurant.enabled" />"
+								value="<spring:message code="restaurant.enable" />"
 								onclick="javascript: window.location.replace('managerActor/meal/delete.do?mealId=${row.id}')"/>
 					</jstl:otherwise>
 				</jstl:choose>
@@ -170,12 +170,12 @@
 				<jstl:choose>
 					<jstl:when test="${row.erased == false}">
 						<input type="button" name="delete"
-								value="<spring:message code="restaurant.disabled" />"
+								value="<spring:message code="restaurant.disable" />"
 								onclick="javascript: window.location.replace('managerActor/meal/delete.do?mealId=${row.id}')"/>
 					</jstl:when>
 					<jstl:otherwise>
 						<input type="button" name="delete"
-								value="<spring:message code="restaurant.enabled" />"
+								value="<spring:message code="restaurant.enable" />"
 								onclick="javascript: window.location.replace('managerActor/meal/delete.do?mealId=${row.id}')"/>
 					</jstl:otherwise>
 				</jstl:choose>

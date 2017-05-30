@@ -58,7 +58,7 @@ public class RestaurantController extends AbstractController {
 			au.setAuthority("MANAGER");
 						
 			if(userAccount.getAuthorities().contains(au) 
-					&& restaurant.getManager().getUserAccount().getUsername() == LoginService.getPrincipal().getUsername()){
+					&& restaurant.getManager().getUserAccount().getUsername().equals(LoginService.getPrincipal().getUsername())){
 				meals = mealService.mealPerRestaurant(restaurant);
 			}else{
 				meals = mealService.mealAvailablePerRestaurant(restaurant);
