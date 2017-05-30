@@ -54,7 +54,9 @@ public class MonthlyBillService {
 		userAccount = LoginService.getPrincipal();
 		Authority au = new Authority();
 		au.setAuthority("ADMIN");
-		Assert.isTrue(userAccount.getAuthorities().contains(au));
+		Authority au1 = new Authority();
+		au1.setAuthority("MANAGER");
+		Assert.isTrue(userAccount.getAuthorities().contains(au) || userAccount.getAuthorities().contains(au1));
 
 		MonthlyBill result;
 
@@ -64,6 +66,13 @@ public class MonthlyBillService {
 	}
 
 	public Collection<MonthlyBill> findAll() {
+
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
 		Collection<MonthlyBill> result;
 
 		result = monthlyBillRepository.findAll();
