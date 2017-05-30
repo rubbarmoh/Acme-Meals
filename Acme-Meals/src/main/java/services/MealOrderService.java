@@ -210,4 +210,22 @@ public class MealOrderService {
 		validator.validate(result, binding);
 		return result;
 	}
+	
+	public void step(MealOrder mealOrder){
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+		Assert.isTrue(mealOrder.getRestaurant().getManager().getUserAccount().getUsername().equals(userAccount.getUsername()));
+		Assert.isTrue(!mealOrder.getStatus().equals("DRAFT")&&!mealOrder.getStatus().equals("FINISHED"));		
+		
+		if(mealOrder.getStatus().equals("PENDING")){
+			mealOrder.setStatus("INPROGRESS");
+		}else{
+			mealOrder.setStatus("FINISHED");
+		}
+		
+		save(mealOrder);
+	}
 }

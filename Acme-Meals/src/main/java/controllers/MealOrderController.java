@@ -102,13 +102,7 @@ public class MealOrderController extends AbstractController{
 		
 		mealOrder = mealOrderService.findOne(mealOrderId);
 		
-		if(mealOrder.getStatus().equals("PENDING")){
-			mealOrder.setStatus("INPROGRESS");
-		}else{
-			mealOrder.setStatus("FINISHED");
-		}
-		
-		mealOrderService.save(mealOrder);
+		mealOrderService.step(mealOrder);
 		
 		return browseCurrentlyByManager();
 	}

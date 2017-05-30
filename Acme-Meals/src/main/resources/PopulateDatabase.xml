@@ -1219,7 +1219,7 @@
 	  <bean id="mealOrder1" class="domain.MealOrder">
 	  	<property name="moment" value="04/25/2017"/>
 	  	<property name="amount" value="9.50"/>
-	  	<property name="status" value="FINISHED"/>
+	  	<property name="status" value="PENDING"/>
 	  	<property name="pickUp" value="false"/>
 	  	<property name="user" ref="user1"/>
 	  	<property name="restaurant" ref="restaurant2"/>

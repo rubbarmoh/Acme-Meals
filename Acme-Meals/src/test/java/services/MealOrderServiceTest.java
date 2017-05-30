@@ -173,5 +173,46 @@ public class MealOrderServiceTest extends AbstractTest {
 		}
 		checkExceptions(expected, caught);
 	}
+	
+	// Tests ------------------------------------------------------------
+
+		/*
+		 * Manage received orders. Only can change the status
+		 */
+		@Test
+		public void driverOrderNext() {
+			Object testingData[][] = {
+				{
+					"manager1", 157, null
+				}, // Listamos pedidos y modificamos un order en depending
+				{
+					"manager1", 158, IllegalArgumentException.class
+				}, // Listamos pedidos e intentamos modificar un order en draft
+				{
+					"admin", 157, IllegalArgumentException.class
+				}, // Intentamos modificar siendo admin
+				{
+					"user1", 157, IllegalArgumentException.class
+				}  // Intentamos modificar siendo user
+			};
+
+			for (int i = 0; i < testingData.length; i++) {
+				templateOrderNext((String) testingData[i][0], (int) testingData[i][1],(Class<?>) testingData[i][2]);
+			}
+		}
+		protected void templateOrderNext(String username, int mealOrderId, Class<?> expected) {
+			Class<?> caught = null;
+
+			try {
+				authenticate(username); // Nos autenticamos
+				MealOrder m = mealOrderService.findOne(mealOrderId);
+				mealOrderService.step(m);
+				unauthenticate();
+			} catch (Throwable oops) {
+				caught = oops.getClass();
+			}
+			checkExceptions(expected, caught);
+		}
+
 
 }
