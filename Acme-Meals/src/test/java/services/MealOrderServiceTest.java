@@ -1,7 +1,9 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +15,8 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.MealOrder;
+import domain.Quantity;
+import domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -25,6 +29,15 @@ public class MealOrderServiceTest extends AbstractTest {
 
 	@Autowired
 	private MealOrderService	mealOrderService;
+
+	@Autowired
+	private MealService			mealService;
+
+	@Autowired
+	private UserService			userService;
+
+	@Autowired
+	private RestaurantService	restaurantService;
 
 
 	// Tests ------------------------------------------------------------
@@ -97,8 +110,64 @@ public class MealOrderServiceTest extends AbstractTest {
 			MealOrder order = mealOrderService.findOne(id);
 			Assert.notNull(order);
 			mealOrderService.delete(order);
-			Assert.isTrue(!mealOrderService.findAll().contains(order));
+			MealOrder orderaux = mealOrderService.findOne(id);
+			Assert.isTrue(orderaux == null);
 			unauthenticate();
+		} catch (Throwable oops) {
+			caught = oops.getClass();
+		}
+		checkExceptions(expected, caught);
+	}
+
+	/*
+	 * Display an order and delete if status is draft
+	 */
+	@Test
+	public void driverMakeOrder() {
+		Object testingData[][] = {
+			{
+				null, "C/Falsa, 123", false, 107, 153, IllegalArgumentException.class
+			}, // Hacemos pedido con usuario no autenticado
+			{
+				"user1", "C/Falsa, 123", false, 107, 150, IllegalArgumentException.class
+			}, // Hacemos pedido con un plato que no existe
+			{
+				"user1", "C/Falsa, 123", false, 107, 153, null
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+			templateMakeOrder((String) testingData[i][0], (String) testingData[i][1], (boolean) testingData[i][2], (int) testingData[i][3], (int) testingData[i][4], (Class<?>) testingData[i][5]);
+		}
+	}
+	protected void templateMakeOrder(String username, String deliveryAdress, boolean pickUp, int restaurantId, int mealId, Class<?> expected) {
+		Class<?> caught = null;
+		Collection<Quantity> quantities = new ArrayList<Quantity>();
+		Quantity quantity = new Quantity();
+		Date date = new Date(System.currentTimeMillis() - 1);
+		try {
+			authenticate(username); // Nos autenticamos
+			User user = userService.findByPrincipal();
+			MealOrder order = mealOrderService.create();
+
+			quantity.setMeal(mealService.findOne(mealId));
+			quantity.setMealOrder(order);
+			quantity.setQuantity(2);
+			Double amount = quantity.getMeal().getPrice() * quantity.getQuantity();
+			quantities.add(quantity);
+
+			order.setAmount(amount);
+			order.setQuantities(quantities);
+			order.setDeliveryAdress(deliveryAdress);
+			order.setMoment(date);
+			order.setPickUp(pickUp);
+			order.setRestaurant(restaurantService.findOne(restaurantId));
+			order.setUser(user);
+
+			order = mealOrderService.save(order);
+			Assert.notNull(order);
+			unauthenticate();
+
 		} catch (Throwable oops) {
 			caught = oops.getClass();
 		}

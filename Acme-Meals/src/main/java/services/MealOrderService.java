@@ -66,6 +66,7 @@ public class MealOrderService {
 
 		result = new MealOrder();
 		result.setQuantities(quantities);
+		result.setStatus("DRAFT");
 
 		return result;
 	}
@@ -109,13 +110,13 @@ public class MealOrderService {
 		Assert.notNull(mealOrder);
 		Assert.isTrue(mealOrder.getId() != 0);
 		Assert.isTrue(mealOrderRepository.exists(mealOrder.getId()));
-		Assert.isTrue(mealOrder.getStatus() == "DRAFT");
 
 		for (Quantity q : mealOrder.getQuantities()) {
 			quantityService.delete(q);
 		}
-
-		mealOrderRepository.delete(mealOrder);
+		if (mealOrder.getStatus().equals("DRAFT")) {
+			mealOrderRepository.delete(mealOrder);
+		}
 	}
 
 	// Other bussiness methods ----------------------------------------------
