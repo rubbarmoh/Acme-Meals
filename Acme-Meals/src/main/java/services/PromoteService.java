@@ -81,9 +81,16 @@ public class PromoteService {
 		userAccount = LoginService.getPrincipal();
 		Authority au = new Authority();
 		au.setAuthority("MANAGER");
+		Date date = new Date(System.currentTimeMillis() - 86400000);
 
 		Assert.isTrue(userAccount.getAuthorities().contains(au));
+		Assert.isTrue(promote.getRestaurant().getManager().getUserAccount().getUsername().equals(userAccount.getUsername()));
 
+		Assert.isTrue(!(promote.getBeginning().equals(promote.getEnding())), "promoteoneday");
+		Assert.isTrue(promote.getBeginning().before(promote.getEnding()), "promotedatecorrectTime");
+		Assert.isTrue(promote.getBeginning().after(date), "promoteafternow");
+		Assert.notNull(promote.getRestaurant(), "promoterestaurantavailable");
+		
 		Promote result;
 		result = promoteRepository.save(promote);
 
