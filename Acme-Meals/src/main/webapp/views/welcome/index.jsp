@@ -21,164 +21,172 @@
 	<script>window.location.href="j_spring_security_logout"</script>
 </jstl:if>
 <security:authorize
-	access="isAnonymous()">
+	access="hasAnyRole('USER')">
 
 <table id="row" class="table" style="border:none">
 	<tr>
-	<jstl:if test ="${restaurant != null }">
-	<td>
-	<h2><spring:message code="welcome.restaurant" /></h2>
-	<table id="row" class="table" style="width: 600px; height: 200px">
-	<tbody>
-		<tr>
-			<td rowspan="10">
-				<img src="${restaurant.picture}" width="200" height="200" >
-			</td>
-		</tr>
-		<tr>
-			<th>
-				<spring:message code = "restaurant.name"/>
-			</th>
-			<td>
-				<jstl:out value="${restaurant.name }" />
-			</td>
-		</tr>
-		<tr>
-			<th>
-				<spring:message code = "restaurant.avgStars"/>
-			</th>
-			<td>
-				<jstl:out value="${restaurant.avgStars }" />
-			</td>
-		</tr>
-		<tr>
-			<th>
-				<spring:message code = "restaurant.display"/>
-			</th>
-			<td>
-				<input type="button" name="display"
-						value="<spring:message code="restaurant.display" />"
-						onclick="javascript: window.location.replace('restaurant/display.do?restaurantId=${restaurant.id}')"/><br/>
-			</td>
-		</tr>
-		</table>
-		</td>
-		</jstl:if>
-		<jstl:if test ="${review != null }">
 		<td>
-		<h2><spring:message code="welcome.review" /></h2>
-		<table id="row" class="table" style="width: 600px; height: 200px">
-		<tbody>
-		<tr>
-			<th width=100px>
-				<spring:message code = "review.title"/>
-			</th>
-			<td width=100px>
-				<jstl:out value="${review.title }" />
-			</td>
-		</tr>
-		<tr>
-			<th width=100px>
-				<spring:message code = "review.rate"/>
-			</th>
-			<td width=100px>
-				<jstl:out value="${review.rate }" />
-			</td>
-		</tr>
-		<tr>
-			<th width=100px>
-				<spring:message code = "review.display"/>
-			</th>
-			<td width=100px>
-				<input type="button" name="display"
-						value="<spring:message code="review.display" />"
-						onclick="javascript: window.location.replace('review/display.do?reviewId=${review.id}')"/><br/>
-			</td>
-		</tr>
-	</table>
-	</td>
-	</jstl:if>
+			<jstl:if test ="${restaurant != null }">
+			<table id="row" class="table" style="width: 600px; height: 280px">
+			<tr>
+				<td colspan=10>
+					<h2><spring:message code="welcome.restaurant" /></h2>
+				</td>
+			</tr>
+				<tr>
+					<td rowspan="10">
+						<img src="${restaurant.picture}" width="170" height="170" >
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<spring:message code = "restaurant.name"/>
+					</th>
+					<td>
+						<jstl:out value="${restaurant.name }" />
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<spring:message code = "restaurant.avgStars"/>
+					</th>
+					<td>
+						<jstl:out value="${restaurant.avgStars }" />
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<spring:message code = "restaurant.display"/>
+					</th>
+					<td>
+						<input type="button" name="display"
+								value="<spring:message code="restaurant.display" />"
+								onclick="javascript: window.location.replace('restaurant/display.do?restaurantId=${restaurant.id}')"/><br/>
+					</td>
+				</tr>
+				</table>
+				</jstl:if>
+		</td>
+		<td>
+			<jstl:if test ="${review != null }">
+			<table id="row" class="table" style="width: 600px; height: 280px">
+			<tr><td  colspan=10>
+			<h2><spring:message code="welcome.review" /></h2>
+			</td></tr>
+			<tr>
+				<th width=100px>
+					<spring:message code = "review.title"/>
+				</th>
+				<td width=100px>
+					<jstl:out value="${review.title }" />
+				</td>
+			</tr>
+			<tr>
+				<th width=100px>
+					<spring:message code = "review.rate"/>
+				</th>
+				<td width=100px>
+					<jstl:out value="${review.rate }" />
+				</td>
+			</tr>
+			<tr>
+				<th width=100px>
+					<spring:message code = "review.display"/>
+				</th>
+				<td width=100px>
+					<input type="button" name="display"
+							value="<spring:message code="review.display" />"
+							onclick="javascript: window.location.replace('review/display.do?reviewId=${review.id}')"/><br/>
+				</td>
+			</tr>
+		</table>
+		</jstl:if>
+		</td>
 	</tr>
 </table>
 </security:authorize>
 
-<security:authorize
-	access="hasRole('USER')">
+<security:authorize access="isAnonymous()">
+
 <table id="row" class="table" style="border:none">
 	<tr>
-	<jstl:if test ="${restaurant != null }">
-	<td>
-	<h2><spring:message code="welcome.restaurant" /></h2>
-	<table id="row" class="table" style="width: 600px; height: 200px">
-	<tbody>
-		<tr>
-			<td rowspan="10">
-				<img src="${restaurant.picture}" width="200" height="200" >
-			</td>
-		</tr>
-		<tr>
-			<th>
-				<spring:message code = "restaurant.name"/>
-			</th>
-			<td>
-				<jstl:out value="${restaurant.name }" />
-			</td>
-		</tr>
-		<tr>
-			<th>
-				<spring:message code = "restaurant.avgStars"/>
-			</th>
-			<td>
-				<jstl:out value="${restaurant.avgStars }" />
-			</td>
-		</tr>
-		<tr>
-			<th>
-				<spring:message code = "restaurant.display"/>
-			</th>
-			<td>
-				<input type="button" name="display"
-						value="<spring:message code="restaurant.display" />"
-						onclick="javascript: window.location.replace('restaurant/display.do?restaurantId=${restaurant.id}')"/><br/>
-			</td>
-		</tr>
-		</table>
-		</td>
-	</jstl:if>
-	<jstl:if test ="${review != null }">
 		<td>
-		<h2><spring:message code="welcome.review" /></h2>
-		<table id="row" class="table" style="width: 600px; height: 200px">
-		<tbody>
-		<tr>
-			<th width=100px>
-				<spring:message code = "review.title"/>
-			</th>
-			<td width=100px>
-				<jstl:out value="${review.title }" />
-			</td>
-		</tr>
-		<tr>
-			<th width=100px>
-				<spring:message code = "review.rate"/>
-			</th>
-			<td width=100px>
-				<jstl:out value="${review.rate }" />
-			</td>
-		</tr>
-		<tr>
-			<th width=100px>
-				<spring:message code = "review.display"/>
-			</th>
-			<td width=100px>
-				<input type="button" name="display"
-						value="<spring:message code="review.display" />"
-						onclick="javascript: window.location.replace('review/display.do?reviewId=${review.id}')"/><br/>
-			</td>
-		</tr>
-	</table>
-	</td>
-	</jstl:if>
+			<jstl:if test ="${restaurant != null }">
+			<table id="row" class="table" style="width: 600px; height: 280px">
+			<tr>
+				<td colspan=10>
+					<h2><spring:message code="welcome.restaurant" /></h2>
+				</td>
+			</tr>
+				<tr>
+					<td rowspan="10">
+						<img src="${restaurant.picture}" width="170" height="170" >
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<spring:message code = "restaurant.name"/>
+					</th>
+					<td>
+						<jstl:out value="${restaurant.name }" />
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<spring:message code = "restaurant.avgStars"/>
+					</th>
+					<td>
+						<jstl:out value="${restaurant.avgStars }" />
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<spring:message code = "restaurant.display"/>
+					</th>
+					<td>
+						<input type="button" name="display"
+								value="<spring:message code="restaurant.display" />"
+								onclick="javascript: window.location.replace('restaurant/display.do?restaurantId=${restaurant.id}')"/><br/>
+					</td>
+				</tr>
+				</table>
+				</jstl:if>
+		</td>
+		<td>
+			<jstl:if test ="${review != null }">
+			<table id="row" class="table" style="width: 600px; height: 280px">
+			<tr><td  colspan=10>
+			<h2><spring:message code="welcome.review" /></h2>
+			</td></tr>
+			<tr>
+				<th width=100px>
+					<spring:message code = "review.title"/>
+				</th>
+				<td width=100px>
+					<jstl:out value="${review.title }" />
+				</td>
+			</tr>
+			<tr>
+				<th width=100px>
+					<spring:message code = "review.rate"/>
+				</th>
+				<td width=100px>
+					<jstl:out value="${review.rate }" />
+				</td>
+			</tr>
+			<tr>
+				<th width=100px>
+					<spring:message code = "review.display"/>
+				</th>
+				<td width=100px>
+					<input type="button" name="display"
+							value="<spring:message code="review.display" />"
+							onclick="javascript: window.location.replace('review/display.do?reviewId=${review.id}')"/><br/>
+				</td>
+			</tr>
+		</table>
+		</jstl:if>
+		</td>
 	</tr>
 </table>
 </security:authorize>
