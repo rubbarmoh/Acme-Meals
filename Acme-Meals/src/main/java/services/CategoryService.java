@@ -86,7 +86,9 @@ public class CategoryService {
 		Assert.notNull(category);
 
 		Category result;
-
+		Assert.isTrue(userAccount.getAuthorities().contains(au) && 
+				(category.getManager().getUserAccount().getUsername().equals(userAccount.getUsername()) ||
+				 category.getId()==0));
 		result = categoryRepository.save(category);
 
 		return result;
@@ -100,7 +102,9 @@ public class CategoryService {
 		Assert.isTrue(userAccount.getAuthorities().contains(au));
 		Assert.notNull(category);
 		Assert.isTrue(category.getId() != 0);
-
+		Assert.isTrue(userAccount.getAuthorities().contains(au) && 
+				(category.getManager().getUserAccount().getUsername().equals(userAccount.getUsername()) ||
+				 category.getId()==0));
 		categoryRepository.delete(category);
 	}
 	
