@@ -203,13 +203,28 @@ public class ReviewService {
 		Object[] ts = findAll().toArray();
 		int min = 0;
 		int max = ts.length;
-		if(ts.length != 0){
+		if (ts.length != 0) {
 			max = ts.length;
-		
+
 			int randomNum = ThreadLocalRandom.current().nextInt(min, max);
 			r = (Review) ts[randomNum];
 		}
 		return r;
+	}
+
+	public Boolean check(Review r, Review r2) {
+
+		Boolean result = false;
+
+		if (r.getRate().equals(r2.getRate()) && r.getCritic().equals(r2.getCritic()) && r.getRestaurant().equals(r2.getRestaurant()) && r.getTitle().equals(r2.getTitle()) && r.getText().equals(r2.getText())
+			&& r.getRelationLikes().equals(r2.getRelationLikes()) && r.getRelationDislikes().equals(r2.getRelationDislikes())) {
+
+			System.out.println(r.getText());
+			System.out.println(r2.getText());
+			result = true;
+
+		}
+		return result;
 	}
 
 }

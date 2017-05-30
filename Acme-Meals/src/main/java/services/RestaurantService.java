@@ -43,7 +43,7 @@ public class RestaurantService {
 
 	@Autowired
 	private ManagerService			managerService;
-	
+
 	@Autowired
 	private MealService				mealService;
 
@@ -106,16 +106,14 @@ public class RestaurantService {
 
 		Assert.isTrue(userAccount.getAuthorities().contains(au2) || userAccount.getAuthorities().contains(au) || userAccount.getAuthorities().contains(au3));
 		Restaurant result;
-		
-		if(userAccount.getAuthorities().contains(au2) && 
-				(restaurant.getManager().getUserAccount().getUsername().equals(userAccount.getUsername()) ||
-				 restaurant.getId()==0)){
+
+		if (userAccount.getAuthorities().contains(au2) && (restaurant.getManager().getUserAccount().getUsername().equals(userAccount.getUsername()) || restaurant.getId() == 0)) {
 			result = restaurantRepository.save(restaurant);
-		}else{
+		} else {
 			Assert.isTrue(check(restaurant));
 			result = restaurantRepository.save(restaurant);
 		}
-		
+
 		return result;
 	}
 
@@ -132,7 +130,7 @@ public class RestaurantService {
 		Assert.isTrue(restaurant.getManager().getUserAccount().equals(userAccount));
 		restaurant.setErased(true);
 	}
-	public void enable(Restaurant restaurant){
+	public void enable(Restaurant restaurant) {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Authority au = new Authority();
@@ -165,8 +163,8 @@ public class RestaurantService {
 	public Collection<Restaurant> findByKey(String key) {
 		Collection<Restaurant> result = restaurantRepository.findByKey(key);
 		Collection<Restaurant> restaurantsByCategory = mealService.searchByCategory(key);
-		for(Restaurant r: restaurantsByCategory){
-			if(!result.contains(r)){
+		for (Restaurant r : restaurantsByCategory) {
+			if (!result.contains(r)) {
 				result.add(r);
 			}
 		}
@@ -315,14 +313,13 @@ public class RestaurantService {
 		restaurantForm.setErased(false);
 		result.setErased(restaurantForm.getErased());
 		result.setDeliveryService(restaurantForm.getDeliveryService());
-		if(restaurantForm.getDeliveryService()){
+		if (restaurantForm.getDeliveryService()) {
 			result.setCostDelivery(restaurantForm.getCostDelivery());
 			result.setMinimunAmount(restaurantForm.getMinimunAmount());
-		}else{
+		} else {
 			result.setCostDelivery(null);
 			result.setMinimunAmount(null);
 		}
-
 
 		validator.validate(result, binding);
 
@@ -361,38 +358,26 @@ public class RestaurantService {
 		r.setAvgStars(restaurantRepository.findAvgStarsR(restaurantId));
 		save(r);
 	}
-	public Collection<Restaurant> findEnabledRestaurants(){
-		Collection<Restaurant>result;
-		result=restaurantRepository.findEnabledRestaurants();
+	public Collection<Restaurant> findEnabledRestaurants() {
+		Collection<Restaurant> result;
+		result = restaurantRepository.findEnabledRestaurants();
 		return result;
 	}
-	
-	private Boolean check(Restaurant r){
-	
+
+	private Boolean check(Restaurant r) {
+
 		Boolean result = false;
 		Restaurant restaurant = findOne(r.getId());
-		
-		if(r.getDeliveryService().equals(restaurant.getDeliveryService()) &&
-		   r.getErased().equals(restaurant.getErased()) &&
-		   r.getAddress().equals(restaurant.getAddress()) &&
-		   r.getCity().equals(restaurant.getCity()) &&
-		   r.getCostDelivery().equals(restaurant.getCostDelivery()) && 
-		   r.getEmail().equals(restaurant.getEmail()) &&
-		   r.getManager().equals(restaurant.getManager()) &&
-		   r.getMealOrders().equals(restaurant.getMealOrders()) &&
-		   r.getMeals().equals(restaurant.getMeals()) &&
-		   r.getMinimunAmount().equals(restaurant.getMinimunAmount())&&
-		   r.getName().equals(restaurant.getName()) &&
-		   r.getPhone().equals(restaurant.getPhone()) &&
-		   r.getPicture().equals(restaurant.getPicture()) &&
-		   r.getPromotes().equals(restaurant.getPromotes()) &&
-		   r.getReviews().equals(restaurant.getReviews()) &&
-		   r.getSocialIdentities().equals(restaurant.getSocialIdentities())){
-			
+
+		if (r.getDeliveryService().equals(restaurant.getDeliveryService()) && r.getErased().equals(restaurant.getErased()) && r.getAddress().equals(restaurant.getAddress()) && r.getCity().equals(restaurant.getCity())
+			&& (r.getCostDelivery() == (restaurant.getCostDelivery())) && r.getEmail().equals(restaurant.getEmail()) && r.getManager().equals(restaurant.getManager()) && r.getMealOrders().equals(restaurant.getMealOrders())
+			&& r.getMeals().equals(restaurant.getMeals()) && r.getMinimunAmount().equals(restaurant.getMinimunAmount()) && r.getName().equals(restaurant.getName()) && r.getPhone().equals(restaurant.getPhone())
+			&& r.getPicture().equals(restaurant.getPicture()) && r.getPromotes().equals(restaurant.getPromotes()) && r.getReviews().equals(restaurant.getReviews()) && r.getSocialIdentities().equals(restaurant.getSocialIdentities())) {
+
 			System.out.println(r.getName());
 			System.out.println(restaurant.getName());
 			result = true;
-			
+
 		}
 		return result;
 	}
