@@ -1,7 +1,7 @@
+
 package services;
 
 import java.util.Collection;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,39 +10,35 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-
-
-import domain.Meal;
-import domain.MealOrder;
-import domain.Quantity;
-import domain.Restaurant;
-import forms.QuantityForm;
-
 import repositories.QuantityRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Meal;
+import domain.MealOrder;
+import domain.Quantity;
+import forms.QuantityForm;
 
 @Service
 @Transactional
 public class QuantityService {
+
 	//Managed Repository-------------------------------------------
 	@Autowired
-	private QuantityRepository quantityRepository;
-	
+	private QuantityRepository	quantityRepository;
+
 	//Supporting services------------------------------------------
 	@Autowired
-	private MealOrderService mealOrderService;
-	
+	private MealOrderService	mealOrderService;
+
 	@Autowired
-	private MealService mealService;
+	private MealService			mealService;
 	@Autowired
-	private RestaurantService restaurantService;
-	
-	@Autowired
-	private Validator validator;
+	private Validator			validator;
+
+
 	//Constructor -------------------------------------------------
-	public QuantityService(){
+	public QuantityService() {
 		super();
 	}
 	// Simple CRUD methods ----------------------------------------------------
@@ -106,20 +102,18 @@ public class QuantityService {
 
 		Assert.isTrue(quantity.getId() != 0);
 
-		
 		quantityRepository.delete(quantity);
 	}
 	// Other bussiness methods ----------------------------------------------------
-	public QuantityForm generateForm(){
-		QuantityForm quantityForm=new QuantityForm();
+	public QuantityForm generateForm() {
+		QuantityForm quantityForm = new QuantityForm();
 		return quantityForm;
 	}
 	public Quantity reconstruct(QuantityForm quantityForm, BindingResult binding) {
 		Quantity result;
 		result = create();
-		MealOrder mo=mealOrderService.findOne(quantityForm.getMealOrderId());
-		Meal m=mealService.findOne(quantityForm.getMealId());
-		Restaurant r=restaurantService.findOne(quantityForm.getRestaurantId());
+		MealOrder mo = mealOrderService.findOne(quantityForm.getMealOrderId());
+		Meal m = mealService.findOne(quantityForm.getMealId());
 		result.setMeal(m);
 		result.setMealOrder(mo);
 		result.setQuantity(quantityForm.getQuantity());
