@@ -1,0 +1,1319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * PopulateDatabase.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+	<!-- User accounts -->
+
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount2" class="security.UserAccount">
+		<property name="username" value="user1" />
+		<property name="password" value="24c9e15e52afc47c225b757e7bee1f9d" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="user2" />
+		<property name="password" value="7e58d63b60197ceb55a1c487989a3720" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="user3" />
+		<property name="password" value="92877af70a45fd6a2ed7fe81e1236b78" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="user4" />
+		<property name="password" value="3f02ebe3d7929b091e3d8ccfde2f3bc6" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="manager1" />
+		<property name="password" value="c240642ddef994358c96da82c0361a58" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount7" class="security.UserAccount">
+		<property name="username" value="manager2" />
+		<property name="password" value="8df5127cd164b5bc2d2b78410a7eea0c" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount8" class="security.UserAccount">
+		<property name="username" value="manager3" />
+		<property name="password" value="2d3a5db4a2a9717b43698520a8de57d0" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount9" class="security.UserAccount">
+		<property name="username" value="critic1" />
+		<property name="password" value="165d185050bab438668aef6faeee3be5" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CRITIC" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount10" class="security.UserAccount">
+		<property name="username" value="critic2" />
+		<property name="password" value="88fc227c1f12e1f11b8b1584991c88fe" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CRITIC" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Other domain beans come here -->
+	
+	<!-- Fee -->
+	
+	<bean id="fee" class="domain.Fee">
+		<property name="value" value="1.00"/>
+	</bean>
+	
+	<!-- VATNumber -->
+	
+	<bean id="vatNumber" class="domain.VATNumber">
+		<property name="value" value="ES-78245688"/>
+	</bean>
+	
+	<!-- Credit Card -->
+	
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="Lucia Aire" />
+		<property name="brandName" value="Visa" />
+		<property name="number" value="4079978752719950" />
+		<property name="expirationMonth" value="10" />
+		<property name="expirationYear" value="2019" />
+		<property name="cvv" value="580" />
+	</bean>
+	
+	<bean id="creditCard2" class="domain.CreditCard">
+	  <property name="holderName" value="Nomis Aege" />
+	  <property name="brandName" value="MasterCard" />
+	  <property name="number" value="5835894060330673" />
+	  <property name="expirationMonth" value="12" />
+	  <property name="expirationYear" value="2017" />
+	  <property name="cvv" value="998" />
+	 </bean>
+
+	<bean id="creditCard3" class="domain.CreditCard">
+	  <property name="holderName" value="Nebur Sotneirrab" />
+	  <property name="brandName" value="Discover" />
+	  <property name="number" value="6011330960939283" />
+	  <property name="expirationMonth" value="1" />
+	  <property name="expirationYear" value="2019" />
+	  <property name="cvv" value="582" />
+	 </bean>
+	
+	<bean id="creditCard4" class="domain.CreditCard">
+	  <property name="holderName" value="Irene Garcia Vazquez" />
+	  <property name="brandName" value="MasterCard" />
+	  <property name="number" value="5237494243102802" />
+	  <property name="expirationMonth" value="8" />
+	  <property name="expirationYear" value="2020" />
+	  <property name="cvv" value="220" />
+	 </bean>
+	 
+	 <bean id="creditCard5" class="domain.CreditCard">
+	  <property name="holderName" value="Pedro Almodovar" />
+	  <property name="brandName" value="Visa" />
+	  <property name="number" value="4735179919208401" />
+	  <property name="expirationMonth" value="4" />
+	  <property name="expirationYear" value="2019" />
+	  <property name="cvv" value="666" />
+	 </bean>
+	 
+	 <bean id="creditCard6" class="domain.CreditCard">
+	  <property name="holderName" value="Montse Caballet" />
+	  <property name="brandName" value="MasterCard" />
+	  <property name="number" value="5901769379901779" />
+	  <property name="expirationMonth" value="9" />
+	  <property name="expirationYear" value="2020" />
+	  <property name="cvv" value="232" />
+	 </bean>
+	 
+	 <bean id="creditCard7" class="domain.CreditCard">
+	  <property name="holderName" value="Chunk Corris" />
+	  <property name="brandName" value="Amex" />
+	  <property name="number" value="371773256613913" />
+	  <property name="expirationMonth" value="11" />
+	  <property name="expirationYear" value="2021" />
+	  <property name="cvv" value="456" />
+	 </bean>
+	 
+	 <!-- Admin -->
+	 
+	 <bean id="admin" class="domain.Administrator">
+		<property name="name" value="Manuel" />
+		<property name="surname" value="Torres" />
+		<property name="email" value="manuto@gmail.com" />
+		<property name="phone" value="+34 965845789" />
+		<property name="address" value="C/Sagasta nº23" />
+		<property name="userAccount" ref="userAccount1"/>
+	 </bean>
+	 
+	 <!-- User -->
+	 
+	 <bean id="user1" class="domain.User">
+		<property name="name" value="Pedro" />
+		<property name="surname" value="Casto" />
+		<property name="email" value="PCasto@gmail.com" />
+		<property name="phone" value="+34 672141455" />
+		<property name="address"><null/></property>
+		<property name="banned" value="false" />
+		<property name="creditCard" ref="creditCard4" />
+		<property name="userAccount" ref="userAccount2"/>
+		<property name="relationLikes">
+			<list>
+				<ref bean="relationLike1"/>
+				<ref bean="relationLike5"/>
+			</list>
+		</property>
+		<property name="relationDislikes">
+			<list>
+				<ref bean="relationDislike1"/>
+				<ref bean="relationDislike2"/>
+			</list>
+		</property>
+		<property name="mealOrders">
+			<list>
+				<ref bean="mealOrder1"/>
+				<ref bean="mealOrder2"/>
+				<ref bean="mealOrder3"/>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				<ref bean="comment1"/>
+				<ref bean="comment3"/>
+			</list>
+		</property>
+		<property name="reports">
+			<list>
+				<ref bean="report1"/>
+			</list>
+		</property>
+	 </bean>
+	 
+	 <bean id="user2" class="domain.User">
+		<property name="name" value="Maria" />
+		<property name="surname" value="Bienaventurada" />
+		<property name="email" value="MariaBAV@gmail.com" />
+		<property name="address" value="C/Barco Perdido nº42" />
+		<property name="banned" value="false" />
+		<property name="creditCard" ref="creditCard5" />
+		<property name="userAccount" ref="userAccount3"/>
+		<property name="relationLikes">
+			<list>
+				<ref bean="relationLike2"/>
+				<ref bean="relationLike6"/>
+			</list>
+		</property>
+		<property name="relationDislikes">
+			<list>
+				<ref bean="relationDislike3"/>
+				<ref bean="relationDislike4"/>
+			</list>
+		</property>
+		<property name="mealOrders">
+			<list>
+				<ref bean="mealOrder4"/>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				<ref bean="comment2"/>
+				<ref bean="comment4"/>
+			</list>
+		</property>
+		<property name="reports">
+			<list>
+				<ref bean="report2"/>
+			</list>
+		</property>
+	 </bean>
+	 
+	 <bean id="user3" class="domain.User">
+		<property name="name" value="Ignacio" />
+		<property name="surname" value="Palomo" />
+		<property name="email" value="IgnPal@gmail.com" />
+		<property name="banned" value="false" />
+		<property name="creditCard" ref="creditCard6" />
+		<property name="userAccount" ref="userAccount4"/>
+		<property name="relationLikes">
+			<list>
+				<ref bean="relationLike3"/>
+			</list>
+		</property>
+		<property name="relationDislikes">
+			<list>
+				<ref bean="relationDislike5"/>
+			</list>
+		</property>
+		<property name="mealOrders">
+			<list>
+				
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				<ref bean="comment5"/>
+			</list>
+		</property>
+		<property name="reports">
+			<list>
+				
+			</list>
+		</property>
+	 </bean>
+	 
+	 <bean id="user4" class="domain.User">
+		<property name="name" value="Vanesa" />
+		<property name="surname" value="Celeste" />
+		<property name="email" value="Valeste@gmail.com" />
+		<property name="phone" value="+34 965922789" />
+		<property name="address" value="C/Andalucía nº80" />
+		<property name="creditCard" ref="creditCard7" />
+		<property name="banned" value="false" />
+		<property name="userAccount" ref="userAccount5"/>
+		<property name="relationLikes">
+			<list>
+				<ref bean="relationLike4"/>
+			</list>
+		</property>
+		<property name="relationDislikes">
+			<list>
+				<ref bean="relationDislike6"/>
+			</list>
+		</property>
+		<property name="mealOrders">
+			<list>
+				
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				<ref bean="comment6"/>
+			</list>
+		</property>
+		<property name="reports">
+			<list>
+				
+			</list>
+		</property>
+	 </bean>
+	 
+	 <!-- Manager -->
+	 
+	 <bean id="manager1" class="domain.Manager">
+		<property name="name" value="Lucia" />
+		<property name="surname" value="Aire" />
+		<property name="email" value="Luci@gmail.com" />
+		<property name="phone" value="+34 922125654" />
+		<property name="address" value="C/Pedro Jimenez nº2" />
+		<property name="creditCard" ref="creditCard1" />
+		<property name="userAccount" ref="userAccount6"/>
+		<property name="monthlyBills">
+			<list>
+				<ref bean="monthlyBill1"/>
+			</list>
+		</property>
+		<property name="restaurants">
+			<list>
+				<ref bean="restaurant1"/>
+				<ref bean="restaurant2"/>
+				<ref bean="restaurant3"/>
+			</list>
+		</property>
+		<property name="reports">
+			<list>
+				
+			</list>
+		</property>
+		<property name="categories">
+			<list>
+				<ref bean="category1"/>
+				<ref bean="category2"/>
+				<ref bean="category3"/>
+			</list>
+		</property>
+	 </bean>
+	 
+	 <bean id="manager2" class="domain.Manager">
+		<property name="name" value="Nomis" />
+		<property name="surname" value="Aege" />
+		<property name="email" value="noAE@gmail.com" />
+		<property name="phone" value="+34 623545987" />
+		<property name="creditCard" ref="creditCard2" />
+		<property name="userAccount" ref="userAccount7"/>
+		<property name="monthlyBills">
+			<list>
+				<ref bean="monthlyBill2"/>
+			</list>
+		</property>
+		<property name="restaurants">
+			<list>
+				<ref bean="restaurant4"/>
+				<ref bean="restaurant5"/>
+			</list>
+		</property>
+		<property name="reports">
+			<list>
+				
+			</list>
+		</property>
+		<property name="categories">
+			<list>
+				<ref bean="category4"/>
+				<ref bean="category5"/>
+			</list>
+		</property>
+	 </bean>
+	 
+	 <bean id="manager3" class="domain.Manager">
+		<property name="name" value="Nebur" />
+		<property name="surname" value="Sotneirrab" />
+		<property name="email" value="neSO@gmail.com" />
+		<property name="creditCard" ref="creditCard3" />
+		<property name="userAccount" ref="userAccount8"/>
+		<property name="monthlyBills">
+			<list>
+				<ref bean="monthlyBill3"/>
+			</list>
+		</property>
+		<property name="restaurants">
+			<list>
+				<ref bean="restaurant6"/>
+			</list>
+		</property>
+		<property name="reports">
+			<list>
+				
+			</list>
+		</property>
+		<property name="categories">
+			<list>
+				<ref bean="category6"/>
+			</list>
+		</property>
+	 </bean>
+	 
+	 <!-- Critic -->
+	 
+	 <bean id="critic1" class="domain.Critic">
+		<property name="name" value="Salocin" />
+		<property name="surname" value="Znerol" />
+		<property name="email" value="Sazn@gmail.com" />
+		<property name="phone" value="+34 654699885" />
+		<property name="address" value="C/Alcala nº6" />
+		<property name="companyName" value="GastroCriticas SL" />
+		<property name="userAccount" ref="userAccount9"/>
+		<property name="reviews">
+			<list>
+				<ref bean="review1"/>
+				<ref bean="review3"/>
+			</list>
+		</property>
+	 </bean>
+	 
+	 <bean id="critic2" class="domain.Critic">
+		<property name="name" value="Marta" />
+		<property name="surname" value="Atunes" />
+		<property name="email" value="maatunes@gmail.com" />
+		<property name="companyName" value="Desafio Comida SL" />
+		<property name="userAccount" ref="userAccount10"/>
+		<property name="reviews">
+			<list>
+				<ref bean="review2"/>
+				<ref bean="review4"/>
+			</list>
+		</property>
+	 </bean>
+	 
+	 <!-- Restaurant -->
+	 
+	 <bean id="restaurant1" class="domain.Restaurant">
+	 	<property name="name" value="El pescaito" />
+		<property name="phone" value="+34 956123456" />
+		<property name="city" value="Cadiz" />
+		<property name="address" value="C/alcala nº6" />
+		<property name="email" value="ElPesca1@gmail.com" />
+		<property name="picture" value="http://www.elpescaito.es/wp-content/uploads/2014/07/restaurante-andaluz-duque-de-sexto.jpg" />
+		<property name="avgStars" value="4.5" />
+		<property name="deliveryService" value="false" />
+		<property name="manager" ref="manager1"/>
+		<property name="erased"	value="false"/>
+		<property name="mealOrders">
+			<list>
+				<ref bean="mealOrder2"/>
+			</list>
+		</property>
+		<property name="meals">
+			<list>
+				<ref bean="meal1"/>
+				<ref bean="meal2"/>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				<ref bean="comment1"/>
+				<ref bean="comment2"/>
+			</list>
+		</property>
+		<property name="socialIdentities">
+			<list>
+				<ref bean="socialIdentity1"/>
+				<ref bean="socialIdentity2"/>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+				<ref bean="review1"/>
+				<ref bean="review2"/>
+			</list>
+		</property>
+		<property name="promotes">
+			<list>
+				<ref bean="promote1"/>
+				<ref bean="promote2"/>
+			</list>
+		</property>
+	 </bean>
+	 
+	 <bean id="restaurant2" class="domain.Restaurant">
+	 	<property name="name" value="La brasa al punto" />
+		<property name="phone" value="+34 688546231" />
+		<property name="city" value="Sevilla" />
+		<property name="address" value="C/Sagasta nº25" />
+		<property name="email" value="Brasitas25@gmail.com" />
+		<property name="picture" value="https://pbs.twimg.com/profile_images/672480932138479616/0KfinFSQ.jpg" />
+		<property name="avgStars" value="3.6" />
+		<property name="deliveryService" value="true" />
+		<property name="costDelivery" value="2.00" />
+		<property name="minimunAmount" value="15.00" />
+		<property name="erased"	value="false"/>
+		<property name="manager" ref="manager1"/>
+		<property name="mealOrders">
+			<list>
+				<ref bean="mealOrder1"/>
+				<ref bean="mealOrder3"/>
+			</list>
+		</property>
+		<property name="meals">
+			<list>
+				<ref bean="meal3"/>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				<ref bean="comment3"/>
+				<ref bean="comment4"/>
+			</list>
+		</property>
+		<property name="socialIdentities">
+			<list>
+				<ref bean="socialIdentity3"/>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+				<ref bean="review3"/>
+			</list>
+		</property>
+		<property name="promotes">
+			<list>
+				
+			</list>
+		</property>
+	 </bean>
+	 
+	 <bean id="restaurant3" class="domain.Restaurant">
+	 	<property name="name" value="El panteon feliz" />
+		<property name="phone" value="+34 956123456" />
+		<property name="city" value="Granada" />
+		<property name="address" value="C/Alhambra nº2" />
+		<property name="email" value="elchinofeliz@gmail.com" />
+		<property name="picture" value="http://www.emtstatic.com/2010/04/panteonfeliz.jpg" />
+		<property name="avgStars" value="2.3" />
+		<property name="deliveryService" value="true" />
+		<property name="erased"	value="false"/>
+		<property name="costDelivery" value="1.00" />
+		<property name="minimunAmount" value="10.00" />
+		<property name="manager" ref="manager1"/>
+		<property name="mealOrders">
+			<list>
+				<ref bean="mealOrder4"/>
+			</list>
+		</property>
+		<property name="meals">
+			<list>
+				<ref bean="meal6"/>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				<ref bean="comment5"/>
+				<ref bean="comment6"/>
+			</list>
+		</property>
+		<property name="socialIdentities">
+			<list>
+				
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+				<ref bean="review4"/>
+			</list>
+		</property>
+		<property name="promotes">
+			<list>
+				<ref bean="promote3"/>
+			</list>
+		</property>
+	 </bean>
+	 
+	 <bean id="restaurant4" class="domain.Restaurant">
+	 	<property name="name" value="Japones Maki" />
+		<property name="phone" value="+34 655474849" />
+		<property name="city" value="Sevilla" />
+		<property name="address" value="C/Aventura nº12" />
+		<property name="email" value="makimaki@gmail.com" />
+		<property name="picture" value="https://madridevoltion.files.wordpress.com/2012/06/maki-restaurante-japones-malasac3b1a.jpg" />
+		<property name="avgStars" value="0.0" />
+		<property name="deliveryService" value="false" />
+		<property name="erased"	value="false"/>
+		<property name="manager" ref="manager2"/>
+		<property name="mealOrders">
+			<list>
+				
+			</list>
+		</property>
+		<property name="meals">
+			<list>
+				
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				
+			</list>
+		</property>
+		<property name="socialIdentities">
+			<list>
+				
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+				
+			</list>
+		</property>
+		<property name="promotes">
+			<list>
+				
+			</list>
+		</property>
+	 </bean>
+	 
+	 <bean id="restaurant5" class="domain.Restaurant">
+	 	<property name="name" value="SubWay" />
+		<property name="phone" value="+34 905666321" />
+		<property name="city" value="Malaga" />
+		<property name="address" value="C/Sol nº42" />
+		<property name="email" value="waysub@gmail.com" />
+		<property name="picture" value="http://ciplo.net/noticias/wp-content/uploads/2013/06/subway-restaurante.jpg" />
+		<property name="avgStars" value="0.0" />
+		<property name="deliveryService" value="true" />
+		<property name="costDelivery" value="3.00" />
+		<property name="erased"	value="false"/>
+		<property name="minimunAmount" value="10.00" />
+		<property name="manager" ref="manager2"/>
+		<property name="mealOrders">
+			<list>
+				
+			</list>
+		</property>
+		<property name="meals">
+			<list>
+				<ref bean="meal5"/>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				
+			</list>
+		</property>
+		<property name="socialIdentities">
+			<list>
+				
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+				
+			</list>
+		</property>
+		<property name="promotes">
+			<list>
+				
+			</list>
+		</property>
+	 </bean>
+	 
+	 <bean id="restaurant6" class="domain.Restaurant">
+	 	<property name="name" value="El Vergel" />
+		<property name="phone" value="+34 905212321" />
+		<property name="city" value="Sevilla" />
+		<property name="address" value="C/Arbol nº20" />
+		<property name="email" value="vergelveggie@gmail.com" />
+		<property name="picture" value="http://s3.eestatic.com/2017/03/30/social/Acoso-Dieta_vegana-Restaurantes-La_Jungla_204740027_31771887_1024x576.jpg" />
+		<property name="avgStars" value="0.0" />
+		<property name="deliveryService" value="false" />
+		<property name="erased"	value="false"/>
+		<property name="manager" ref="manager3"/>
+		<property name="mealOrders">
+			<list>
+				
+			</list>
+		</property>
+		<property name="meals">
+			<list>
+				
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				
+			</list>
+		</property>
+		<property name="socialIdentities">
+			<list>
+				
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+				
+			</list>
+		</property>
+		<property name="promotes">
+			<list>
+				
+			</list>
+		</property>
+	 </bean>
+
+	 <!-- Category -->
+	 
+	 <bean id="category1" class="domain.Category">
+		<property name="name" value="Pescado"/>
+		<property name="manager" ref="manager1"/>
+	 </bean>
+	 
+	 <bean id="category2" class="domain.Category">
+		<property name="name" value="Carne"/>
+		<property name="manager" ref="manager1"/>
+	 </bean>
+	 
+	 <bean id="category3" class="domain.Category">
+		<property name="name" value="Comida China"/>
+		<property name="manager" ref="manager1"/>
+	 </bean>
+	 
+	 <bean id="category4" class="domain.Category">
+		<property name="name" value="Comida Japonesa"/>
+		<property name="manager" ref="manager2"/>
+	 </bean>
+	 
+	 <bean id="category5" class="domain.Category">
+		<property name="name" value="Comida Rapida"/>
+		<property name="manager" ref="manager2"/>
+	 </bean>
+	 
+	 <bean id="category6" class="domain.Category">
+		<property name="name" value="Comida Vegana"/>
+		<property name="manager" ref="manager3"/>
+	 </bean>
+	 
+	 <!-- Social Identity -->
+	 
+	 <bean id="socialIdentity1" class="domain.SocialIdentity">
+		<property name="nick" value="PescaitoGaditano"/>
+		<property name="socialNetwork" value="Twitter"/>
+		<property name="link" value="http://www.Twitter.com/PescaditoGaditano"/>
+		<property name="picture" value="https://pbs.twimg.com/profile_images/846376697020637184/VZF-4g8F.jpg"/>
+		<property name="restaurant" ref="restaurant1"/>
+	 </bean>
+	 
+	 <bean id="socialIdentity2" class="domain.SocialIdentity">
+		<property name="nick" value="PescaitoGadiFace"/>
+		<property name="socialNetwork" value="Facebook"/>
+		<property name="link" value="http://www.facebook.com/PescaditoGaditano"/>
+		<property name="picture" value="https://pbs.twimg.com/profile_images/846376697020637184/VZF-4g8F.jpg"/>
+		<property name="restaurant" ref="restaurant1"/>
+	 </bean>
+	 
+	 <bean id="socialIdentity3" class="domain.SocialIdentity">
+		<property name="nick" value="BrasasEnTwitter"/>
+		<property name="socialNetwork" value="Twitter"/>
+		<property name="link" value="http://www.twitter.com/BrasasEnTwitter"/>
+		<property name="picture" value="https://pbs.twimg.com/profile_images/344513261576185938/64a7e31fd8a24c1d74b6f5036749a55a.jpeg"/>
+		<property name="restaurant" ref="restaurant2"/>
+	 </bean>
+	 
+	 <!-- Review -->
+	 
+	 <bean id="review1" class="domain.Review">
+		<property name="title" value="Critica al Pescadito"/>
+		<property name="text" value="Muy lejos, más allá de las montañas de palabras."/>
+		<property name="rate" value="4"/>
+		<property name="critic" ref="critic1"/>
+		<property name="restaurant" ref="restaurant1"/>
+		<property name="relationLikes">
+			<list>
+				<ref bean="relationLike1"/>
+				<ref bean="relationLike2"/>
+				<ref bean="relationLike3"/>
+				<ref bean="relationLike4"/>
+			</list>
+		</property>
+		<property name="relationDislikes">
+			<list>
+				
+			</list>
+		</property>
+	 </bean>
+	 
+	 <bean id="review2" class="domain.Review">
+		<property name="title" value="Critica al Pescadito Gaditano"/>
+		<property name="text" value="Muy lejos, más allá de las montañas de palabras, alejados de los países de las vocales y las consonantes."/>
+		<property name="rate" value="5"/>
+		<property name="critic" ref="critic2"/>
+		<property name="restaurant" ref="restaurant1"/>
+		<property name="relationLikes">
+			<list>
+				<ref bean="relationLike5"/>
+			</list>
+		</property>
+		<property name="relationDislikes">
+			<list>
+				<ref bean="relationDislike3"/>
+			</list>
+		</property>
+	 </bean>
+	 
+	 <bean id="review3" class="domain.Review">
+		<property name="title" value="Critica al restaurante de brasas"/>
+		<property name="text" value="Muy lejos, más allá de las montañas."/>
+		<property name="rate" value="3"/>
+		<property name="critic" ref="critic1"/>
+		<property name="restaurant" ref="restaurant2"/>
+		<property name="relationLikes">
+			<list>
+				<ref bean="relationLike6"/>
+			</list>
+		</property>
+		<property name="relationDislikes">
+			<list>
+				<ref bean="relationDislike1"/>
+			</list>
+		</property>
+	 </bean>
+	 
+	 <bean id="review4" class="domain.Review">
+		<property name="title" value="Critica al restaurante chino"/>
+		<property name="text" value="Muy lejos, más allá."/>
+		<property name="rate" value="2"/>
+		<property name="critic" ref="critic2"/>
+		<property name="restaurant" ref="restaurant3"/>
+		<property name="relationLikes">
+			<list>
+				
+			</list>
+		</property>
+		<property name="relationDislikes">
+			<list>
+				<ref bean="relationDislike2"/>
+				<ref bean="relationDislike4"/>
+				<ref bean="relationDislike5"/>
+				<ref bean="relationDislike6"/>
+			</list>
+		</property>
+	 </bean>
+	 
+	 <!-- Relation Like -->
+	 
+	 <bean id="relationLike1" class="domain.RelationLike">
+		<property name="user" ref="user1"/>
+		<property name="review" ref="review1"/>
+	 </bean>
+	 
+	 <bean id="relationLike2" class="domain.RelationLike">
+		<property name="user" ref="user2"/>
+		<property name="review" ref="review1"/>
+	 </bean>
+	 
+	 <bean id="relationLike3" class="domain.RelationLike">
+		<property name="user" ref="user3"/>
+		<property name="review" ref="review1"/>
+	 </bean>
+	 
+	 <bean id="relationLike4" class="domain.RelationLike">
+		<property name="user" ref="user4"/>
+		<property name="review" ref="review1"/>
+	 </bean>
+	 
+	 <bean id="relationLike5" class="domain.RelationLike">
+		<property name="user" ref="user1"/>
+		<property name="review" ref="review2"/>
+	 </bean>
+	 
+	 <bean id="relationLike6" class="domain.RelationLike">
+		<property name="user" ref="user2"/>
+		<property name="review" ref="review3"/>
+	 </bean>
+	 
+	 <!-- Relation Dislike -->
+	 
+	 <bean id="relationDislike1" class="domain.RelationDislike">
+		<property name="user" ref="user1"/>
+		<property name="review" ref="review3"/>
+	 </bean>
+	 
+	 <bean id="relationDislike2" class="domain.RelationDislike">
+		<property name="user" ref="user1"/>
+		<property name="review" ref="review4"/>
+	 </bean>
+	 
+	 <bean id="relationDislike3" class="domain.RelationDislike">
+		<property name="user" ref="user2"/>
+		<property name="review" ref="review2"/>
+	 </bean>
+	 
+	 <bean id="relationDislike4" class="domain.RelationDislike">
+		<property name="user" ref="user2"/>
+		<property name="review" ref="review4"/>
+	 </bean>
+	 
+	 <bean id="relationDislike5" class="domain.RelationDislike">
+		<property name="user" ref="user3"/>
+		<property name="review" ref="review4"/>
+	 </bean>
+	 
+	 <bean id="relationDislike6" class="domain.RelationDislike">
+		<property name="user" ref="user4"/>
+		<property name="review" ref="review4"/>
+	 </bean>
+	 
+	 <!-- Monthly Bills -->
+	 
+	 <bean id="monthlyBill1" class="domain.MonthlyBill">
+		<property name="moment" value="05/05/2017 15:00"/>
+		<property name="paidMoment" value="05/08/2017 15:00"/>
+		<property name="cost" value="20.00"/>
+		<property name="manager" ref="manager1"/>
+	 </bean>
+	 
+	 <bean id="monthlyBill2" class="domain.MonthlyBill">
+		<property name="moment" value="04/05/2017 15:00"/>
+		<property name="paidMoment" value="04/08/2017 15:00"/>
+		<property name="cost" value="50.00"/>
+		<property name="manager" ref="manager2"/>
+	 </bean>
+	 
+	 <bean id="monthlyBill3" class="domain.MonthlyBill">
+		<property name="moment" value="03/05/2017 15:00"/>
+		<property name="paidMoment" value="03/08/2017 15:00"/>
+		<property name="cost" value="25.00"/>
+		<property name="manager" ref="manager3"/>
+	 </bean>
+	 
+	 <!-- Comment -->
+	 
+	 <bean id="comment1" class="domain.Comment">
+	 	<property name="title" value="Comentario del pescadito"/>
+		<property name="text" value="Muy buen restaurante, tal y como me esperaba. El pescaito en su punto"/>
+		<property name="moment" value="04/05/2017 15:00"/>
+		<property name="stars" value="4"/>
+		<property name="user" ref="user1"/>
+		<property name="restaurant" ref="restaurant1"/>
+		<property name="reports">
+			<list>
+				
+			</list>
+		</property>
+	  </bean>
+	  
+	 <bean id="comment2" class="domain.Comment">
+	 	<property name="title" value="Comentario del pescadito"/>
+		<property name="text" value="Me encanta el aroma de la playa cuando fui a recoger mi pescadito frito"/>
+		<property name="moment" value="05/06/2017 15:00"/>
+		<property name="stars" value="5"/>
+		<property name="user" ref="user2"/>
+		<property name="restaurant" ref="restaurant1"/>
+		<property name="reports">
+			<list>
+				
+			</list>
+		</property>
+	  </bean>
+	  
+	 <bean id="comment3" class="domain.Comment">
+	 	<property name="title" value="Comentario del brasas"/>
+		<property name="text" value="La comida estaba un poco cruda, pero aun asi estaba buena."/>
+		<property name="moment" value="03/05/2017 15:00"/>
+		<property name="stars" value="3"/>
+		<property name="user" ref="user1"/>
+		<property name="restaurant" ref="restaurant2"/>
+		<property name="reports">
+			<list>
+				
+			</list>
+		</property>
+	  </bean>
+	  
+	 <bean id="comment4" class="domain.Comment">
+	 	<property name="title" value="Comentario del pescadito"/>
+		<property name="text" value="Creo que ha sido una de mis mejoras experiencias en restaurantes de este tipo"/>
+		<property name="moment" value="03/25/2017 15:00"/>
+		<property name="stars" value="5"/>
+		<property name="user" ref="user2"/>
+		<property name="restaurant" ref="restaurant2"/>
+		<property name="reports">
+			<list>
+				
+			</list>
+		</property>
+	  </bean>
+	  
+	 <bean id="comment5" class="domain.Comment">
+	 	<property name="title" value="Comentario del chino"/>
+		<property name="text" value="Comida decente, quizas vuelva a pedir comia otro dia"/>
+		<property name="moment" value="02/15/2017 15:00"/>
+		<property name="stars" value="4"/>
+		<property name="user" ref="user3"/>
+		<property name="restaurant" ref="restaurant3"/>
+		<property name="reports">
+			<list>
+				
+			</list>
+		</property>
+	  </bean>
+	  
+	 <bean id="comment6" class="domain.Comment">
+	 	<property name="title" value="Comentario basura"/>
+		<property name="text" value="Menuda basura de comida"/>
+		<property name="moment" value="04/06/2017 15:00"/>
+		<property name="stars" value="1"/>
+		<property name="user" ref="user4"/>
+		<property name="restaurant" ref="restaurant3"/>
+		<property name="reports">
+			<list>
+				<ref bean="report1"/>
+				<ref bean="report2"/>
+			</list>
+		</property>
+	  </bean>
+	  
+	  <!-- Report -->
+	  
+	 <bean id="report1" class="domain.Report">
+		<property name="text" value="Este comentario me parece inadecuado"/>
+		<property name="moment" value="04/07/2017 15:00"/>
+		<property name="reporter" ref="user1"/>
+		<property name="comment" ref="comment6"/>
+	  </bean>
+	  
+	 <bean id="report2" class="domain.Report">
+		<property name="text" value="Este comentario me parece incorrecto"/>
+		<property name="moment" value="04/08/2017 15:00"/>
+		<property name="reporter" ref="user2"/>
+		<property name="comment" ref="comment6"/>
+	  </bean>
+	  
+	  <!-- Promote -->
+	  
+	  <bean id="promote1" class="domain.Promote">
+	  	<property name="beginning" value="02/25/2016" />
+	  	<property name="ending" value="02/25/2017" />
+	  	<property name="timesDisplayed" value="0" />
+	  	<property name="totalDisplayed" value="100" />
+	  	<property name="restaurant" ref="restaurant1" />
+	  </bean>
+	  
+	  <bean id="promote2" class="domain.Promote">
+	  	<property name="beginning" value="04/30/2017" />
+	  	<property name="ending" value="12/25/2017" />
+	  	<property name="timesDisplayed" value="0" />
+	  	<property name="totalDisplayed" value="0" />
+	  	<property name="restaurant" ref="restaurant1" />
+	  </bean>
+	  
+	  <bean id="promote3" class="domain.Promote">
+	  	<property name="beginning" value="04/25/2017" />
+	  	<property name="ending" value="09/25/2017" />
+	  	<property name="timesDisplayed" value="0" />
+	  	<property name="totalDisplayed" value="0" />
+	  	<property name="restaurant" ref="restaurant3" />
+	  </bean>
+	  
+	  <!-- Meals -->
+	  
+	  <bean id="meal1" class="domain.Meal">
+	  	<property name="title" value="Surtido variado"/>
+	  	<property name="description" value="Surtido de gran variedad de los mejores y mas frescos pescaitos fritos."/>
+	  	<property name="price" value="25.50"/>
+	  	<property name="erased" value="false"/>
+	  	<property name="category" ref="category1"/>
+	  	<property name="restaurant" ref="restaurant1"/>
+	  	<property name="quantities">
+	  		<list>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
+	  <bean id="meal2" class="domain.Meal">
+	  	<property name="title" value="Dorada a la plancha"/>
+	  	<property name="description" value="Estupenda dorada a la plancha acompañada con ensalada de col."/>
+	  	<property name="price" value="17.50"/>
+	  	<property name="erased" value="false"/>
+	  	<property name="category" ref="category1"/>
+	  	<property name="restaurant" ref="restaurant1"/>
+	  	<property name="quantities">
+	  		<list>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
+	  <bean id="meal3" class="domain.Meal">
+	  	<property name="title" value="Secreto ibérico"/>
+	  	<property name="description" value="Filete de secreto ibérico en su punto con patatas."/>
+	  	<property name="price" value="9.50"/>
+	  	<property name="erased" value="false"/>
+	  	<property name="category" ref="category2"/>
+	  	<property name="restaurant" ref="restaurant2"/>
+	  	<property name="quantities">
+	  		<list>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
+	  <bean id="meal4" class="domain.Meal">
+	  	<property name="title" value="Sushi variado"/>
+	  	<property name="description" value="En este variado encontraras un total de30 piezas de sushi entre maki, uramaki, nigiri y oshi."/>
+	  	<property name="price" value="30.00"/>
+	  	<property name="erased" value="false"/>
+	  	<property name="category" ref="category4"/>
+	  	<property name="restaurant" ref="restaurant4"/>
+	  	<property name="quantities">
+	  		<list>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
+	  <bean id="meal5" class="domain.Meal">
+	  	<property name="title" value="Bocadillo de albondigas"/>
+	  	<property name="description" value="Estupendo bocadillo de albondigas en salsa, ¿cúal salsa? ¡La que tú quieras!."/>
+	  	<property name="price" value="7.50"/>
+	  	<property name="erased" value="false"/>
+	  	<property name="category" ref="category5"/>
+	  	<property name="restaurant" ref="restaurant5"/>
+	  	<property name="quantities">
+	  		<list>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
+	  <bean id="meal6" class="domain.Meal">
+	  	<property name="title" value="Ramen"/>
+	  	<property name="description" value="Fideos calentitos en todas las epocas del año."/>
+	  	<property name="price" value="8.00"/>
+	  	<property name="erased" value="false"/>
+	  	<property name="category" ref="category3"/>
+	  	<property name="restaurant" ref="restaurant3"/>
+	  	<property name="quantities">
+	  		<list>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
+	  <!-- Meal Order -->
+	  
+	  <bean id="mealOrder1" class="domain.MealOrder">
+	  	<property name="moment" value="04/25/2017"/>
+	  	<property name="amount" value="9.50"/>
+	  	<property name="status" value="PENDING"/>
+	  	<property name="pickUp" value="false"/>
+	  	<property name="user" ref="user1"/>
+	  	<property name="restaurant" ref="restaurant2"/>
+	  	<property name="quantities">
+	  		<list>
+	  			<ref bean="quantity1"/>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
+	   <bean id="mealOrder2" class="domain.MealOrder">
+	  	<property name="moment" value="05/12/2017"/>
+	  	<property name="amount" value="43.00"/>
+	  	<property name="status" value="DRAFT"/>
+	  	<property name="pickUp" value="true"/>
+	  	<property name="user" ref="user1"/>
+	  	<property name="restaurant" ref="restaurant1"/>
+	  	<property name="quantities">
+	  		<list>
+	  			<ref bean="quantity2"/>
+	  			<ref bean="quantity3"/>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
+	  <bean id="mealOrder3" class="domain.MealOrder">
+	  	<property name="moment" value="04/26/2017"/>
+	  	<property name="amount" value="14.50"/>
+	  	<property name="status" value="FINISHED"/>
+	  	<property name="pickUp" value="false"/>
+	  	<property name="user" ref="user1"/>
+	  	<property name="restaurant" ref="restaurant2"/>
+	  	<property name="quantities">
+	  		<list>
+	  			<ref bean="quantity4"/>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
+	  <bean id="mealOrder4" class="domain.MealOrder">
+	  	<property name="moment" value="04/26/2017"/>
+	  	<property name="amount" value="42.00"/>
+	  	<property name="status" value="FINISHED"/>
+	  	<property name="pickUp" value="false"/>
+	  	<property name="user" ref="user2"/>
+	  	<property name="restaurant" ref="restaurant3"/>
+	  	<property name="quantities">
+	  		<list>
+	  			<ref bean="quantity5"/>
+	  		</list>
+	  	</property>
+	  </bean>
+	  
+	  <!-- Quantity -->
+	  
+	  <bean id="quantity1" class="domain.Quantity">
+	  	<property name="quantity" value="1"/>
+	  	<property name="mealOrder" ref="mealOrder1"/>
+	  	<property name="meal" ref="meal3"/>
+	  </bean>
+	  
+	  <bean id="quantity2" class="domain.Quantity">
+	  	<property name="quantity" value="1"/>
+	  	<property name="mealOrder" ref="mealOrder2"/>
+	  	<property name="meal" ref="meal1"/>
+	  </bean>
+	  
+	  <bean id="quantity3" class="domain.Quantity">
+	  	<property name="quantity" value="1"/>
+	  	<property name="mealOrder" ref="mealOrder2"/>
+	  	<property name="meal" ref="meal2"/>
+	  </bean>
+	  
+	   <bean id="quantity4" class="domain.Quantity">
+	  	<property name="quantity" value="1"/>
+	  	<property name="mealOrder" ref="mealOrder3"/>
+	  	<property name="meal" ref="meal3"/>
+	  </bean>
+	  
+	  <bean id="quantity5" class="domain.Quantity">
+	  	<property name="quantity" value="2"/>
+	  	<property name="mealOrder" ref="mealOrder4"/>
+	  	<property name="meal" ref="meal4"/>
+	  </bean>
+	  
+	  <!-- Invoice -->
+	  
+	  <bean id="invoice1" class="domain.Invoice">
+	 	<property name="description" value="Se ha realizado tu pedido con la tarjeta ************5756"/>
+	  	<property name="moment" value="04/25/2017 18:30"/>
+	  	<property name="vatNumber" value="ES-78245688"/>
+	  	<property name="name" value="Irene"/>
+	  	<property name="surname" value="Montoya"/>
+	  	<property name="mealOrder" ref="mealOrder1"/>
+	  </bean>
+	
+</beans>
