@@ -1,6 +1,6 @@
 ﻿start transaction;
 
-drop database if exists `Acme-Pad-Thai`;
+drop database if exists `Acme-Meals`;
 create database `Acme-Meals`;
 
 use `Acme-Meals`;
