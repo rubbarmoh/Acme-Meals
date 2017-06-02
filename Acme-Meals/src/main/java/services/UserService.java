@@ -278,7 +278,20 @@ public class UserService {
 		return result;
 	}
 
-	public void banUnban(User user) {
+	public void ban(User user) {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("ADMIN");
+		Assert.isTrue(userAccount.getAuthorities().contains(au));
+
+		if (user.getBanned() == false) {
+			user.setBanned(true);
+			save2(user);
+		} 
+		
+	}
+	public void unban(User user) {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Authority au = new Authority();
@@ -287,10 +300,9 @@ public class UserService {
 
 		if (user.getBanned() == true) {
 			user.setBanned(false);
-		} else {
-			user.setBanned(true);
-		}
-		save2(user);
+			save2(user);
+		} 
+		
 	}
 
 	public User encryptCreditCard(User user) {

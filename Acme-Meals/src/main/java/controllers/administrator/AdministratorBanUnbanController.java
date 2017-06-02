@@ -98,13 +98,34 @@ public class AdministratorBanUnbanController extends AbstractController {
 
 	//BanUnban -----
 
-	@RequestMapping(value = "/banUnban", method = RequestMethod.GET)
-	public ModelAndView banUnban(@RequestParam int userId) {
+	@RequestMapping(value = "/ban", method = RequestMethod.GET)
+	public ModelAndView ban(@RequestParam int userId) {
 		ModelAndView result;
 		User user = userService.findOne(userId);
 		try {
-			userService.banUnban(user);
+			if(user.getBanned()==false){
+				userService.ban(user);
+			
+			}
 			result = browse();
+		}catch (Throwable oops) {
+			result = browse();
+			result.addObject("message", "master-page.commit.error");
+		}
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/unban", method = RequestMethod.GET)
+	public ModelAndView unban(@RequestParam int userId) {
+		ModelAndView result;
+		User user = userService.findOne(userId);
+		try {
+			if(user.getBanned()==true){
+				userService.unban(user);
+			}
+			result = browse();
+		
 		} catch (Throwable oops) {
 			result = browse();
 			result.addObject("message", "master-page.commit.error");

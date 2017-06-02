@@ -59,12 +59,12 @@
 				<jstl:when test="${row.banned}">
 						<input type="button" name="banUnban"
 						value="<spring:message code="user.unban" />"
-						onclick="javascript: window.location.replace('administrator/banUnban/banUnban.do?userId=${row.id}')"/>
+						onclick="javascript: window.location.replace('administrator/banUnban/unban.do?userId=${row.id}')"/>
 				</jstl:when>
 				<jstl:otherwise>
 					<input type="button" name="banUnban"
 						value="<spring:message code="user.ban" />"
-						onclick="javascript: window.location.replace('administrator/banUnban/banUnban.do?userId=${row.id}')"/>
+						onclick="javascript: window.location.replace('administrator/banUnban/ban.do?userId=${row.id}')"/>
 				</jstl:otherwise>
 		</jstl:choose>
 	</display:column>
