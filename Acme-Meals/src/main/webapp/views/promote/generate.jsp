@@ -24,6 +24,7 @@
 	
 		<form:hidden path="id"/>
 		<form:hidden path="timesDisplayed"/>
+		<form:hidden path="totalDisplayed"/>
 		
 		<acme:textbox code="promote.beginning" path="beginning"/>
 		<acme:textbox code="promote.ending" path="ending"/>
