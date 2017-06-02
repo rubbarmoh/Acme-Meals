@@ -140,7 +140,7 @@ public class MealOrderServiceTest extends AbstractTest {
 			templateMakeOrder((String) testingData[i][0], (String) testingData[i][1], (boolean) testingData[i][2], (int) testingData[i][3], (int) testingData[i][4], (Class<?>) testingData[i][5]);
 		}
 	}
-	protected void templateMakeOrder(String username, String deliveryAdress, boolean pickUp, int restaurantId, int mealId, Class<?> expected) {
+	protected void templateMakeOrder(String username, String deliveryAddress, boolean pickUp, int restaurantId, int mealId, Class<?> expected) {
 		Class<?> caught = null;
 		Collection<Quantity> quantities = new ArrayList<Quantity>();
 		Quantity quantity = new Quantity();
@@ -158,7 +158,7 @@ public class MealOrderServiceTest extends AbstractTest {
 
 			order.setAmount(amount);
 			order.setQuantities(quantities);
-			order.setDeliveryAdress(deliveryAdress);
+			order.setDeliveryAddress(deliveryAddress);
 			order.setMoment(date);
 			order.setPickUp(pickUp);
 			order.setRestaurant(restaurantService.findOne(restaurantId));

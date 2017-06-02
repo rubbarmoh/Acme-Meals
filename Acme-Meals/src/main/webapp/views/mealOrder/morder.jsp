@@ -38,6 +38,26 @@
 			</td>
 		</tr>
 		<tr>
+			<th><spring:message code = "restaurant.deliveryService"/></th>
+			<jstl:if test="${mealOrder.restaurant.deliveryService == true}">
+				<th><spring:message code = "restaurant.costDelivery"/></th>
+				<th><spring:message code = "restaurant.minimunAmount"/></th>
+			</jstl:if>
+		</tr>
+		<tr>
+			<jstl:choose>
+				<jstl:when test="${mealOrder.restaurant.deliveryService == true}">
+						<td><spring:message code = "restaurant.yes"/></td>
+						<td><jstl:out value="${mealOrder.restaurant.costDelivery }"/></td>
+						<td><jstl:out value="${mealOrder.restaurant.minimunAmount }"/></td>
+				</jstl:when>
+				<jstl:otherwise>
+						<td><spring:message code = "restaurant.no"/></td>
+				</jstl:otherwise>
+			</jstl:choose>
+			
+		</tr>
+		<tr>
 			<th>
 				<spring:message code = "mealOrder.amount"/>
 			</th>
@@ -108,7 +128,7 @@
 	
 </display:table>
 <jstl:if test="${mealOrder.status=='DRAFT'}">
-	<jstl:if test="${mealOrder.amount>0.0 && (mealOrder.amount>=mealOrder.restaurant.minimunAmount || mealOrder.restaurant.minimunAmount==null)}">
+	<jstl:if test="${mealOrder.amount>0.0 }">
 <input type="button" name="end"
 						value="<spring:message code="mealOrder.end" />"
 						onclick="window.location.replace('user/mealOrder/edit.do?mealOrderId=${mealOrder.id }&restaurantId=${restaurant.id }')"/><br/>

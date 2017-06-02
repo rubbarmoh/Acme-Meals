@@ -39,7 +39,7 @@ public class RelationDislikeServiceTest extends AbstractTest {
 	 * Give Dislike to a review.
 	 */
 	@Test
-	public void driverGiveLike() {
+	public void driverGiveDislike() {
 		Object testingData[][] = {
 			{
 				null, 124, IllegalArgumentException.class
@@ -48,7 +48,7 @@ public class RelationDislikeServiceTest extends AbstractTest {
 				"admin", 124, IllegalArgumentException.class
 			}, // Damos like con admin
 			{
-				"user1", 124, null
+				"user1", 121, null
 			}
 		};
 

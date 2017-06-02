@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 @Embeddable
 @Access(AccessType.PROPERTY)
 public class MealOrderForm {
-	private String deliveryAdress;
+	private String deliveryAddress;
 	private Boolean pickUp;
 	private int mealOrderId;
 	private int restaurantId;
@@ -30,11 +30,11 @@ public class MealOrderForm {
 		this.restaurantId = restaurantId;
 	}
 	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getDeliveryAdress() {
-		return deliveryAdress;
+	public String getDeliveryAddress() {
+		return deliveryAddress;
 	}
-	public void setDeliveryAdress(String deliveryAdress) {
-		this.deliveryAdress = deliveryAdress;
+	public void setDeliveryAddress(String deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
 	}
 	public Boolean getPickUp() {
 		return pickUp;

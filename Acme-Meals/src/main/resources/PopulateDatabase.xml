@@ -1121,8 +1121,8 @@
 	  <bean id="promote2" class="domain.Promote">
 	  	<property name="beginning" value="04/30/2017" />
 	  	<property name="ending" value="12/25/2017" />
-	  	<property name="timesDisplayed" value="0" />
-	  	<property name="totalDisplayed" value="0" />
+	  	<property name="timesDisplayed" value="10" />
+	  	<property name="totalDisplayed" value="10" />
 	  	<property name="restaurant" ref="restaurant1" />
 	  </bean>
 	  
@@ -1221,6 +1221,7 @@
 	  	<property name="amount" value="9.50"/>
 	  	<property name="status" value="PENDING"/>
 	  	<property name="pickUp" value="false"/>
+	  	<property name="deliveryAddress" value="C/ Sevilla nº19"/>
 	  	<property name="user" ref="user1"/>
 	  	<property name="restaurant" ref="restaurant2"/>
 	  	<property name="quantities">
@@ -1249,7 +1250,7 @@
 	  	<property name="moment" value="04/26/2017"/>
 	  	<property name="amount" value="14.50"/>
 	  	<property name="status" value="FINISHED"/>
-	  	<property name="pickUp" value="false"/>
+	  	<property name="pickUp" value="true"/>
 	  	<property name="user" ref="user1"/>
 	  	<property name="restaurant" ref="restaurant2"/>
 	  	<property name="quantities">
@@ -1264,6 +1265,7 @@
 	  	<property name="amount" value="42.00"/>
 	  	<property name="status" value="FINISHED"/>
 	  	<property name="pickUp" value="false"/>
+	  	<property name="deliveryAddress" value="C/ Cordoba nº19"/>	  	
 	  	<property name="user" ref="user2"/>
 	  	<property name="restaurant" ref="restaurant3"/>
 	  	<property name="quantities">

@@ -195,16 +195,16 @@ public class MealOrderService {
 	}
 	public MealOrder reconstruct(MealOrderForm mealOrderForm, BindingResult binding) {
 		MealOrder result;
+		Assert.isTrue(!mealOrderForm.getPickUp()||mealOrderForm.getDeliveryAddress()==null, "pickUpMarked");
+		Assert.isTrue(mealOrderForm.getPickUp()||!mealOrderForm.getDeliveryAddress().isEmpty());
+		
 		result = mealOrderRepository.findOne(mealOrderForm.getMealOrderId());
-		result.setDeliveryAdress(mealOrderForm.getDeliveryAdress());
+		result.setDeliveryAddress(mealOrderForm.getDeliveryAddress());
 		if (mealOrderForm.getPickUp()) {
 			result.setPickUp(true);
-			Assert.isTrue((result.getDeliveryAdress().equals("")), "pickupMarked");
 		} else {
 			result.setPickUp(false);
-			result.setDeliveryAdress(mealOrderForm.getDeliveryAdress());
-			Assert.isTrue(!(result.getDeliveryAdress().equals("")), "adressNotValid");
-			Assert.isTrue(result.getRestaurant().getDeliveryService(), "noDeliveryService");
+			result.setDeliveryAddress(mealOrderForm.getDeliveryAddress());
 		}
 
 		validator.validate(result, binding);

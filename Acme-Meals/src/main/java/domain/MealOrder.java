@@ -28,16 +28,16 @@ public class MealOrder extends DomainEntity {
 	private Double	amount;
 	private String	status;
 	private Boolean	pickUp;
-	private String	deliveryAdress;
+	private String	deliveryAddress;
 
 
 	// Getters and Setters -----------------------------
 
-	public String getDeliveryAdress() {
-		return deliveryAdress;
+	public String getDeliveryAddress() {
+		return deliveryAddress;
 	}
-	public void setDeliveryAdress(String deliveryAdress) {
-		this.deliveryAdress = deliveryAdress;
+	public void setDeliveryAddress(String deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
 	}
 	@NotNull
 	@Past

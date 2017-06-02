@@ -30,6 +30,26 @@
 			</td>
 		</tr>
 		<tr>
+			<th><spring:message code = "restaurant.deliveryService"/></th>
+			<jstl:if test="${mealOrder.restaurant.deliveryService == true}">
+				<th><spring:message code = "restaurant.costDelivery"/></th>
+				<th><spring:message code = "restaurant.minimunAmount"/></th>
+			</jstl:if>
+		</tr>
+		<tr>
+			<jstl:choose>
+				<jstl:when test="${mealOrder.restaurant.deliveryService == true}">
+						<td><spring:message code = "restaurant.yes"/></td>
+						<td><jstl:out value="${mealOrder.restaurant.costDelivery }"/></td>
+						<td><jstl:out value="${mealOrder.restaurant.minimunAmount }"/></td>
+				</jstl:when>
+				<jstl:otherwise>
+						<td><spring:message code = "restaurant.no"/></td>
+				</jstl:otherwise>
+			</jstl:choose>
+			
+		</tr>
+		<tr>
 			<th>
 				<spring:message code = "mealOrder.amount"/>
 			</th>
@@ -44,6 +64,19 @@
 			<td>
 				<fmt:formatDate value="${mealOrder.moment }" pattern="dd/MM/yyyy HH:mm" />
 			</td>
+		</tr>
+		<tr>
+			<jstl:choose>
+				<jstl:when test="${mealOrder.pickUp == true}">
+						<th><spring:message code = "mealOrder.pickUp"/></th>
+						<td><spring:message code = "restaurant.yes"/></td>
+				</jstl:when>
+				<jstl:otherwise>
+						<th><spring:message code = "mealOrder.deliveryAddress"/></th>
+						<td><jstl:out value="${mealOrder.deliveryAddress}"/></td>
+				</jstl:otherwise>
+			</jstl:choose>
+			
 		</tr>
 		<tr>
 			<th>

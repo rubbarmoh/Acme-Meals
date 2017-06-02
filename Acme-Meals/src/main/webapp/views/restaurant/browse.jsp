@@ -58,7 +58,16 @@
 	<display:column property="avgStars" title="${avgStarsHeader}"/>
 	
 	<spring:message code="restaurant.deliveryService" var="deliveryServiceHeader" />
-	<display:column property="deliveryService" title="${deliveryServiceHeader}"/>
+	<display:column title="${deliveryServiceHeader}">
+	<jstl:choose>
+		<jstl:when test="${row.deliveryService == true}">
+			<spring:message code = "restaurant.yes"/>
+		</jstl:when>
+		<jstl:otherwise>
+			<spring:message code = "restaurant.no"/>
+		</jstl:otherwise>
+	</jstl:choose>
+	</display:column>
 	
 	<spring:message code="restaurant.costDelivery" var="costDeliveryHeader" />
 	<display:column property="costDelivery" title="${costDeliveryHeader}"/>

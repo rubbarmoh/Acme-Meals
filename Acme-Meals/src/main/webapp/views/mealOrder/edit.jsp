@@ -26,12 +26,23 @@
 		<form:hidden path="restaurantId"/>
 		<form:hidden path="mealOrderId"/>
 		
+		<h3><spring:message code="mealOrder.pickOne"/></h3>
+		
+		
 		<acme:checkbox code="mealOrder.pickUp" path="pickUp" />
-		<br/>
-		<acme:textbox code="mealOrder.deliveryAdress" path="deliveryAdress"/>
+		
+		<jstl:choose>
+			<jstl:when test="${minimun && dev}">
+				<acme:textbox code="mealOrder.deliveryAddress" path="deliveryAddress"/>
+			</jstl:when>
+			<jstl:when test="${minimun==false && dev }">
+				<acme:textbox code="mealOrder.deliveryAddress" readonly="true" path="deliveryAddress"/>
+				<b><spring:message code="mealOrder.noMinimun"/></b>
+			</jstl:when>
+		</jstl:choose>
+		<br><br>
 		<acme:submit name="save" code="mealOrder.save"/>
 		<acme:cancel code="mealOrder.cancel" url="user/mealOrder/morder.do?restaurantId=${mealOrderForm.restaurantId}"/>
-		
 		
 	</form:form>
 

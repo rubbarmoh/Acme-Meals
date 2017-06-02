@@ -125,8 +125,18 @@ public class UserMealOrderController extends AbstractController{
 			mealOrderForm.setRestaurantId(restaurantId);
 			mealOrderForm.setMealOrderId(mealOrderId);
 
-
-			result = createEditModelAndView(mealOrderForm, null);
+			MealOrder m = mealOrderService.findOne(mealOrderId);
+			Boolean minimun = false;
+			Restaurant r = restaurantService.findOne(restaurantId);
+			
+			if(r.getDeliveryService() && (r.getMinimunAmount()==null || m.getAmount()>=r.getMinimunAmount()))
+				minimun = true;
+				
+			result = new ModelAndView("mealOrder/edit");
+			result.addObject("mealOrderForm",mealOrderForm);
+			result.addObject("minimun", minimun);
+			result.addObject("dev", r.getDeliveryService());
+			
 			return result;
 
 		}
@@ -155,6 +165,8 @@ public class UserMealOrderController extends AbstractController{
 					mealOrder =mealOrderService.reconstruct(mealOrderForm, binding);
 					Restaurant r=restaurantService.findOne(mealOrderForm.getRestaurantId());
 					mealOrder.setStatus("PENDING");
+					Date d=new Date(System.currentTimeMillis()-1000);
+					mealOrder.setMoment(d);
 					if(r.getMinimunAmount()!=null){
 						Double am=mealOrder.getAmount()+r.getCostDelivery();
 						mealOrder.setAmount(am);
@@ -162,7 +174,6 @@ public class UserMealOrderController extends AbstractController{
 					aux = mealOrderService.save(mealOrder);
 					invoice=invoiceService.create();
 					invoice.setMealOrder(aux);
-					Date d= new Date(System.currentTimeMillis()-1000);
 					invoice.setMoment(d);
 					invoice.setName(aux.getUser().getName());
 					invoice.setSurname(aux.getUser().getSurname());
@@ -177,12 +188,13 @@ public class UserMealOrderController extends AbstractController{
 					msgCode = "mealOrder.err";
 					if (oops.getMessage().equals("pickUpMarked")) {
 						msgCode = "mealOrder.pickUpMarked";
-					} else if (oops.getMessage().equals("adressNotValid")) {
-						msgCode = "mealOrder.adressNotValid";
+					} else if (oops.getMessage().equals("addressNotValid")) {
+						msgCode = "mealOrder.addressNotValid";
 					} else if (oops.getMessage().equals("noDeliveryService")){
 						msgCode="mealOrder.noDeliveryService";
 					}
-					result = createEditModelAndView(mealOrderForm, msgCode);
+					result = edit(mealOrderForm.getMealOrderId(), mealOrderForm.getRestaurantId());
+					result.addObject("message", msgCode);
 				}
 			}
 			return result;
