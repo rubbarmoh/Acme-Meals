@@ -43,16 +43,28 @@ public class RestaurantServiceTest extends AbstractTest {
 		Object testingData[][] = {
 
 			{//Manager con todos los datos correctos
-				"manager1", "Restaurante", "954632145", "Sevilla", "C/ Sevilla nº 19", "correo@gmail.com", "http://2.bp.blogspot.com/-H6MLqMZhViM/VD7jpYbzemI/AAAAAAAABN0/C1eyjkI-Y4U/s1600/visitante%2Bmisterioso.jpg", 3.5, true, 1.0, 10.0, false, null
-			}, {//Manager con todos los datos correctos
-				"manager1", "Restaurante", "954632145", "Sevilla", "C/ Sevilla nº 19", "correo@gmail.com", "http://2.bp.blogspot.com/-H6MLqMZhViM/VD7jpYbzemI/AAAAAAAABN0/C1eyjkI-Y4U/s1600/visitante%2Bmisterioso.jpg", 3.5, false, null, null, false, null
-			}, {// Intentamos crear un restaurante siendo un usuario
-				"user1", "Restaurante", "954632145", "Sevilla", "C/ Sevilla nº 19", "correo@gmail.com", "http://2.bp.blogspot.com/-H6MLqMZhViM/VD7jpYbzemI/AAAAAAAABN0/C1eyjkI-Y4U/s1600/visitante%2Bmisterioso.jpg", 3.5, false, null, null, false,
-				IllegalArgumentException.class
-			}, {// Intentamos crear un restaurante sin autenticar
-				null, "Restaurante", "954632145", "Sevilla", "C/ Sevilla nº 19", "correo@gmail.com", "http://2.bp.blogspot.com/-H6MLqMZhViM/VD7jpYbzemI/AAAAAAAABN0/C1eyjkI-Y4U/s1600/visitante%2Bmisterioso.jpg", 3.5, false, null, null, false,
-				IllegalArgumentException.class
-			},
+				"manager1", "Restaurante", "954632145", "Sevilla", "C/ Sevilla nº 19", "correo@gmail.com", "http://2.bp.blogspot.com/-H6MLqMZhViM/VD7jpYbzemI/AAAAAAAABN0/C1eyjkI-Y4U/s1600/visitante%2Bmisterioso.jpg", 3.5, true, 1.0, 10.0, false, null}, 
+			{//Manager con todos los datos correctos con telefono +34
+				"manager1", "Restaurante", "+34 954632145", "Sevilla", "C/ Sevilla nº 19", "correo@gmail.com", "http://2.bp.blogspot.com/-H6MLqMZhViM/VD7jpYbzemI/AAAAAAAABN0/C1eyjkI-Y4U/s1600/visitante%2Bmisterioso.jpg", 3.5, true, 1.0, 10.0, false, null}, 
+			{//Manager con todos los datos correctos sin deliverable
+				"manager1", "Restaurante", "954632145", "Sevilla", "C/ Sevilla nº 19", "correo@gmail.com", "http://2.bp.blogspot.com/-H6MLqMZhViM/VD7jpYbzemI/AAAAAAAABN0/C1eyjkI-Y4U/s1600/visitante%2Bmisterioso.jpg", 3.5, false, null, null, false, null}, 
+			{//Manager con todos los datos correctos con deliverable y sin precio mínimo
+				"manager1", "Restaurante", "954632145", "Sevilla", "C/ Sevilla nº 19", "correo@gmail.com", "http://2.bp.blogspot.com/-H6MLqMZhViM/VD7jpYbzemI/AAAAAAAABN0/C1eyjkI-Y4U/s1600/visitante%2Bmisterioso.jpg", 3.5, true, 1.0, 0.0, false, null}, 
+			{// Intentamos registrar un restaurante con telefono inváldo
+				"manager1", "Restaurante", "12", "Sevilla", "C/ Sevilla nº 19", "correo@gmail.com", "http://2.bp.blogspot.com/-H6MLqMZhViM/VD7jpYbzemI/AAAAAAAABN0/C1eyjkI-Y4U/s1600/visitante%2Bmisterioso.jpg", 3.5, true, 1.0, 10.0, false,NullPointerException.class}, 
+			{// Intentamos registrar un restaurante sin direccion
+				"manager1", "Restaurante", "954632145", "Sevilla", "", "correo@gmail.com", "http://2.bp.blogspot.com/-H6MLqMZhViM/VD7jpYbzemI/AAAAAAAABN0/C1eyjkI-Y4U/s1600/visitante%2Bmisterioso.jpg", 3.5, true, 1.0, 10.0, false, NullPointerException.class}, 
+			{// Intentamos registrar un restaurante con correo inválido
+				"manager1", "Restaurante", "954632145", "Sevilla", "C/ Sevilla nº 19", "correo.com", "http://2.bp.blogspot.com/-H6MLqMZhViM/VD7jpYbzemI/AAAAAAAABN0/C1eyjkI-Y4U/s1600/visitante%2Bmisterioso.jpg", 3.5, true, 1.0, 10.0, false, NullPointerException.class}, 
+			{// Intentamos crear un restaurante siendo un usuario
+				"user1", "Restaurante", "954632145", "Sevilla", "C/ Sevilla nº 19", "correo@gmail.com", "http://2.bp.blogspot.com/-H6MLqMZhViM/VD7jpYbzemI/AAAAAAAABN0/C1eyjkI-Y4U/s1600/visitante%2Bmisterioso.jpg", 3.5, false, null, null, false,IllegalArgumentException.class}, 
+			{// Intentamos crear un restaurante sin autenticar
+				null, "Restaurante", "954632145", "Sevilla", "C/ Sevilla nº 19", "correo@gmail.com", "http://2.bp.blogspot.com/-H6MLqMZhViM/VD7jpYbzemI/AAAAAAAABN0/C1eyjkI-Y4U/s1600/visitante%2Bmisterioso.jpg", 3.5, false, null, null, false,IllegalArgumentException.class},
+			{// Intentamos crear un restaurante siendo un admin
+				"admin", "Restaurante", "954632145", "Sevilla", "C/ Sevilla nº 19", "correo@gmail.com", "http://2.bp.blogspot.com/-H6MLqMZhViM/VD7jpYbzemI/AAAAAAAABN0/C1eyjkI-Y4U/s1600/visitante%2Bmisterioso.jpg", 3.5, false, null, null, false,IllegalArgumentException.class},
+			{// Intentamos crear un restaurante siendo un critic
+				"critic1", "Restaurante", "954632145", "Sevilla", "C/ Sevilla nº 19", "correo@gmail.com", "http://2.bp.blogspot.com/-H6MLqMZhViM/VD7jpYbzemI/AAAAAAAABN0/C1eyjkI-Y4U/s1600/visitante%2Bmisterioso.jpg", 3.5, false, null, null, false,IllegalArgumentException.class},
+
 		};
 
 		for (int i = 0; i < testingData.length; i++)

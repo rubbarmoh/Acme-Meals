@@ -120,7 +120,18 @@
 		<jstl:if test="${row.restaurant.manager.userAccount.username == pageContext.request.remoteUser}">
 	
 			<spring:message code="restaurant.erased" var="erasedHeader" />
-			<display:column property="erased" title="${erasedHeader}" style="background-color:none" sortable="true"/>
+			<display:column title="${erasedHeader}"  style="background-color:none" sortable="true">
+				<jstl:choose>
+					<jstl:when test="${row.erased == false}">
+						<spring:message code="restaurant.yes" var="yes"/>
+						<jstl:out value="${yes}"/>
+					</jstl:when>
+					<jstl:otherwise>
+						<spring:message code="restaurant.no" var="no"/>
+						<jstl:out value="${no}"/>
+					</jstl:otherwise>
+				</jstl:choose>
+			</display:column>
 			
 				<display:column style="background-color:none">
 				<jstl:choose>
@@ -164,8 +175,18 @@
 		<security:authorize access="hasRole('MANAGER')">
 			<jstl:if test="${row.restaurant.manager.userAccount.username == pageContext.request.remoteUser}">
 			<spring:message code="restaurant.erased" var="erasedHeader" />
-			<display:column property="erased" title="${erasedHeader}" style="background-color:#C8C4C4" sortable="true"/>
-			
+			<display:column title="${erasedHeader}"  style="background-color:#C8C4C4" sortable="true">
+				<jstl:choose>
+					<jstl:when test="${row.erased == false}">
+						<spring:message code="restaurant.yes" var="yes"/>
+						<jstl:out value="${yes}"/>
+					</jstl:when>
+					<jstl:otherwise>
+						<spring:message code="restaurant.no" var="no"/>
+						<jstl:out value="${no}"/>
+					</jstl:otherwise>
+				</jstl:choose>
+			</display:column>
 			
 				<display:column style="background-color:#C8C4C4">
 				<jstl:choose>

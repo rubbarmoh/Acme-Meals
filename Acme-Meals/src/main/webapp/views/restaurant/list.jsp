@@ -25,24 +25,49 @@
 	pagesize="5"
 	requestURI="${requestURI}" >
 	
-	<display:column>
-		<a href="managerActor/restaurant/edit.do?restaurantId=${row.id}"><spring:message code="restaurant.edit" /></a>
-	</display:column>
-	
-	<spring:message code="restaurant.name" var="nameHeader" />
-	<display:column property="name" title="${nameHeader}"/>
-			
-	<spring:message code="restaurant.phone" var="phoneHeader" />
-	<display:column property="phone" title="${phoneHeader}"/>
-	
-	<display:column>
-		<a href="restaurant/display.do?restaurantId=${row.id}"><spring:message code="restaurant.display" /></a>
-	</display:column>
-	
-	<display:column>
-		<a href="socialIdentity/create.do?restaurantId=${row.id}"><spring:message code="restaurant.socialIdentity" /></a>
-	</display:column>
-	
+	<jstl:choose>
+		<jstl:when test="${row.erased}">
+		<display:column style="background-color:#C8C4C4">
+			<a href="managerActor/restaurant/edit.do?restaurantId=${row.id}"><spring:message code="restaurant.edit" /></a>
+		</display:column>
+		
+		<spring:message code="restaurant.name" var="nameHeader" />
+		<display:column property="name" title="${nameHeader}" style="background-color:#C8C4C4"/>
+				
+		<spring:message code="restaurant.phone" var="phoneHeader" />
+		<display:column property="phone" title="${phoneHeader}" style="background-color:#C8C4C4"/>
+		
+		<display:column style="background-color:#C8C4C4">
+			<a href="restaurant/display.do?restaurantId=${row.id}"><spring:message code="restaurant.display" /></a>
+		</display:column>
+		
+		<display:column style="background-color:#C8C4C4">
+			<a href="socialIdentity/create.do?restaurantId=${row.id}"><spring:message code="restaurant.socialIdentity" /></a>
+		</display:column>
+		</jstl:when>
+		<jstl:otherwise>
+		
+		<display:column  style="background-color:none">
+			<a href="managerActor/restaurant/edit.do?restaurantId=${row.id}"><spring:message code="restaurant.edit" /></a>
+		</display:column>
+		
+		<spring:message code="restaurant.name" var="nameHeader" />
+		<display:column property="name" title="${nameHeader}" style="background-color:none"/>
+				
+		<spring:message code="restaurant.phone" var="phoneHeader" />
+		<display:column property="phone" title="${phoneHeader}" style="background-color:none"/>
+		
+		<display:column style="background-color:none">
+			<a href="restaurant/display.do?restaurantId=${row.id}"><spring:message code="restaurant.display" /></a>
+		</display:column>
+		
+		<display:column  style="background-color:none">
+			<a href="socialIdentity/create.do?restaurantId=${row.id}"><spring:message code="restaurant.socialIdentity" /></a>
+		</display:column>
+		
+		
+		</jstl:otherwise>
+	</jstl:choose>
 	
 	
 </display:table>

@@ -72,9 +72,11 @@ public class RelationLikeService {
 		au.setAuthority("USER");
 
 		Assert.isTrue(userAccount.getAuthorities().contains(au));
+		RelationLike result = null;
 
-		RelationLike result;
-		result = relationLikeRepository.save(relationLike);
+		if(findRelationLike(relationLike.getReview())==null){
+			result = relationLikeRepository.save(relationLike);
+		}
 
 		return result;
 	}
@@ -92,8 +94,10 @@ public class RelationLikeService {
 
 		Assert.isTrue(relationLike.getId() != 0);
 
+		if(findRelationLike(relationLike.getReview())!=null){
+			relationLikeRepository.delete(relationLike);
+		}
 		
-		relationLikeRepository.delete(relationLike);
 	}
 	// Other bussiness methods ----------------------------------------------------
 	

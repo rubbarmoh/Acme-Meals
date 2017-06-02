@@ -75,8 +75,10 @@ public class RelationDislikeService {
 
 		Assert.isTrue(userAccount.getAuthorities().contains(au));
 
-		RelationDislike result;
-		result = relationDislikeRepository.save(relationDislike);
+		RelationDislike result = null;
+		if(findRelationDislike(relationDislike.getReview())==null){
+			result = relationDislikeRepository.save(relationDislike);
+		}
 
 		return result;
 	}
@@ -93,9 +95,11 @@ public class RelationDislikeService {
 		Assert.notNull(relationDislike);
 
 		Assert.isTrue(relationDislike.getId() != 0);
-
 		
-		relationDislikeRepository.delete(relationDislike);
+		if(findRelationDislike(relationDislike.getReview())!=null){
+			relationDislikeRepository.delete(relationDislike);
+		}
+		
 	}
 	// Other bussiness methods ----------------------------------------------------
 	

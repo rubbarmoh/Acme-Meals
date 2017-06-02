@@ -84,14 +84,14 @@
 			<jstl:when test="${containsD == true }">
 				<input type="button" name="unDislike"
 					value="<spring:message code="review.undislike" />"
-					onclick="javascript: window.location.replace('user/review/dislike/delete.do?reviewId=${review.id}')" />
+					onclick="javascript: window.location.replace('user/review/dislike/delete.do?reviewId=${review.id}')"
+					style="float: right;padding: 5px 15px; margin: 0 3px 0 3px;"  />
 			</jstl:when>
 			<jstl:otherwise>
 				<input type="button" name="dislike"
 					value="<spring:message code="review.dislike" />"
 					onclick="javascript: window.location.replace('user/review/dislike/create.do?reviewId=${review.id}')" 
 					style="float: right;padding: 5px 15px; margin: 0 3px 0 3px;" />
-			
 			</jstl:otherwise>
 		</jstl:choose>
 		
@@ -102,7 +102,6 @@
 	  		</jstl:if>
 		</jstl:forEach>
 		<jstl:choose>
-		
 			<jstl:when test="${containsL == true }">
 				<input type="button" name="unLike"
 					value="<spring:message code="review.unlike" />"
