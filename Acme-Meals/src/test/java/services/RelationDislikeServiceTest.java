@@ -43,13 +43,13 @@ public class RelationDislikeServiceTest extends AbstractTest {
 		Object testingData[][] = {
 			{
 				null, 124, IllegalArgumentException.class
-			}, // Damos like con usuario no autenticado
+			}, // Damos dislike con usuario no autenticado
 			{
 				"admin", 124, IllegalArgumentException.class
-			}, // Damos like con admin
+			}, // Damos dislike con admin
 			{
 				"user1", 121, null
-			}
+			}  // Damos dislike con un usuario
 		};
 
 		for (int i = 0; i < testingData.length; i++) {

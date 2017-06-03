@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 import services.MealOrderService;
 import domain.MealOrder;
 
@@ -84,12 +87,36 @@ public class MealOrderController extends AbstractController{
 	@RequestMapping(value="/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam int mealOrderId){
 		ModelAndView result;
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Authority au = new Authority();
+		au.setAuthority("MANAGER");
+		Authority au2 = new Authority();
+		au2.setAuthority("USER");
+		MealOrder mealOrder = mealOrderService.findOne(mealOrderId);		
 		
-		MealOrder mealOrder = mealOrderService.findOne(mealOrderId);
-		
-		result = new ModelAndView("mealOrder/display");
-		result.addObject("mealOrder", mealOrder);
-		result.addObject("quantities", mealOrder.getQuantities());
+		if((mealOrder!=null && userAccount.getAuthorities().contains(au) && mealOrder.getRestaurant().getManager().getUserAccount().getUsername().equals(LoginService.getPrincipal().getUsername()))
+				|| ( userAccount.getAuthorities().contains(au2) && mealOrder!=null && mealOrder.getUser().getUserAccount().getUsername().equals(LoginService.getPrincipal().getUsername()))){
+			result = new ModelAndView("mealOrder/display");
+			result.addObject("mealOrder", mealOrder);
+			result.addObject("quantities", mealOrder.getQuantities());
+			
+		}else{
+			if(userAccount.getAuthorities().contains(au2)){
+				String msgCode;
+				msgCode = "mealOrder.notAuthored";
+				
+				result = browseByUser();
+				result.addObject("message", msgCode);
+			}else{
+				String msgCode;
+				msgCode = "mealOrder.notAuthored";
+				
+				result = browseByManager();
+				result.addObject("message", msgCode);
+			}
+			
+		}
 		
 		return result;
 	}
