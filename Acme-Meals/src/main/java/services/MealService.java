@@ -94,8 +94,7 @@ public class MealService {
 		Assert.notNull(meal);
 		
 		Assert.isTrue(userAccount.getAuthorities().contains(au) && 
-				(meal.getRestaurant().getManager().getUserAccount().getUsername().equals(userAccount.getUsername()) ||
-				 meal.getId()==0));
+				meal.getRestaurant().getManager().getUserAccount().getUsername().equals(userAccount.getUsername()));
 			
 		return mealRepository.save(meal);
 	}
@@ -169,7 +168,7 @@ public class MealService {
 		result.setDescription(mealForm.getDescription());
 		result.setPrice(mealForm.getPrice());
 		result.setCategory(mealForm.getCategory());
-
+		Assert.isTrue(result.getRestaurant().getManager().getUserAccount().getUsername().equals(userAccount.getUsername()));
 		validator.validate(result, binding);
 
 		return result;
