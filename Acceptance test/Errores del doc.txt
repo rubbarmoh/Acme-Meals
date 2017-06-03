@@ -1,0 +1,11 @@
+- No aparece botón de crear comentarios si eres un manager
+- Errores de like-dislike sobre dar like mil veces (corregido actualmente)
+- No promociona restaurante (corregido actualmente)
+- Se pude acceder a pedidos que no son de un user a traves de la url
+- Se puede acceder a crear menu de un restaurante que no es de un manager a traves de la url
+- Al deshabilitar un restaurante deja de estar visible para el manager
+- Registrar crítico deja poner XSS
+- Un manager puede crear social identities de un restaurante que no es suyo a partir de la url.
+
+- Hay que revisar muchos mensajes en español que salen en ingles sin ser los bugs puestos.
+- Tiene muchos comentarios sobre las capturas por que estas esetán desfasadas.
