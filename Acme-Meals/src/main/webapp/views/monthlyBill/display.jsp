@@ -28,7 +28,7 @@
 				<spring:message code = "monthlyBill.cc"/>
 			</th>
 			<td>
-				<jstl:out value="${aux}" />
+				<spring:message code = "monthlyBill.ccc"/> <jstl:out value="${aux}" />
 			</td>
 		</tr>
 		<tr>

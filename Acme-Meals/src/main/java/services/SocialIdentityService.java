@@ -80,14 +80,13 @@ public class SocialIdentityService {
 		Authority au2 = new Authority();
 		au2.setAuthority("MANAGER");
 
-		Assert.isTrue(userAccount.getAuthorities().contains(au2));
+		Assert.isTrue((userAccount.getAuthorities().contains(au2)) && (socialIdentity.getRestaurant().getManager().getUserAccount().getUsername().equals(userAccount.getUsername())));
 
 		SocialIdentity result;
 		result = socialIdentityRepository.save(socialIdentity);
 
 		return result;
 	}
-
 	public void delete(SocialIdentity socialIdentity) {
 
 		UserAccount userAccount;

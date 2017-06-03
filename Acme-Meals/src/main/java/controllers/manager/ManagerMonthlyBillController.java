@@ -43,7 +43,7 @@ public class ManagerMonthlyBillController extends AbstractController {
 		if (monthlyBill.getPaidMoment() == null) {
 			aux = "";
 		} else {
-			aux = "Se ha realizado el pago con la tarjeta ************" + monthlyBill.getManager().getCreditCard().getNumber().substring(12);
+			aux = "************" + monthlyBill.getManager().getCreditCard().getNumber().substring(12);
 		}
 		result = new ModelAndView("monthlyBill/display");
 		result.addObject("monthlyBill", monthlyBill);

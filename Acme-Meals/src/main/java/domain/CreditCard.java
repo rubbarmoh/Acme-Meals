@@ -51,6 +51,7 @@ public class CreditCard {
 
 	@Valid
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getNumber() {
 		return this.number;
 	}

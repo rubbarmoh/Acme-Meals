@@ -56,6 +56,7 @@ public class ManagerForm {
 
 	@NotBlank
 	@Size(min = 5, max = 32)
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPassword() {
 		return password;
 	}
@@ -65,6 +66,7 @@ public class ManagerForm {
 
 	@NotBlank
 	@Size(min = 5, max = 32)
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPassword2() {
 		return password2;
 	}
