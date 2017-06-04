@@ -248,15 +248,17 @@ public class RestaurantService {
 		Assert.isTrue(userAccount.getAuthorities().contains(au));
 
 		List<Restaurant> result = new ArrayList<Restaurant>();
-		Double aux = 0.;
+		Double aux = 0.0;
 		List<Object[]> obj = restaurantRepository.restaurantMoreProfit(manager);
 		for (Object[] o : obj) {
-			if ((Double) o[1] > aux) {
-				result = new ArrayList<Restaurant>();
-				result.add((Restaurant) o[0]);
-				aux = (Double) o[1];
-			} else if ((Double) o[1] == aux) {
-				result.add((Restaurant) o[0]);
+			if(o[1] != null){
+				if ((Double) o[1] > aux) {
+					result = new ArrayList<Restaurant>();
+					result.add((Restaurant) o[0]);
+					aux = (Double) o[1];
+				} else if ((Double) o[1] == aux) {
+					result.add((Restaurant) o[0]);
+				}
 			}
 		}
 
